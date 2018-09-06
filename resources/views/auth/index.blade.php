@@ -29,7 +29,7 @@
                 <label for="exampleInputPassword1" class="text-uppercase">Пароль</label>
                 <input type="password" class="form-control" placeholder="" required>
             </div>
-            <button type="submit" class="">Submit</button>
+            <button type="submit" class="">ВОЙТИ В СИСТЕМУ</button>
     </div>
 </div>
 

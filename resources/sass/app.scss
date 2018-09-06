@@ -1,3 +1,5 @@
+@import "variables";
+
 * {
     margin: 0;
     padding: 0;
@@ -191,13 +193,14 @@
 }
 
 .auth-form {
-    border: 5px solid rgb(222, 98, 98);
+    border: 5px solid $pretty_color;
     background-color: white;
+    box-shadow: 0 0 10px $pretty_color;
 }
 
 .auth-form-text {
     margin-top: 30px;
-    color: rgb(222, 98, 98);
+    color: $pretty_color;
 }
 
 .auth-form .form-group {
@@ -207,19 +210,20 @@
 .auth-form input {
     width: 100%;
     margin-bottom: 30px;
-    border-color: rgb(222, 98, 98);
+    border-color: $pretty_color;
+    border-width: 2px;
 }
 
 .auth-form button {
     margin-bottom: 0px;
     width: 100%;
-    background-color: rgb(222, 98, 98);
+    background-color: $pretty_color;
     border: none;
     color: white;
     padding: 12px;
     cursor: pointer;
     border: none;
-    border-top: 5px solid rgb(222, 98, 98);
+    border-top: 5px solid $pretty_color;
 }
 
 .auth-background{
@@ -245,7 +249,7 @@
 }
 
 .auth-form button:hover {
-    color: rgb(222, 98, 98);
+    color: $pretty_color;
     background-color: white;
 }
 
@@ -256,7 +260,7 @@
     display: block;
     margin-top: 20px;
     border-radius: 3px;
-    background-color: rgb(222, 98, 98);
+    background-color: $pretty_color;
 }
 
 @media(min-width: 992px) {
