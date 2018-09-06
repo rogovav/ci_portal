@@ -23,7 +23,7 @@
         <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav animate side-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="#" title="Cart"><i class="fas fa-tachometer-alt"></i> Панель <i
+                    <a class="nav-link" href="{{ url("dashboard") }}" title="Cart"><i class="fas fa-tachometer-alt"></i> Панель <i
                             class="fas fa-tachometer-alt shortmenu animate"></i></a>
                 </li>
                 <li class="nav-item dropdown">
@@ -32,38 +32,39 @@
                         <i class="fas fa-tasks"></i> Заявки <i class="fas fa-tasks shortmenu animate"></i>
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Новая</a>
-                        <a class="dropdown-item" href="#">Просмотр</a>
+                        <a class="dropdown-item" href="{{ url("mission/new") }}">Новая</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Запланированная</a>
+                        <a class="dropdown-item" href="{{ url("mission/show") }}">Просмотр</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{{ url("mission/plan") }}">Запланированная</a>
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" title="Группы"><i class="fas fa-users"></i> Группы <i
+                    <a class="nav-link" href="{{ url("group/index") }}" title="Группы"><i class="fas fa-users"></i> Группы <i
                             class="fas fa-users shortmenu animate"></i></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" title="Люди"><i class="fas fa-user-tie"></i> Люди <i
+                    <a class="nav-link" href="{{ url("crew/index") }}" title="Люди"><i class="fas fa-user-tie"></i> Люди <i
                             class="fas fa-user-tie shortmenu animate"></i></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" title="WIKI"><i class="fas fa-graduation-cap"></i> WIKI <i
+                    <a class="nav-link" href="{{ url("wiki/index") }}" title="WIKI"><i class="fas fa-graduation-cap"></i> WIKI <i
                             class="fas fa-graduation-cap shortmenu animate"></i></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" title="Календарь"><i class="fas fa-calendar-alt"></i> Календарь <i
+                    <a class="nav-link" href="{{ url("calendar/index") }}" title="Календарь"><i class="fas fa-calendar-alt"></i> Календарь <i
                             class="fas fa-calendar-alt shortmenu animate"></i></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" title="Отчеты"><i class="fas fa-file-alt"></i> Отчеты <i
+                    <a class="nav-link" href="{{ url("report/index") }}" title="Отчеты"><i class="fas fa-file-alt"></i> Отчеты <i
                             class="fas fa-file-alt shortmenu animate"></i></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" title="Чат"><i class="fas fa-comments"></i> Чат <i
+                    <a class="nav-link" href="{{ url("chat/index") }}" title="Чат"><i class="fas fa-comments"></i> Чат <i
                             class="fas fa-comments shortmenu animate"></i></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" title="Склад"><i class="fas fa-warehouse"></i> Склад <i
+                    <a class="nav-link" href="" title="Склад"><i class="fas fa-warehouse"></i> Склад <i
                             class="fas fa-warehouse shortmenu animate"></i></a>
                 </li>
 

@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('layout.index');
+    return view('dashboard.index');
 });
 
 Route::get('/dashboard', function () {
@@ -22,3 +22,4 @@ Route::get('/dashboard', function () {
 Route::get('/auth', function () {
     return view('auth.index');
 });
+
