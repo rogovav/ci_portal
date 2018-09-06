@@ -3,6 +3,7 @@
     padding: 0;
 }
 
+// layout.php
 #wrapper {
     padding: 90px 15px;
 }
@@ -27,6 +28,8 @@
     display: none
 
 }
+
+// dashboard
 
 .card-title {
     font-size: 28px
@@ -145,11 +148,11 @@
 .card-body {
 }
 
-.no-padding{
+.no-padding {
     padding: 0px;
 }
 
-.real-time-counter{
+.real-time-counter {
     font-weight: bold;
 }
 
@@ -173,11 +176,91 @@
     color: white;
 }
 
+// auth.blade.php
 
+.auth-container {
+    height: 100vh;
+}
+
+.main-auth-row {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.auth-form {
+    border: 5px solid rgb(222, 98, 98);
+    background-color: white;
+}
+
+.auth-form-text {
+    margin-top: 30px;
+    color: rgb(222, 98, 98);
+}
+
+.auth-form .form-group {
+    padding: 0 30px;
+}
+
+.auth-form input {
+    width: 100%;
+    margin-bottom: 30px;
+    border-color: rgb(222, 98, 98);
+}
+
+.auth-form button {
+    margin-bottom: 0px;
+    width: 100%;
+    background-color: rgb(222, 98, 98);
+    border: none;
+    color: white;
+    padding: 12px;
+    cursor: pointer;
+    border: none;
+    border-top: 5px solid rgb(222, 98, 98);
+}
+
+.auth-background{
+    z-index: -1;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    filter: blur(5px) brightness(40%);
+    background-repeat: no-repeat;
+    background-size: cover;
+    //background: -webkit-linear-gradient(to bottom, #FFB88C, #DE6262);  /* Chrome 10-25, Safari 5.1-6 */
+    //background: linear-gradient(to bottom, #FFB88C, #DE6262); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background-image: url("https://dekoriko.ru/images/article/orig/2017/12/osobennosti-oboev-pod-pokrasku-101.jpg");
+}
+
+.text-ci-auth{
+    display: inline-block;
+    width: 100%;
+    text-align: right;
+
+}
+
+.auth-form button:hover {
+    color: rgb(222, 98, 98);
+    background-color: white;
+}
+
+.auth-form-text:after {
+    content: " ";
+    width: 100%;
+    height: 5px;
+    display: block;
+    margin-top: 20px;
+    border-radius: 3px;
+    background-color: rgb(222, 98, 98);
+}
 
 @media(min-width: 992px) {
     .leftmenutrigger {
-        display: block;
         display: block;
         margin: 7px 20px 4px 0;
         cursor: pointer;

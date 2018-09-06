@@ -127,9 +127,75 @@
   background-color: #00c2ea;
   color: white; }
 
+.auth-container {
+  height: 100vh; }
+
+.main-auth-row {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+
+.auth-form {
+  border: 5px solid #de6262;
+  background-color: white; }
+
+.auth-form-text {
+  margin-top: 30px;
+  color: #de6262; }
+
+.auth-form .form-group {
+  padding: 0 30px; }
+
+.auth-form input {
+  width: 100%;
+  margin-bottom: 30px;
+  border-color: #de6262; }
+
+.auth-form button {
+  margin-bottom: 0px;
+  width: 100%;
+  background-color: #de6262;
+  border: none;
+  color: white;
+  padding: 12px;
+  cursor: pointer;
+  border: none;
+  border-top: 5px solid #de6262; }
+
+.auth-background {
+  z-index: -1;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  filter: blur(5px) brightness(40%);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url("https://dekoriko.ru/images/article/orig/2017/12/osobennosti-oboev-pod-pokrasku-101.jpg"); }
+
+.text-ci-auth {
+  display: inline-block;
+  width: 100%;
+  text-align: right; }
+
+.auth-form button:hover {
+  color: #de6262;
+  background-color: white; }
+
+.auth-form-text:after {
+  content: " ";
+  width: 100%;
+  height: 5px;
+  display: block;
+  margin-top: 20px;
+  border-radius: 3px;
+  background-color: #de6262; }
+
 @media (min-width: 992px) {
   .leftmenutrigger {
-    display: block;
     display: block;
     margin: 7px 20px 4px 0;
     cursor: pointer; }
