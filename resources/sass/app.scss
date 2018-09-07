@@ -226,7 +226,7 @@
     border-top: 5px solid $pretty_color;
 }
 
-.auth-background{
+.auth-background {
     z-index: -1;
     position: fixed;
     left: 0;
@@ -241,7 +241,7 @@
     background-image: url("https://dekoriko.ru/images/article/orig/2017/12/osobennosti-oboev-pod-pokrasku-101.jpg");
 }
 
-.text-ci-auth{
+.text-ci-auth {
     display: inline-block;
     width: 100%;
     text-align: right;
@@ -261,6 +261,66 @@
     margin-top: 20px;
     border-radius: 3px;
     background-color: $pretty_color;
+}
+
+// user.index
+
+.user-table thead, .user-table tbody {
+    text-align: center;
+}
+
+.create-user-button {
+    border-radius: 0px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+
+.profile-card-user {
+    text-align: center;
+    padding: 20px;
+    border-radius: 10px;
+    -webkit-transition: -webkit-transform 0.7s;
+    transition: transform 0.7s;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+}
+
+.profile-card-user-social{
+    list-style: none;
+    text-align: left;
+    display: flex;
+    width: 100%;
+    align-items: center;;
+    justify-content: space-between;
+    color: #d9175f;
+    margin: 0px;
+}
+
+.profile-card-user-social li{
+    display: inline-block;
+}
+
+.profile-card-user img {
+    border-radius: 100%;
+    margin: 20px;
+}
+
+.profile-card-user a {
+    color: #d9175f;
+}
+
+.profile-card-user hr {
+    margin: 0;
+    padding: 0;
+}
+
+.profile-card-user span {
+    margin-top: 10px;
+    display: inline-block;
+}
+
+.profile-card-user h5 {
+    color: grey;
 }
 
 @media(min-width: 992px) {

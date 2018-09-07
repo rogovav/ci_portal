@@ -23,7 +23,6 @@
             <div class="form-group">
                 <label for="exampleInputEmail1" class="text-uppercase">Имя пользователя</label>
                 <input type="text" class="form-control" placeholder="" required>
-
             </div>
             <div class="form-group">
                 <label for="exampleInputPassword1" class="text-uppercase">Пароль</label>

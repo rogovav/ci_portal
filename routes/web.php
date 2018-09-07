@@ -23,3 +23,6 @@ Route::get('/auth', function () {
     return view('auth.index');
 });
 
+Route::get('/user', function () {
+    return view('user.index');
+});
