@@ -1,7 +1,4 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: Eugene
- * Date: 05.09.2018
- * Time: 13:16
- */
+@extends('layout.index')
+@section('content')
+    {{--<table id="table_id" class="display"></table>--}}
+@endsection

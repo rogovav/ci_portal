@@ -13,16 +13,16 @@
 
 Route::get('/', function () {
     return view('dashboard.index');
-})->name('dashboard');
+});
+
+Route::get('/dashboard', function () {
+    return view('dashboard.index');
+});
 
 Route::get('/auth', function () {
     return view('auth.index');
 });
 
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/user', function () {
+    return view('user.index');
+});
