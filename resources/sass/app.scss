@@ -31,16 +31,320 @@
 
 }
 
-// Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
+// dashboard
 
-// Variables
-@import 'variables';
+.card-title {
+    font-size: 28px
+}
 
-// Bootstrap
-@import '~bootstrap/scss/bootstrap';
+.table-tasks tr {
+    text-align: center;
+}
 
-.navbar-laravel {
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+.table-tasks tbody {
+    font-size: 14px;
+}
+
+.priority {
+    font-size: 20px;
+    padding: 5px 10px;
+}
+
+.high-priority {
+    color: red;
+}
+
+.work {
+    padding: 2px 6px;
+    color: white;
+}
+
+.work-go {
+    background-color: #777777;
+}
+
+.work-wait {
+    background-color: #041e42;
+}
+
+.work-done {
+    background-color: green;
+}
+
+.medium-priority {
+    color: blue;
+}
+
+.low-priority {
+    color: green;
+}
+
+.deadline {
+    padding: 2px 6px;
+}
+
+.deadline-ok {
+    background-color: rgba(0, 255, 0, 0.1);
+}
+
+.deadline-middle {
+    background-color: rgba(255, 250, 0, 0.1);
+}
+
+.deadline-expired {
+    background-color: rgba(255, 0, 0, 0.1);
+}
+
+.profile-image {
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+
+}
+
+.time-post {
+    color: grey;
+}
+
+.text-post {
+}
+
+.card-body-label {
+    float: left;
+    height: 100%;
+    width: 100px;
+    padding: 1.25em;
+    background-color: red;
+    text-align: center;
+    color: white;
+}
+
+.card-task {
+    background-color: #ae124c; // #d9175f
+}
+
+.card-message {
+    background-color: #cc6a2d; // #ff8438
+}
+
+.card-wiki {
+    background-color: #2ba3a2; // #37cccb
+}
+
+.card-users {
+    background-color: #009abb; // #00c2ea
+}
+
+.card-body-text {
+    float: left;
+    padding: 6px;
+    width: calc(100% - 100px);
+}
+
+.card-body-text hr {
+    margin: 0;
+    padding: 0;
+    background-color: white;
+}
+
+.card-body {
+}
+
+.no-padding {
+    padding: 0px;
+}
+
+.real-time-counter {
+    font-weight: bold;
+}
+
+.card-body-task {
+    background-color: #d9175f;
+    color: white;
+}
+
+.card-body-message {
+    background-color: #ff8438;
+    color: white;
+}
+
+.card-body-wiki {
+    background-color: #37cccb;
+    color: white;
+}
+
+.card-body-users {
+    background-color: #00c2ea;
+    color: white;
+}
+
+// auth.blade.php
+
+.auth-container {
+    height: 100vh;
+}
+
+.main-auth-row {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.auth-form {
+    border: 5px solid $pretty_color;
+    background-color: white;
+    box-shadow: 0 0 10px $pretty_color;
+}
+
+.auth-form-text {
+    margin-top: 30px;
+    color: $pretty_color;
+}
+
+.auth-form .form-group {
+    padding: 0 30px;
+}
+
+.auth-form input {
+    width: 100%;
+    margin-bottom: 30px;
+    border-color: $pretty_color;
+    border-width: 2px;
+}
+
+.auth-form button {
+    margin-bottom: 0px;
+    width: 100%;
+    background-color: $pretty_color;
+    border: none;
+    color: white;
+    padding: 12px;
+    cursor: pointer;
+    border: none;
+    border-top: 5px solid $pretty_color;
+}
+
+.auth-background{
+    z-index: -1;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    filter: blur(5px) brightness(40%);
+    background-repeat: no-repeat;
+    background-size: cover;
+    //background: -webkit-linear-gradient(to bottom, #FFB88C, #DE6262);  /* Chrome 10-25, Safari 5.1-6 */
+    //background: linear-gradient(to bottom, #FFB88C, #DE6262); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background-image: url("https://dekoriko.ru/images/article/orig/2017/12/osobennosti-oboev-pod-pokrasku-101.jpg");
+}
+
+.text-ci-auth{
+    display: inline-block;
+    width: 100%;
+    text-align: right;
+
+}
+
+.auth-form button:hover {
+    color: $pretty_color;
+    background-color: white;
+}
+
+.auth-form-text:after {
+    content: " ";
+    width: 100%;
+    height: 5px;
+    display: block;
+    margin-top: 20px;
+    border-radius: 3px;
+    background-color: $pretty_color;
+}
+
+@media(min-width: 992px) {
+    .leftmenutrigger {
+        display: block;
+        margin: 7px 20px 4px 0;
+        cursor: pointer;
+    }
+    #wrapper {
+        padding: 90px 15px 15px 75px;
+    }
+    #wrapper.open {
+        padding: 90px 15px 15px 225px;
+    }
+    .navbar-nav.side-nav.open {
+        left: 0;
+    }
+    .side-nav li a {
+        padding: 20px
+    }
+    .navbar-nav li a .shortmenu {
+        float: right;
+        display: block;
+        opacity: 1
+    }
+    .navbar-nav.side-nav.open.navbar-nav li a .shortmenu {
+        opacity: 0
+    }
+    .navbar-nav.side-nav {
+        background: #585f66;
+        box-shadow: 2px 1px 2px rgba(0, 0, 0, .1);
+        position: fixed;
+        top: 56px;
+        flex-direction: column !important;
+        left: -140px;
+        width: 200px;
+        bottom: 0;
+        padding-bottom: 40px
+    }
+}
+
+.animate {
+    -webkit-transition: all .2s ease-in-out;
+    -moz-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+    -ms-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out
+}
+
+.navbar-nav li a svg {
+    font-size: 25px;
+    float: left;
+    margin: 0 10px 0 5px;
+}
+
+.side-nav li {
+    border-bottom: 1px solid #50575d;
+}
+
+.side-nav .dropdown {
+    position: initial;
+}
+
+.side-nav .dropdown-menu {
+    position: relative;
+    opacity: 0;
+    left: 120%;
+    top: 0;
+    height: 100%;
+    border: 0;
+    padding: 0;
+    margin: 0;
+    border-radius: 0;
+    box-shadow: 5px 0 5px rgba(0, 0, 0, .1);
+    background: #eee;
+    visibility: hidden;
+    display: block;
+    transition: .4s ease all;
+}
+
+.side-nav .dropdown-menu.show {
+    left: 100%;
+    opacity: 1;
+    visibility: visible;
+    display: block;
+    transition: .4s ease all;
 }
