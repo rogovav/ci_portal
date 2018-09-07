@@ -23,7 +23,7 @@
         <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav animate side-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="#" title="Cart"><i class="fas fa-tachometer-alt"></i> Панель <i
+                    <a class="nav-link" href="{{ url('') }}" title="Cart"><i class="fas fa-tachometer-alt"></i> Панель <i
                             class="fas fa-tachometer-alt shortmenu animate"></i></a>
                 </li>
                 <li class="nav-item dropdown">

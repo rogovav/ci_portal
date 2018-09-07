@@ -12,13 +12,17 @@
 */
 
 Route::get('/', function () {
-    return view('layout.index');
-});
-
-Route::get('/dashboard', function () {
     return view('dashboard.index');
-});
+})->name('dashboard');
 
 Route::get('/auth', function () {
     return view('auth.index');
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
