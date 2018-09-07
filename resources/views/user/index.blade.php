@@ -10,15 +10,18 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <form action="">
+                <form method="POST" action="{{ route('register') }}">
+                    @csrf
+                    <div class="modal-body">
+
+
                         <div class="form-group">
                             <label for="exampleInputEmail1" class="text-uppercase">ФИО</label>
-                            <input type="text" class="form-control" placeholder="" required>
+                            <input type="text" class="form-control" name="fio" placeholder="" required>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1" class="text-uppercase">Должность</label>
-                            <select class="custom-select" id="inputGroupSelect01">
+                            <select class="custom-select" id="inputGroupSelect01" name="position">
                                 <option selected>Выберите должность</option>
                                 <option value="1">One</option>
                                 <option value="2">Two</option>
@@ -27,38 +30,40 @@
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1" class="text-uppercase">Логин</label>
-                            <input type="text" class="form-control" placeholder="" required>
+                            <input type="text" class="form-control" name="login" placeholder="" required>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1" class="text-uppercase">VK ID</label>
-                            <input type="text" class="form-control" placeholder="" required>
+                            <input type="text" class="form-control" name="vk" placeholder="" required>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1" class="text-uppercase">E-mail</label>
-                            <input type="email" class="form-control" placeholder="" required>
+                            <input type="email" class="form-control" name="email" placeholder="" required>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1" class="text-uppercase">Номер телефона</label>
-                            <input type="tel" class="form-control" placeholder="" required>
+                            <input type="tel" class="form-control" name="phone" placeholder="" required>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1" class="text-uppercase">День рождения</label>
-                            <input type="date" class="form-control" placeholder="" required>
+                            <input type="date" class="form-control" name="birthday" placeholder="" required>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1" class="text-uppercase">Пароль</label>
-                            <input type="password" class="form-control" placeholder="" required>
+                            <input type="password" class="form-control" name="password" placeholder="" required>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1" class="text-uppercase">Повторите пароль</label>
-                            <input type="password" class="form-control" placeholder="" required>
+                            <input type="password" class="form-control" name="password_confirmation" placeholder=""
+                                   required>
                         </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
-                    <button type="button" class="btn btn-primary">Создать</button>
-                </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                        <button type="submit" class="btn btn-primary">Создать</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -81,9 +86,9 @@
                         <hr>
                         <ul class="profile-card-user-social">
                             <li><span><a href="https://vk.com/eug_art" target="_blank"><i
-                                            class="fab fa-vk fa-2x"></i></a></span></li>
+                                                class="fab fa-vk fa-2x"></i></a></span></li>
                             <li><span><a href="mailto:artashkinep@mrsu.ru"><i
-                                            class="far fa-envelope fa-2x"></i></a></span></li>
+                                                class="far fa-envelope fa-2x"></i></a></span></li>
                             <li><span><a href="tel:7987543210"><i class="fas fa-phone fa-2x"></i></a></span></li>
                             <li><span><a href="tel:7987543210"><i class="far fa-comment fa-2x"></i></a></span></li>
                         </ul>
@@ -101,9 +106,9 @@
                         <hr>
                         <ul class="profile-card-user-social">
                             <li><span><a href="https://vk.com/eug_art" target="_blank"><i
-                                            class="fab fa-vk fa-2x"></i></a></span></li>
+                                                class="fab fa-vk fa-2x"></i></a></span></li>
                             <li><span><a href="mailto:artashkinep@mrsu.ru"><i
-                                            class="far fa-envelope fa-2x"></i></a></span></li>
+                                                class="far fa-envelope fa-2x"></i></a></span></li>
                             <li><span><a href="tel:7987543210"><i class="fas fa-phone fa-2x"></i></a></span></li>
                             <li><span><a href="tel:7987543210"><i class="far fa-comment fa-2x"></i></a></span></li>
                         </ul>
@@ -121,9 +126,9 @@
                         <hr>
                         <ul class="profile-card-user-social">
                             <li><span><a href="https://vk.com/eug_art" target="_blank"><i
-                                            class="fab fa-vk fa-2x"></i></a></span></li>
+                                                class="fab fa-vk fa-2x"></i></a></span></li>
                             <li><span><a href="mailto:artashkinep@mrsu.ru"><i
-                                            class="far fa-envelope fa-2x"></i></a></span></li>
+                                                class="far fa-envelope fa-2x"></i></a></span></li>
                             <li><span><a href="tel:7987543210"><i class="fas fa-phone fa-2x"></i></a></span></li>
                             <li><span><a href="tel:7987543210"><i class="far fa-comment fa-2x"></i></a></span></li>
                         </ul>
@@ -141,9 +146,9 @@
                         <hr>
                         <ul class="profile-card-user-social">
                             <li><span><a href="https://vk.com/eug_art" target="_blank"><i
-                                            class="fab fa-vk fa-2x"></i></a></span></li>
+                                                class="fab fa-vk fa-2x"></i></a></span></li>
                             <li><span><a href="mailto:artashkinep@mrsu.ru"><i
-                                            class="far fa-envelope fa-2x"></i></a></span></li>
+                                                class="far fa-envelope fa-2x"></i></a></span></li>
                             <li><span><a href="tel:7987543210"><i class="fas fa-phone fa-2x"></i></a></span></li>
                             <li><span><a href="tel:7987543210"><i class="far fa-comment fa-2x"></i></a></span></li>
                         </ul>
@@ -161,9 +166,9 @@
                         <hr>
                         <ul class="profile-card-user-social">
                             <li><span><a href="https://vk.com/eug_art" target="_blank"><i
-                                            class="fab fa-vk fa-2x"></i></a></span></li>
+                                                class="fab fa-vk fa-2x"></i></a></span></li>
                             <li><span><a href="mailto:artashkinep@mrsu.ru"><i
-                                            class="far fa-envelope fa-2x"></i></a></span></li>
+                                                class="far fa-envelope fa-2x"></i></a></span></li>
                             <li><span><a href="tel:7987543210"><i class="fas fa-phone fa-2x"></i></a></span></li>
                             <li><span><a href="tel:7987543210"><i class="far fa-comment fa-2x"></i></a></span></li>
                         </ul>
@@ -181,9 +186,9 @@
                         <hr>
                         <ul class="profile-card-user-social">
                             <li><span><a href="https://vk.com/eug_art" target="_blank"><i
-                                            class="fab fa-vk fa-2x"></i></a></span></li>
+                                                class="fab fa-vk fa-2x"></i></a></span></li>
                             <li><span><a href="mailto:artashkinep@mrsu.ru"><i
-                                            class="far fa-envelope fa-2x"></i></a></span></li>
+                                                class="far fa-envelope fa-2x"></i></a></span></li>
                             <li><span><a href="tel:7987543210"><i class="fas fa-phone fa-2x"></i></a></span></li>
                             <li><span><a href="tel:7987543210"><i class="far fa-comment fa-2x"></i></a></span></li>
                         </ul>
@@ -201,9 +206,9 @@
                         <hr>
                         <ul class="profile-card-user-social">
                             <li><span><a href="https://vk.com/eug_art" target="_blank"><i
-                                            class="fab fa-vk fa-2x"></i></a></span></li>
+                                                class="fab fa-vk fa-2x"></i></a></span></li>
                             <li><span><a href="mailto:artashkinep@mrsu.ru"><i
-                                            class="far fa-envelope fa-2x"></i></a></span></li>
+                                                class="far fa-envelope fa-2x"></i></a></span></li>
                             <li><span><a href="tel:7987543210"><i class="fas fa-phone fa-2x"></i></a></span></li>
                             <li><span><a href="tel:7987543210"><i class="far fa-comment fa-2x"></i></a></span></li>
                         </ul>
@@ -223,9 +228,9 @@
                         <hr>
                         <ul class="profile-card-user-social">
                             <li><span><a href="https://vk.com/eug_art" target="_blank"><i
-                                            class="fab fa-vk fa-2x"></i></a></span></li>
+                                                class="fab fa-vk fa-2x"></i></a></span></li>
                             <li><span><a href="mailto:artashkinep@mrsu.ru"><i
-                                            class="far fa-envelope fa-2x"></i></a></span></li>
+                                                class="far fa-envelope fa-2x"></i></a></span></li>
                             <li><span><a href="tel:7987543210"><i class="fas fa-phone fa-2x"></i></a></span></li>
                             <li><span><a href="tel:7987543210"><i class="far fa-comment fa-2x"></i></a></span></li>
                         </ul>
@@ -243,9 +248,9 @@
                         <hr>
                         <ul class="profile-card-user-social">
                             <li><span><a href="https://vk.com/eug_art" target="_blank"><i
-                                            class="fab fa-vk fa-2x"></i></a></span></li>
+                                                class="fab fa-vk fa-2x"></i></a></span></li>
                             <li><span><a href="mailto:artashkinep@mrsu.ru"><i
-                                            class="far fa-envelope fa-2x"></i></a></span></li>
+                                                class="far fa-envelope fa-2x"></i></a></span></li>
                             <li><span><a href="tel:7987543210"><i class="fas fa-phone fa-2x"></i></a></span></li>
                             <li><span><a href="tel:7987543210"><i class="far fa-comment fa-2x"></i></a></span></li>
                         </ul>
@@ -263,9 +268,9 @@
                         <hr>
                         <ul class="profile-card-user-social">
                             <li><span><a href="https://vk.com/eug_art" target="_blank"><i
-                                            class="fab fa-vk fa-2x"></i></a></span></li>
+                                                class="fab fa-vk fa-2x"></i></a></span></li>
                             <li><span><a href="mailto:artashkinep@mrsu.ru"><i
-                                            class="far fa-envelope fa-2x"></i></a></span></li>
+                                                class="far fa-envelope fa-2x"></i></a></span></li>
                             <li><span><a href="tel:7987543210"><i class="fas fa-phone fa-2x"></i></a></span></li>
                             <li><span><a href="tel:7987543210"><i class="far fa-comment fa-2x"></i></a></span></li>
                         </ul>
@@ -283,9 +288,9 @@
                         <hr>
                         <ul class="profile-card-user-social">
                             <li><span><a href="https://vk.com/eug_art" target="_blank"><i
-                                            class="fab fa-vk fa-2x"></i></a></span></li>
+                                                class="fab fa-vk fa-2x"></i></a></span></li>
                             <li><span><a href="mailto:artashkinep@mrsu.ru"><i
-                                            class="far fa-envelope fa-2x"></i></a></span></li>
+                                                class="far fa-envelope fa-2x"></i></a></span></li>
                             <li><span><a href="tel:7987543210"><i class="fas fa-phone fa-2x"></i></a></span></li>
                             <li><span><a href="tel:7987543210"><i class="far fa-comment fa-2x"></i></a></span></li>
                         </ul>
@@ -303,9 +308,9 @@
                         <hr>
                         <ul class="profile-card-user-social">
                             <li><span><a href="https://vk.com/eug_art" target="_blank"><i
-                                            class="fab fa-vk fa-2x"></i></a></span></li>
+                                                class="fab fa-vk fa-2x"></i></a></span></li>
                             <li><span><a href="mailto:artashkinep@mrsu.ru"><i
-                                            class="far fa-envelope fa-2x"></i></a></span></li>
+                                                class="far fa-envelope fa-2x"></i></a></span></li>
                             <li><span><a href="tel:7987543210"><i class="fas fa-phone fa-2x"></i></a></span></li>
                             <li><span><a href="tel:7987543210"><i class="far fa-comment fa-2x"></i></a></span></li>
                         </ul>
@@ -323,9 +328,9 @@
                         <hr>
                         <ul class="profile-card-user-social">
                             <li><span><a href="https://vk.com/eug_art" target="_blank"><i
-                                            class="fab fa-vk fa-2x"></i></a></span></li>
+                                                class="fab fa-vk fa-2x"></i></a></span></li>
                             <li><span><a href="mailto:artashkinep@mrsu.ru"><i
-                                            class="far fa-envelope fa-2x"></i></a></span></li>
+                                                class="far fa-envelope fa-2x"></i></a></span></li>
                             <li><span><a href="tel:7987543210"><i class="fas fa-phone fa-2x"></i></a></span></li>
                             <li><span><a href="tel:7987543210"><i class="far fa-comment fa-2x"></i></a></span></li>
                         </ul>
@@ -343,9 +348,9 @@
                         <hr>
                         <ul class="profile-card-user-social">
                             <li><span><a href="https://vk.com/eug_art" target="_blank"><i
-                                            class="fab fa-vk fa-2x"></i></a></span></li>
+                                                class="fab fa-vk fa-2x"></i></a></span></li>
                             <li><span><a href="mailto:artashkinep@mrsu.ru"><i
-                                            class="far fa-envelope fa-2x"></i></a></span></li>
+                                                class="far fa-envelope fa-2x"></i></a></span></li>
                             <li><span><a href="tel:7987543210"><i class="fas fa-phone fa-2x"></i></a></span></li>
                             <li><span><a href="tel:7987543210"><i class="far fa-comment fa-2x"></i></a></span></li>
                         </ul>

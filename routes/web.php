@@ -26,3 +26,8 @@ Route::get('/auth', function () {
 Route::get('/user', function () {
     return view('user.index');
 });
+
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
