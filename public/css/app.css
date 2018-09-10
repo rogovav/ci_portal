@@ -3,7 +3,8 @@
   padding: 0; }
 
 #wrapper {
-  padding: 90px 15px; }
+  padding: 90px 15px;
+  padding-top: 75px; }
 
 .navbar-expand-lg .navbar-nav.side-nav {
   flex-direction: column; }
@@ -89,6 +90,12 @@
 .card-message {
   background-color: #cc6a2d; }
 
+.card-body-label a {
+  color: white; }
+
+.card-body-label a:visited {
+  color: white; }
+
 .card-wiki {
   background-color: #2ba3a2; }
 
@@ -106,7 +113,7 @@
   background-color: white; }
 
 .no-padding {
-  padding: 0px; }
+  padding: 0; }
 
 .real-time-counter {
   font-weight: bold; }
@@ -152,18 +159,16 @@
 .auth-form input {
   width: 100%;
   margin-bottom: 30px;
-  border-color: #de6262;
-  border-width: 2px; }
+  border: 2px #de6262; }
 
 .auth-form button {
-  margin-bottom: 0px;
+  margin-bottom: 0;
   width: 100%;
   background-color: #de6262;
   border: none;
   color: white;
   padding: 12px;
   cursor: pointer;
-  border: none;
   border-top: 5px solid #de6262; }
 
 .auth-background {
@@ -174,9 +179,8 @@
   width: 100%;
   height: 100vh;
   filter: blur(5px) brightness(40%);
-  background-repeat: no-repeat;
   background-size: cover;
-  background-image: url("https://dekoriko.ru/images/article/orig/2017/12/osobennosti-oboev-pod-pokrasku-101.jpg"); }
+  background: url("https://dekoriko.ru/images/article/orig/2017/12/osobennosti-oboev-pod-pokrasku-101.jpg") no-repeat; }
 
 .text-ci-auth {
   display: inline-block;
@@ -200,9 +204,10 @@
   text-align: center; }
 
 .create-user-button {
-  border-radius: 0px;
+  border-radius: 0;
   text-transform: uppercase;
-  margin-bottom: 20px; }
+  margin-bottom: 20px;
+  padding: 20px; }
 
 .profile-card-user {
   text-align: center;
@@ -221,7 +226,7 @@
   align-items: center;
   justify-content: space-between;
   color: #d9175f;
-  margin: 0px; }
+  margin: 0; }
 
 .profile-card-user-social li {
   display: inline-block; }
@@ -244,6 +249,35 @@
 .profile-card-user h5 {
   color: grey; }
 
+.account-profile-avatar {
+  width: 180px;
+  height: 180px;
+  display: block;
+  margin: auto; }
+
+.account-profile-main {
+  padding: 20px;
+  margin: 0 20px 20px 20px; }
+
+.account-profile-contact_information {
+  list-style: none; }
+
+.account-profile-main_information {
+  list-style-type: none; }
+
+.account-profile-main_information li:first-child {
+  font-size: 20px;
+  white-space: nowrap; }
+
+.account-main-btn {
+  display: block;
+  margin: auto;
+  width: 200px; }
+
+marquee {
+  margin: 20px;
+  margin-top: 0px; }
+
 @media (min-width: 992px) {
   .leftmenutrigger {
     display: block;
@@ -251,10 +285,10 @@
     cursor: pointer; }
 
   #wrapper {
-    padding: 90px 15px 15px 75px; }
+    padding: 75px 15px 15px 75px; }
 
   #wrapper.open {
-    padding: 90px 15px 15px 225px; }
+    padding: 75px 15px 15px 225px; }
 
   .navbar-nav.side-nav.open {
     left: 0; }
@@ -284,7 +318,6 @@
   -webkit-transition: all .2s ease-in-out;
   -moz-transition: all .2s ease-in-out;
   -o-transition: all .2s ease-in-out;
-  -ms-transition: all .2s ease-in-out;
   transition: all 0.2s ease-in-out; }
 
 .navbar-nav li a svg {

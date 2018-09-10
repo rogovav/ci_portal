@@ -10,15 +10,16 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <form action="">
+                <form method="POST" action="javascript:void(0);" onsubmit="register()">
+                    @csrf
+                    <div class="modal-body">
                         <div class="form-group">
                             <label for="exampleInputEmail1" class="text-uppercase">ФИО</label>
-                            <input type="text" class="form-control" placeholder="" required>
+                            <input type="text" class="form-control" name="fio" placeholder="" required>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1" class="text-uppercase">Должность</label>
-                            <select class="custom-select" id="inputGroupSelect01">
+                            <select class="custom-select" id="inputGroupSelect01" name="position">
                                 <option selected>Выберите должность</option>
                                 <option value="1">One</option>
                                 <option value="2">Two</option>
@@ -27,38 +28,40 @@
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1" class="text-uppercase">Логин</label>
-                            <input type="text" class="form-control" placeholder="" required>
+                            <input type="text" class="form-control" name="login" placeholder="" required>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1" class="text-uppercase">VK ID</label>
-                            <input type="text" class="form-control" placeholder="" required>
+                            <input type="text" class="form-control" name="vk" placeholder="" required>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1" class="text-uppercase">E-mail</label>
-                            <input type="email" class="form-control" placeholder="" required>
+                            <input type="email" class="form-control" name="email" placeholder="" required>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1" class="text-uppercase">Номер телефона</label>
-                            <input type="tel" class="form-control" placeholder="" required>
+                            <input type="tel" class="form-control" name="phone" placeholder="" required>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1" class="text-uppercase">День рождения</label>
-                            <input type="date" class="form-control" placeholder="" required>
+                            <input type="date" class="form-control" name="birthday" placeholder="" required>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1" class="text-uppercase">Пароль</label>
-                            <input type="password" class="form-control" placeholder="" required>
+                            <input type="password" class="form-control" name="password" placeholder="" required>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1" class="text-uppercase">Повторите пароль</label>
-                            <input type="password" class="form-control" placeholder="" required>
+                            <input type="password" class="form-control" name="password_confirmation" placeholder=""
+                                   required>
                         </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
-                    <button type="button" class="btn btn-primary">Создать</button>
-                </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                        <button type="submit" class="btn btn-primary">Создать</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -69,287 +72,116 @@
             </button>
         </div>
     </div>
+    <div class="row">
+        <div class="card account-profile-main">
+            <div class="row">
+                <div class="col account-main-info-col">
+                    <img src="https://api.adorable.io/avatars/150/2" class="account-profile-avatar"
+                         alt="">
+                </div>
+                <div class="col">
+                    <ul class="account-profile-main_information">
+                        <li><b>Кулягина Таисия Ивановна</b></li>
+                        <li><b>Программист</b></li>
+                        <li>Ответсвенный</li>
+                    </ul>
+                    <ul class="account-profile-contact_information">
+                        <li>День рождения: <b>01.02.1997</b></li>
+                    </ul>
 
-    <div class="row">
-        <div class="col">
-            <div class="card-container">
-                <div class="card profile-card-user">
-                    <div class="front">
-                        <img src="https://api.adorable.io/avatars/150/1" alt="">
-                        <h3>Арташкин Евгений</h3>
-                        <h5>Программист</h5>
-                        <hr>
-                        <ul class="profile-card-user-social">
-                            <li><span><a href="https://vk.com/eug_art" target="_blank"><i
-                                            class="fab fa-vk fa-2x"></i></a></span></li>
-                            <li><span><a href="mailto:artashkinep@mrsu.ru"><i
-                                            class="far fa-envelope fa-2x"></i></a></span></li>
-                            <li><span><a href="tel:7987543210"><i class="fas fa-phone fa-2x"></i></a></span></li>
-                            <li><span><a href="tel:7987543210"><i class="far fa-comment fa-2x"></i></a></span></li>
-                        </ul>
-                    </div>
+                    <hr>
+                    <ul class="profile-card-user-social">
+                        <li><span><a href="https://vk.com/eug_art" target="_blank"><i
+                                        class="fab fa-vk fa-2x"></i></a></span></li>
+                        <li><span><a href="mailto:artashkinep@mrsu.ru"><i
+                                        class="far fa-envelope fa-2x"></i></a></span></li>
+                        <li><span><a href="tel:7987543210"><i class="fas fa-phone fa-2x"></i></a></span></li>
+                        <li><span><a href="tel:7987543210"><i class="far fa-comment fa-2x"></i></a></span></li>
+                    </ul>
                 </div>
             </div>
         </div>
-        <div class="col">
-            <div class="card-container">
-                <div class="card profile-card-user">
-                    <div class="front">
-                        <img src="https://api.adorable.io/avatars/150/2" alt="">
-                        <h3>Арташкин Евгений</h3>
-                        <h5>Программист</h5>
-                        <hr>
-                        <ul class="profile-card-user-social">
-                            <li><span><a href="https://vk.com/eug_art" target="_blank"><i
-                                            class="fab fa-vk fa-2x"></i></a></span></li>
-                            <li><span><a href="mailto:artashkinep@mrsu.ru"><i
-                                            class="far fa-envelope fa-2x"></i></a></span></li>
-                            <li><span><a href="tel:7987543210"><i class="fas fa-phone fa-2x"></i></a></span></li>
-                            <li><span><a href="tel:7987543210"><i class="far fa-comment fa-2x"></i></a></span></li>
-                        </ul>
-                    </div>
+        <div class="card account-profile-main">
+            <div class="row">
+                <div class="col account-main-info-col">
+                    <img src="https://api.adorable.io/avatars/150/2" class="account-profile-avatar"
+                         alt="">
+                </div>
+                <div class="col">
+                    <ul class="account-profile-main_information">
+                        <li><b>Кулягина Таисия Ивановна</b></li>
+                        <li><b>Программист</b></li>
+                        <li>Ответсвенный</li>
+                    </ul>
+                    <ul class="account-profile-contact_information">
+                        <li>День рождения: <b>01.02.1997</b></li>
+                    </ul>
+
+                    <hr>
+                    <ul class="profile-card-user-social">
+                        <li><span><a href="https://vk.com/eug_art" target="_blank"><i
+                                        class="fab fa-vk fa-2x"></i></a></span></li>
+                        <li><span><a href="mailto:artashkinep@mrsu.ru"><i
+                                        class="far fa-envelope fa-2x"></i></a></span></li>
+                        <li><span><a href="tel:7987543210"><i class="fas fa-phone fa-2x"></i></a></span></li>
+                        <li><span><a href="tel:7987543210"><i class="far fa-comment fa-2x"></i></a></span></li>
+                    </ul>
                 </div>
             </div>
         </div>
-        <div class="col">
-            <div class="card-container">
-                <div class="card profile-card-user">
-                    <div class="front">
-                        <img src="https://api.adorable.io/avatars/150/3" alt="">
-                        <h3>Арташкин Евгений</h3>
-                        <h5>Программист</h5>
-                        <hr>
-                        <ul class="profile-card-user-social">
-                            <li><span><a href="https://vk.com/eug_art" target="_blank"><i
-                                            class="fab fa-vk fa-2x"></i></a></span></li>
-                            <li><span><a href="mailto:artashkinep@mrsu.ru"><i
-                                            class="far fa-envelope fa-2x"></i></a></span></li>
-                            <li><span><a href="tel:7987543210"><i class="fas fa-phone fa-2x"></i></a></span></li>
-                            <li><span><a href="tel:7987543210"><i class="far fa-comment fa-2x"></i></a></span></li>
-                        </ul>
-                    </div>
+        <div class="card account-profile-main">
+            <div class="row">
+                <div class="col account-main-info-col">
+                    <img src="https://api.adorable.io/avatars/150/2" class="account-profile-avatar"
+                         alt="">
+                </div>
+                <div class="col">
+                    <ul class="account-profile-main_information">
+                        <li><b>Кулягина Таисия Ивановна</b></li>
+                        <li><b>Программист</b></li>
+                        <li>Ответсвенный</li>
+                    </ul>
+                    <ul class="account-profile-contact_information">
+                        <li>День рождения: <b>01.02.1997</b></li>
+                    </ul>
+
+                    <hr>
+                    <ul class="profile-card-user-social">
+                        <li><span><a href="https://vk.com/eug_art" target="_blank"><i
+                                        class="fab fa-vk fa-2x"></i></a></span></li>
+                        <li><span><a href="mailto:artashkinep@mrsu.ru"><i
+                                        class="far fa-envelope fa-2x"></i></a></span></li>
+                        <li><span><a href="tel:7987543210"><i class="fas fa-phone fa-2x"></i></a></span></li>
+                        <li><span><a href="tel:7987543210"><i class="far fa-comment fa-2x"></i></a></span></li>
+                    </ul>
                 </div>
             </div>
         </div>
-        <div class="col">
-            <div class="card-container">
-                <div class="card profile-card-user">
-                    <div class="front">
-                        <img src="https://api.adorable.io/avatars/150/4" alt="">
-                        <h3>Арташкин Евгений</h3>
-                        <h5>Программист</h5>
-                        <hr>
-                        <ul class="profile-card-user-social">
-                            <li><span><a href="https://vk.com/eug_art" target="_blank"><i
-                                            class="fab fa-vk fa-2x"></i></a></span></li>
-                            <li><span><a href="mailto:artashkinep@mrsu.ru"><i
-                                            class="far fa-envelope fa-2x"></i></a></span></li>
-                            <li><span><a href="tel:7987543210"><i class="fas fa-phone fa-2x"></i></a></span></li>
-                            <li><span><a href="tel:7987543210"><i class="far fa-comment fa-2x"></i></a></span></li>
-                        </ul>
-                    </div>
+        <div class="card account-profile-main">
+            <div class="row">
+                <div class="col account-main-info-col">
+                    <img src="https://api.adorable.io/avatars/150/2" class="account-profile-avatar"
+                         alt="">
                 </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card-container">
-                <div class="card profile-card-user">
-                    <div class="front">
-                        <img src="https://api.adorable.io/avatars/150/5" alt="">
-                        <h3>Арташкин Евгений</h3>
-                        <h5>Программист</h5>
-                        <hr>
-                        <ul class="profile-card-user-social">
-                            <li><span><a href="https://vk.com/eug_art" target="_blank"><i
-                                            class="fab fa-vk fa-2x"></i></a></span></li>
-                            <li><span><a href="mailto:artashkinep@mrsu.ru"><i
-                                            class="far fa-envelope fa-2x"></i></a></span></li>
-                            <li><span><a href="tel:7987543210"><i class="fas fa-phone fa-2x"></i></a></span></li>
-                            <li><span><a href="tel:7987543210"><i class="far fa-comment fa-2x"></i></a></span></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card-container">
-                <div class="card profile-card-user">
-                    <div class="front">
-                        <img src="https://api.adorable.io/avatars/150/6" alt="">
-                        <h3>Арташкин Евгений</h3>
-                        <h5>Программист</h5>
-                        <hr>
-                        <ul class="profile-card-user-social">
-                            <li><span><a href="https://vk.com/eug_art" target="_blank"><i
-                                            class="fab fa-vk fa-2x"></i></a></span></li>
-                            <li><span><a href="mailto:artashkinep@mrsu.ru"><i
-                                            class="far fa-envelope fa-2x"></i></a></span></li>
-                            <li><span><a href="tel:7987543210"><i class="fas fa-phone fa-2x"></i></a></span></li>
-                            <li><span><a href="tel:7987543210"><i class="far fa-comment fa-2x"></i></a></span></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card-container">
-                <div class="card profile-card-user">
-                    <div class="front">
-                        <img src="https://api.adorable.io/avatars/150/7" alt="">
-                        <h3>Арташкин Евгений</h3>
-                        <h5>Программист</h5>
-                        <hr>
-                        <ul class="profile-card-user-social">
-                            <li><span><a href="https://vk.com/eug_art" target="_blank"><i
-                                            class="fab fa-vk fa-2x"></i></a></span></li>
-                            <li><span><a href="mailto:artashkinep@mrsu.ru"><i
-                                            class="far fa-envelope fa-2x"></i></a></span></li>
-                            <li><span><a href="tel:7987543210"><i class="fas fa-phone fa-2x"></i></a></span></li>
-                            <li><span><a href="tel:7987543210"><i class="far fa-comment fa-2x"></i></a></span></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            <div class="card-container">
-                <div class="card profile-card-user">
-                    <div class="front">
-                        <img src="https://api.adorable.io/avatars/150/8" alt="">
-                        <h3>Арташкин Евгений</h3>
-                        <h5>Программист</h5>
-                        <hr>
-                        <ul class="profile-card-user-social">
-                            <li><span><a href="https://vk.com/eug_art" target="_blank"><i
-                                            class="fab fa-vk fa-2x"></i></a></span></li>
-                            <li><span><a href="mailto:artashkinep@mrsu.ru"><i
-                                            class="far fa-envelope fa-2x"></i></a></span></li>
-                            <li><span><a href="tel:7987543210"><i class="fas fa-phone fa-2x"></i></a></span></li>
-                            <li><span><a href="tel:7987543210"><i class="far fa-comment fa-2x"></i></a></span></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card-container">
-                <div class="card profile-card-user">
-                    <div class="front">
-                        <img src="https://api.adorable.io/avatars/150/9" alt="">
-                        <h3>Арташкин Евгений</h3>
-                        <h5>Программист</h5>
-                        <hr>
-                        <ul class="profile-card-user-social">
-                            <li><span><a href="https://vk.com/eug_art" target="_blank"><i
-                                            class="fab fa-vk fa-2x"></i></a></span></li>
-                            <li><span><a href="mailto:artashkinep@mrsu.ru"><i
-                                            class="far fa-envelope fa-2x"></i></a></span></li>
-                            <li><span><a href="tel:7987543210"><i class="fas fa-phone fa-2x"></i></a></span></li>
-                            <li><span><a href="tel:7987543210"><i class="far fa-comment fa-2x"></i></a></span></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card-container">
-                <div class="card profile-card-user">
-                    <div class="front">
-                        <img src="https://api.adorable.io/avatars/150/10" alt="">
-                        <h3>Арташкин Евгений</h3>
-                        <h5>Программист</h5>
-                        <hr>
-                        <ul class="profile-card-user-social">
-                            <li><span><a href="https://vk.com/eug_art" target="_blank"><i
-                                            class="fab fa-vk fa-2x"></i></a></span></li>
-                            <li><span><a href="mailto:artashkinep@mrsu.ru"><i
-                                            class="far fa-envelope fa-2x"></i></a></span></li>
-                            <li><span><a href="tel:7987543210"><i class="fas fa-phone fa-2x"></i></a></span></li>
-                            <li><span><a href="tel:7987543210"><i class="far fa-comment fa-2x"></i></a></span></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card-container">
-                <div class="card profile-card-user">
-                    <div class="front">
-                        <img src="https://api.adorable.io/avatars/150/11" alt="">
-                        <h3>Арташкин Евгений</h3>
-                        <h5>Программист</h5>
-                        <hr>
-                        <ul class="profile-card-user-social">
-                            <li><span><a href="https://vk.com/eug_art" target="_blank"><i
-                                            class="fab fa-vk fa-2x"></i></a></span></li>
-                            <li><span><a href="mailto:artashkinep@mrsu.ru"><i
-                                            class="far fa-envelope fa-2x"></i></a></span></li>
-                            <li><span><a href="tel:7987543210"><i class="fas fa-phone fa-2x"></i></a></span></li>
-                            <li><span><a href="tel:7987543210"><i class="far fa-comment fa-2x"></i></a></span></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card-container">
-                <div class="card profile-card-user">
-                    <div class="front">
-                        <img src="https://api.adorable.io/avatars/150/12" alt="">
-                        <h3>Арташкин Евгений</h3>
-                        <h5>Программист</h5>
-                        <hr>
-                        <ul class="profile-card-user-social">
-                            <li><span><a href="https://vk.com/eug_art" target="_blank"><i
-                                            class="fab fa-vk fa-2x"></i></a></span></li>
-                            <li><span><a href="mailto:artashkinep@mrsu.ru"><i
-                                            class="far fa-envelope fa-2x"></i></a></span></li>
-                            <li><span><a href="tel:7987543210"><i class="fas fa-phone fa-2x"></i></a></span></li>
-                            <li><span><a href="tel:7987543210"><i class="far fa-comment fa-2x"></i></a></span></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card-container">
-                <div class="card profile-card-user">
-                    <div class="front">
-                        <img src="https://api.adorable.io/avatars/150/13" alt="">
-                        <h3>Арташкин Евгений</h3>
-                        <h5>Программист</h5>
-                        <hr>
-                        <ul class="profile-card-user-social">
-                            <li><span><a href="https://vk.com/eug_art" target="_blank"><i
-                                            class="fab fa-vk fa-2x"></i></a></span></li>
-                            <li><span><a href="mailto:artashkinep@mrsu.ru"><i
-                                            class="far fa-envelope fa-2x"></i></a></span></li>
-                            <li><span><a href="tel:7987543210"><i class="fas fa-phone fa-2x"></i></a></span></li>
-                            <li><span><a href="tel:7987543210"><i class="far fa-comment fa-2x"></i></a></span></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card-container">
-                <div class="card profile-card-user">
-                    <div class="front">
-                        <img src="https://api.adorable.io/avatars/150/14" alt="">
-                        <h3>Арташкин Евгений</h3>
-                        <h5>Программист</h5>
-                        <hr>
-                        <ul class="profile-card-user-social">
-                            <li><span><a href="https://vk.com/eug_art" target="_blank"><i
-                                            class="fab fa-vk fa-2x"></i></a></span></li>
-                            <li><span><a href="mailto:artashkinep@mrsu.ru"><i
-                                            class="far fa-envelope fa-2x"></i></a></span></li>
-                            <li><span><a href="tel:7987543210"><i class="fas fa-phone fa-2x"></i></a></span></li>
-                            <li><span><a href="tel:7987543210"><i class="far fa-comment fa-2x"></i></a></span></li>
-                        </ul>
-                    </div>
+                <div class="col">
+                    <ul class="account-profile-main_information">
+                        <li><b>Кулягина Таисия Ивановна</b></li>
+                        <li><b>Программист</b></li>
+                        <li>Ответсвенный</li>
+                    </ul>
+                    <ul class="account-profile-contact_information">
+                        <li>День рождения: <b>01.02.1997</b></li>
+                    </ul>
+
+                    <hr>
+                    <ul class="profile-card-user-social">
+                        <li><span><a href="https://vk.com/eug_art" target="_blank"><i
+                                        class="fab fa-vk fa-2x"></i></a></span></li>
+                        <li><span><a href="mailto:artashkinep@mrsu.ru"><i
+                                        class="far fa-envelope fa-2x"></i></a></span></li>
+                        <li><span><a href="tel:7987543210"><i class="fas fa-phone fa-2x"></i></a></span></li>
+                        <li><span><a href="tel:7987543210"><i class="far fa-comment fa-2x"></i></a></span></li>
+                    </ul>
                 </div>
             </div>
         </div>
