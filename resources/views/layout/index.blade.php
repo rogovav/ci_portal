@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="{{asset("css/app.css")}}">
 </head>
 <body>
@@ -36,7 +36,7 @@
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="{{ url("mission/new") }}">Новая</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="{{ url("mission/show") }}">Просмотр</a>
+                        <a class="dropdown-item" href="{{ url("mission") }}">Просмотр</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{{ url("mission/plan") }}">Запланированная</a>
                     </div>
@@ -166,6 +166,8 @@
         crossorigin="anonymous"></script>
 <script type="text/javascript" charset="utf8"
         src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+<script src='https://cloud.tinymce.com/stable/tinymce.min.js'></script>
+<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
 <script src="{{asset("js/app.js")}}"></script>
 <script src="{{ asset("js/form.js")  }}"></script>
 </body>

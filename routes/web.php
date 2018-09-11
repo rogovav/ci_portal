@@ -27,6 +27,10 @@ Route::get('/user', function () {
     return view('user.index');
 });
 
+Route::get('/mission', function () {
+    return view('mission.index');
+});
+
 Route::get('/user/show', function (){
     return view('user.show');
 });

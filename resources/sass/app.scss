@@ -366,6 +366,18 @@ marquee{
     margin-top: 0px;
 }
 
+.user-info-popup{
+   list-style-type: none;
+}
+
+#mceu_31{
+    display: none;
+}
+
+.dataTables_filter input{
+    border: 1px solid black;
+}
+
 @media(min-width: 992px) {
     .leftmenutrigger {
         display: block;
