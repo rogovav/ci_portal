@@ -374,9 +374,10 @@ marquee{
     display: none;
 }
 
-.dataTables_filter input{
-    border: 1px solid black;
+.card-table-rendered{
+    padding: 20px;
 }
+
 
 @media(min-width: 992px) {
     .leftmenutrigger {

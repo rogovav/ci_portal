@@ -43,6 +43,24 @@ $(document).ready(function () {
             "url": "http://ci/public/test.json",
             "dataSrc": "data"
         },
+        "createdRow": function (row, data, dataIndex) {
+            console.log(data["priority"]);
+            if (data["priority"] == "blue blue") {
+                $(row).addClass('important');
+            }
+
+            switch (data["priority"]) {
+                case "blue blue":
+                    $(row).addClass('deadline-ok');
+                    break;
+                case "green blue":
+                    $(row).addClass('deadline-middle');
+                    break;
+                case "brown blue":
+                    $(row).addClass('deadline-expired');
+                    break;
+            }
+        },
         "columns": [
             {data: 'id'},
             {data: 'type'},
@@ -56,12 +74,6 @@ $(document).ready(function () {
             {data: 'time'}
         ]
     });
-
-    table.on('xhr', function () {
-        var json = table.ajax.json();
-        console.log(json.data.length + ' row(s) were loaded');
-    });
-
 
 
 });

@@ -122,22 +122,24 @@
     </div>
     <div class="row">
         <div class="col">
-            <table id="table_id" class="table table-tasks">
-                <thead>
-                <tr>
-                    <th>№</th>
-                    <th>Тип</th>
-                    <th>Автор</th>
-                    <th>Исполнитель</th>
-                    <th>Тема</th>
-                    <th>Клиент</th>
-                    <th>Info</th>
-                    <th>Создана</th>
-                    <th>Deadline</th>
-                    <th>Прошло</th>
-                </tr>
-                </thead>
-            </table>
+            <div class="card card-table-rendered">
+                <table id="table_id" class="table table-tasks table-rendered table-bordered" >
+                    <thead>
+                    <tr>
+                        <th>№</th>
+                        <th>Тип</th>
+                        <th>Автор</th>
+                        <th>Исполнитель</th>
+                        <th>Тема</th>
+                        <th>Клиент</th>
+                        <th>Info</th>
+                        <th>Создана</th>
+                        <th>Deadline</th>
+                        <th>Прошло</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
         </div>
     </div>
 @endsection
