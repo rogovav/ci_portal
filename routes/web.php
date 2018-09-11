@@ -34,3 +34,7 @@ Route::get('/mission', function () {
 Route::get('/user/show', function (){
     return view('user.show');
 });
+
+Route::get('/group', function (){
+    return view('group.index');
+});

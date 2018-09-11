@@ -278,8 +278,8 @@
 .create-user-button {
     border-radius: 0;
     text-transform: uppercase;
-    margin-bottom: 20px;
     padding: 20px;
+    margin-bottom: 20px;
 }
 
 .profile-card-user {
@@ -339,7 +339,7 @@
 
 .account-profile-main {
     padding: 20px;
-    margin: 0 20px 20px 20px;
+    margin: 0 0 20px 0;
 }
 
 .account-profile-contact_information {
@@ -376,6 +376,19 @@ marquee{
 
 .card-table-rendered{
     padding: 20px;
+}
+
+.group-user-avatar{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    cursor: pointer;
+}
+
+.card-col{
+    padding:15px;
 }
 
 

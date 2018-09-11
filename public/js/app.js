@@ -10,10 +10,6 @@ $(document).ready(function () {
         e.preventDefault();
     });
 
-    // var data_to_table = $.getJSON("https://raw.githubusercontent.com/angular-ui/ui-grid/master/misc/site/data/10000.json", function (data) {
-    //     console.log(data);
-    //     return data;
-    // });
 
     var table = $('#table_id').DataTable({
         "order": [[0, "desc"]],
@@ -75,5 +71,5 @@ $(document).ready(function () {
         ]
     });
 
-
+    $('.group-user-avatar').popover('enable');
 });
