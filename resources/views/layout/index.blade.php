@@ -28,21 +28,13 @@
                         Панель <i
                             class="fas fa-tachometer-alt shortmenu animate"></i></a>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fas fa-tasks"></i> Заявки <i class="fas fa-tasks shortmenu animate"></i>
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{{ url("mission/new") }}">Новая</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="{{ url("mission") }}">Просмотр</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="{{ url("mission/plan") }}">Запланированная</a>
-                    </div>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url("mission") }}" title="Cart"><i class="fas fa-tasks"></i>
+                        Заявки <i
+                            class="fas fas fa-tasks shortmenu animate"></i></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url("group/index") }}" title="Группы"><i class="fas fa-users"></i>
+                    <a class="nav-link" href="{{ url("group") }}" title="Группы"><i class="fas fa-users"></i>
                         Группы <i
                             class="fas fa-users shortmenu animate"></i></a>
                 </li>
@@ -51,22 +43,22 @@
                             class="fas fa-user-tie shortmenu animate"></i></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url("wiki/index") }}" title="WIKI"><i
+                    <a class="nav-link" href="{{ url("wiki") }}" title="WIKI"><i
                             class="fas fa-graduation-cap"></i> WIKI <i
                             class="fas fa-graduation-cap shortmenu animate"></i></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url("calendar/index") }}" title="Календарь"><i
+                    <a class="nav-link" href="{{ url("calendar") }}" title="Календарь"><i
                             class="fas fa-calendar-alt"></i> Календарь <i
                             class="fas fa-calendar-alt shortmenu animate"></i></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url("report/index") }}" title="Отчеты"><i class="fas fa-file-alt"></i>
+                    <a class="nav-link" href="{{ url("report") }}" title="Отчеты"><i class="fas fa-file-alt"></i>
                         Отчеты <i
                             class="fas fa-file-alt shortmenu animate"></i></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url("chat/index") }}" title="Чат"><i class="fas fa-comments"></i> Чат
+                    <a class="nav-link" href="{{ url("chat") }}" title="Чат"><i class="fas fa-comments"></i> Чат
                         <i
                             class="fas fa-comments shortmenu animate"></i></a>
                 </li>
@@ -147,9 +139,8 @@
                     </div>
                 </div>
             </div>
+
         </div>
-    </div>
-    <div class="container">
         @yield('content')
     </div>
 </div>
@@ -168,7 +159,7 @@
         src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
 <script src='https://cloud.tinymce.com/stable/tinymce.min.js'></script>
 <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+<script src="{{ asset('js/paraia_multi_select.js')  }}"></script>
 <script src="{{asset("js/app.js")}}"></script>
-<script src="{{ asset("js/form.js")  }}"></script>
 </body>
 </html>

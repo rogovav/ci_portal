@@ -23,6 +23,10 @@ Route::get('/mission', function () {
     return view('mission.index');
 });
 
-Auth::routes();
+Route::get('/user/show', function (){
+    return view('user.show');
+});
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/group', function (){
+    return view('group.index');
+});

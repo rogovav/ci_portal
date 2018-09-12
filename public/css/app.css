@@ -257,7 +257,7 @@
 
 .account-profile-main {
   padding: 20px;
-  margin: 0 20px 20px 20px; }
+  margin: 0 0 20px 0; }
 
 .account-profile-contact_information {
   list-style: none; }
@@ -284,8 +284,25 @@ marquee {
 #mceu_31 {
   display: none; }
 
-.dataTables_filter input {
-  border: 1px solid black; }
+.card-table-rendered {
+  padding: 20px; }
+
+.group-user-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  cursor: pointer; }
+
+.card-col {
+  padding: 15px; }
+
+#photo {
+  cursor: pointer; }
+
+.hidden-print {
+  display: none; }
 
 @media (min-width: 992px) {
   .leftmenutrigger {
