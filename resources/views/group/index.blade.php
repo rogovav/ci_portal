@@ -10,7 +10,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form method="POST" action="javascript:void(0);" onsubmit="register()">
+                <form method="POST" action="" onsubmit="">
                     @csrf
                     <div class="modal-body">
                         <div class="form-group">

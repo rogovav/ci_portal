@@ -94,7 +94,7 @@ $(document).ready(function () {
         {value: 18, text: 'ZTE'},
         {value: 19, text: 'Asus'},
         {value: 20, text: 'Alcatel'}
-    ];
+];
 
     var select = $('[data-paraia-multi-select="true"]').paraia_multi_select({
         items: items,
