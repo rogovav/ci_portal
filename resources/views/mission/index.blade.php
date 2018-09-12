@@ -127,15 +127,14 @@
                     <thead>
                     <tr>
                         <th>№</th>
+                        <th>Info</th>
                         <th>Тип</th>
                         <th>Автор</th>
                         <th>Исполнитель</th>
                         <th>Тема</th>
                         <th>Клиент</th>
-                        <th>Info</th>
-                        <th>Создана</th>
+                        <th>Дата начала</th>
                         <th>Deadline</th>
-                        <th>Прошло</th>
                     </tr>
                     </thead>
                 </table>

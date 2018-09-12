@@ -28,18 +28,10 @@
                         Панель <i
                             class="fas fa-tachometer-alt shortmenu animate"></i></a>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fas fa-tasks"></i> Заявки <i class="fas fa-tasks shortmenu animate"></i>
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{{ url("mission/new") }}">Новая</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="{{ url("mission") }}">Просмотр</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="{{ url("mission/plan") }}">Запланированная</a>
-                    </div>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url("mission") }}" title="Cart"><i class="fas fa-tasks"></i>
+                        Заявки <i
+                            class="fas fas fa-tasks shortmenu animate"></i></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url("group") }}" title="Группы"><i class="fas fa-users"></i>

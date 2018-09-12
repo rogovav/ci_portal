@@ -40,34 +40,30 @@ $(document).ready(function () {
             "dataSrc": "data"
         },
         "createdRow": function (row, data, dataIndex) {
-            console.log(data["priority"]);
-            if (data["priority"] == "blue blue") {
-                $(row).addClass('important');
+            if (data["priority"].includes("green")) {
+                $(row).addClass('deadline-middle');
+            }
+            else if (data["priority"].includes("brown")) {
+                $(row).addClass('deadline-expired');
+            }
+            else {
+                $(row).addClass('deadline-ok');
             }
 
-            switch (data["priority"]) {
-                case "blue blue":
-                    $(row).addClass('deadline-ok');
-                    break;
-                case "green blue":
-                    $(row).addClass('deadline-middle');
-                    break;
-                case "brown blue":
-                    $(row).addClass('deadline-expired');
-                    break;
+            if (data["priority"].includes("clock")){
+
             }
         },
         "columns": [
             {data: 'id'},
+            {data: 'priority'},
             {data: 'type'},
             {data: 'author'},
             {data: 'worker'},
             {data: 'topic'},
             {data: 'client'},
-            {data: 'priority'},
             {data: 'datefrom'},
             {data: 'deadline'},
-            {data: 'time'}
         ]
     });
 
