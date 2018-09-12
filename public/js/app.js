@@ -50,7 +50,7 @@ $(document).ready(function () {
                 $(row).addClass('deadline-ok');
             }
 
-            if (data["priority"].includes("clock")){
+            if (data["priority"].includes("clock")) {
 
             }
         },
@@ -68,4 +68,49 @@ $(document).ready(function () {
     });
 
     $('.group-user-avatar').popover('enable');
+
+    $("#photo").click(function () {
+        $("#btnImagemPaciente").trigger('click');
+    })
+
+
+    $('#btnImagemPaciente').change(function () {
+        if (this.files && this.files[0]) {
+            var img = document.getElementById('photo_preview');
+            console.log(img.src)// $('img')[0]
+            img.src = URL.createObjectURL(this.files[0]); // set src to file url
+            // img.onload = imageIsLoaded; // optional onload event listener
+        }
+    });
+
+    var items = [
+        {value: 11, text: 'Apple'},
+        {value: 12, text: 'Nokia'},
+        {value: 13, text: 'Sony'},
+        {value: 14, text: 'LG'},
+        {value: 15, text: 'HTC'},
+        {value: 16, text: 'Motorola'},
+        {value: 17, text: 'Samsung'},
+        {value: 18, text: 'ZTE'},
+        {value: 19, text: 'Asus'},
+        {value: 20, text: 'Alcatel'}
+    ];
+
+    var select = $('[data-paraia-multi-select="true"]').paraia_multi_select({
+        items: items,
+        // enable multi select
+        multi_select: true,
+        // selected items on init
+        defaults: [],
+        // filter text
+        filter_text: 'Filter',
+        // is Right To Left?
+        rtl: false,
+        // is case sensitive?
+        case_sensitive: false
+    });
+
+    select.paraia_multi_select('get_items');
+
+
 });

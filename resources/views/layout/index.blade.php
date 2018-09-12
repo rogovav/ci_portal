@@ -8,6 +8,7 @@
     <title>Document</title>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="{{ asset('css/paraia_multi_select.css') }}">
     <link rel="stylesheet" href="{{asset("css/app.css")}}">
 </head>
 <body>
@@ -160,7 +161,7 @@
         src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
 <script src='https://cloud.tinymce.com/stable/tinymce.min.js'></script>
 <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+<script src="{{ asset('js/paraia_multi_select.js')  }}"></script>
 <script src="{{asset("js/app.js")}}"></script>
-<script src="{{ asset("js/form.js")  }}"></script>
 </body>
 </html>

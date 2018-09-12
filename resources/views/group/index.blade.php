@@ -1,9 +1,52 @@
 @extends('layout.index')
 @section('content')
+    <div class="modal fade" id="ModalCreateUser" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Создание группы</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form method="POST" action="javascript:void(0);" onsubmit="register()">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <input name="group_name" id="" class="form-control" placeholder="Название группы"></input>
+                        </div>
+
+                        <div id="photo" class="form-group">
+                            <img src="http://via.placeholder.com/185x185"
+                                 style="width:185px;height:185px;border:#41719C 2px solid;" id="photo_preview"
+                                 class="img-thumbnail" alt="Фото группы">
+                        </div>
+                        <label class="custom-file hidden-print" style="">
+                            <input type="file" id="btnImagemPaciente" style="width: 160px;"
+                                   class="form-control form-control-sm">
+                            <span class="custom-file-control"></span>
+                        </label>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="brands" data-paraia-multi-select="true"
+                                   placeholder="Select a brand">
+
+                        </div>
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Создать</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
     <div class="row">
         <div class="col">
             <button class="btn btn-primary create-user-button" data-toggle="modal" data-target="#ModalCreateUser">
-                Создать пользователя
+                Создать группу
             </button>
         </div>
     </div>

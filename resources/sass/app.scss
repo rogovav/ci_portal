@@ -355,30 +355,30 @@
     white-space: nowrap;
 }
 
-.account-main-btn{
+.account-main-btn {
     display: block;
     margin: auto;
     width: 200px;
 }
 
-marquee{
+marquee {
     margin: 20px;
     margin-top: 0px;
 }
 
-.user-info-popup{
-   list-style-type: none;
+.user-info-popup {
+    list-style-type: none;
 }
 
-#mceu_31{
+#mceu_31 {
     display: none;
 }
 
-.card-table-rendered{
+.card-table-rendered {
     padding: 20px;
 }
 
-.group-user-avatar{
+.group-user-avatar {
     width: 30px;
     height: 30px;
     border-radius: 50%;
@@ -387,10 +387,17 @@ marquee{
     cursor: pointer;
 }
 
-.card-col{
-    padding:15px;
+.card-col {
+    padding: 15px;
 }
 
+#photo {
+    cursor: pointer;
+}
+
+.hidden-print{
+    display: none;
+}
 
 @media(min-width: 992px) {
     .leftmenutrigger {

@@ -298,6 +298,12 @@ marquee {
 .card-col {
   padding: 15px; }
 
+#photo {
+  cursor: pointer; }
+
+.hidden-print {
+  display: none; }
+
 @media (min-width: 992px) {
   .leftmenutrigger {
     display: block;
