@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\View\View;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -14,6 +15,16 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //
+        view()->composer('layout.index', function ($view)
+        {
+            $users_all = \App\User::all()->count();
+            $users_online = 1;
+            $users_info = [
+                'online' => $users_online,
+                'all' => $users_all,
+            ];
+            $view->with('users_layout', $users_info);
+        });
     }
 
     /**

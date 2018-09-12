@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="{{asset("css/app.css")}}">
 </head>
 <body>
@@ -24,7 +24,8 @@
         <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav animate side-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="#" title="Cart"><i class="fas fa-tachometer-alt"></i> Панель <i
+                    <a class="nav-link" href="{{ url("dashboard") }}" title="Cart"><i class="fas fa-tachometer-alt"></i>
+                        Панель <i
                             class="fas fa-tachometer-alt shortmenu animate"></i></a>
                 </li>
                 <li class="nav-item dropdown">
@@ -35,7 +36,7 @@
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="{{ url("mission/new") }}">Новая</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="{{ url("mission/show") }}">Просмотр</a>
+                        <a class="dropdown-item" href="{{ url("mission") }}">Просмотр</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{{ url("mission/plan") }}">Запланированная</a>
                     </div>
@@ -75,6 +76,7 @@
                 </li>
 
             </ul>
+
             <ul class="navbar-nav ml-md-auto d-md-flex">
                 <li class="nav-item">
                     <a class="nav-link" href="#"><i class="fas fa-user"></i> Profile</a>
@@ -87,10 +89,17 @@
     </nav>
     <div class="container-fluid">
         <div class="row">
+            <marquee behavior="" direction="" onmouseout="this.start()" onmouseover="this.stop()">Lorem ipsum dolor sit
+                amet, consectetur adipisicing elit. A autem
+                consequatur, culpa cum dignissimos ducimus eos explicabo facere, illo iste laboriosam minima molestiae
+                molestias necessitatibus praesentium rerum ullam ut voluptatum?
+            </marquee>
+        </div>
+        <div class="row">
             <div class="col">
                 <div class="card">
                     <div class="card-body card-body-task no-padding">
-                        <div class="card-body-label card-task"><i class="fas fa-tag fa-3x"></i></div>
+                        <div class="card-body-label card-task"><a href=""><i class="fas fa-tag fa-3x"></i></a></div>
                         <div class="card-body-text"><span>ЗАЯВОК</span><br><span class="real-time-counter">20</span>
                             <hr>
                             <span class="real-time-counter-user">15</span>
@@ -102,7 +111,8 @@
             <div class="col">
                 <div class="card card-body-message">
                     <div class="card-body no-padding">
-                        <div class="card-body-label card-message"><i class="fas fa-envelope fa-3x"></i></div>
+                        <div class="card-body-label card-message"><a href=""><i class="fas fa-envelope fa-3x"></i></a>
+                        </div>
                         <div class="card-body-text"><span>СООБЩЕНИЙ</span><br><span class="real-time-counter">21</span>
                             <hr>
                             <span class="real-time-counter-user">10</span>
@@ -114,7 +124,8 @@
             <div class="col">
                 <div class="card">
                     <div class="card-body card-body-wiki no-padding">
-                        <div class="card-body-label card-wiki"><i class="fas fa-graduation-cap fa-3x"></i></div>
+                        <div class="card-body-label card-wiki"><a href=""><i
+                                    class="fas fa-graduation-cap fa-3x"></i></a></div>
                         <div class="card-body-text"><span>СТАТЕЙ</span><br><span class="real-time-counter">35</span>
                             <hr>
                             <span class="real-time-counter-user">4</span>
@@ -126,18 +137,19 @@
             <div class="col">
                 <div class="card">
                     <div class="card-body card-body-users no-padding">
-                        <div class="card-body-label card-users"><i class="fas fa-users fa-3x"></i></div>
+                        <div class="card-body-label card-users"><a href=""><i class="fas fa-users fa-3x"></i></a></div>
                         <div class="card-body-text"><span>ПОЛЬЗОВАТЕЛЕЙ</span><br><span
-                                class="real-time-counter">143</span>
+                                class="real-time-counter">{{ $users_layout['all'] }}</span>
                             <hr>
-                            <span class="real-time-counter-user">3</span>
+                            <span class="real-time-counter-user">{{ $users_layout['online'] }}</span>
                             <span> on-line</span>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
+    </div>
+    <div class="container">
         @yield('content')
     </div>
 </div>
@@ -152,6 +164,11 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
+<script type="text/javascript" charset="utf8"
+        src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+<script src='https://cloud.tinymce.com/stable/tinymce.min.js'></script>
+<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
 <script src="{{asset("js/app.js")}}"></script>
+<script src="{{ asset("js/form.js")  }}"></script>
 </body>
 </html>

@@ -8,6 +8,12 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
+
+    public function group_admin()
+    {
+        return $this->hasMany('App\Group', 'admin');
+    }
+
     use Notifiable;
 
     /**

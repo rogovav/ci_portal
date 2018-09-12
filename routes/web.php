@@ -11,22 +11,17 @@
 |
 */
 
-Route::get('/', function () {
-    return view('dashboard.index');
-});
-
-Route::get('/dashboard', function () {
-    return view('dashboard.index');
-});
+Route::get('/', 'HomeController@index');
 
 Route::get('/auth', function () {
     return view('auth.index');
 });
 
-Route::get('/user', function () {
-    return view('user.index');
-});
+Route::get('/users', 'UserController@index');
 
+Route::get('/mission', function () {
+    return view('mission.index');
+});
 
 Auth::routes();
 
