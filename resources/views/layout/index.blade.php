@@ -8,7 +8,9 @@
     <title>Document</title>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
-    <link rel="stylesheet" href="{{asset("css/app.css")}}">
+    <link rel="stylesheet" href="{{ asset("css/paraia_multi_select.css") }}">
+
+    <link rel="stylesheet" href="{{ asset("css/app.css") }}">
 </head>
 <body>
 
@@ -24,47 +26,47 @@
         <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav animate side-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url("dashboard") }}" title="Cart"><i class="fas fa-tachometer-alt"></i>
+                    <a class="nav-link" href="{{ url("") }}" title="Cart"><i class="fas fa-tachometer-alt"></i>
                         Панель <i
-                            class="fas fa-tachometer-alt shortmenu animate"></i></a>
+                                class="fas fa-tachometer-alt shortmenu animate"></i></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url("mission") }}" title="Cart"><i class="fas fa-tasks"></i>
+                    <a class="nav-link" href="{{ url("missions") }}" title="Cart"><i class="fas fa-tasks"></i>
                         Заявки <i
-                            class="fas fas fa-tasks shortmenu animate"></i></a>
+                                class="fas fas fa-tasks shortmenu animate"></i></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url("group") }}" title="Группы"><i class="fas fa-users"></i>
+                    <a class="nav-link" href="{{ url("groups") }}" title="Группы"><i class="fas fa-users"></i>
                         Группы <i
-                            class="fas fa-users shortmenu animate"></i></a>
+                                class="fas fa-users shortmenu animate"></i></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url("user") }}" title="Люди"><i class="fas fa-user-tie"></i> Люди <i
-                            class="fas fa-user-tie shortmenu animate"></i></a>
+                    <a class="nav-link" href="{{ url("users") }}" title="Люди"><i class="fas fa-user-tie"></i> Люди <i
+                                class="fas fa-user-tie shortmenu animate"></i></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url("wiki") }}" title="WIKI"><i
-                            class="fas fa-graduation-cap"></i> WIKI <i
-                            class="fas fa-graduation-cap shortmenu animate"></i></a>
+                                class="fas fa-graduation-cap"></i> WIKI <i
+                                class="fas fa-graduation-cap shortmenu animate"></i></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url("calendar") }}" title="Календарь"><i
-                            class="fas fa-calendar-alt"></i> Календарь <i
-                            class="fas fa-calendar-alt shortmenu animate"></i></a>
+                                class="fas fa-calendar-alt"></i> Календарь <i
+                                class="fas fa-calendar-alt shortmenu animate"></i></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url("report") }}" title="Отчеты"><i class="fas fa-file-alt"></i>
+                    <a class="nav-link" href="{{ url("reports") }}" title="Отчеты"><i class="fas fa-file-alt"></i>
                         Отчеты <i
-                            class="fas fa-file-alt shortmenu animate"></i></a>
+                                class="fas fa-file-alt shortmenu animate"></i></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url("chat") }}" title="Чат"><i class="fas fa-comments"></i> Чат
+                    <a class="nav-link" href="{{ url("chats") }}" title="Чат"><i class="fas fa-comments"></i> Чат
                         <i
-                            class="fas fa-comments shortmenu animate"></i></a>
+                                class="fas fa-comments shortmenu animate"></i></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="" title="Склад"><i class="fas fa-warehouse"></i> Склад <i
-                            class="fas fa-warehouse shortmenu animate"></i></a>
+                                class="fas fa-warehouse shortmenu animate"></i></a>
                 </li>
 
             </ul>
@@ -74,8 +76,13 @@
                     <a class="nav-link" href="#"><i class="fas fa-user"></i> Profile</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="fas fa-key"></i> Logout</a>
+                    <a class="nav-link" href="{{ route('logout') }}"
+                       onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        <i class="fas fa-key"></i> Logout</a>
                 </li>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
             </ul>
         </div>
     </nav>
@@ -117,7 +124,7 @@
                 <div class="card">
                     <div class="card-body card-body-wiki no-padding">
                         <div class="card-body-label card-wiki"><a href=""><i
-                                    class="fas fa-graduation-cap fa-3x"></i></a></div>
+                                        class="fas fa-graduation-cap fa-3x"></i></a></div>
                         <div class="card-body-text"><span>СТАТЕЙ</span><br><span class="real-time-counter">35</span>
                             <hr>
                             <span class="real-time-counter-user">4</span>
@@ -131,7 +138,7 @@
                     <div class="card-body card-body-users no-padding">
                         <div class="card-body-label card-users"><a href=""><i class="fas fa-users fa-3x"></i></a></div>
                         <div class="card-body-text"><span>ПОЛЬЗОВАТЕЛЕЙ</span><br><span
-                                class="real-time-counter">{{ $users_layout['all'] }}</span>
+                                    class="real-time-counter">{{ $users_layout['all'] }}</span>
                             <hr>
                             <span class="real-time-counter-user">{{ $users_layout['online'] }}</span>
                             <span> on-line</span>
@@ -141,14 +148,16 @@
             </div>
 
         </div>
+    </div>
+    <div class="container">
         @yield('content')
     </div>
 </div>
 <script defer src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 <script
-    src="http://code.jquery.com/jquery-3.3.1.js"
-    integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
-    crossorigin="anonymous"></script>
+        src="http://code.jquery.com/jquery-3.3.1.js"
+        integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+        crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
         integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
         crossorigin="anonymous"></script>
@@ -160,6 +169,8 @@
 <script src='https://cloud.tinymce.com/stable/tinymce.min.js'></script>
 <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
 <script src="{{ asset('js/paraia_multi_select.js')  }}"></script>
-<script src="{{asset("js/app.js")}}"></script>
+<script src="{{ asset("js/app.js") }}"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 </body>
 </html>

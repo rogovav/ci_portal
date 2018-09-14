@@ -9,9 +9,14 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable
 {
 
-    public function group_admin()
+    public function groups_admin()
     {
         return $this->hasMany('App\Group', 'admin');
+    }
+
+    public function groups()
+    {
+        return $this->belongsToMany('App\Group')->withTimestamps();
     }
 
     use Notifiable;

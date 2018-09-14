@@ -11,6 +11,9 @@
 |
 */
 
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+
 Route::get('/', 'HomeController@index');
 
 Route::get('/auth', function () {
@@ -18,15 +21,14 @@ Route::get('/auth', function () {
 });
 
 Route::get('/users', 'UserController@index');
+Route::post('/users', 'UserController@add');
+Route::get('/users/json', 'UserController@users_json');
 
-Route::get('/mission', function () {
+Auth::routes();
+
+Route::get('/missions', function () {
     return view('mission.index');
 });
 
-Route::get('/user/show', function (){
-    return view('user.show');
-});
-
-Route::get('/group', function (){
-    return view('group.index');
-});
+Route::get('/groups', 'GroupController@index');
+Route::post('/groups', 'GroupController@add');

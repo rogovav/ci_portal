@@ -206,8 +206,8 @@
 .create-user-button {
   border-radius: 0;
   text-transform: uppercase;
-  margin-bottom: 20px;
-  padding: 20px; }
+  padding: 20px;
+  margin-bottom: 20px; }
 
 .profile-card-user {
   text-align: center;

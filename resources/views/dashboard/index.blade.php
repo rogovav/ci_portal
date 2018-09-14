@@ -1,21 +1,8 @@
 @extends('layout.index')
 @section('content')
-    @foreach($admins as $admin)
-        <ul>
-            <li>{{ $admin->id }}</li>
-            <li>{{ $admin->fio }}</li>
-            <li>{{ $admin->group_admin }}</li>
-        </ul>
-    @endforeach
-    <hr>
-    @foreach($groups as $group)
-        <ul>
-            <li>{{ $group->id }}</li>
-            <li>{{ $group->name }}</li>
-            <li>{{ $group->admin }}</li>
-            <li>{{ $group->admin_user }}</li>
-        </ul>
-    @endforeach
+
+    {{ Auth::user() }}
+
     <div class="row">
         <div class="col">
             <div class="card">
