@@ -1,4 +1,7 @@
 @extends('layout.index')
+@section('css')
+    <link rel="stylesheet" href="{{ asset("css/dataTables.bootstrap4.min.css") }}">
+@endsection
 @section('content')
     <div class="modal fade" id="ModalCreateUser" tabindex="-1" role="dialog"
          aria-labelledby="exampleModalCenterTitle" aria-hidden="true">

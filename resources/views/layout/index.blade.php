@@ -6,11 +6,9 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
-    <link rel="stylesheet" href="{{ asset("css/paraia_multi_select.css") }}">
-
-    <link rel="stylesheet" href="{{ asset("css/app.css") }}">
+    <link href="{{ asset("css/bootstrap.min.css") }}" rel="stylesheet" id="bootstrap-css">
+    @yield('css')
+    <link rel="stylesheet" href="{{asset("css/app.css")}}">
 </head>
 <body>
 
@@ -153,24 +151,11 @@
         @yield('content')
     </div>
 </div>
-<script defer src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
-<script
-        src="http://code.jquery.com/jquery-3.3.1.js"
-        integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
-        crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
-<script type="text/javascript" charset="utf8"
-        src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
-<script src='https://cloud.tinymce.com/stable/tinymce.min.js'></script>
-<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
-<script src="{{ asset('js/paraia_multi_select.js')  }}"></script>
-<script src="{{ asset("js/app.js") }}"></script>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+<script src="{{ asset("js/fontawesome.js") }}"></script>
+<script src="{{ asset("js/jquery-3.3.1.js") }}"></script>
+<script src="{{ asset("js/popper.min.js") }}"></script>
+<script src="{{ asset("js/bootstrap.min.js")  }}"></script>
+@yield('js')
+<script src="{{asset("js/app.js")}}"></script>
 </body>
 </html>
