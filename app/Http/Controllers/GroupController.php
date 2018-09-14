@@ -20,18 +20,16 @@ class GroupController extends Controller
     {
         Log::debug($request);
 
-//        $group = new Group;
-//
-//        $group->name = $request['name'];
-//        $group->admin = 1;
-//
-//
-//        $group->save();
-////        $group = Group::all();
-////
-////        Log::debug($group);
-//
-//        $group->users()->sync($request['users']);
+        $users = array_map('intval', explode(',', $request['users']));
+
+        $group = new Group;
+
+        $group->name = $request['name'];
+        $group->admin = 1;
+
+        $group->save();
+
+        $group->users()->attach($users);
 
 
         return back()->withInput();

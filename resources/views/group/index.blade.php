@@ -33,13 +33,6 @@
                             <input type="text" name="users" class="form-control" data-paraia-multi-select="true"
                                    placeholder="Добавить пользователей" id="value-array">
                         </div>
-
-                        <select class="js-example-basic-multiple" name="states[]" multiple="multiple">
-                            <option value="AL">Alabama</option>
-                            ...
-                            <option value="WY">Wyoming</option>
-                        </select>
-
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">Создать</button>
@@ -57,85 +50,35 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-6 col-lg-6 col-xl-6">
-            <div class="card account-profile-main">
-                <div class="row">
-                    <div class="col account-main-info-col">
-                        <img src="https://api.adorable.io/avatars/150/2" class="account-profile-avatar"
-                             alt="">
-                    </div>
-                    <div class="col">
-                        <ul class="account-profile-main_information">
-                            <li><b>Группа развития</b></li>
-                        </ul>
-                        <ul class="account-profile-contact_information">
-                            <li><span><b>6</b></span><span> участников</span></li>
-                        </ul>
-                        <hr>
-                        <div>
-                            <a href=""><img class="group-user-avatar" src="https://api.adorable.io/avatars/150/1" alt=""
-                                            data-container="body" data-toggle="popover" data-placement="top"
-                                            data-content="Имя Пользователя" data-html="true" data-trigger="hover"></a>
-                            <a href=""><img class="group-user-avatar" src="https://api.adorable.io/avatars/150/2" alt=""
-                                            data-container="body" data-toggle="popover" data-placement="top"
-                                            data-content="Имя Пользователя" data-html="true" data-trigger="hover"></a>
-                            <a href=""><img class="group-user-avatar" src="https://api.adorable.io/avatars/150/3" alt=""
-                                            data-container="body" data-toggle="popover" data-placement="top"
-                                            data-content="Имя Пользователя" data-html="true" data-trigger="hover"></a>
-                            <a href=""><img class="group-user-avatar" src="https://api.adorable.io/avatars/150/4" alt=""
-                                            data-container="body" data-toggle="popover" data-placement="top"
-                                            data-content="Имя Пользователя" data-html="true" data-trigger="hover"></a>
-                            <a href=""><img class="group-user-avatar" src="https://api.adorable.io/avatars/150/5" alt=""
-                                            data-container="body" data-toggle="popover" data-placement="top"
-                                            data-content="Имя Пользователя" data-html="true" data-trigger="hover"></a>
-                            <a href=""><img class="group-user-avatar" src="https://api.adorable.io/avatars/150/6" alt=""
-                                            data-container="body" data-toggle="popover" data-placement="top"
-                                            data-content="Имя Пользователя" data-html="true" data-trigger="hover"></a>
-
+        @foreach($groups as $group)
+            <div class="col-md-6 col-lg-6 col-xl-6">
+                <div class="card account-profile-main">
+                    <div class="row">
+                        <div class="col account-main-info-col">
+                            <img src="https://api.adorable.io/avatars/150/2" class="account-profile-avatar" alt="">
+                        </div>
+                        <div class="col">
+                            <ul class="account-profile-main_information">
+                                <li><b>{{ $group->name }}</b></li>
+                            </ul>
+                            <ul class="account-profile-contact_information">
+                                <li><span><b>{{ $group->users->count() }}</b></span><span> участников</span></li>
+                            </ul>
+                            <hr>
+                            <div>
+                                @foreach($group->users as $user)
+                                    <a href=""><img class="group-user-avatar"
+                                                    src="https://api.adorable.io/avatars/150/{{ rand(1, 100) }}" alt=""
+                                                    data-container="body" data-toggle="popover" data-placement="top"
+                                                    data-content="{{ $user->fio }}" data-html="true"
+                                                    data-trigger="hover"></a>
+                                @endforeach
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-6 col-lg-6 col-xl-6">
-            <div class="card account-profile-main">
-                <div class="row">
-                    <div class="col account-main-info-col">
-                        <img src="https://api.adorable.io/avatars/150/1" class="account-profile-avatar"
-                             alt="">
-                    </div>
-                    <div class="col">
-                        <ul class="account-profile-main_information">
-                            <li><b>Группа пирожков</b></li>
-                        </ul>
-                        <ul class="account-profile-contact_information">
-                            <li><span><b>6</b></span><span> участников</span></li>
-                        </ul>
-                        <hr>
-                        <div>
-                            <a href=""><img class="group-user-avatar" src="https://api.adorable.io/avatars/150/1" alt=""
-                                            data-container="body" data-toggle="popover" data-placement="top"
-                                            data-content="Имя Пользователя" data-html="true" data-trigger="hover"></a>
-                            <a href=""><img class="group-user-avatar" src="https://api.adorable.io/avatars/150/2" alt=""
-                                            data-container="body" data-toggle="popover" data-placement="top"
-                                            data-content="Имя Пользователя" data-html="true" data-trigger="hover"></a>
-                            <a href=""><img class="group-user-avatar" src="https://api.adorable.io/avatars/150/3" alt=""
-                                            data-container="body" data-toggle="popover" data-placement="top"
-                                            data-content="Имя Пользователя" data-html="true" data-trigger="hover"></a>
-                            <a href=""><img class="group-user-avatar" src="https://api.adorable.io/avatars/150/4" alt=""
-                                            data-container="body" data-toggle="popover" data-placement="top"
-                                            data-content="Имя Пользователя" data-html="true" data-trigger="hover"></a>
-                            <a href=""><img class="group-user-avatar" src="https://api.adorable.io/avatars/150/5" alt=""
-                                            data-container="body" data-toggle="popover" data-placement="top"
-                                            data-content="Имя Пользователя" data-html="true" data-trigger="hover"></a>
-                            <a href=""><img class="group-user-avatar" src="https://api.adorable.io/avatars/150/6" alt=""
-                                            data-container="body" data-toggle="popover" data-placement="top"
-                                            data-content="Имя Пользователя" data-html="true" data-trigger="hover"></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        @endforeach
     </div>
 @endsection
 @section('js')
@@ -143,7 +86,7 @@
     <script>
         $("#photo").click(function () {
             $("#btnImagemPaciente").trigger('click');
-        })
+        });
 
 
         $('#btnImagemPaciente').change(function () {
@@ -154,20 +97,13 @@
         });
     </script>
     <script>
-        var items = [
-            {value: 11, text: 'Apple'},
-            {value: 12, text: 'Nokia'},
-            {value: 13, text: 'Sony'},
-            {value: 14, text: 'LG'},
-            {value: 15, text: 'HTC'},
-            {value: 16, text: 'Motorola'},
-            {value: 17, text: 'Samsung'},
-            {value: 18, text: 'ZTE'},
-            {value: 19, text: 'Asus'},
-            {value: 20, text: 'Alcatel'}
-        ];
-        var select = $('[data-paraia-multi-select="true"]').paraia_multi_select({
-            items: items,
+
+        let select = $('[data-paraia-multi-select="true"]').paraia_multi_select({
+            items: JSON.parse($.ajax({
+                url: "/users/json",
+                type: "GET",
+                async: false,
+            }).responseText),
             // enable multi select
             multi_select: true,
             // selected items on init
@@ -181,10 +117,7 @@
 
         });
         $(".item").click(function () {
-            let a = []
-            a.push(select.paraia_multi_select("get_items"));
-            $("#value-array").val("["+a[0]+"]")
-            console.log($("#value-array").val());
+            $("#value-array").val(select.paraia_multi_select("get_items"));
         });
 
     </script>
