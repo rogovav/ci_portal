@@ -1,6 +1,7 @@
 @extends('layout.index')
 @section('css')
     <link rel="stylesheet" href="{{ asset("css/dataTables.bootstrap4.min.css") }}">
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap4.min.css">
 @endsection
 @section('content')
     <div class="modal fade" id="ModalCreateUser" tabindex="-1" role="dialog"
@@ -126,7 +127,7 @@
     <div class="row">
         <div class="col">
             <div class="card card-table-rendered">
-                <table id="table_id" class="table table-tasks table-rendered table-bordered" >
+                <table id="table_id" class="table table-tasks table-rendered dt-responsive nowrap">
                     <thead>
                     <tr>
                         <th>№</th>
@@ -144,4 +145,78 @@
             </div>
         </div>
     </div>
+@endsection
+@section('js')
+    <script src="{{ asset("js/jquery.dataTables.js") }}"></script>
+    <script src="{{ asset("js/dataTables.bootstrap4.min.js") }}"></script>
+    <script src='https://cloud.tinymce.com/stable/tinymce.min.js'></script>
+
+    <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap4.min.js"></script>
+
+    <script>
+        tinymce.init({
+            selector: '#comment-user-mission'
+        });
+    </script>
+    <script>
+        $('#table_id').DataTable({
+            "order": [[0, "desc"]],
+            "language": {
+                "processing": "Подождите...",
+                "search": "Поиск:",
+                "lengthMenu": "Показать _MENU_ записей",
+                "info": "Записи с _START_ до _END_ из _TOTAL_ записей",
+                "infoEmpty": "Записи с 0 до 0 из 0 записей",
+                "infoFiltered": "(отфильтровано из _MAX_ записей)",
+                "infoPostFix": "",
+                "loadingRecords": "Загрузка записей...",
+                "zeroRecords": "Записи отсутствуют.",
+                "emptyTable": "В таблице отсутствуют данные",
+                "paginate": {
+                    "first": "Первая",
+                    "previous": "Предыдущая",
+                    "next": "Следующая",
+                    "last": "Последняя"
+                },
+                "aria": {
+                    "sortAscending": ": активировать для сортировки столбца по возрастанию",
+                    "sortDescending": ": активировать для сортировки столбца по убыванию"
+                }
+            },
+            "ajax": {
+                "url": "/test.json",
+                "dataSrc": "data"
+            },
+            "createdRow": function (row, data, dataIndex) {
+                if (data["priority"].includes("green")) {
+                    $(row).addClass('deadline-middle');
+                }
+                else if (data["priority"].includes("brown")) {
+                    $(row).addClass('deadline-expired');
+                }
+                else {
+                    $(row).addClass('deadline-ok');
+                }
+
+                if (data["priority"].includes("clock")) {
+
+                }
+            },
+            "columns": [
+                {data: 'id'},
+                {data: 'priority'},
+                {data: 'type'},
+                {data: 'author'},
+                {data: 'worker'},
+                {data: 'topic'},
+                {data: 'client'},
+                {data: 'datefrom'},
+                {data: 'deadline'},
+            ]
+        });
+
+        $(document).ready(function() {
+            $('#example').DataTable();
+        } );</script>
 @endsection
