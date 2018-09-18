@@ -5,7 +5,7 @@
 @section('content')
     <div class="modal fade" id="ModalCreateUser" tabindex="-1" role="dialog"
          aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLongTitle">Создание группы</h5>
@@ -13,7 +13,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form method="POST" action="{{ url('groups') }}">
+                <form method="POST" action="{{ url('groups') }}" enctype="multipart/form-data">
                     @csrf
                     <div class="modal-body">
                         <div class="form-group">
@@ -21,7 +21,7 @@
                         </div>
                         <div id="photo" class="form-group">
                             <img src="http://via.placeholder.com/185x185"
-                                 style="width:185px; height:185px; border:#41719C 2px solid;" id="photo_preview"
+                                 style="" id="photo_preview"
                                  class="img-thumbnail" alt="Фото группы">
                         </div>
                         <label class="custom-file hidden-print" style="">
@@ -55,20 +55,20 @@
                 <div class="card account-profile-main">
                     <div class="row">
                         <div class="col account-main-info-col">
-                            <img src="https://api.adorable.io/avatars/150/2" class="account-profile-avatar" alt="">
+                            <a href="/group/{{ $group->hash_id }}"><img src="{{ asset("images/avatars/groups/$group->avatar") }}" class="account-profile-avatar" alt=""></a>
                         </div>
                         <div class="col">
                             <ul class="account-profile-main_information">
                                 <li><b>{{ $group->name }}</b></li>
                             </ul>
                             <ul class="account-profile-contact_information">
-                                <li><span><b>{{ $group->users->count() }}</b></span><span> участников</span></li>
+                                <li><span>Кол-во участников: </span><span><b>{{ $group->users->count() }}</b></span></li>
                             </ul>
                             <hr>
                             <div>
                                 @foreach($group->users as $user)
                                     <a href=""><img class="group-user-avatar"
-                                                    src="https://api.adorable.io/avatars/150/{{ rand(1, 100) }}" alt=""
+                                                    src="{{ asset("images/avatars/users/$user->avatar") }}" alt=""
                                                     data-container="body" data-toggle="popover" data-placement="top"
                                                     data-content="{{ $user->fio }}" data-html="true"
                                                     data-trigger="hover"></a>
@@ -100,7 +100,7 @@
 
         let select = $('[data-paraia-multi-select="true"]').paraia_multi_select({
             items: JSON.parse($.ajax({
-                url: "/users/json",
+                url: "/users/api",
                 type: "GET",
                 async: false,
             }).responseText),

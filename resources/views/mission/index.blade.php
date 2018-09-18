@@ -4,9 +4,9 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap4.min.css">
 @endsection
 @section('content')
-    <div class="modal fade" id="ModalCreateUser" tabindex="-1" role="dialog"
+    <div class="modal fade bd-example-modal-lg" id="ModalCreateUser" tabindex="-1" role="dialog"
          aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLongTitle">Создание заявки</h5>
@@ -18,16 +18,16 @@
                     @csrf
                     <div class="modal-body">
                         <div class="form-group">
-                            <select class="custom-select" name="from">
-                                <option selected>Выберите источник</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
+                            <select class="custom-select" name="client">
+                                <option selected disabled>Источник</option>
+                                <option value="1">Задача</option>
+                                <option value="2">Общежитие</option>
+                                <option value="3">Университет</option>
                             </select>
                         </div>
                         <div class="form-group">
                             <select class="custom-select" name="client">
-                                <option selected>Выберите от кого</option>
+                                <option selected disabled>Клиент</option>
                                 <option value="1">One</option>
                                 <option value="2">Two</option>
                                 <option value="3">Three</option>
@@ -47,7 +47,7 @@
                         </div>
                         <div class="form-group">
                             <select class="custom-select" name="place">
-                                <option selected>Выберите место</option>
+                                <option selected>Адрес</option>
                                 <option value="1">One</option>
                                 <option value="2">Two</option>
                                 <option value="3">Three</option>
@@ -55,7 +55,7 @@
                         </div>
                         <div class="form-group">
                             <select class="custom-select" name="topic">
-                                <option selected>Выберите тему</option>
+                                <option selected disabled>Тема</option>
                                 <option value="1">One</option>
                                 <option value="2">Two</option>
                                 <option value="3">Three</option>
@@ -63,7 +63,7 @@
                         </div>
                         <div class="form-group">
                             <select class="custom-select" name="worker">
-                                <option selected>Выберите кого</option>
+                                <option selected disabled>Исполнитель</option>
                                 <option value="1">One</option>
                                 <option value="2">Two</option>
                                 <option value="3">Three</option>
@@ -71,7 +71,7 @@
                         </div>
                         <div class="form-group">
                             <select class="custom-select" name="help">
-                                <option selected>Выберите помощь</option>
+                                <option selected>Помощники</option>
                                 <option value="1">One</option>
                                 <option value="2">Two</option>
                                 <option value="3">Three</option>
@@ -79,7 +79,7 @@
                         </div>
                         <div class="form-group">
                             <select class="custom-select" name="looking">
-                                <option selected>Выберите смотрящего</option>
+                                <option selected>Наблюдатели</option>
                                 <option value="1">One</option>
                                 <option value="2">Two</option>
                                 <option value="3">Three</option>
@@ -87,10 +87,10 @@
                         </div>
                         <div class="form-group">
                             <select class="custom-select" name="priority">
-                                <option selected>Выберите приоритет</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
+                                <option selected disabled>Приоритет</option>
+                                <option value="1">Высокий</option>
+                                <option value="2">Средний</option>
+                                <option value="3">Низкий</option>
                             </select>
                         </div>
                         <div class="form-group">
@@ -155,8 +155,69 @@
     <script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap4.min.js"></script>
 
     <script>
+        $(document).ready(function () {
+            dropDown = $(".dropdown-search");
+            selectId = 0;
+            let items = [
+                {value: 1, text: 'Sony'},
+                {value: 2, text: 'LG'},
+                {value: 3, text: 'Apple'},
+                {value: 4, text: 'One Plus'},
+                {value: 5, text: 'Android'},
+                {value: 6, text: 'Iphone'}
+
+            ];
+            items.forEach(function (item) {
+                selectId++;
+                (dropDown).append(
+                    '<div class="item">' +
+                    '   <div class="live-checkbox">' +
+                    '       <span class="live-label form-control" onclick="GetValue(id)" ' + 'id=live-' + selectId + '>' + item['text'] + '</span>' +
+                    '   </div>' +
+                    '</div>'
+                );
+            });
+        });
+
+        function GetValue(id) {
+            $("#live-search").val($("#" + id).text());
+            if ($("#live-search").val() != "") {
+                $(".user-info-popup").show();
+            }
+        }
+
+        $("select[name=source]").change(function () {
+            switch ($(this).val()) {
+                case "1":
+                    $(".live-form-group, .user-info-popup").hide();
+                    break;
+                case "2":
+                    $(".live-form-group").show();
+                    break;
+            }
+        });
+
+        $('input[name=live-search]').on('keyup focus', function () {
+            let filter = $(this);
+            let text = filter.val();
+            console.log(text);
+            dropDown = $(".dropdown-search");
+            dropDown.find('.item').each(function () {
+                var item = $(this);
+                console.log(item.html().includes(text));
+                if (item.html().includes(text)) {
+                    item.show();
+                } else {
+                    item.hide();
+                }
+            });
+        });
+
+    </script>
+    <script>
         tinymce.init({
-            selector: '#comment-user-mission'
+            selector: '#comment-user-mission',
+            plugins : 'table',
         });
     </script>
     <script>
@@ -216,7 +277,7 @@
             ]
         });
 
-        $(document).ready(function() {
+        $(document).ready(function () {
             $('#example').DataTable();
-        } );</script>
+        });</script>
 @endsection

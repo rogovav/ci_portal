@@ -10,9 +10,11 @@ $(document).ready(function () {
 
     $(".post-comment-icon").click(function () {
         console.log("click");
-        $(this).closest(".posts-wrapper").find(".comments-rendered").slideToggle("slow", function(){
-
+        $(this).closest(".posts-wrapper").find(".comments-rendered").slideToggle("slow", function () {
+            console.log($(".comments-rendered").css("display") == "block");
         });
     });
+    //.user-popup-select
+
 });
 

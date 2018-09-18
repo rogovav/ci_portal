@@ -15,4 +15,13 @@ class Group extends Model
     {
         return $this->belongsToMany('App\User')->withTimestamps();
     }
+
+    public function posts()
+    {
+        return $this->hasMany('App\GroupPost');
+    }
+
+    protected $fillable = [
+        'name', 'avatar', 'admin',
+    ];
 }

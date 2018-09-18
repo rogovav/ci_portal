@@ -19,6 +19,16 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Group')->withTimestamps();
     }
 
+    public function group_posts()
+    {
+        return $this->hasMany('App\GroupPost');
+    }
+
+    public function group_post_comments()
+    {
+        return $this->hasMany('App\GroupPostComment');
+    }
+
     use Notifiable;
 
     /**
@@ -27,7 +37,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'fio', 'position', 'login', 'vk', 'email', 'phone', 'birthday', 'password',
+        'fio', 'avatar', 'position', 'login', 'vk', 'email', 'phone', 'birthday', 'password',
     ];
 
     /**
