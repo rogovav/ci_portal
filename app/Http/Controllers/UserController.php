@@ -38,7 +38,7 @@ class UserController extends Controller
         return back()->withInput();
     }
 
-    public function group_users_json(Request $params)
+    public function api_json(Request $params)
     {
         $users = User::all();
 

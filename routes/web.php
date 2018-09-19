@@ -42,6 +42,6 @@ Route::get('/missions', function () {
 Route::get('/users', 'UserController@index');
 Route::post('/users', 'UserController@add');
 
-Route::get('/users/api{params?}', 'UserController@group_users_json');
+Route::get('/users/api{params?}', 'UserController@api_json');
 
 
