@@ -29,6 +29,10 @@ class CreateGroupUser extends Migration
      */
     public function down()
     {
+        Schema::table('group_user', function (Blueprint $table) {
+            $table->dropForeign('group_user_group_id_foreign');
+            $table->dropForeign('group_user_user_id_foreign');
+        });
         Schema::dropIfExists('group_user');
     }
 }
