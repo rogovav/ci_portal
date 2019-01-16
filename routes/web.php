@@ -18,9 +18,11 @@ Auth::routes();
 
 Route::get('/', 'HomeController@index');
 
-Route::get('/admin', function () {
-    return view('dashboard.admin');
-});
+Route::get('/admin', 'AdminController@index')->name('admin.index');
+Route::post('/admin/building', 'AdminController@building')->name('admin.building');
+Route::post('/admin/client', 'AdminController@client')->name('admin.client');
+Route::post('/admin/event', 'AdminController@event')->name('admin.event');
+Route::post('/admin/subject', 'AdminController@subject')->name('admin.subject');
 
 Route::get('/auth', function () {
     return view('auth.index');
@@ -29,15 +31,14 @@ Route::get('/auth', function () {
 Route::get('/groups', 'GroupController@index');
 Route::post('/groups', 'GroupController@add');
 
+Route::get('/missions', 'MissionController@index');
+
 Route::get('/group/{id}', 'GroupController@show');
 Route::post('/group/new_user', 'GroupController@add_new_users');
 
 Route::post('/group/new_post', 'GroupPostController@add_post');
 Route::post('/group/new_comment', 'GroupPostController@add_comment');
 
-Route::get('/missions', function () {
-    return view('mission.index');
-});
 
 Route::get('/users', 'UserController@index');
 Route::post('/users', 'UserController@add');
