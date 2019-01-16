@@ -17,9 +17,15 @@ class UserController extends Controller
         return view('user.index', compact('users'));
     }
 
+    public function edit($id)
+    {
+        $user = User::findorfail($id);
+        return view('user.edit', compact($user));
+    }
+
     public function add(Request $data)
     {
-        $photoName = $data['login'].'.'.$data['avatar']->getClientOriginalExtension();
+        $photoName = $data['login'] . '.' . $data['avatar']->getClientOriginalExtension();
 
         User::create([
             'fio' => $data['fio'],
@@ -46,8 +52,7 @@ class UserController extends Controller
 
         $not_users = array_map('intval', explode(',', $params['users']));
 
-        foreach ($users as $user)
-        {
+        foreach ($users as $user) {
             if (!in_array($user->id, $not_users))
                 $data[] = [
                     'value' => $user->id,
