@@ -16,33 +16,33 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::get('/', 'HomeController@index');
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/', 'HomeController@index');
 
-Route::get('/admin', 'AdminController@index')->name('admin.index');
-Route::post('/admin/building', 'AdminController@building')->name('admin.building');
-Route::post('/admin/client', 'AdminController@client')->name('admin.client');
-Route::post('/admin/event', 'AdminController@event')->name('admin.event');
-Route::post('/admin/subject', 'AdminController@subject')->name('admin.subject');
+    Route::get('/admin', function () {
+        return view('dashboard.admin');
+    });
 
-Route::get('/auth', function () {
-    return view('auth.index');
+    Route::get('/auth', function () {
+        return view('auth.index');
+    });
+
+    Route::get('/groups', 'GroupController@index');
+    Route::post('/groups', 'GroupController@add');
+
+    Route::get('/group/{id}', 'GroupController@show');
+    Route::post('/group/new_user', 'GroupController@add_new_users');
+
+    Route::post('/group/new_post', 'GroupPostController@add_post');
+    Route::post('/group/new_comment', 'GroupPostController@add_comment');
+
+    Route::get('/missions', 'MissionController@index')->name('mission.index');
+    Route::post('/missions', 'MissionController@store')->name('mission.store');
+
+    Route::get('/users', 'UserController@index');
+    Route::get('/user/{id}', 'UserController@edit')->name('user.edit');
+    Route::post('/user/{id}', 'UserController@update');
+    Route::post('/users', 'UserController@add');
+
+    Route::get('/users/api{params?}', 'UserController@api_json');
 });
-
-Route::get('/groups', 'GroupController@index');
-Route::post('/groups', 'GroupController@add');
-
-Route::get('/missions', 'MissionController@index');
-
-Route::get('/group/{id}', 'GroupController@show');
-Route::post('/group/new_user', 'GroupController@add_new_users');
-
-Route::post('/group/new_post', 'GroupPostController@add_post');
-Route::post('/group/new_comment', 'GroupPostController@add_comment');
-
-
-Route::get('/users', 'UserController@index');
-Route::post('/users', 'UserController@add');
-
-Route::get('/users/api{params?}', 'UserController@api_json');
-
-

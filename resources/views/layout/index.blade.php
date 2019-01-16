@@ -75,10 +75,10 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url("admin") }}"><i class="fas fa-users-cog"></i> Админ-панель</a>
                 </li>
-                {{--<li class="nav-item">--}}
-                    {{--<a class="nav-link" href="{{ route('user.edit', Auth::id()) }}"><img src="{{ asset('images/avatars/users/' . Auth::user()->avatar) }}" alt=""--}}
-                                                      {{--class="group-user-avatar-layout"> {{ Auth::user()->fio }}</a>--}}
-                {{--</li>--}}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('user.edit', Auth::id()) }}"><img src="{{ asset('images/avatars/users/' . Auth::user()->avatar) }}" alt=""
+                                                      class="group-user-avatar-layout"> {{ Auth::user()->fio }}</a>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('logout') }}"
                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">

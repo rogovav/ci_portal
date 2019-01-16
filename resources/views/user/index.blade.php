@@ -44,11 +44,11 @@
                             <input type="email" class="form-control" name="email" placeholder="E-mail" required>
                         </div>
                         <div class="form-group">
-                            <input type="tel" class="form-control" name="phone" placeholder="Номер телефона" required>
+                            <input type="tel" id="telephone" class="form-control" name="phone" placeholder="Номер телефона" required>
                         </div>
                         <div class="form-group">
                             <input type="text"
-                                   onfocus="(this.type='date')" class="form-control" name="birthday"
+                                   onfocus="(this.type='date')" onblur="(this.type='text')" class="form-control" name="birthday"
                                    placeholder="День рождения" required>
                         </div>
                         <div class="form-group">
@@ -125,5 +125,9 @@
                 img.src = URL.createObjectURL(this.files[0]); // set src to file url
             }
         });
+    </script>
+    <script src="{{ asset('js/jquery.maskedinput.js') }}"></script>
+    <script>
+        $("#telephone").mask("+7 (999) 999-99-99");
     </script>
 @endsection

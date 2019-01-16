@@ -106,7 +106,7 @@
                                       placeholder="Комментарий"></textarea>
                         </div>
                         <div class="form-group">
-                            <input type="file" name="file_group" id="" class="form-control" multiple>
+                            <input type="file" name="file_group" id="" class="form-control" multiple></input>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -147,8 +147,8 @@
                             <td>{{ $mission->id }}</td>
                             <td>{{ $mission->info }}</td>
                             <td>{{ $mission->from }}</td>
-                            <td>{{ $mission->owner_id }}</td>
-                            <td>{{ $mission->worker_id }}</td>
+                            <td>{{ $mission->owner }}</td>
+                            <td>{{ $mission->worker }}</td>
                             <td>{{ $mission->subject_id }}</td>
 
                         </tr>
