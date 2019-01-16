@@ -76,13 +76,13 @@
                     <a class="nav-link" href="{{ url("admin") }}"><i class="fas fa-users-cog"></i> Админ-панель</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#"><img src="https://api.adorable.io/avatars/150/2" alt=""
-                                                      class="group-user-avatar-layout"> Profile</a>
+                    <a class="nav-link" href="{{ route('user.edit', Auth::id()) }}"><img src="{{ asset('images/avatars/users/' . Auth::user()->avatar) }}" alt=""
+                                                      class="group-user-avatar-layout"> {{ Auth::user()->fio }}</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('logout') }}"
                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                        <i class="fas fa-key"></i> Logout</a>
+                        <i class="fas fa-key"></i> Выйти</a>
                 </li>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                     @csrf

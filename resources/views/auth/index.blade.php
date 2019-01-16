@@ -29,6 +29,7 @@
                 <input type="password" class="form-control" placeholder="" required>
             </div>
             <button type="submit" class="">ВОЙТИ В СИСТЕМУ</button>
+        </form>
     </div>
 </div>
 

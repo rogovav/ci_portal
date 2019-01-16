@@ -14,7 +14,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form method="POST" action="javascript:void(0);" onsubmit="register()">
+                <form method="POST" onsubmit="">
                     @csrf
                     <div class="modal-body">
                         <div class="form-group">
@@ -127,7 +127,7 @@
     <div class="row">
         <div class="col">
             <div class="card card-table-rendered">
-                <table id="table_id" class="table table-tasks table-rendered dt-responsive nowrap">
+                <table class="table">
                     <thead>
                     <tr>
                         <th>№</th>
@@ -141,7 +141,35 @@
                         <th>Deadline</th>
                     </tr>
                     </thead>
+                    <tbody>
+                    @foreach($missions as $mission)
+                        <tr>
+                            <td>{{ $mission->id }}</td>
+                            <td>{{ $mission->info }}</td>
+                            <td>{{ $mission->from }}</td>
+                            <td>{{ $mission->owner }}</td>
+                            <td>{{ $mission->worker }}</td>
+                            <td>{{ $mission->subject_id }}</td>
+
+                        </tr>
+                    @endforeach
+                    </tbody>
                 </table>
+                {{--<table id="table_id" class="table table-tasks table-rendered dt-responsive nowrap">--}}
+                {{--<thead>--}}
+                {{--<tr>--}}
+                {{--<th>№</th>--}}
+                {{--<th>Info</th>--}}
+                {{--<th>Тип</th>--}}
+                {{--<th>Автор</th>--}}
+                {{--<th>Исполнитель</th>--}}
+                {{--<th>Тема</th>--}}
+                {{--<th>Клиент</th>--}}
+                {{--<th>Дата начала</th>--}}
+                {{--<th>Deadline</th>--}}
+                {{--</tr>--}}
+                {{--</thead>--}}
+                {{--</table>--}}
             </div>
         </div>
     </div>
@@ -217,7 +245,7 @@
     <script>
         tinymce.init({
             selector: '#comment-user-mission',
-            plugins : 'table',
+            plugins: 'table',
         });
     </script>
     <script>
@@ -252,11 +280,9 @@
             "createdRow": function (row, data, dataIndex) {
                 if (data["priority"].includes("green")) {
                     $(row).addClass('deadline-middle');
-                }
-                else if (data["priority"].includes("brown")) {
+                } else if (data["priority"].includes("brown")) {
                     $(row).addClass('deadline-expired');
-                }
-                else {
+                } else {
                     $(row).addClass('deadline-ok');
                 }
 
