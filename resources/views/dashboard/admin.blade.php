@@ -51,18 +51,18 @@
                             <div class="card-body row">
                                 <div class="col-8">
                                     <div class="row">
-                                    @foreach($buildings as $building)
-                                    <div class="col-3">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <h5 class="card-subtitle mb-3">{{ $building->name }}</h5>
-                                                <h6 class="card-subtitle mb-2 text-muted">{{ $building->type == 3? 'Другое' : $building->type == 1? 'Общежитие' : 'Университет'}}</h6>
-                                                <p class="card-text">{{ $building->address }}</p>
-                                                <a href="#" class="card-link">Изменить</a>
+                                        @foreach($buildings as $building)
+                                            <div class="col-3">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <h5 class="card-subtitle mb-3">{{ $building->name }}</h5>
+                                                        <h6 class="card-subtitle mb-2 text-muted">{{ $building->type == 3? 'Другое' : $building->type == 1? 'Общежитие' : 'Университет'}}</h6>
+                                                        <p class="card-text">{{ $building->address }}</p>
+                                                        <a href="#" class="card-link">Изменить</a>
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                    @endforeach
+                                        @endforeach
                                     </div>
                                 </div>
 
@@ -72,7 +72,7 @@
                                         {{ csrf_field() }}
                                         <div class="form-group">
                                             <input name="name" type="text" class="form-control"
-                                                                       placeholder="Название">
+                                                   placeholder="Название">
                                         </div>
                                         <div class="form-group">
                                             <select name="type" type="text"
@@ -101,16 +101,16 @@
                             <div class="card-body row">
                                 <div id="accordion2" class="col-8">
                                     <div class="row">
-                                    @foreach($subjects as $subject)
-                                        <div class="col-3">
-                                            <div class="card">
-                                                <div class="card-body">
-                                                    <p class="card-text">{{ $subject->name }}</p>
-                                                    <a href="#" class="card-link">Изменить</a>
+                                        @foreach($subjects as $subject)
+                                            <div class="col-3">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <p class="card-text">{{ $subject->name }}</p>
+                                                        <a href="#" class="card-link">Изменить</a>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    @endforeach
+                                        @endforeach
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -132,7 +132,7 @@
                             <div class="card-body row">
                                 <div id="accordion2" class="col-8">
                                     <div class="row">
-                                    @foreach($clients as $client)
+
                                         <div class="col-12">
                                             <div class="card">
                                                 <div class="card-body">
@@ -146,20 +146,22 @@
                                                             <th>Информация</th>
                                                             </thead>
                                                             <tbody>
-                                                            <tr>
-                                                                <td>{{ $client->fio }}</td>
-                                                                <td>{{ $client->cid }}</td>
-                                                                <td>{{ $client->phone }}</td>
-                                                                <td>{{ $client->mail }}</td>
-                                                                <td>{{ $client->info }}</td>
-                                                            </tr>
+                                                            @foreach($clients as $client)
+                                                                <tr>
+                                                                    <td>{{ $client->fio }}</td>
+                                                                    <td>{{ $client->cid }}</td>
+                                                                    <td>{{ $client->phone }}</td>
+                                                                    <td>{{ $client->mail }}</td>
+                                                                    <td>{{ $client->info }}</td>
+                                                                </tr>
+                                                            @endforeach
                                                             </tbody>
                                                         </table>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    @endforeach
+
                                     </div>
                                 </div>
                                 <div class="col-md-4">
