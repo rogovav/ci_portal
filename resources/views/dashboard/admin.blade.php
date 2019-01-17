@@ -65,6 +65,8 @@
                                         @endforeach
                                     </div>
                                 </div>
+
+
                                 <div class="col-md-4">
                                     <form action="{{ route('admin.building') }}" class="admin-form" method="post">
                                         {{ csrf_field() }}
