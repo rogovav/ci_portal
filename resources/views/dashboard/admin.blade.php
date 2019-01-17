@@ -51,54 +51,42 @@
                             <div class="card-body row">
                                 <div class="col-8">
                                     <div class="row">
-                                        <div class="col-3">
-                                            <div class="card">
-                                                <div class="card-body">
-                                                    <h5 class="card-subtitle mb-3">Название здания</h5>
-                                                    <h6 class="card-subtitle mb-2 text-muted">Тип здания</h6>
-                                                    <p class="card-text">Адрес</p>
-                                                    <a href="#" class="card-link">Изменить</a>
-                                                    <a href="#" class="card-link">Удалить</a>
+                                        @foreach($buildings as $building)
+                                            <div class="col-3">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <h5 class="card-subtitle mb-3">{{ $building->name }}</h5>
+                                                        <h6 class="card-subtitle mb-2 text-muted">{{ $building->type == 3? 'Другое' : $building->type == 1? 'Общежитие' : 'Университет'}}</h6>
+                                                        <p class="card-text">{{ $building->address }}</p>
+                                                        <a href="#" class="card-link">Изменить</a>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col-3">
-                                            <div class="card">
-                                                <div class="card-body">
-                                                    <h5 class="card-subtitle mb-3">Название здания</h5>
-                                                    <h6 class="card-subtitle mb-2 text-muted">Тип здания</h6>
-                                                    <p class="card-text">Адрес</p>
-                                                    <a href="#" class="card-link">Изменить</a>
-                                                    <a href="#" class="card-link">Удалить</a>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        @endforeach
                                     </div>
                                 </div>
-                                <div class="col-4">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <form action="" class="admin-form">
-                                                <div class="form-group"><input name="obj-name" type="text"
-                                                                               class="form-control"
-                                                                               placeholder="Название"></div>
-                                                <div class="form-group">
-                                                    <select name="obj-type" type="text"
-                                                            class="form-control"
-                                                            placeholder="Тип">
-                                                        <option value="">Тип здания</option>
-                                                        <option value="1">Общежитие</option>
-                                                        <option value="2">Университет</option>
-                                                        <option value="3">Другое</option>
-                                                    </select>
-                                                </div>
-                                                <div class="form-group"><input name="obj-address" type="text"
-                                                                               class="form-control"
-                                                                               placeholder="Адрес"></div>
-                                                <div class="form-group"><input type="submit" class="form-control"></div>
-                                            </form>
+                                <div class="col-md-4">
+                                    <form action="{{ route('admin.building') }}" class="admin-form" method="post">
+                                        {{ csrf_field() }}
+                                        <div class="form-group">
+                                            <input name="name" type="text" class="form-control"
+                                                   placeholder="Название">
                                         </div>
-                                    </div>
+                                        <div class="form-group">
+                                            <select name="type" type="text"
+                                                    class="form-control"
+                                                    placeholder="Тип">
+                                                <option value="">Тип здания</option>
+                                                <option value="1">Общежитие</option>
+                                                <option value="2">Университет</option>
+                                                <option value="3">Другое</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group"><input name="address" type="text"
+                                                                       class="form-control"
+                                                                       placeholder="Адрес"></div>
+                                        <div class="form-group"><input type="submit" class="form-control"></div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -109,28 +97,27 @@
                         <div class="card admin-card-header">
                             <h4>Темы</h4>
                             <div class="card-body row">
-                                <div class="col-8">
-                                    <div class="col-3">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <p class="card-text">Название темы заявки</p>
-                                                <a href="#" class="card-link">Изменить</a>
-                                                <a href="#" class="card-link">Удалить</a>
+                                <div id="accordion2" class="col-8">
+                                    <div class="row">
+                                        @foreach($subjects as $subject)
+                                            <div class="col-3">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <p class="card-text">{{ $subject->name }}</p>
+                                                        <a href="#" class="card-link">Изменить</a>
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
+                                        @endforeach
                                     </div>
                                 </div>
                                 <div class="col-md-4">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <form action="" class="admin-form">
-                                                <div class="form-group"><input name="tp-name" type="text"
-                                                                               class="form-control"
-                                                                               placeholder="Название темы"></div>
-                                                <div class="form-group"><input type="submit" class="form-control"></div>
-                                            </form>
-                                        </div>
-                                    </div>
+                                    <form action="{{ route('admin.subject') }}" class="admin-form" method="post">
+                                        {{ csrf_field() }}
+                                        <div class="form-group"><input name="name" type="text" class="form-control"
+                                                                       placeholder="Название темы"></div>
+                                        <div class="form-group"><input type="submit" class="form-control"></div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -141,8 +128,9 @@
                         <div class="card admin-card-header">
                             <h4>Клиенты</h4>
                             <div class="card-body row">
-                                <div class="col-8">
+                                <div id="accordion2" class="col-8">
                                     <div class="row">
+
                                         <div class="col-12">
                                             <div class="card">
                                                 <div class="card-body">
@@ -156,44 +144,39 @@
                                                             <th>Информация</th>
                                                             </thead>
                                                             <tbody>
-                                                            <tr>
-                                                                <td>Кулягина Таисия Ивановна</td>
-                                                                <td>0000228</td>
-                                                                <td>+7 (987) 9935570</td>
-                                                                <td>test@mail.ru</td>
-                                                                <td>Странный клиент</td>
-                                                            </tr>
+                                                            @foreach($clients as $client)
+                                                                <tr>
+                                                                    <td>{{ $client->fio }}</td>
+                                                                    <td>{{ $client->cid }}</td>
+                                                                    <td>{{ $client->phone }}</td>
+                                                                    <td>{{ $client->mail }}</td>
+                                                                    <td>{{ $client->info }}</td>
+                                                                </tr>
+                                                            @endforeach
                                                             </tbody>
                                                         </table>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
+
                                     </div>
                                 </div>
-                                <div class="col-4">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <form action="" class="admin-form">
-                                                <div class="form-group"><input name="cl-name" type="text"
-                                                                               class="form-control"
-                                                                               placeholder="ФИО"></div>
-                                                <div class="form-group"><input name="cl-cid" type="text"
-                                                                               class="form-control"
-                                                                               placeholder="Номер договора"></div>
-                                                <div class="form-group"><input name="cl-phone" type="tel"
-                                                                               class="form-control"
-                                                                               placeholder="Номер телефона"></div>
-                                                <div class="form-group"><input name="cl-email" type="email"
-                                                                               class="form-control"
-                                                                               placeholder="Email"></div>
-                                                <div class="form-group"><input name="cl-info" type="text"
-                                                                               class="form-control"
-                                                                               placeholder="Информация"></div>
-                                                <div class="form-group"><input type="submit" class="form-control"></div>
-                                            </form>
-                                        </div>
-                                    </div>
+                                <div class="col-md-4">
+                                    <form action="{{ route('admin.client') }}" class="admin-form" method="post">
+                                        {{ csrf_field() }}
+                                        <div class="form-group"><input name="fio" type="text" class="form-control"
+                                                                       placeholder="ФИО"></div>
+                                        <div class="form-group"><input name="cid" type="text" class="form-control"
+                                                                       placeholder="Номер договра"></div>
+                                        <div class="form-group"><input name="phone" type="text" class="form-control"
+                                                                       placeholder="Номер телефона"></div>
+                                        <div class="form-group"><input name="mail" type="text" class="form-control"
+                                                                       placeholder="Email"></div>
+                                        <div class="form-group"><input name="info" type="text" class="form-control"
+                                                                       placeholder="Информация"></div>
+                                        <div class="form-group"><input type="submit" class="form-control"></div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
