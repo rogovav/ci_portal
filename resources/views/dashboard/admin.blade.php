@@ -133,55 +133,32 @@
                                 <div id="accordion2" class="col-8">
                                     <div class="row">
                                     @foreach($clients as $client)
-                                    <div class="building-header">
-                                        <div class="card-header" id="uheading1">
-                                            <h5 class="mb-0">
-                                                <button class="btn btn-link" data-toggle="collapse"
-                                                        data-target="#ucollapse1"
-                                                        aria-expanded="true" aria-controls="ucollapse1">
-                                                    {{ $client->fio }}
-                                                </button>
-                                            </h5>
-                                        </div>
-
-                                        <div id="ucollapse1" class="collapse show" aria-labelledby="uheading1"
-                                             data-parent="#accordion2">
-                                            <div class="card-body building-body">
-                                                <ul>
-                                                    <li><span><b>Номер договора: </b></span>{{ $client->cid }}</li>
-                                                    <li><span><b>Номер телефона: </b></span>{{ $client->phone }}</li>
-                                                    <li><span><b>Email: </b></span>{{ $client->mail }}</li>
-                                                    <li><span><b>Информация: </b></span>{{ $client->info }}</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                            <div class="col-12">
-                                                <div class="card">
-                                                    <div class="card-body">
-                                                        <div class="col-12">
-                                                            <table class="table">
-                                                                <thead>
-                                                                <th>ФИО</th>
-                                                                <th>Номер договора</th>
-                                                                <th>Номер телефона</th>
-                                                                <th>Email</th>
-                                                                <th>Информация</th>
-                                                                </thead>
-                                                                <tbody>
-                                                                <tr>
-                                                                    <td>{{ $client->fio }}</td>
-                                                                    <td>{{ $client->cid }}</td>
-                                                                    <td>{{ $client->phone }}</td>
-                                                                    <td>{{ $client->mail }}</td>
-                                                                    <td>{{ $client->info }}</td>
-                                                                </tr>
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
+                                        <div class="col-12">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <div class="col-12">
+                                                        <table class="table">
+                                                            <thead>
+                                                            <th>ФИО</th>
+                                                            <th>Номер договора</th>
+                                                            <th>Номер телефона</th>
+                                                            <th>Email</th>
+                                                            <th>Информация</th>
+                                                            </thead>
+                                                            <tbody>
+                                                            <tr>
+                                                                <td>{{ $client->fio }}</td>
+                                                                <td>{{ $client->cid }}</td>
+                                                                <td>{{ $client->phone }}</td>
+                                                                <td>{{ $client->mail }}</td>
+                                                                <td>{{ $client->info }}</td>
+                                                            </tr>
+                                                            </tbody>
+                                                        </table>
                                                     </div>
                                                 </div>
                                             </div>
+                                        </div>
                                     @endforeach
                                     </div>
                                 </div>
