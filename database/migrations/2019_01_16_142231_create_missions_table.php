@@ -22,6 +22,7 @@ class CreateMissionsTable extends Migration
             $table->string('cid');
             $table->integer('client_id');
             $table->string('address');
+            $table->integer('building_id');
             $table->integer('priority');
             $table->dateTime('date_from');
             $table->dateTime('date_to');

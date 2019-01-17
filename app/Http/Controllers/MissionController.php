@@ -10,6 +10,7 @@ class MissionController extends Controller
     public function index()
     {
         $missions = Mission::all();
+
         return view('mission.index', compact('missions'));
     }
 }

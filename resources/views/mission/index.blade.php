@@ -54,12 +54,16 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <select class="custom-select" name="topic">
+                            <select class="custom-select" name="topic" id="choose-topic">
                                 <option selected disabled>Тема</option>
                                 <option value="1">One</option>
                                 <option value="2">Two</option>
                                 <option value="3">Three</option>
+                                <option value="-1">Другое</option>
                             </select>
+                        </div>
+                        <div class="form-group hidden-topic-input">
+                            <input class="form-control" type="text" placeholder="Введите название новой темы">
                         </div>
                         <div class="form-group">
                             <select class="custom-select" name="worker">
@@ -305,5 +309,11 @@
 
         $(document).ready(function () {
             $('#example').DataTable();
+            $('#choose-topic').val() == '-1' ? $('.hidden-topic-input').show() : $('.hidden-topic-input').hide();
+            $('#choose-topic').change(function () {
+                $(this).val() == '-1' ? $('.hidden-topic-input').show().children('input').removeProp('disabled') :
+                    $('.hidden-topic-input').hide().children('input').prop('disabled', 'disabled');
+
+            })
         });</script>
 @endsection
