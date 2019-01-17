@@ -49,13 +49,14 @@
                             <h4>Здания</h4>
                             <div class="card-body row">
                                 <div id="accordion1" class="col-md-8">
+                                    @foreach($buildings as $building)
                                     <div class="building-header">
                                         <div class="card-header" id="heading2">
                                             <h5 class="mb-0">
                                                 <button class="btn btn-link" data-toggle="collapse"
                                                         data-target="#collapse1"
                                                         aria-expanded="true" aria-controls="collapse1">
-                                                    Общежитие №1
+                                                    {{ $building->name }}
                                                 </button>
                                             </h5>
                                         </div>
@@ -64,20 +65,31 @@
                                              data-parent="#accordion1">
                                             <div class="card-body building-body">
                                                 <ul>
-                                                    <li><span><b>Тип: </b></span>Общежитие</li>
-                                                    <li><span><b>Адрес: </b></span>Серадзская 7, 25</li>
+                                                    <li><span><b>Тип: </b></span>{{ $building->type == 0? 'Другое' : $building->type == 1? 'Общага' : 'Универ'}}</li>
+                                                    <li><span><b>Адрес: </b></span>{{ $building->address }}</li>
                                                 </ul>
                                             </div>
                                         </div>
                                     </div>
+                                    @endforeach
                                 </div>
+
+
                                 <div class="col-md-4">
-                                    <form action="" class="admin-form">
-                                        <div class="form-group"><input name="obj-name" type="text" class="form-control"
-                                                                       placeholder="Название"></div>
-                                        <div class="form-group"><input name="obj-type" type="text" class="form-control"
-                                                                       placeholder="Тип"></div>
-                                        <div class="form-group"><input name="obj-address" type="text"
+                                    <form action="{{ route('admin.building') }}" class="admin-form" method="post">
+                                        {{ csrf_field() }}
+                                        <div class="form-group">
+                                            <input name="name" type="text" class="form-control"
+                                                                       placeholder="Название">
+                                        </div>
+                                        <div class="form-group">
+                                            <select name="type" id="">
+                                                <option value="1">Общага</option>
+                                                <option value="2">Универ</option>
+                                                <option value="0">Другое</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group"><input name="address" type="text"
                                                                        class="form-control"
                                                                        placeholder="Адрес"></div>
                                         <div class="form-group"><input type="submit" class="form-control"></div>
@@ -93,19 +105,22 @@
                             <h4>Темы</h4>
                             <div class="card-body row">
                                 <div id="accordion2" class="col-md-8">
+                                    @foreach($subjects as $subject)
                                     <div class="building-header">
                                         <div class="card-header">
                                             <h5 class="mb-0">
                                                 <button class="btn btn-link">
-                                                    Тема №1
+                                                    {{ $subject->name }}
                                                 </button>
                                             </h5>
                                         </div>
                                     </div>
+                                    @endforeach
                                 </div>
                                 <div class="col-md-4">
-                                    <form action="" class="admin-form">
-                                        <div class="form-group"><input name="tp-name" type="text" class="form-control"
+                                    <form action="{{ route('admin.subject') }}" class="admin-form" method="post">
+                                        {{ csrf_field() }}
+                                        <div class="form-group"><input name="name" type="text" class="form-control"
                                                                        placeholder="Название темы"></div>
                                         <div class="form-group"><input type="submit" class="form-control"></div>
                                     </form>
@@ -120,13 +135,14 @@
                             <h4>Клиенты</h4>
                             <div class="card-body row">
                                 <div id="accordion2" class="col-md-8">
+                                    @foreach($clients as $client)
                                     <div class="building-header">
                                         <div class="card-header" id="uheading1">
                                             <h5 class="mb-0">
                                                 <button class="btn btn-link" data-toggle="collapse"
                                                         data-target="#ucollapse1"
                                                         aria-expanded="true" aria-controls="ucollapse1">
-                                                    Пользователь №1
+                                                    {{ $client->fio }}
                                                 </button>
                                             </h5>
                                         </div>
@@ -135,23 +151,28 @@
                                              data-parent="#accordion2">
                                             <div class="card-body building-body">
                                                 <ul>
-                                                    <li><span><b>Номер договора: </b></span>Общежитие</li>
-                                                    <li><span><b>Номер телефона: </b></span>Серадзская 7, 25</li>
-                                                    <li><span><b>Информация: </b></span>Серадзская 7, 25</li>
+                                                    <li><span><b>Номер договора: </b></span>{{ $client->cid }}</li>
+                                                    <li><span><b>Номер телефона: </b></span>{{ $client->phone }}</li>
+                                                    <li><span><b>Email: </b></span>{{ $client->mail }}</li>
+                                                    <li><span><b>Информация: </b></span>{{ $client->info }}</li>
                                                 </ul>
                                             </div>
                                         </div>
                                     </div>
+                                    @endforeach
                                 </div>
                                 <div class="col-md-4">
-                                    <form action="" class="admin-form">
-                                        <div class="form-group"><input name="cl-name" type="text" class="form-control"
+                                    <form action="{{ route('admin.client') }}" class="admin-form" method="post">
+                                        {{ csrf_field() }}
+                                        <div class="form-group"><input name="fio" type="text" class="form-control"
                                                                        placeholder="ФИО"></div>
-                                        <div class="form-group"><input name="cl-cid" type="text" class="form-control"
+                                        <div class="form-group"><input name="cid" type="text" class="form-control"
                                                                        placeholder="Номер договра"></div>
-                                        <div class="form-group"><input name="cl-phone" type="text" class="form-control"
+                                        <div class="form-group"><input name="phone" type="text" class="form-control"
                                                                        placeholder="Номер телефона"></div>
-                                        <div class="form-group"><input name="cl-info" type="text" class="form-control"
+                                        <div class="form-group"><input name="mail" type="text" class="form-control"
+                                                                       placeholder="Email"></div>
+                                        <div class="form-group"><input name="info" type="text" class="form-control"
                                                                        placeholder="Информация"></div>
                                         <div class="form-group"><input type="submit" class="form-control"></div>
                                     </form>
