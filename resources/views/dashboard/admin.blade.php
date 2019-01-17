@@ -52,7 +52,7 @@
                                 <div class="col-8">
                                     <div class="row">
                                         @foreach($buildings as $building)
-                                            <div class="col-3">
+                                            <div class="col-4">
                                                 <div class="card">
                                                     <div class="card-body">
                                                         <h5 class="card-subtitle mb-3">{{ $building->name }}</h5>
@@ -68,27 +68,32 @@
 
 
                                 <div class="col-md-4">
-                                    <form action="{{ route('admin.building') }}" class="admin-form" method="post">
-                                        {{ csrf_field() }}
-                                        <div class="form-group">
-                                            <input name="name" type="text" class="form-control"
-                                                   placeholder="Название">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <form action="{{ route('admin.building') }}" class="admin-form"
+                                                  method="post">
+                                                {{ csrf_field() }}
+                                                <div class="form-group">
+                                                    <input name="name" type="text" class="form-control"
+                                                           placeholder="Название">
+                                                </div>
+                                                <div class="form-group">
+                                                    <select name="type" type="text"
+                                                            class="form-control"
+                                                            placeholder="Тип">
+                                                        <option value="">Тип здания</option>
+                                                        <option value="1">Общежитие</option>
+                                                        <option value="2">Университет</option>
+                                                        <option value="3">Другое</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group"><input name="address" type="text"
+                                                                               class="form-control"
+                                                                               placeholder="Адрес"></div>
+                                                <div class="form-group"><input type="submit" class="form-control"></div>
+                                            </form>
                                         </div>
-                                        <div class="form-group">
-                                            <select name="type" type="text"
-                                                    class="form-control"
-                                                    placeholder="Тип">
-                                                <option value="">Тип здания</option>
-                                                <option value="1">Общежитие</option>
-                                                <option value="2">Университет</option>
-                                                <option value="3">Другое</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group"><input name="address" type="text"
-                                                                       class="form-control"
-                                                                       placeholder="Адрес"></div>
-                                        <div class="form-group"><input type="submit" class="form-control"></div>
-                                    </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -114,12 +119,18 @@
                                     </div>
                                 </div>
                                 <div class="col-md-4">
-                                    <form action="{{ route('admin.subject') }}" class="admin-form" method="post">
-                                        {{ csrf_field() }}
-                                        <div class="form-group"><input name="name" type="text" class="form-control"
-                                                                       placeholder="Название темы"></div>
-                                        <div class="form-group"><input type="submit" class="form-control"></div>
-                                    </form>
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <form action="{{ route('admin.subject') }}" class="admin-form"
+                                                  method="post">
+                                                {{ csrf_field() }}
+                                                <div class="form-group"><input name="name" type="text"
+                                                                               class="form-control"
+                                                                               placeholder="Название темы"></div>
+                                                <div class="form-group"><input type="submit" class="form-control"></div>
+                                            </form>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -165,20 +176,29 @@
                                     </div>
                                 </div>
                                 <div class="col-md-4">
-                                    <form action="{{ route('admin.client') }}" class="admin-form" method="post">
-                                        {{ csrf_field() }}
-                                        <div class="form-group"><input name="fio" type="text" class="form-control"
-                                                                       placeholder="ФИО"></div>
-                                        <div class="form-group"><input name="cid" type="text" class="form-control"
-                                                                       placeholder="Номер договра"></div>
-                                        <div class="form-group"><input name="phone" type="text" class="form-control"
-                                                                       placeholder="Номер телефона"></div>
-                                        <div class="form-group"><input name="mail" type="text" class="form-control"
-                                                                       placeholder="Email"></div>
-                                        <div class="form-group"><input name="info" type="text" class="form-control"
-                                                                       placeholder="Информация"></div>
-                                        <div class="form-group"><input type="submit" class="form-control"></div>
-                                    </form>
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <form action="{{ route('admin.client') }}" class="admin-form" method="post">
+                                                {{ csrf_field() }}
+                                                <div class="form-group"><input name="fio" type="text"
+                                                                               class="form-control"
+                                                                               placeholder="ФИО"></div>
+                                                <div class="form-group"><input name="cid" type="text"
+                                                                               class="form-control"
+                                                                               placeholder="Номер договра"></div>
+                                                <div class="form-group"><input name="phone" type="text"
+                                                                               class="form-control"
+                                                                               placeholder="Номер телефона"></div>
+                                                <div class="form-group"><input name="mail" type="text"
+                                                                               class="form-control"
+                                                                               placeholder="Email"></div>
+                                                <div class="form-group"><input name="info" type="text"
+                                                                               class="form-control"
+                                                                               placeholder="Информация"></div>
+                                                <div class="form-group"><input type="submit" class="form-control"></div>
+                                            </form>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

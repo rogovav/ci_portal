@@ -13,4 +13,9 @@ class MissionController extends Controller
 
         return view('mission.index', compact('missions'));
     }
+
+    public function store()
+    {
+
+    }
 }
