@@ -19,9 +19,11 @@ Auth::routes();
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/', 'HomeController@index');
 
-    Route::get('/admin', function () {
-        return view('dashboard.admin');
-    });
+    Route::get('/admin', 'AdminController@index')->name('admin.index');
+    Route::post('/admin/building', 'AdminController@building')->name('admin.building');
+    Route::post('/admin/client', 'AdminController@client')->name('admin.client');
+    Route::post('/admin/event', 'AdminController@event')->name('admin.event');
+    Route::post('/admin/subject', 'AdminController@subject')->name('admin.subject');
 
     Route::get('/auth', function () {
         return view('auth.index');
