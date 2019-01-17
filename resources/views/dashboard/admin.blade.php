@@ -56,7 +56,7 @@
                                         <div class="card">
                                             <div class="card-body">
                                                 <h5 class="card-subtitle mb-3">{{ $building->name }}</h5>
-                                                <h6 class="card-subtitle mb-2 text-muted">{{ $building->type == 3? 'Другое' : $building->type == 1? 'Общага' : 'Универ'}}</h6>
+                                                <h6 class="card-subtitle mb-2 text-muted">{{ $building->type == 3? 'Другое' : $building->type == 1? 'Общежитие' : 'Университет'}}</h6>
                                                 <p class="card-text">{{ $building->address }}</p>
                                                 <a href="#" class="card-link">Изменить</a>
                                             </div>
