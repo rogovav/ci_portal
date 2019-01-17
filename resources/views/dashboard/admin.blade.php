@@ -65,7 +65,7 @@
                                              data-parent="#accordion1">
                                             <div class="card-body building-body">
                                                 <ul>
-                                                    <li><span><b>Тип: </b></span>{{ $building->type == 0? 'Другое' : $building->type == 1? 'Общага' : 'Универ'}}</li>
+                                                    <li><span><b>Тип: </b></span>{{ $building->type == 3? 'Другое' : $building->type == 1? 'Общага' : 'Универ'}}</li>
                                                     <li><span><b>Адрес: </b></span>{{ $building->address }}</li>
                                                 </ul>
                                             </div>
