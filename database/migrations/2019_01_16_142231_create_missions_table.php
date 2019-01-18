@@ -15,19 +15,19 @@ class CreateMissionsTable extends Migration
     {
         Schema::create('missions', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('from');
-            $table->integer('owner_id');
-            $table->integer('worker_id');
-            $table->integer('subject_id');
-            $table->string('cid');
-            $table->integer('client_id');
-            $table->string('address');
-            $table->integer('building_id');
-            $table->integer('priority');
-            $table->dateTime('date_from');
-            $table->dateTime('date_to');
-            $table->string('info');
-            $table->integer('status');
+            $table->string('from')->nullable();
+            $table->integer('owner_id')->nullable();
+            $table->integer('worker_id')->nullable();
+            $table->integer('subject_id')->nullable();
+            $table->string('cid')->nullable();
+            $table->integer('client_id')->nullable();
+            $table->string('address')->nullable();
+            $table->integer('building_id')->nullable();
+            $table->integer('priority')->nullable();
+            $table->dateTime('date_from')->nullable();
+            $table->dateTime('date_to')->nullable();
+            $table->string('info')->nullable();
+            $table->integer('status')->nullable();
             $table->timestamps();
         });
     }
