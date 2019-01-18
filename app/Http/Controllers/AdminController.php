@@ -12,47 +12,41 @@ class AdminController extends Controller
 {
     public function index()
     {
-        $buildings = Building::all();
-        $clients   = Client::all();
-        $events    = Event::all();
-        $subjects  = Subject::all();
+        $buildings = Building::orderBy('name')->get();
+        $clients   = Client::orderBy('fio')->get();
+        $subjects  = Subject::orderBy('name')->get();
 
-        return view('dashboard.admin', compact('buildings','clients', 'events', 'subjects'));
+        return view('dashboard.admin', compact('buildings','clients', 'subjects'));
     }
 
     public function building(Request $request)
     {
-        if($request->id)
-        {
+        Building::updateOrCreate(['id' => $request->id],
+            [
+                'name'    => $request->name,
+                'type'    => $request->type,
+                'address' => $request->address
+            ]);
 
-        }
         return redirect()->back();
     }
 
     public function client(Request $request)
     {
-        if($request->id)
-        {
-
-        }
-        return redirect()->back();
-    }
-
-    public function event(Request $request)
-    {
-        if($request->id)
-        {
-
-        }
+        Client::updateOrCreate(['id' => $request->id],
+            [
+                'fio'   => $request->fio,
+                'phone' => $request->phone,
+                'mail'  => $request->mail,
+                'info'  => $request->info,
+                'cid'   => $request->cid,
+            ]);
         return redirect()->back();
     }
 
     public function subject(Request $request)
     {
-        if($request->id)
-        {
-
-        }
+        Subject::updateOrCreate(['id' => $request->id], ['name' => $request->name]);
         return redirect()->back();
     }
 }

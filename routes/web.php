@@ -19,9 +19,10 @@ Auth::routes();
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/', 'HomeController@index');
 
-    Route::get('/admin', function () {
-        return view('dashboard.admin');
-    });
+    Route::get('/admin', 'AdminController@index')->name('admin.index');
+    Route::post('/admin/building', 'AdminController@building')->name('admin.building');
+    Route::post('/admin/client', 'AdminController@client')->name('admin.client');
+    Route::post('/admin/subject', 'AdminController@subject')->name('admin.subject');
 
     Route::get('/auth', function () {
         return view('auth.index');
@@ -41,7 +42,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/users', 'UserController@index');
     Route::get('/user/{id}', 'UserController@edit')->name('user.edit');
-    Route::post('/user/{id}', 'UserController@update');
+    Route::post('/user/{id}', 'UserController@update')->name('user.update');
     Route::post('/users', 'UserController@add');
 
     Route::get('/users/api{params?}', 'UserController@api_json');

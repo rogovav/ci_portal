@@ -29,6 +29,16 @@ class User extends Authenticatable
         return $this->hasMany('App\GroupPostComment');
     }
 
+    public function mission_owner()
+    {
+        return $this->hasMany('App\Mission', 'owner_id');
+    }
+
+    public function mission_worker()
+    {
+        return $this->hasMany('App\Mission', 'worker_id');
+    }
+
     use Notifiable;
 
     /**

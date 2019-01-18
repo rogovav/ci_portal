@@ -1,6 +1,7 @@
 @extends('layout.index')
 @section('css')
     <link rel="stylesheet" href="{{ asset("css/dataTables.bootstrap4.min.css") }}">
+    <link rel="stylesheet" href="{{ asset('css/sel-boot4.css') }}">
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap4.min.css">
 @endsection
 @section('content')
@@ -14,11 +15,11 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form method="POST" onsubmit="">
-                    @csrf
+                <form method="POST" action="{{ route('mission.store') }}">
+                    {{ csrf_field() }}
                     <div class="modal-body">
                         <div class="form-group">
-                            <select class="custom-select" name="client">
+                            <select class="custom-select" name="from">
                                 <option selected disabled>Источник</option>
                                 <option value="1">Задача</option>
                                 <option value="2">Общежитие</option>
@@ -26,51 +27,56 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <select class="custom-select" name="client">
+                            <select class="form-control" id="client-select" name="client">
                                 <option selected disabled>Клиент</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
+                                @foreach($clients as $client)
+                                    <option value="{{ $client->id }}">{{ $client->fio }}</option>
+                                @endforeach
                             </select>
                         </div>
-                        {{--TODO: make users info popup--}}
                         <div class="user-info-popup">
                             <div class="form-group">
-                                <input name="" id="" class="form-control" placeholder="Номер договора"></input>
+                                <input name="" id="" class="form-control" placeholder="Номер договора">
                             </div>
                             <div class="form-group">
-                                <input name="" id="" class="form-control" placeholder="Номер телефона"></input>
+                                <input name="" id="" class="form-control" placeholder="Номер телефона">
                             </div>
                             <div class="form-group">
-                                <input name="" id="" class="form-control" placeholder="Информация о клиенте"></input>
+                                <input name="" id="" class="form-control" placeholder="Информация о клиенте">
                             </div>
                         </div>
                         <div class="form-group">
-                            <select class="custom-select" name="place">
-                                <option selected>Адрес</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
+                            <select class="custom-select" name="building">
+                                <option selected>Здание</option>
+                                @foreach($buildings as $building)
+                                    <option value="{{ $building->id }}">{{ $building->name }}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="form-group">
-                            <select class="custom-select" name="topic">
+                            <input name="address" id="" class="form-control" placeholder="Адрес">
+                        </div>
+                        <div class="form-group">
+                            <select class="custom-select" name="subject" id="choose-topic">
                                 <option selected disabled>Тема</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
+                                @foreach($subjects as $subject)
+                                    <option value="{{ $subject->id }}">{{ $subject->name }}</option>
+                                @endforeach
                             </select>
+                        </div>
+                        <div class="form-group hidden-topic-input">
+                            <input class="form-control" type="text" name="new_subject" placeholder="Введите название новой темы">
                         </div>
                         <div class="form-group">
                             <select class="custom-select" name="worker">
                                 <option selected disabled>Исполнитель</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
+                                @foreach($users as $user)
+                                    <option value="{{ $user->id }}">{{ $user->fio }}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="form-group">
-                            <select class="custom-select" name="help">
+                            <select class="custom-select" name="helper">
                                 <option selected>Помощники</option>
                                 <option value="1">One</option>
                                 <option value="2">Two</option>
@@ -78,7 +84,7 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <select class="custom-select" name="looking">
+                            <select class="custom-select" name="watcher">
                                 <option selected>Наблюдатели</option>
                                 <option value="1">One</option>
                                 <option value="2">Two</option>
@@ -95,18 +101,18 @@
                         </div>
                         <div class="form-group">
                             <input placeholder="Дата начала" class="form-control" type="text"
-                                   onfocus="(this.type='date')" name="date_begin" required>
+                                   onfocus="(this.type='date')" name="date_from" required>
                         </div>
                         <div class="form-group">
                             <input placeholder="Крайний срок" class="form-control" type="text"
-                                   onfocus="(this.type='date')" name="date_end" required>
+                                   onfocus="(this.type='date')" name="date_to" required>
                         </div>
                         <div class="form-group">
-                            <textarea name="comment" id="comment-user-mission" cols="30" rows="10" class="form-control"
+                            <textarea name="info" id="comment-user-mission" cols="30" rows="10" class="form-control"
                                       placeholder="Комментарий"></textarea>
                         </div>
                         <div class="form-group">
-                            <input type="file" name="file_group" id="" class="form-control" multiple></input>
+                            <input type="file" name="file_group" id="" class="form-control" multiple>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -147,10 +153,12 @@
                             <td>{{ $mission->id }}</td>
                             <td>{{ $mission->info }}</td>
                             <td>{{ $mission->from }}</td>
-                            <td>{{ $mission->owner }}</td>
-                            <td>{{ $mission->worker }}</td>
-                            <td>{{ $mission->subject_id }}</td>
-
+                            <td>{{ $mission->owner->fio }}</td>
+                            <td>{{ $mission->worker->fio }}</td>
+                            <td>{{ $mission->subject->name }}</td>
+                            <td>{{ $mission->client->fio }}</td>
+                            <td>{{ $mission->date_from }}</td>
+                            <td>{{ $mission->date_to }}</td>
                         </tr>
                     @endforeach
                     </tbody>
@@ -248,6 +256,17 @@
             plugins: 'table',
         });
     </script>
+
+    <script>
+        $('#client-select').change(function () {
+            if ($(this).val() != '') {
+                $('.user-info-popup').show();
+            } else {
+                $('.user-info-popup').hide();
+            }
+        })
+    </script>
+
     <script>
         $('#table_id').DataTable({
             "order": [[0, "desc"]],
@@ -305,5 +324,11 @@
 
         $(document).ready(function () {
             $('#example').DataTable();
-        });</script>
+            $('#choose-topic').val() == '-1' ? $('.hidden-topic-input').show() : $('.hidden-topic-input').hide();
+            $('#choose-topic').change(function () {
+                $(this).val() == '-1' ? $('.hidden-topic-input').show().children('input').removeProp('disabled') :
+                    $('.hidden-topic-input').hide().children('input').prop('disabled', 'disabled');
+            })
+        });
+    </script>
 @endsection

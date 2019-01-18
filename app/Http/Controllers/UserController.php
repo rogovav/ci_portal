@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
+use phpDocumentor\Reflection\Types\Null_;
 
 class UserController extends Controller
 {
@@ -21,6 +22,25 @@ class UserController extends Controller
     {
         $user = User::findorfail($id);
         return view('user.edit', compact($user));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $user = User::findorfail($id);
+
+        if (isset($request['avatar'])) {
+            $user->update(['avatar' => $request['avatar']]);
+        };
+        if (isset($request['vk'])) {
+            $user->update(['vk' => $request['vk']]);
+        };
+        if (isset($request['email'])) {
+            $user->update(['email' => $request['email']]);
+        };
+        if (isset($request['phone'])) {
+            $user->update(['phone' => $request['phone']]);
+        };
+        return back()->withInput();
     }
 
     public function add(Request $data)

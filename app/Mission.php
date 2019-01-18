@@ -18,6 +18,16 @@ class Mission extends Model
 
     public function subject()
     {
-        return $this->belongsTo('App\User', 'subject_id');
+        return $this->belongsTo('App\Subject', 'subject_id');
+    }
+
+    public function client()
+    {
+        return $this->belongsTo('App\Client', 'client_id');
+    }
+
+    public function building()
+    {
+        return $this->belongsTo('App\Building', 'building_id');
     }
 }
