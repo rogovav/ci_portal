@@ -1,6 +1,7 @@
 @extends('layout.index')
 @section('css')
     <link rel="stylesheet" href="{{ asset("css/dataTables.bootstrap4.min.css") }}">
+    <link rel="stylesheet" href="{{ asset('css/sel-boot4.css') }}">
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap4.min.css">
 @endsection
 @section('content')
@@ -26,7 +27,7 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <select class="custom-select" name="client">
+                            <select class="form-control" id="client-select" name="client">
                                 <option selected disabled>Клиент</option>
                                 @foreach($clients as $client)
                                     <option value="{{ $client->id }}">{{ $client->fio }}</option>
@@ -255,6 +256,17 @@
             plugins: 'table',
         });
     </script>
+
+    <script>
+        $('#client-select').change(function () {
+            if ($(this).val() != '') {
+                $('.user-info-popup').show();
+            } else {
+                $('.user-info-popup').hide();
+            }
+        })
+    </script>
+
     <script>
         $('#table_id').DataTable({
             "order": [[0, "desc"]],
