@@ -1,5 +1,6 @@
 @extends('layout.index')
 @section('css')
+    <link rel="stylesheet" href="{{ asset('css/paraia_multi_select.css') }}">
     <link rel="stylesheet" href="{{ asset("css/dataTables.bootstrap4.min.css") }}">
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap4.min.css">
 @endsection
@@ -14,11 +15,11 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form method="POST" action="{{ route('mission.store') }}">
-                    {{ csrf_field() }}
+                <form method="POST" onsubmit="">
+                    @csrf
                     <div class="modal-body">
                         <div class="form-group">
-                            <select class="custom-select" name="from">
+                            <select class="custom-select" name="client">
                                 <option selected disabled>Источник</option>
                                 <option value="1">Задача</option>
                                 <option value="2">Общежитие</option>
@@ -35,13 +36,13 @@
                         </div>
                         <div class="user-info-popup">
                             <div class="form-group">
-                                <input name="" id="" class="form-control" placeholder="Номер договора">
+                                <input name="" id="" class="form-control" placeholder="Номер договора"></input>
                             </div>
                             <div class="form-group">
-                                <input name="" id="" class="form-control" placeholder="Номер телефона">
+                                <input name="" id="" class="form-control" placeholder="Номер телефона"></input>
                             </div>
                             <div class="form-group">
-                                <input name="" id="" class="form-control" placeholder="Информация о клиенте">
+                                <input name="" id="" class="form-control" placeholder="Информация о клиенте"></input>
                             </div>
                         </div>
                         <div class="form-group">
@@ -64,7 +65,7 @@
                             </select>
                         </div>
                         <div class="form-group hidden-topic-input">
-                            <input class="form-control" type="text" name="new_subject" placeholder="Введите название новой темы">
+                            <input class="form-control" type="text" placeholder="Введите название новой темы">
                         </div>
                         <div class="form-group">
                             <select class="custom-select" name="worker">
@@ -83,7 +84,11 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <select class="custom-select" name="watcher">
+                            <input type="text" name="help" class="form-control" data-paraia-multi-select="true"
+                                   placeholder="Добавить помощников" id="value-array">
+                        </div>
+                        <div class="form-group">
+                            <select class="custom-select" name="looking">
                                 <option selected>Наблюдатели</option>
                                 <option value="1">One</option>
                                 <option value="2">Two</option>
@@ -91,7 +96,7 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <select class="custom-select" name="priority">
+                            <select class="custom-select" name="priority" id="priority">
                                 <option selected disabled>Приоритет</option>
                                 <option value="1">Высокий</option>
                                 <option value="2">Средний</option>
@@ -100,11 +105,17 @@
                         </div>
                         <div class="form-group">
                             <input placeholder="Дата начала" class="form-control" type="text"
-                                   onfocus="(this.type='date')" name="date_from" required>
+                                   onfocus="(this.type='datetime-local')"
+                                   id="date_begin"
+                                   onblur="(this.type='text')" name="date_begin" required>
                         </div>
                         <div class="form-group">
                             <input placeholder="Крайний срок" class="form-control" type="text"
-                                   onfocus="(this.type='date')" name="date_to" required>
+                                   id="date_end"
+                                   onfocus="(this.type='datetime-local')"
+                                   onblur="(this.type='text')"
+                                   name="date_end"
+                                   required>
                         </div>
                         <div class="form-group">
                             <textarea name="info" id="comment-user-mission" cols="30" rows="10" class="form-control"
