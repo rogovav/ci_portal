@@ -76,14 +76,6 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <select class="custom-select" name="helper">
-                                <option selected>Помощники</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
                             <input type="text" name="help" class="form-control" data-paraia-multi-select="true"
                                    placeholder="Добавить помощников" id="value-array">
                         </div>
@@ -196,9 +188,32 @@
     <script src="{{ asset("js/jquery.dataTables.js") }}"></script>
     <script src="{{ asset("js/dataTables.bootstrap4.min.js") }}"></script>
     <script src='https://cloud.tinymce.com/stable/tinymce.min.js'></script>
-
     <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap4.min.js"></script>
+    <script src="{{ asset('js/paraia_multi_select.js')  }}"></script>
+    <script>
+        let select = $('[data-paraia-multi-select="true"]').paraia_multi_select({
+            items: JSON.parse($.ajax({
+                url: "/users/api",
+                type: "GET",
+                async: false,
+            }).responseText),
+            // enable multi select
+            multi_select: true,
+            // selected items on init
+            defaults: [],
+            // filter text
+            filter_text: 'Фильтр',
+            // is Right To Left?
+            rtl: false,
+            // is case sensitive?
+            case_sensitive: false
+        });
+        $(".item").click(function () {
+            $("#value-array").val(select.paraia_multi_select("get_items"));
+        });
+
+    </script>
 
     <script>
         $(document).ready(function () {
@@ -327,7 +342,89 @@
             $('#choose-topic').change(function () {
                 $(this).val() == '-1' ? $('.hidden-topic-input').show().children('input').removeProp('disabled') :
                     $('.hidden-topic-input').hide().children('input').prop('disabled', 'disabled');
+
             })
         });
+    </script>
+
+    <script>
+        $('#date_begin').focus(function () {
+            let d = new Date();
+            d = new Date().toJSON().slice(0, 19)
+            $(this).val(d)
+        })
+        $('#date_begin').blur(function () {
+            $(this).val($(this).val().replace('T', ' '))
+        })
+
+        $('#priority').change(function () {
+            d = new Date()
+            switch ($(this).val()) {
+                case '1':
+                    if (d.getDay() == 5) {
+                        d.setDate(d.getDate() + 3)
+                        d.setUTCHours(17, 0, 0, 0)
+                        break
+
+                    } else if (d.getDay() == 6) {
+                        d.setDate(d.getDate() + 2)
+                        d.setUTCHours(17, 0, 0, 0)
+                        break
+
+                    } else {
+                        d.setDate(d.getDay() + 1)
+                        d.setUTCHours(17, 0, 0, 0)
+                        break
+                    }
+
+
+                case '2':
+                    if (d.getDay() == 4 || d.getDay() == 5) {
+                        d.setDate(d.getDate() + 4)
+                        d.setUTCHours(17, 0, 0, 0)
+                        break
+
+                    } else if (d.getDay() == 6) {
+                        d.setDate(d.getDate() + 3)
+                        d.setUTCHours(17, 0, 0, 0)
+                        break
+
+                    } else {
+                        d.setDate(d.getDate() + 2)
+                        d.setUTCHours(17, 0, 0, 0)
+                        break
+                    }
+                case '3':
+                    if (d.getDay() == 3 || d.getDay() == 4 || d.getDay() == 5) {
+                        d.setDate(d.getDate() + 5)
+                        d.setUTCHours(17, 0, 0, 0)
+                        break
+
+                    } else if (d.getDay() == 6) {
+                        d.setDate(d.getDate() + 4)
+                        d.setUTCHours(17, 0, 0, 0)
+                        break
+
+                    } else {
+                        d.setDate(d.getDate() + 3)
+                        d.setUTCHours(17, 0, 0, 0)
+                        break
+                    }
+            }
+            $('#date_end').val(d.toJSON().slice(0, 19))
+            $('#date_end').val($('#date_end').val().replace('T', ' '))
+        })
+
+        $('#date_end').focus(function () {
+            let d = new Date()
+            d.setDate(d.getDate() + 1)
+            d.setUTCHours(17, 0, 0, 0)
+            d = d.toJSON().slice(0, 19)
+            $(this).val(d)
+        })
+
+        $('#date_end').blur(function () {
+            $(this).val($(this).val().replace('T', ' '))
+        })
     </script>
 @endsection
