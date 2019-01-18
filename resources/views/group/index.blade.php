@@ -1,6 +1,6 @@
 @extends('layout.index')
 @section('css')
-    <link rel="stylesheet" href="{{ asset('css/paraia_multi_select.css') }}">
+    <link rel="stylesheet" href="{{ asset('sel-boot4.css') }}">
 @endsection
 @section('content')
     <div class="modal fade" id="ModalCreateUser" tabindex="-1" role="dialog"

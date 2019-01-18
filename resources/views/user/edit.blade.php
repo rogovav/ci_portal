@@ -105,108 +105,91 @@
                                     </a>
                                 </div>
                                 <div class="card-body">
-                                    <div class="tab-pane fade show active" id="nav-do" role="tabpanel"
-                                         aria-labelledby="nav-home-tab">
-                                        <div class="row">
-                                            <div class="col-4">
-                                                <div class="card">
-                                                    <div class="card-header card-priority-high-header">
-                                                        <div class="row">
-                                                            <div class="col-6">Название TODO</div>
-                                                            <div class="col-6"><span
-                                                                    class="badge badge-light float-right">25.01.2017</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="card-body card-priority-high">
-                                                        <p>Lorem ipsum vkbskdfnkjd dhf ldsbflDKS FlDSKBF kdbf</p>
-                                                        <div class="row">
-                                                            <div class="col-6"><span
-                                                                    class="badge badge-danger text-center col-12">Высокий приоритет</span>
-                                                            </div>
-                                                            <div class="col-6">
-                                                                <a href=""
-                                                                   class="badge badge-success text-center col-12">Завершить
-                                                                    TODO</a>
-
-                                                            </div>
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-6">
+                                            <div class="card">
+                                                <div class="card-header card-priority-high-header">
+                                                    <div class="row">
+                                                        <div class="col-6">Название TODO</div>
+                                                        <div class="col-6"><span
+                                                                class="badge badge-light float-right">25.01.2017</span>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-4">
-                                                <div class="card">
-                                                    <div class="card-header card-priority-mid-header">
-                                                        <div class="row">
-                                                            <div class="col-6">Название TODO</div>
-                                                            <div class="col-6"><span
-                                                                    class="badge badge-light float-right">25.01.2017</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="card-body card-priority-mid">
-                                                        <p>Lorem ipsum vkbskdfnkjd dhf ldsbflDKS FlDSKBF kdbf</p>
-                                                        <div class="row">
-                                                            <div class="col-6"><span
-                                                                    class="badge badge-warning text-center col-12">Средний приоритет</span>
-                                                            </div>
-                                                            <div class="col-6">
-                                                                <a href=""
-                                                                   class="badge badge-success text-center col-12">Завершить
-                                                                    TODO</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-4">
-                                                <div class="card">
-                                                    <div class="card-header card-priority-low-header">
-                                                        <div class="row">
-                                                            <div class="col-6">Название TODO</div>
-                                                            <div class="col-6"><span
-                                                                    class="badge badge-light float-right">25.01.2017</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="card-body card-priority-low">
-                                                        <p>Lorem ipsum vkbskdfnkjd dhf ldsbflDKS FlDSKBF kdbf</p>
-                                                        <div class="row">
-                                                            <div class="col-6"><span
-                                                                    class="badge badge-success text-center col-12">Низкий приоритет</span>
-                                                            </div>
-                                                            <div class="col-6">
-                                                                <a href=""
-                                                                   class="badge badge-success text-center col-12">Завершить
-                                                                    TODO</a>
-                                                            </div>
+                                                <div class="card-body card-priority-high">
+                                                    <p>Lorem ipsum vkbskdfnkjd dhf ldsbflDKS FlDSKBF kdbf</p>
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                            <a href=""
+                                                               class="badge badge-success text-center col-12">Завершить
+                                                                задание</a>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-4">
-                                                <div class="card todo-done">
-                                                    <div class="card-header card-priority-high-header">
-                                                        <div class="row">
-                                                            <div class="col-6"><s>Название TODO</s></div>
-                                                            <div class="col-6"><span
-                                                                    class="badge badge-light float-right">25.01.2017</span>
-                                                            </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-6">
+                                            <div class="card">
+                                                <div class="card-header card-priority-mid-header">
+                                                    <div class="row">
+                                                        <div class="col-6">Название TODO</div>
+                                                        <div class="col-6"><span
+                                                                class="badge badge-light float-right">25.01.2017</span>
                                                         </div>
                                                     </div>
-                                                    <div class="card-body card-priority-high">
-                                                        <p><s>Lorem ipsum vkbskdfnkjd dhf ldsbflDKS FlDSKBF
-                                                                kdbf</s></p>
-                                                        <div class="row">
-                                                            <div class="col-6"><span
-                                                                    class="badge badge-danger text-center col-12">Высокий приоритет</span>
-                                                            </div>
-                                                            <div class="col-6"><a href=""
-                                                                                  class="badge badge-dark text-center col-12">Восстановить
-                                                                    TODO</a>
-                                                            </div>
+                                                </div>
+                                                <div class="card-body card-priority-mid">
+                                                    <p>Lorem ipsum vkbskdfnkjd dhf ldsbflDKS FlDSKBF kdbf</p>
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                            <a href=""
+                                                               class="badge badge-success text-center col-12">Завершить
+                                                                задание</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-6">
+                                            <div class="card">
+                                                <div class="card-header card-priority-low-header">
+                                                    <div class="row">
+                                                        <div class="col-6">Название TODO</div>
+                                                        <div class="col-6"><span
+                                                                class="badge badge-light float-right">25.01.2017</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="card-body card-priority-low">
+                                                    <p>Lorem ipsum vkbskdfnkjd dhf ldsbflDKS FlDSKBF kdbf</p>
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                            <a href=""
+                                                               class="badge badge-success text-center col-12">Завершить
+                                                                задание</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-6">
+                                            <div class="card todo-done">
+                                                <div class="card-header card-priority-high-header">
+                                                    <div class="row">
+                                                        <div class="col-6"><s>Название TODO</s></div>
+                                                        <div class="col-6"><span
+                                                                class="badge badge-light float-right">25.01.2017</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="card-body card-priority-high">
+                                                    <p><s>Lorem ipsum vkbskdfnkjd dhf ldsbflDKS FlDSKBF
+                                                            kdbf</s></p>
+                                                    <div class="row">
+                                                        <div class="col-12"><a href=""
+                                                                               class="badge badge-dark text-center col-12">Восстановить
+                                                                задание</a>
                                                         </div>
                                                     </div>
                                                 </div>
