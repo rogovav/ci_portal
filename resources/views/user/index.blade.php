@@ -44,11 +44,13 @@
                             <input type="email" class="form-control" name="email" placeholder="E-mail" required>
                         </div>
                         <div class="form-group">
-                            <input type="tel" id="telephone" class="form-control" name="phone" placeholder="Номер телефона" required>
+                            <input type="tel" id="telephone" class="form-control" name="phone"
+                                   placeholder="Номер телефона" required>
                         </div>
                         <div class="form-group">
                             <input type="text"
-                                   onfocus="(this.type='date')" onblur="(this.type='text')" class="form-control" name="birthday"
+                                   onfocus="(this.type='date')" onblur="(this.type='text')" class="form-control"
+                                   name="birthday"
                                    placeholder="День рождения" required>
                         </div>
                         <div class="form-group">
@@ -81,30 +83,41 @@
             <div class="col-md-6 col-lg-6 col-xl-6">
                 <div class="card account-profile-main">
                     <div class="row">
-                        <div class="col account-main-info-col">
-                            <img src="{{ asset("images/avatars/users/$user->avatar") }}" class="account-profile-avatar"
-                                 alt="">
+                        <div class="col-4 account-main-info-col">
+                            <div class="card">
+                                <div class="card-body">
+                                    <img src="{{ asset("images/avatars/users/$user->avatar") }}"
+                                         class="account-profile-avatar"
+                                         alt="">
+                                </div>
+                            </div>
                         </div>
-                        <div class="col">
-                            <ul class="account-profile-main_information">
-                                <li><b>{{ $user->fio }}</b></li>
-                                <li><b>{{ $user->position }}</b></li>
-                                <li>Ответсвенный</li>
-                            </ul>
-                            <ul class="account-profile-contact_information">
-                                <li>День рождения: <b>{{ $user->birthday }}</b></li>
-                            </ul>
-
-                            <hr>
-                            <ul class="profile-card-user-social">
-                                <li><span><a href="https://vk.com/{{ $user->vk }}" target="_blank"><i
-                                                class="fab fa-vk fa-2x"></i></a></span></li>
-                                <li><span><a href="mailto:{{ $user->email }}"><i
-                                                class="far fa-envelope fa-2x"></i></a></span></li>
-                                <li><span><a href="tel:{{ $user->phone }}"><i class="fas fa-phone fa-2x"></i></a></span>
-                                </li>
-                                <li><span><a href="tel:7987543210"><i class="far fa-comment fa-2x"></i></a></span></li>
-                            </ul>
+                        <div class="col-8">
+                            <div class="card">
+                                <div class="card-body">
+                                    <ul class="account-profile-main_information">
+                                        <li><b>{{ $user->fio }}</b></li>
+                                        <li><b>{{ $user->position }}</b></li>
+                                        <li>Ответсвенный</li>
+                                        <li>День рождения: <b>{{ $user->birthday }}</b></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-body">
+                                    <ul class="profile-card-user-social">
+                                        <li><span><a href="https://vk.com/{{ $user->vk }}" target="_blank"><i
+                                                        class="fab fa-vk fa-2x"></i></a></span></li>
+                                        <li><span><a href="mailto:{{ $user->email }}"><i
+                                                        class="far fa-envelope fa-2x"></i></a></span></li>
+                                        <li><span><a href="tel:{{ $user->phone }}"><i
+                                                        class="fas fa-phone fa-2x"></i></a></span>
+                                        </li>
+                                        <li><span><a href="tel:7987543210"><i
+                                                        class="far fa-comment fa-2x"></i></a></span></li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

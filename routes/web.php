@@ -42,7 +42,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/users', 'UserController@index');
     Route::get('/user/{id}', 'UserController@edit')->name('user.edit');
-    Route::post('/user/{id}', 'UserController@update');
+    Route::post('/user/{id}', 'UserController@update')->name('user.update');
     Route::post('/users', 'UserController@add');
 
     Route::get('/users/api{params?}', 'UserController@api_json');
