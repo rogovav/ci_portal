@@ -1,5 +1,6 @@
 @extends('layout.index')
 @section('css')
+    <link rel="stylesheet" href="{{ asset('css/paraia_multi_select.css') }}">
     <link rel="stylesheet" href="{{ asset("css/dataTables.bootstrap4.min.css") }}">
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap4.min.css">
 @endsection
@@ -74,12 +75,8 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <select class="custom-select" name="help">
-                                <option selected>Помощники</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                            </select>
+                            <input type="text" name="help" class="form-control" data-paraia-multi-select="true"
+                                   placeholder="Добавить помощников" id="value-array">
                         </div>
                         <div class="form-group">
                             <select class="custom-select" name="looking">
@@ -90,7 +87,7 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <select class="custom-select" name="priority">
+                            <select class="custom-select" name="priority" id="priority">
                                 <option selected disabled>Приоритет</option>
                                 <option value="1">Высокий</option>
                                 <option value="2">Средний</option>
@@ -99,11 +96,17 @@
                         </div>
                         <div class="form-group">
                             <input placeholder="Дата начала" class="form-control" type="text"
-                                   onfocus="(this.type='date')" name="date_begin" required>
+                                   onfocus="(this.type='datetime-local')"
+                                   id="date_begin"
+                                   onblur="(this.type='text')" name="date_begin" required>
                         </div>
                         <div class="form-group">
                             <input placeholder="Крайний срок" class="form-control" type="text"
-                                   onfocus="(this.type='date')" name="date_end" required>
+                                   id="date_end"
+                                   onfocus="(this.type='datetime-local')"
+                                   onblur="(this.type='text')"
+                                   name="date_end"
+                                   required>
                         </div>
                         <div class="form-group">
                             <textarea name="comment" id="comment-user-mission" cols="30" rows="10" class="form-control"
@@ -182,9 +185,32 @@
     <script src="{{ asset("js/jquery.dataTables.js") }}"></script>
     <script src="{{ asset("js/dataTables.bootstrap4.min.js") }}"></script>
     <script src='https://cloud.tinymce.com/stable/tinymce.min.js'></script>
-
     <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap4.min.js"></script>
+    <script src="{{ asset('js/paraia_multi_select.js')  }}"></script>
+    <script>
+        let select = $('[data-paraia-multi-select="true"]').paraia_multi_select({
+            items: JSON.parse($.ajax({
+                url: "/users/api",
+                type: "GET",
+                async: false,
+            }).responseText),
+            // enable multi select
+            multi_select: true,
+            // selected items on init
+            defaults: [],
+            // filter text
+            filter_text: 'Фильтр',
+            // is Right To Left?
+            rtl: false,
+            // is case sensitive?
+            case_sensitive: false
+        });
+        $(".item").click(function () {
+            $("#value-array").val(select.paraia_multi_select("get_items"));
+        });
+
+    </script>
 
     <script>
         $(document).ready(function () {
@@ -315,5 +341,87 @@
                     $('.hidden-topic-input').hide().children('input').prop('disabled', 'disabled');
 
             })
-        });</script>
+        });
+    </script>
+
+    <script>
+        $('#date_begin').focus(function () {
+            let d = new Date();
+            d = new Date().toJSON().slice(0, 19)
+            $(this).val(d)
+        })
+        $('#date_begin').blur(function () {
+            $(this).val($(this).val().replace('T', ' '))
+        })
+
+        $('#priority').change(function () {
+            d = new Date()
+            switch ($(this).val()) {
+                case '1':
+                    if (d.getDay() == 5) {
+                        d.setDate(d.getDate() + 3)
+                        d.setUTCHours(17, 0, 0, 0)
+                        break
+
+                    } else if (d.getDay() == 6) {
+                        d.setDate(d.getDate() + 2)
+                        d.setUTCHours(17, 0, 0, 0)
+                        break
+
+                    } else {
+                        d.setDate(d.getDay() + 1)
+                        d.setUTCHours(17, 0, 0, 0)
+                        break
+                    }
+
+
+                case '2':
+                    if (d.getDay() == 4 || d.getDay() == 5) {
+                        d.setDate(d.getDate() + 4)
+                        d.setUTCHours(17, 0, 0, 0)
+                        break
+
+                    } else if (d.getDay() == 6) {
+                        d.setDate(d.getDate() + 3)
+                        d.setUTCHours(17, 0, 0, 0)
+                        break
+
+                    } else {
+                        d.setDate(d.getDate() + 2)
+                        d.setUTCHours(17, 0, 0, 0)
+                        break
+                    }
+                case '3':
+                    if (d.getDay() == 3 || d.getDay() == 4 || d.getDay() == 5) {
+                        d.setDate(d.getDate() + 5)
+                        d.setUTCHours(17, 0, 0, 0)
+                        break
+
+                    } else if (d.getDay() == 6) {
+                        d.setDate(d.getDate() + 4)
+                        d.setUTCHours(17, 0, 0, 0)
+                        break
+
+                    } else {
+                        d.setDate(d.getDate() + 3)
+                        d.setUTCHours(17, 0, 0, 0)
+                        break
+                    }
+            }
+            $('#date_end').val(d.toJSON().slice(0, 19))
+            $('#date_end').val($('#date_end').val().replace('T', ' '))
+        })
+
+        $('#date_end').focus(function () {
+            let d = new Date()
+            d.setDate(d.getDate() + 1)
+            d.setUTCHours(17, 0, 0, 0)
+            d = d.toJSON().slice(0, 19)
+            $(this).val(d)
+        })
+
+        $('#date_end').blur(function () {
+            $(this).val($(this).val().replace('T', ' '))
+        })
+    </script>
 @endsection

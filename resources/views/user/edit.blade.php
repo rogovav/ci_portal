@@ -62,7 +62,7 @@
                             <div class="collapse" id="collapseExample">
                                 <div class="card">
                                     <div class="card-header">
-                                        Список дел
+                                        Новое TODO
                                     </div>
                                     <div class="card-body">
                                         <form action="" class="col-12">
