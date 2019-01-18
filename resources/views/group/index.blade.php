@@ -55,14 +55,17 @@
                 <div class="card account-profile-main">
                     <div class="row">
                         <div class="col account-main-info-col">
-                            <a href="/group/{{ $group->hash_id }}"><img src="{{ asset("images/avatars/groups/$group->avatar") }}" class="account-profile-avatar" alt=""></a>
+                            <a href="/group/{{ $group->hash_id }}"><img
+                                    src="{{ asset("images/avatars/groups/$group->avatar") }}"
+                                    class="account-profile-avatar" alt=""></a>
                         </div>
                         <div class="col">
                             <ul class="account-profile-main_information">
                                 <li><b>{{ $group->name }}</b></li>
                             </ul>
                             <ul class="account-profile-contact_information">
-                                <li><span>Кол-во участников: </span><span><b>{{ $group->users->count() }}</b></span></li>
+                                <li><span>Кол-во участников: </span><span><b>{{ $group->users->count() }}</b></span>
+                                </li>
                             </ul>
                             <hr>
                             <div>
@@ -109,12 +112,11 @@
             // selected items on init
             defaults: [],
             // filter text
-            filter_text: 'Filter',
+            filter_text: 'Фильтр',
             // is Right To Left?
             rtl: false,
             // is case sensitive?
             case_sensitive: false
-
         });
         $(".item").click(function () {
             $("#value-array").val(select.paraia_multi_select("get_items"));
