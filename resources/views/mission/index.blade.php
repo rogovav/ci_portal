@@ -16,8 +16,8 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form method="POST" onsubmit="">
-                    @csrf
+                <form method="POST" action="{{ route('mission.store') }}">
+                    {{ csrf_field() }}
                     <div class="modal-body">
                         <div class="form-group">
                             <select class="custom-select" name="client">
@@ -37,13 +37,13 @@
                         </div>
                         <div class="user-info-popup">
                             <div class="form-group">
-                                <input name="" id="" class="form-control" placeholder="Номер договора"></input>
+                                <input name="" id="" class="form-control" placeholder="Номер договора">
                             </div>
                             <div class="form-group">
-                                <input name="" id="" class="form-control" placeholder="Номер телефона"></input>
+                                <input name="" id="" class="form-control" placeholder="Номер телефона">
                             </div>
                             <div class="form-group">
-                                <input name="" id="" class="form-control" placeholder="Информация о клиенте"></input>
+                                <input name="" id="" class="form-control" placeholder="Информация о клиенте">
                             </div>
                         </div>
                         <div class="form-group">
@@ -66,7 +66,7 @@
                             </select>
                         </div>
                         <div class="form-group hidden-topic-input">
-                            <input class="form-control" type="text" placeholder="Введите название новой темы">
+                            <input class="form-control" type="text" name="new_subject" placeholder="Введите название новой темы">
                         </div>
                         <div class="form-group">
                             <select class="custom-select" name="worker">
@@ -81,11 +81,12 @@
                                    placeholder="Добавить помощников" id="value-array">
                         </div>
                         <div class="form-group">
-                            <select class="custom-select" name="looking">
+                            <select class="custom-select" name="watcher">
                                 <option selected>Наблюдатели</option>
                                 <option value="1">One</option>
                                 <option value="2">Two</option>
                                 <option value="3">Three</option>
+                                <option value="4">Three</option>
                             </select>
                         </div>
                         <div class="form-group">
