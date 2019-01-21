@@ -1,5 +1,6 @@
 @extends('layout.index')
 @section('css')
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="{{ asset("css/dataTables.bootstrap4.min.css") }}">
     <link rel="stylesheet" href="{{ asset('css/sel-boot4.css') }}">
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap4.min.css">
@@ -19,7 +20,7 @@
                     {{ csrf_field() }}
                     <div class="modal-body">
                         <div class="form-group">
-                            <select class="custom-select" name="from">
+                            <select class="custom-select" name="client">
                                 <option selected disabled>Источник</option>
                                 <option value="1">Задача</option>
                                 <option value="2">Общежитие</option>
@@ -77,15 +78,7 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <select class="custom-select" name="helper">
-                                <option selected>Помощники</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <select class="custom-select" name="watcher">
+                            <select class="custom-select" id="looking-select" name="looking">
                                 <option selected>Наблюдатели</option>
                                 <option value="1">One</option>
                                 <option value="2">Two</option>
@@ -93,7 +86,7 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <select class="custom-select" name="priority">
+                            <select class="custom-select" name="priority" id="priority">
                                 <option selected disabled>Приоритет</option>
                                 <option value="1">Высокий</option>
                                 <option value="2">Средний</option>
@@ -102,18 +95,24 @@
                         </div>
                         <div class="form-group">
                             <input placeholder="Дата начала" class="form-control" type="text"
-                                   onfocus="(this.type='date')" name="date_from" required>
+                                   onfocus="(this.type='datetime-local')"
+                                   id="date_begin"
+                                   onblur="(this.type='text')" name="date_begin" required>
                         </div>
                         <div class="form-group">
                             <input placeholder="Крайний срок" class="form-control" type="text"
-                                   onfocus="(this.type='date')" name="date_to" required>
+                                   id="date_end"
+                                   onfocus="(this.type='datetime-local')"
+                                   onblur="(this.type='text')"
+                                   name="date_end"
+                                   required>
                         </div>
                         <div class="form-group">
-                            <textarea name="info" id="comment-user-mission" cols="30" rows="10" class="form-control"
+                            <textarea name="comment" id="comment-user-mission" cols="30" rows="10" class="form-control"
                                       placeholder="Комментарий"></textarea>
                         </div>
                         <div class="form-group">
-                            <input type="file" name="file_group" id="" class="form-control" multiple>
+                            <input type="file" name="file_group" id="" class="form-control" multiple></input>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -187,9 +186,39 @@
     <script src="{{ asset("js/jquery.dataTables.js") }}"></script>
     <script src="{{ asset("js/dataTables.bootstrap4.min.js") }}"></script>
     <script src='https://cloud.tinymce.com/stable/tinymce.min.js'></script>
-
     <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#help-select').select2({
+                    width: '100%',
+                    theme: "bootstrap4"
+                }
+            );
+
+            $('#looking-select').select2({
+                    width: '100%',
+                    theme: "bootstrap4"
+                }
+            );
+
+            $('#client-select').select2({
+                    width: '100%',
+                    theme: "bootstrap4"
+                }
+            );
+
+            $('#user-select').select2({
+                    width: '100%',
+                    theme: "bootstrap4"
+                }
+            );
+
+        });
+    </script>
+
 
     <script>
         $(document).ready(function () {
@@ -329,7 +358,89 @@
             $('#choose-topic').change(function () {
                 $(this).val() == '-1' ? $('.hidden-topic-input').show().children('input').removeProp('disabled') :
                     $('.hidden-topic-input').hide().children('input').prop('disabled', 'disabled');
+
             })
         });
+    </script>
+
+    <script>
+        $('#date_begin').focus(function () {
+            let d = new Date();
+            d = new Date().toJSON().slice(0, 19)
+            $(this).val(d)
+        })
+        $('#date_begin').blur(function () {
+            $(this).val($(this).val().replace('T', ' '))
+        })
+
+        $('#priority').change(function () {
+            d = new Date()
+            switch ($(this).val()) {
+                case '1':
+                    if (d.getDay() == 5) {
+                        d.setDate(d.getDate() + 3)
+                        d.setUTCHours(17, 0, 0, 0)
+                        break
+
+                    } else if (d.getDay() == 6) {
+                        d.setDate(d.getDate() + 2)
+                        d.setUTCHours(17, 0, 0, 0)
+                        break
+
+                    } else {
+                        d.setDate(d.getDay() + 1)
+                        d.setUTCHours(17, 0, 0, 0)
+                        break
+                    }
+
+
+                case '2':
+                    if (d.getDay() == 4 || d.getDay() == 5) {
+                        d.setDate(d.getDate() + 4)
+                        d.setUTCHours(17, 0, 0, 0)
+                        break
+
+                    } else if (d.getDay() == 6) {
+                        d.setDate(d.getDate() + 3)
+                        d.setUTCHours(17, 0, 0, 0)
+                        break
+
+                    } else {
+                        d.setDate(d.getDate() + 2)
+                        d.setUTCHours(17, 0, 0, 0)
+                        break
+                    }
+                case '3':
+                    if (d.getDay() == 3 || d.getDay() == 4 || d.getDay() == 5) {
+                        d.setDate(d.getDate() + 5)
+                        d.setUTCHours(17, 0, 0, 0)
+                        break
+
+                    } else if (d.getDay() == 6) {
+                        d.setDate(d.getDate() + 4)
+                        d.setUTCHours(17, 0, 0, 0)
+                        break
+
+                    } else {
+                        d.setDate(d.getDate() + 3)
+                        d.setUTCHours(17, 0, 0, 0)
+                        break
+                    }
+            }
+            $('#date_end').val(d.toJSON().slice(0, 19))
+            $('#date_end').val($('#date_end').val().replace('T', ' '))
+        })
+
+        $('#date_end').focus(function () {
+            let d = new Date()
+            d.setDate(d.getDate() + 1)
+            d.setUTCHours(17, 0, 0, 0)
+            d = d.toJSON().slice(0, 19)
+            $(this).val(d)
+        })
+
+        $('#date_end').blur(function () {
+            $(this).val($(this).val().replace('T', ' '))
+        })
     </script>
 @endsection
