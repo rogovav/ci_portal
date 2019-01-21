@@ -66,10 +66,11 @@
                             </select>
                         </div>
                         <div class="form-group hidden-topic-input">
-                            <input class="form-control" type="text" name="new_subject" placeholder="Введите название новой темы">
+                            <input class="form-control" type="text" name="new_subject"
+                                   placeholder="Введите название новой темы">
                         </div>
                         <div class="form-group">
-                            <select class="custom-select" name="worker">
+                            <select class="form-control" id="user-select" name="worker">
                                 <option selected disabled>Исполнитель</option>
                                 @foreach($users as $user)
                                     <option value="{{ $user->id }}">{{ $user->fio }}</option>
