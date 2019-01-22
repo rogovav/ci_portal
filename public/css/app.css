@@ -679,8 +679,47 @@ marquee {
     background-color: rgba(0, 255, 0, 0.05);
 }
 
+.card-info-header {
+    background-color: rgba(0, 0, 255, 0.2);
+}
+
+.card-info {
+    background-color: rgba(0, 0, 255, 0.05);
+}
+
+.card-client-header {
+    background-color: rgba(0, 255, 255, 0.2);
+}
+
+.card-client {
+    background-color: rgba(0, 255, 255, 0.05);
+}
+
+.card-deadline-header {
+    background-color: rgba(205, 0, 116, 0.2);
+}
+
+.card-deadline {
+    background-color: rgba(205, 0, 116, 0.05);
+}
+
+.progress-text {
+    font-size: 12px;
+}
+
+.black-file {
+    color: #000;
+}
+
 .todo-done {
     opacity: 0.4;
+}
+
+.users-helpers-img {
+    height: 50px;
+    cursor: pointer;
+    border: 2px solid #041e42;
+    border-radius: 50%;
 
 }
 

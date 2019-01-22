@@ -14,6 +14,7 @@ class TodoController extends Controller
             'name' => $request->name,
             'info' => $request->info,
             'priority' => $request->priority,
+            'date' => $request->date,
             'user_id' => Auth::id(),
         ]);
 
