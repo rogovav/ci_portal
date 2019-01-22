@@ -110,7 +110,7 @@
                                         <li><span><a href="tel:{{ $user->phone }}"><i
                                                         class="fas fa-phone fa-2x"></i></a></span>
                                         </li>
-                                        <li><span><a href="tel:7987543210"><i
+                                        <li><span><a href="#"><i
                                                         class="far fa-comment fa-2x"></i></a></span></li>
                                     </ul>
                                 </div>
