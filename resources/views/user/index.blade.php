@@ -80,27 +80,24 @@
     </div>
     <div class="row">
         @foreach($users as $user)
-            <div class="col-md-6 col-lg-6 col-xl-6">
-                <div class="card account-profile-main">
-                    <div class="row">
-                        <div class="col-4 account-main-info-col">
+            <div class="col-md-6 col-lg-4 col-xl-3">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="col account-main-info-col">
                             <div class="card">
                                 <div class="card-body">
-                                    <img src="{{ asset("images/avatars/users/$user->avatar") }}"
+                                    <img src="{{ asset('images/avatars/users/' . $user->avatar) }}"
                                          class="account-profile-avatar"
                                          alt="">
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-8">
                             <div class="card">
                                 <div class="card-body">
-                                    <ul class="account-profile-main_information">
-                                        <li><b>{{ $user->fio }}</b></li>
-                                        <li><b>{{ $user->position }}</b></li>
-                                        <li>Ответсвенный</li>
-                                        <li>День рождения: <b>{{ $user->birthday }}</b></li>
-                                    </ul>
+                                    <h5 class="card-subtitle text-center">{{ $user->fio }}
+                                        <span class="badge badge-info">{{ $user->login }}</span>
+                                    </h5>
+                                    <p class="text-center mb-0">{{ $user->position }}</p>
+                                    <p class="text-center"><b>День рождения:</b> {{ $user->birthday }}</p>
                                 </div>
                             </div>
                             <div class="card">
@@ -113,7 +110,7 @@
                                         <li><span><a href="tel:{{ $user->phone }}"><i
                                                         class="fas fa-phone fa-2x"></i></a></span>
                                         </li>
-                                        <li><span><a href="tel:7987543210"><i
+                                        <li><span><a href="#"><i
                                                         class="far fa-comment fa-2x"></i></a></span></li>
                                     </ul>
                                 </div>
