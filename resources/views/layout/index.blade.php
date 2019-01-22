@@ -103,10 +103,10 @@
                 <div class="card">
                     <div class="card-body card-body-task no-padding">
                         <div class="card-body-label card-task"><a href=""><i class="fas fa-tag fa-3x"></i></a></div>
-                        <div class="card-body-text"><span>ЗАЯВОК</span><br><span class="real-time-counter">20</span>
+                        <div class="card-body-text"><span>Заданий</span><br><span class="real-time-counter">{{ Auth::user()->todos->count() }}</span>
                             <hr>
-                            <span class="real-time-counter-user">15</span>
-                            <span> выполнено</span>
+                            <span class="real-time-counter-user">{{ Auth::user()->todos->where('date', date('Y-m-d'))->count() }}</span>
+                            <span> на сегодня</span>
                         </div>
                     </div>
                 </div>
