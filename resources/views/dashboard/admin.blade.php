@@ -247,6 +247,10 @@
     </div>
 @endsection
 @section('js')
+    <script src="{{ asset('js/jquery.maskedinput.js') }}"></script>
+    <script>
+        $("#client-phone").mask("+7 (999) 999-99-99");
+    </script>
     <script>
         $('.collapse').collapse('toggle');
     </script>

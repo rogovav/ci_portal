@@ -2,8 +2,8 @@
 @section('css')
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="{{ asset("css/dataTables.bootstrap4.min.css") }}">
-    <link rel="stylesheet" href="{{ asset('css/sel-boot4.css') }}">
-    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap4.min.css">
+    {{--<link rel="stylesheet" href="{{ asset('css/sel-boot4.css') }}">--}}
+    {{--<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap4.min.css">--}}
 @endsection
 @section('content')
     <div class="modal fade bd-example-modal-lg" id="ModalCreateUser" tabindex="-1" role="dialog"
@@ -28,8 +28,8 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <select class="form-control" id="client-select" name="client">
-                                <option selected disabled>Клиент</option>
+                            <select id="client-select" name="client">
+                                <option value=""></option>
                                 @foreach($clients as $client)
                                     <option value="{{ $client->id }}">{{ $client->fio }}</option>
                                 @endforeach
@@ -40,7 +40,8 @@
                                 <input name="" id="" class="form-control" placeholder="Номер договора">
                             </div>
                             <div class="form-group">
-                                <input name="" id="" class="form-control" placeholder="Номер телефона">
+                                <input type="tel" id="telephone" class="form-control" name="phone"
+                                       placeholder="Номер телефона" required>
                             </div>
                             <div class="form-group">
                                 <input name="" id="" class="form-control" placeholder="Информация о клиенте">
@@ -48,7 +49,7 @@
                         </div>
                         <div class="form-group">
                             <select class="custom-select" name="building">
-                                <option selected>Здание</option>
+                                <option selected value="">Здание</option>
                                 @foreach($buildings as $building)
                                     <option value="{{ $building->id }}">{{ $building->name }}</option>
                                 @endforeach
@@ -59,7 +60,7 @@
                         </div>
                         <div class="form-group">
                             <select class="custom-select" name="subject" id="choose-topic">
-                                <option selected disabled>Тема</option>
+                                <option selected value="">Тема</option>
                                 @foreach($subjects as $subject)
                                     <option value="{{ $subject->id }}">{{ $subject->name }}</option>
                                 @endforeach
@@ -70,24 +71,32 @@
                                    placeholder="Введите название новой темы">
                         </div>
                         <div class="form-group">
-                            <select class="form-control" id="user-select" name="worker">
-                                <option selected disabled>Исполнитель</option>
+                            <select id="user-select" name="worker">
+                                <option value=""></option>
                                 @foreach($users as $user)
                                     <option value="{{ $user->id }}">{{ $user->fio }}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="form-group">
-                            <select class="custom-select" id="looking-select" name="looking">
-                                <option selected>Наблюдатели</option>
+                            <select id="looking-select" name="looking">
+                                <option value=""></option>
                                 <option value="1">One</option>
                                 <option value="2">Two</option>
                                 <option value="3">Three</option>
                             </select>
                         </div>
                         <div class="form-group">
+                            <select id="help-select" class="js-example-placeholder-multiple" name="helper[]"
+                                    multiple="multiple">
+                                <option value="1">вавыа</option>
+                                <option value="2">ываыва</option>
+                                <option value="3">ваывпып</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
                             <select class="custom-select" name="priority" id="priority">
-                                <option selected disabled>Приоритет</option>
+                                <option selected value="">Приоритет</option>
                                 <option value="1">Высокий</option>
                                 <option value="2">Средний</option>
                                 <option value="3">Низкий</option>
@@ -188,98 +197,47 @@
     <script src='https://cloud.tinymce.com/stable/tinymce.min.js'></script>
     <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap4.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/i18n/ru.js"></script>
 
     <script>
         $(document).ready(function () {
-            $('#help-select').select2({
+            $('.js-example-placeholder-multiple').select2({
                     width: '100%',
-                    theme: "bootstrap4"
+                    placeholder: 'Помощники'
                 }
             );
 
             $('#looking-select').select2({
+                    placeholder: 'Наблюдатель',
                     width: '100%',
-                    theme: "bootstrap4"
+                    allowClear: true
                 }
             );
 
             $('#client-select').select2({
+                    placeholder: 'Клиент',
                     width: '100%',
-                    theme: "bootstrap4"
+                    allowClear: true
                 }
             );
 
             $('#user-select').select2({
+                    placeholder: 'Исполнитель',
                     width: '100%',
-                    theme: "bootstrap4"
+                    allowClear: true
                 }
             );
 
         });
     </script>
 
+    <script src="{{ asset('js/jquery.maskedinput.js') }}"></script>
 
     <script>
-        $(document).ready(function () {
-            dropDown = $(".dropdown-search");
-            selectId = 0;
-            let items = [
-                {value: 1, text: 'Sony'},
-                {value: 2, text: 'LG'},
-                {value: 3, text: 'Apple'},
-                {value: 4, text: 'One Plus'},
-                {value: 5, text: 'Android'},
-                {value: 6, text: 'Iphone'}
-
-            ];
-            items.forEach(function (item) {
-                selectId++;
-                (dropDown).append(
-                    '<div class="item">' +
-                    '   <div class="live-checkbox">' +
-                    '       <span class="live-label form-control" onclick="GetValue(id)" ' + 'id=live-' + selectId + '>' + item['text'] + '</span>' +
-                    '   </div>' +
-                    '</div>'
-                );
-            });
-        });
-
-        function GetValue(id) {
-            $("#live-search").val($("#" + id).text());
-            if ($("#live-search").val() != "") {
-                $(".user-info-popup").show();
-            }
-        }
-
-        $("select[name=source]").change(function () {
-            switch ($(this).val()) {
-                case "1":
-                    $(".live-form-group, .user-info-popup").hide();
-                    break;
-                case "2":
-                    $(".live-form-group").show();
-                    break;
-            }
-        });
-
-        $('input[name=live-search]').on('keyup focus', function () {
-            let filter = $(this);
-            let text = filter.val();
-            console.log(text);
-            dropDown = $(".dropdown-search");
-            dropDown.find('.item').each(function () {
-                var item = $(this);
-                console.log(item.html().includes(text));
-                if (item.html().includes(text)) {
-                    item.show();
-                } else {
-                    item.hide();
-                }
-            });
-        });
-
+        $("#telephone").mask("+7 (999) 999-99-99");
     </script>
+
     <script>
         tinymce.init({
             selector: '#comment-user-mission',
