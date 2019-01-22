@@ -20,7 +20,7 @@
                     {{ csrf_field() }}
                     <div class="modal-body">
                         <div class="form-group">
-                            <select class="custom-select" name="client">
+                            <select class="custom-select" name="from">
                                 <option selected disabled>Источник</option>
                                 <option value="1">Задача</option>
                                 <option value="2">Общежитие</option>
@@ -42,9 +42,6 @@
                             <div class="form-group">
                                 <input type="tel" id="telephone" class="form-control" name="phone"
                                        placeholder="Номер телефона" required>
-                            </div>
-                            <div class="form-group">
-                                <input name="" id="" class="form-control" placeholder="Информация о клиенте">
                             </div>
                         </div>
                         <div class="form-group">
@@ -79,19 +76,11 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <select id="looking-select" name="looking">
-                                <option value=""></option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
                             <select id="help-select" class="js-example-placeholder-multiple" name="helper[]"
                                     multiple="multiple">
-                                <option value="1">вавыа</option>
-                                <option value="2">ываыва</option>
-                                <option value="3">ваывпып</option>
+                                @foreach($users as $user)
+                                    <option value="{{ $user->id }}">{{ $user->fio }}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="form-group">
@@ -103,25 +92,16 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <input placeholder="Дата начала" class="form-control" type="text"
-                                   onfocus="(this.type='datetime-local')"
-                                   id="date_begin"
-                                   onblur="(this.type='text')" name="date_begin" required>
+                            <input placeholder="Дата начала" class="form-control" type="text" onfocus="(this.type='datetime-local')" id="date_begin" onblur="(this.type='text')" name="date_from" required>
                         </div>
                         <div class="form-group">
-                            <input placeholder="Крайний срок" class="form-control" type="text"
-                                   id="date_end"
-                                   onfocus="(this.type='datetime-local')"
-                                   onblur="(this.type='text')"
-                                   name="date_end"
-                                   required>
+                            <input placeholder="Крайний срок" class="form-control" type="text" id="date_end" onfocus="(this.type='datetime-local')" onblur="(this.type='text')" name="date_to" required>
                         </div>
                         <div class="form-group">
-                            <textarea name="comment" id="comment-user-mission" cols="30" rows="10" class="form-control"
-                                      placeholder="Комментарий"></textarea>
+                            <textarea name="info" id="comment-user-mission" cols="30" rows="10" class="form-control" placeholder="Комментарий"></textarea>
                         </div>
                         <div class="form-group">
-                            <input type="file" name="file_group" id="" class="form-control" multiple></input>
+                            <input type="file" name="file_group" id="" class="form-control" multiple>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -208,14 +188,6 @@
                     allowClear: true,
                     theme: 'bootstrap4'
 
-                }
-            );
-
-            $('#looking-select').select2({
-                    placeholder: 'Наблюдатель',
-                    width: '100%',
-                    allowClear: true,
-                    theme: 'bootstrap4'
                 }
             );
 

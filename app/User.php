@@ -19,6 +19,11 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Group')->withTimestamps();
     }
 
+    public function missions()
+    {
+        return $this->belongsToMany('App\Mission', 'helper_mission')->withTimestamps();
+    }
+
     public function group_posts()
     {
         return $this->hasMany('App\GroupPost');

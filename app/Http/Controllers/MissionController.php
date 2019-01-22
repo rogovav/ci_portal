@@ -25,6 +25,7 @@ class MissionController extends Controller
 
     public function store(Request $request)
     {
+
         $mission = new Mission();
 
         $mission->from        = $request->from;
@@ -34,14 +35,15 @@ class MissionController extends Controller
         $mission->cid         = $request->cid;
         $mission->client_id   = $request->client;
         $mission->address     = $request->address;
-        $mission->building_id = $request->building_id;
+        $mission->building_id = $request->building;
         $mission->priority    = $request->priority;
         $mission->date_from   = $request->date_from;
         $mission->date_to     = $request->date_to;
         $mission->info        = $request->info;
-        $mission->status      = 1;
 
         $mission->save();
+
+        $mission->helpers()->sync($request->helper);
 
         return redirect()->back();
     }

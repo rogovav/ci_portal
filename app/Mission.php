@@ -30,4 +30,9 @@ class Mission extends Model
     {
         return $this->belongsTo('App\Building', 'building_id');
     }
+
+    public function helpers()
+    {
+        return $this->belongsToMany('App\User', 'helper_mission')->withTimestamps();
+    }
 }
