@@ -35,11 +35,11 @@
                         Заявки <i
                             class="fas fas fa-tasks shortmenu animate"></i></a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url("groups") }}" title="Группы"><i class="fas fa-users"></i>
-                        Группы <i
-                            class="fas fa-users shortmenu animate"></i></a>
-                </li>
+                {{--<li class="nav-item">--}}
+                {{--<a class="nav-link" href="{{ url("groups") }}" title="Группы"><i class="fas fa-users"></i>--}}
+                {{--Группы <i--}}
+                {{--class="fas fa-users shortmenu animate"></i></a>--}}
+                {{--</li>--}}
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url("users") }}" title="Люди"><i class="fas fa-user-tie"></i> Люди <i
                             class="fas fa-user-tie shortmenu animate"></i></a>
