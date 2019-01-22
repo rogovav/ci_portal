@@ -45,5 +45,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/user/{id}', 'UserController@update')->name('user.update');
     Route::post('/users', 'UserController@add');
 
+    Route::post('/todo', 'TodoController@store')->name('todo.store');
+    Route::get('/todo/{id}', 'TodoController@update')->name('todo.update');
+
     Route::get('/users/api{params?}', 'UserController@api_json');
 });

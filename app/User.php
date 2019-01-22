@@ -39,6 +39,11 @@ class User extends Authenticatable
         return $this->hasMany('App\Mission', 'worker_id');
     }
 
+    public function todos()
+    {
+        return $this->hasMany('App\Todo', 'user_id');
+    }
+
     use Notifiable;
 
     /**

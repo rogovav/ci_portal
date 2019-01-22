@@ -65,7 +65,9 @@
                                         Новое TODO
                                     </div>
                                     <div class="card-body">
-                                        <form action="" class="col-12">
+                                        <form action="{{ route('todo.store') }}" class="col-12" method="post">
+                                            {{ csrf_field() }}
+
                                             <div class="form-row mb-3">
                                                 <div class="col-8">
                                                     <input class="form-control" type="text" placeholder="Название TODO"
@@ -81,7 +83,7 @@
                                             </div>
                                             <div class="form-row  mb-3">
                                                 <div class="col">
-                                                <textarea placeholder="Текст TODO" class="form-control" name="text"
+                                                <textarea placeholder="Текст TODO" class="form-control" name="info"
                                                           id="" cols="30"
                                                           rows="2"></textarea>
                                                 </div>
@@ -106,95 +108,31 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="row">
+                                        @foreach(Auth::user()->todos->sortByDesc('created_at') as $todo)
                                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-6">
-                                            <div class="card">
-                                                <div class="card-header card-priority-high-header">
+                                            <div class="card {{ $todo->success? 'todo-done' : Null }}">
+                                                <div class="card-header card-priority-{{ $todo->priority == 1? 'low' : $todo->priority == 2? 'mid' : 'high' }}-header">
                                                     <div class="row">
-                                                        <div class="col-6">Название TODO</div>
+                                                        <div class="col-6">{{ $todo->name }}</div>
                                                         <div class="col-6"><span
-                                                                class="badge badge-light float-right">25.01.2017</span>
+                                                                class="badge badge-light float-right">{{ $todo->created_at }}</span>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="card-body card-priority-high">
-                                                    <p>Lorem ipsum vkbskdfnkjd dhf ldsbflDKS FlDSKBF kdbf</p>
+                                                <div class="card-body card-priority-{{ $todo->priority == 1? 'low' : $todo->priority == 2? 'mid' : 'high' }}">
+                                                    <p>{{ $todo->info }}</p>
                                                     <div class="row">
                                                         <div class="col-12">
-                                                            <a href=""
-                                                               class="badge badge-success text-center col-12">Завершить
-                                                                задание</a>
+                                                            <a href="{{ route('todo.update', $todo->id) }}" class="badge badge-{{ $todo->success? 'dark' : 'success' }} text-center col-12">
+                                                                {{ $todo->success? 'Восстановить задание' : 'Завершить
+                                                                задание' }}
+                                                            </a>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-6">
-                                            <div class="card">
-                                                <div class="card-header card-priority-mid-header">
-                                                    <div class="row">
-                                                        <div class="col-6">Название TODO</div>
-                                                        <div class="col-6"><span
-                                                                class="badge badge-light float-right">25.01.2017</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="card-body card-priority-mid">
-                                                    <p>Lorem ipsum vkbskdfnkjd dhf ldsbflDKS FlDSKBF kdbf</p>
-                                                    <div class="row">
-                                                        <div class="col-12">
-                                                            <a href=""
-                                                               class="badge badge-success text-center col-12">Завершить
-                                                                задание</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-6">
-                                            <div class="card">
-                                                <div class="card-header card-priority-low-header">
-                                                    <div class="row">
-                                                        <div class="col-6">Название TODO</div>
-                                                        <div class="col-6"><span
-                                                                class="badge badge-light float-right">25.01.2017</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="card-body card-priority-low">
-                                                    <p>Lorem ipsum vkbskdfnkjd dhf ldsbflDKS FlDSKBF kdbf</p>
-                                                    <div class="row">
-                                                        <div class="col-12">
-                                                            <a href=""
-                                                               class="badge badge-success text-center col-12">Завершить
-                                                                задание</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-6">
-                                            <div class="card todo-done">
-                                                <div class="card-header card-priority-high-header">
-                                                    <div class="row">
-                                                        <div class="col-6"><s>Название TODO</s></div>
-                                                        <div class="col-6"><span
-                                                                class="badge badge-light float-right">25.01.2017</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="card-body card-priority-high">
-                                                    <p><s>Lorem ipsum vkbskdfnkjd dhf ldsbflDKS FlDSKBF
-                                                            kdbf</s></p>
-                                                    <div class="row">
-                                                        <div class="col-12"><a href=""
-                                                                               class="badge badge-dark text-center col-12">Восстановить
-                                                                задание</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        @endforeach
                                     </div>
                                 </div>
                             </div>
