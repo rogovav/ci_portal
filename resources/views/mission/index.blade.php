@@ -2,7 +2,7 @@
 @section('css')
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="{{ asset("css/dataTables.bootstrap4.min.css") }}">
-    {{--<link rel="stylesheet" href="{{ asset('css/sel-boot4.css') }}">--}}
+    <link rel="stylesheet" href="{{ asset('css/sel-boot4.css') }}">
     {{--<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap4.min.css">--}}
 @endsection
 @section('content')
@@ -203,29 +203,35 @@
     <script>
         $(document).ready(function () {
             $('.js-example-placeholder-multiple').select2({
+                    placeholder: 'Помощь',
                     width: '100%',
-                    placeholder: 'Помощники'
+                    allowClear: true,
+                    theme: 'bootstrap4'
+
                 }
             );
 
             $('#looking-select').select2({
                     placeholder: 'Наблюдатель',
                     width: '100%',
-                    allowClear: true
+                    allowClear: true,
+                    theme: 'bootstrap4'
                 }
             );
 
             $('#client-select').select2({
                     placeholder: 'Клиент',
                     width: '100%',
-                    allowClear: true
+                    allowClear: true,
+                    theme: 'bootstrap4'
                 }
             );
 
             $('#user-select').select2({
                     placeholder: 'Исполнитель',
                     width: '100%',
-                    allowClear: true
+                    allowClear: true,
+                    theme: 'bootstrap4'
                 }
             );
 

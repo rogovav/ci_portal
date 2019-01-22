@@ -19,7 +19,7 @@ class CreateTodosTable extends Migration
             $table->integer('priority')->nullable();
             $table->string('name')->nullable();
             $table->string('info')->nullable();
-            $table->boolean('success')->default('false');
+            $table->boolean('success')->default(false);
             $table->timestamps();
         });
     }
