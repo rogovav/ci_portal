@@ -19,109 +19,129 @@
                 <form method="POST" action="{{ route('mission.store') }}">
                     {{ csrf_field() }}
                     <div class="modal-body">
-                        <div class="form-group">
-                            <select class="custom-select" name="client">
-                                <option selected disabled>Источник</option>
-                                <option value="1">Задача</option>
-                                <option value="2">Общежитие</option>
-                                <option value="3">Университет</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <select id="client-select" name="client">
-                                <option value=""></option>
-                                @foreach($clients as $client)
-                                    <option value="{{ $client->id }}">{{ $client->fio }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="user-info-popup">
-                            <div class="form-group">
-                                <input name="" id="" class="form-control" placeholder="Номер договора">
+                        <div class="card">
+                            <div class="card-header">Информация о заявке</div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <select id="client-select" name="client">
+                                        <option value=""></option>
+                                        @foreach($clients as $client)
+                                            <option value="{{ $client->id }}">{{ $client->fio }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="user-info-popup">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="">
+                                                <div class="form-group">
+                                                    <input name="" id="" class="form-control"
+                                                           placeholder="Номер договора">
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="tel" id="telephone" class="form-control" name="phone"
+                                                           placeholder="Номер телефона" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <input name="" id="" class="form-control"
+                                                           placeholder="Информация о клиенте">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <select class="custom-select" name="client">
+                                        <option selected disabled>Источник</option>
+                                        <option value="1">Задача</option>
+                                        <option value="2">Общежитие</option>
+                                        <option value="3">Университет</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <select class="custom-select" name="priority" id="priority">
+                                        <option selected value="">Приоритет</option>
+                                        <option value="1">Высокий</option>
+                                        <option value="2">Средний</option>
+                                        <option value="3">Низкий</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <select class="custom-select" name="subject" id="choose-topic">
+                                        <option selected value="">Тема</option>
+                                        @foreach($subjects as $subject)
+                                            <option value="{{ $subject->id }}">{{ $subject->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <input placeholder="Крайний срок" class="form-control" type="text"
+                                           id="date_end"
+                                           onfocus="(this.type='datetime-local')"
+                                           onblur="(this.type='text')"
+                                           name="date_end"
+                                           required>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <input type="tel" id="telephone" class="form-control" name="phone"
-                                       placeholder="Номер телефона" required>
+                        </div>
+                        <div class="card">
+                            <div class="card-header">Выбор сотрудников</div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <select id="user-select" name="worker">
+                                        <option value=""></option>
+                                        @foreach($users as $user)
+                                            <option value="{{ $user->id }}">{{ $user->fio }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <select id="looking-select" name="looking">
+                                        <option value=""></option>
+                                        <option value="1">One</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <select id="help-select" class="js-example-placeholder-multiple" name="helper[]"
+                                            multiple="multiple">
+                                        <option value="1">вавыа</option>
+                                        <option value="2">ываыва</option>
+                                        <option value="3">ваывпып</option>
+                                    </select>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <input name="" id="" class="form-control" placeholder="Информация о клиенте">
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                Местоположение
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <select class="custom-select" name="building">
+                                        <option selected value="">Здание</option>
+                                        @foreach($buildings as $building)
+                                            <option value="{{ $building->id }}">{{ $building->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <input name="address" id="" class="form-control" placeholder="Адрес">
+                                </div>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <select class="custom-select" name="building">
-                                <option selected value="">Здание</option>
-                                @foreach($buildings as $building)
-                                    <option value="{{ $building->id }}">{{ $building->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <input name="address" id="" class="form-control" placeholder="Адрес">
-                        </div>
-                        <div class="form-group">
-                            <select class="custom-select" name="subject" id="choose-topic">
-                                <option selected value="">Тема</option>
-                                @foreach($subjects as $subject)
-                                    <option value="{{ $subject->id }}">{{ $subject->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="form-group hidden-topic-input">
-                            <input class="form-control" type="text" name="new_subject"
-                                   placeholder="Введите название новой темы">
-                        </div>
-                        <div class="form-group">
-                            <select id="user-select" name="worker">
-                                <option value=""></option>
-                                @foreach($users as $user)
-                                    <option value="{{ $user->id }}">{{ $user->fio }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <select id="looking-select" name="looking">
-                                <option value=""></option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <select id="help-select" class="js-example-placeholder-multiple" name="helper[]"
-                                    multiple="multiple">
-                                <option value="1">вавыа</option>
-                                <option value="2">ываыва</option>
-                                <option value="3">ваывпып</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <select class="custom-select" name="priority" id="priority">
-                                <option selected value="">Приоритет</option>
-                                <option value="1">Высокий</option>
-                                <option value="2">Средний</option>
-                                <option value="3">Низкий</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <input placeholder="Дата начала" class="form-control" type="text"
-                                   onfocus="(this.type='datetime-local')"
-                                   id="date_begin"
-                                   onblur="(this.type='text')" name="date_begin" required>
-                        </div>
-                        <div class="form-group">
-                            <input placeholder="Крайний срок" class="form-control" type="text"
-                                   id="date_end"
-                                   onfocus="(this.type='datetime-local')"
-                                   onblur="(this.type='text')"
-                                   name="date_end"
-                                   required>
-                        </div>
-                        <div class="form-group">
+                        <div class="card">
+                            <div class="card-header">Дополнительная информация</div>
+                            <div class="card-body">
+                                <div class="form-group">
                             <textarea name="comment" id="comment-user-mission" cols="30" rows="10" class="form-control"
                                       placeholder="Комментарий"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <input type="file" name="file_group" id="" class="form-control" multiple></input>
+                                </div>
+                                <div class="form-group">
+                                    <input type="file" name="file_group" id="" class="form-control" multiple></input>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -328,6 +348,12 @@
     </script>
 
     <script>
+        $(document).ready(function () {
+            let d = new Date();
+            d = new Date(d.getTime() - d.getTimezoneOffset() * 60000).toJSON().slice(0, 19)
+            $('#date_begin').val(d.replace('T', ' '))
+        })
+
         $('#date_begin').focus(function () {
             let d = new Date();
             d = new Date(d.getTime() - d.getTimezoneOffset() * 60000).toJSON().slice(0, 19)

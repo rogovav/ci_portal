@@ -1001,13 +1001,12 @@ a.delete-a:hover {
     margin-top: 10px;
 }
 
-.live-form-group, .user-info-popup {
+.user-info-popup {
     display: none;
 }
 
 .user-info-popup {
     padding: 10px;
-    background-color: rgba(4, 30, 66, 0.1);
     margin-bottom: 5px;
 }
 
