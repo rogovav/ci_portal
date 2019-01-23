@@ -16,7 +16,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form method="POST" action="{{ route('mission.store') }}">
+                <form method="POST" action="{{ route('mission.store') }}" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     <div class="modal-body">
                         <div class="form-group">
@@ -101,7 +101,7 @@
                             <textarea name="info" id="comment-user-mission" cols="30" rows="10" class="form-control" placeholder="Комментарий"></textarea>
                         </div>
                         <div class="form-group">
-                            <input type="file" name="file_group" id="" class="form-control" multiple>
+                            <input type="file" name="files[]" id="" class="form-control" multiple>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -139,7 +139,7 @@
                     <tbody>
                     @foreach($missions as $mission)
                         <tr>
-                            <td>{{ $mission->id }}</td>
+                            <td><a href="{{ route('mission.show', $mission->id) }}">{{ $mission->id }}</a></td>
                             <td>{{ $mission->info }}</td>
                             <td>{{ $mission->from }}</td>
                             <td>{{ $mission->owner->fio }}</td>

@@ -18,21 +18,26 @@ class Mission extends Model
 
     public function subject()
     {
-        return $this->belongsTo('App\Subject', 'subject_id');
+        return $this->belongsTo('App\Subject');
     }
 
     public function client()
     {
-        return $this->belongsTo('App\Client', 'client_id');
+        return $this->belongsTo('App\Client');
     }
 
     public function building()
     {
-        return $this->belongsTo('App\Building', 'building_id');
+        return $this->belongsTo('App\Building');
     }
 
     public function helpers()
     {
         return $this->belongsToMany('App\User', 'helper_mission')->withTimestamps();
+    }
+
+    public function files()
+    {
+        return $this->hasMany('App\MissionFile');
     }
 }

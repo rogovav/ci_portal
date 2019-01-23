@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Building;
 use App\Client;
 use App\Mission;
+use App\MissionFile;
 use App\Subject;
 use App\User;
 use Illuminate\Http\Request;
@@ -12,6 +13,14 @@ use Illuminate\Support\Facades\Auth;
 
 class MissionController extends Controller
 {
+    public $from = [1 => 'Задача',
+                    2 => 'Общежитие',
+                    3 => 'Университет',];
+
+    public $status = [1 => 'В работе',
+                      2 => 'На проверке',
+                      3 => 'Выполнена',];
+
     public function index()
     {
         $buildings = Building::orderBy('name')->get();
@@ -23,9 +32,18 @@ class MissionController extends Controller
         return view('mission.index', compact('buildings', 'clients', 'missions', 'subjects', 'users'));
     }
 
+    public function show($id)
+    {
+        $mission = Mission::findOrFail($id);
+        $from = $this->from;
+        $status = $this->status;
+        $per = (strtotime("now") - strtotime($mission->created_at))/(strtotime($mission->date_to) - strtotime($mission->created_at)) * 100;
+
+        return view('mission.show', compact('mission', 'from', 'status', 'per'));
+    }
+
     public function store(Request $request)
     {
-
         $mission = new Mission();
 
         $mission->from        = $request->from;
@@ -37,11 +55,17 @@ class MissionController extends Controller
         $mission->address     = $request->address;
         $mission->building_id = $request->building;
         $mission->priority    = $request->priority;
-        $mission->date_from   = $request->date_from;
         $mission->date_to     = $request->date_to;
         $mission->info        = $request->info;
 
         $mission->save();
+
+        foreach ($request->file('files') as $file)
+        {
+            $fileName = $mission->id . '_' . $file->getClientOriginalName();
+            $file->storeAs('public/missions', $fileName);
+            MissionFile::create(['name' => $fileName, 'mission_id' => $mission->id]);
+        }
 
         $mission->helpers()->sync($request->helper);
 
