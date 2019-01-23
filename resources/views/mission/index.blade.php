@@ -178,7 +178,7 @@
                     <tbody>
                     @foreach($missions as $mission)
                         <tr>
-                            <td>{{ $mission->id }}</td>
+                            <td><a href="{{ route('mission.show', $mission->id) }}">{{ $mission->id }}</a></td>
                             <td>{{ $mission->info }}</td>
                             <td>{{ $mission->from }}</td>
                             <td>{{ $mission->owner->fio }}</td>
