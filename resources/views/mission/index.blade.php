@@ -330,7 +330,7 @@
     <script>
         $('#date_begin').focus(function () {
             let d = new Date();
-            d = new Date().toJSON().slice(0, 19)
+            d = new Date(d.getTime() - d.getTimezoneOffset() * 60000).toJSON().slice(0, 19)
             $(this).val(d)
         })
         $('#date_begin').blur(function () {

@@ -5,7 +5,7 @@
             <div class="row">
                 <div class="col-4">
                     <div class="card">
-                        <div class="card-body">
+                        <div class="card-body card-info">
                             <div class="col account-main-info-col">
                                 <div class="card">
                                     <div class="card-body">
@@ -58,11 +58,142 @@
                 </div>
                 <div class="col-8">
                     <div class="card">
-                        <div class="card-body">
+                        <div class="card-body card-info">
+                            <div class="card">
+                                <div class="card-header">
+                                    Список заявок
+                                </div>
+                                <div class="card-body ">
+                                    <nav>
+                                        <div class="nav nav-tabs mb-3" id="nav-tab" role="tablist">
+                                            <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab"
+                                               href="#nav-home" role="tab" aria-controls="nav-home"
+                                               aria-selected="true">Мои заявки</a>
+                                            <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab"
+                                               href="#nav-profile" role="tab" aria-controls="nav-profile"
+                                               aria-selected="false">Заявки мне</a>
+                                            <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab"
+                                               href="#nav-contact" role="tab" aria-controls="nav-contact"
+                                               aria-selected="false">Заявки в помощь</a>
+                                        </div>
+                                    </nav>
+                                    <div class="tab-content" id="nav-tabContent">
+                                        <div class="tab-pane fade show active" id="nav-home" role="tabpanel"
+                                             aria-labelledby="nav-home-tab">
+                                            <div class="row">
+                                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                    <div class="card">
+                                                        <div class="card-body task-card card-priority-mid">
+                                                            <div class="progress">
+                                                                <div class="progress-bar bg-warning" role="progressbar"
+                                                                     style="width: 60%" aria-valuenow="25"
+                                                                     aria-valuemin="0"
+                                                                     aria-valuemax="100"></div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-12">
+                                                                    <table class="table table-sm mb-0">
+                                                                        <tbody>
+                                                                        <tr>
+                                                                            <td>#9999</td>
+                                                                            <td>Обеспечение доступа в Интернет</td>
+                                                                            <td>Lorem ipsum dolor sit amet, consectetur
+                                                                                adipisicing elit. Alias aliquam animi
+                                                                                cumque
+                                                                            </td>
+                                                                        </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                    <div class="card">
+                                                        <div class="card-body task-card card-priority-low">
+                                                            <div class="progress">
+                                                                <div class="progress-bar bg-success" role="progressbar"
+                                                                     style="width: 20%" aria-valuenow="25"
+                                                                     aria-valuemin="0"
+                                                                     aria-valuemax="100"></div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-12">
+                                                                    <table class="table table-sm mb-0">
+                                                                        <tbody>
+                                                                        <tr>
+                                                                            <td>#8888</td>
+                                                                            <td>Обеспечение доступа в Интернет</td>
+                                                                            <td>Lorem ipsum dolor sit amet, consectetur
+                                                                                adipisicing elit. Alias aliquam animi
+                                                                                cumque
+                                                                            </td>
+                                                                        </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                    <div class="card">
+                                                        <div class="card-body task-card card-priority-high">
+                                                            <div class="progress">
+                                                                <div class="progress-bar bg-danger" role="progressbar"
+                                                                     style="width: 90%" aria-valuenow="25"
+                                                                     aria-valuemin="0"
+                                                                     aria-valuemax="100"></div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-12">
+                                                                    <table class="table table-sm mb-0">
+                                                                        <tbody>
+                                                                        <tr>
+                                                                            <td>#1000</td>
+                                                                            <td>Обеспечение доступа в Интернет</td>
+                                                                            <td>Lorem ipsum dolor sit amet, consectetur
+                                                                                adipisicing elit. Alias aliquam animi
+                                                                                cumque
+                                                                            </td>
+                                                                        </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="nav-profile" role="tabpanel"
+                                             aria-labelledby="nav-profile-tab">
+                                            <div class="row">
+
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="nav-contact" role="tabpanel"
+                                             aria-labelledby="nav-contact-tab">
+                                            <div class="row">
+                                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-6">
+                                                    <div class="card">
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body card-info">
                             <div class="collapse" id="collapseExample">
                                 <div class="card">
                                     <div class="card-header">
-                                        Новое TODO
+                                        Новое задание
                                     </div>
                                     <div class="card-body">
                                         <form action="{{ route('todo.store') }}" class="col-12" method="post">
@@ -70,7 +201,8 @@
 
                                             <div class="form-row mb-3">
                                                 <div class="col-4">
-                                                    <input class="form-control" type="text" placeholder="Название TODO"
+                                                    <input class="form-control" type="text"
+                                                           placeholder="Название задание"
                                                            name="name">
                                                 </div>
                                                 <div class="col-4">
@@ -103,9 +235,9 @@
                             </div>
                             <div class="card">
                                 <div class="card-header">
-                                    Список дел <a class="badge badge-primary" data-toggle="collapse"
-                                                  href="#collapseExample" role="button" aria-expanded="false"
-                                                  aria-controls="collapseExample">
+                                    Список заданий <a class="badge badge-primary" data-toggle="collapse"
+                                                      href="#collapseExample" role="button" aria-expanded="false"
+                                                      aria-controls="collapseExample">
                                         Добавить
                                     </a>
                                 </div>
@@ -164,16 +296,16 @@
                                                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-6">
                                                         <div class="card {{ $todo->success? 'todo-done' : Null }}">
                                                             <div
-                                                                    class="card-header card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}-header">
+                                                                class="card-header card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}-header">
                                                                 <div class="row">
                                                                     <div class="col-6">{{ $todo->name }}</div>
                                                                     <div class="col-6"><span
-                                                                                class="badge badge-light float-right">Задание на {{ $todo->date }}</span>
+                                                                            class="badge badge-light float-right">Задание на {{ $todo->date }}</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <div
-                                                                    class="card-body card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}">
+                                                                class="card-body card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}">
                                                                 <p>{{ $todo->info }}</p>
                                                                 <div class="row">
                                                                     <div class="col-12">
@@ -197,16 +329,16 @@
                                                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-6">
                                                         <div class="card {{ $todo->success? 'todo-done' : Null }}">
                                                             <div
-                                                                    class="card-header card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}-header">
+                                                                class="card-header card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}-header">
                                                                 <div class="row">
                                                                     <div class="col-6">{{ $todo->name }}</div>
                                                                     <div class="col-6"><span
-                                                                                class="badge badge-light float-right">Задание на {{ $todo->date }}</span>
+                                                                            class="badge badge-light float-right">Задание на {{ $todo->date }}</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <div
-                                                                    class="card-body card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}">
+                                                                class="card-body card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}">
                                                                 <p>{{ $todo->info }}</p>
                                                                 <div class="row">
                                                                     <div class="col-12">

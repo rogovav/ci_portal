@@ -896,7 +896,15 @@ input[type="color"]:focus,
     border-right: 4px solid #cce5ff;
 }
 
-
+.task-card > .progress {
+    height: 0.1875rem;
+    background: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1;
+}
 
 .media-body {
     height: 100%;
