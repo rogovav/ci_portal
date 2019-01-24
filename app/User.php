@@ -9,6 +9,26 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable
 {
 
+    use Notifiable;
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'fio', 'avatar', 'position', 'login', 'vk', 'email', 'phone', 'birthday', 'password',
+    ];
+
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'password', 'remember_token',
+    ];
+
     public function groups_admin()
     {
         return $this->hasMany('App\Group', 'admin');
@@ -17,6 +37,11 @@ class User extends Authenticatable
     public function groups()
     {
         return $this->belongsToMany('App\Group')->withTimestamps();
+    }
+
+    public function missions()
+    {
+        return $this->belongsToMany('App\Mission', 'helper_mission')->withTimestamps();
     }
 
     public function group_posts()
@@ -41,26 +66,8 @@ class User extends Authenticatable
 
     public function todos()
     {
-        return $this->hasMany('App\Todo', 'user_id');
+        return $this->hasMany('App\Todo');
     }
 
-    use Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
-        'fio', 'avatar', 'position', 'login', 'vk', 'email', 'phone', 'birthday', 'password',
-    ];
-
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'password', 'remember_token',
-    ];
 }

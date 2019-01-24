@@ -6,7 +6,7 @@
     {{--<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap4.min.css">--}}
 @endsection
 @section('content')
-    <div class="modal fade bd-example-modal-lg" id="ModalCreateUser" tabindex="-1" role="dialog"
+    <div class="modal fade bd-example-modal-lg" id="ModalCreateUser" role="dialog"
          aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
@@ -16,14 +16,14 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form method="POST" action="{{ route('mission.store') }}">
+                <form method="POST" action="{{ route('mission.store') }}" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     <div class="modal-body">
                         <div class="card">
                             <div class="card-header">Информация о заявке</div>
                             <div class="card-body">
                                 <div class="form-group">
-                                    <select id="client-select" name="client">
+                                    <select class="client-select form-control" name="client">
                                         <option value=""></option>
                                         @foreach($clients as $client)
                                             <option value="{{ $client->id }}">{{ $client->fio }}</option>
@@ -33,25 +33,18 @@
                                 <div class="user-info-popup">
                                     <div class="card">
                                         <div class="card-body">
-                                            <div class="">
-                                                <div class="form-group">
-                                                    <input name="" id="" class="form-control"
-                                                           placeholder="Номер договора">
-                                                </div>
-                                                <div class="form-group">
-                                                    <input type="tel" id="telephone" class="form-control" name="phone"
-                                                           placeholder="Номер телефона" required>
-                                                </div>
-                                                <div class="form-group">
-                                                    <input name="" id="" class="form-control"
-                                                           placeholder="Информация о клиенте">
-                                                </div>
+                                            <div class="form-group">
+                                                <input name="" id="" class="form-control" placeholder="Номер договора">
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="tel" id="telephone" class="form-control" name="phone"
+                                                       placeholder="Номер телефона" required>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <select class="custom-select" name="client">
+                                    <select class="custom-select" name="from">
                                         <option selected disabled>Источник</option>
                                         <option value="1">Задача</option>
                                         <option value="2">Общежитие</option>
@@ -88,7 +81,7 @@
                             <div class="card-header">Выбор сотрудников</div>
                             <div class="card-body">
                                 <div class="form-group">
-                                    <select id="user-select" name="worker">
+                                    <select class="user-select" name="worker">
                                         <option value=""></option>
                                         @foreach($users as $user)
                                             <option value="{{ $user->id }}">{{ $user->fio }}</option>
@@ -96,19 +89,11 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <select id="looking-select" name="looking">
-                                        <option value=""></option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <select id="help-select" class="js-example-placeholder-multiple" name="helper[]"
+                                    <select id="help-select" class="help-select" name="helper[]"
                                             multiple="multiple">
-                                        <option value="1">вавыа</option>
-                                        <option value="2">ываыва</option>
-                                        <option value="3">ваывпып</option>
+                                        @foreach($users as $user)
+                                            <option value="{{ $user->id }}">{{ $user->fio }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -217,12 +202,20 @@
     <script src='https://cloud.tinymce.com/stable/tinymce.min.js'></script>
     <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap4.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.full.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/i18n/ru.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 
     <script>
         $(document).ready(function () {
-            $('.js-example-placeholder-multiple').select2({
+
+            $('.client-select').select2({
+                    placeholder: 'Клиент',
+                    width: '100%',
+                    allowClear: true,
+                    theme: 'bootstrap4'
+                }
+            );
+
+            $('.help-select').select2({
                     placeholder: 'Помощь',
                     width: '100%',
                     allowClear: true,
@@ -231,23 +224,8 @@
                 }
             );
 
-            $('#looking-select').select2({
-                    placeholder: 'Наблюдатель',
-                    width: '100%',
-                    allowClear: true,
-                    theme: 'bootstrap4'
-                }
-            );
-
-            $('#client-select').select2({
-                    placeholder: 'Клиент',
-                    width: '100%',
-                    allowClear: true,
-                    theme: 'bootstrap4'
-                }
-            );
-
-            $('#user-select').select2({
+            $('.user-select').select2(
+                {
                     placeholder: 'Исполнитель',
                     width: '100%',
                     allowClear: true,
