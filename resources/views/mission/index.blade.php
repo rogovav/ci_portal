@@ -6,7 +6,7 @@
     {{--<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap4.min.css">--}}
 @endsection
 @section('content')
-    <div class="modal fade bd-example-modal-lg" id="ModalCreateUser" tabindex="-1" role="dialog"
+    <div class="modal fade bd-example-modal-lg" id="ModalCreateUser" role="dialog"
          aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
@@ -202,12 +202,20 @@
     <script src='https://cloud.tinymce.com/stable/tinymce.min.js'></script>
     <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap4.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.full.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/i18n/ru.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 
     <script>
         $(document).ready(function () {
-            $('.js-example-placeholder-multiple').select2({
+
+            $('.client-select').select2({
+                    placeholder: 'Клиент',
+                    width: '100%',
+                    allowClear: true,
+                    theme: 'bootstrap4'
+                }
+            );
+
+            $('.help-select').select2({
                     placeholder: 'Помощь',
                     width: '100%',
                     allowClear: true,
@@ -216,15 +224,8 @@
                 }
             );
 
-            $('#client-select').select2({
-                    placeholder: 'Клиент',
-                    width: '100%',
-                    allowClear: true,
-                    theme: 'bootstrap4'
-                }
-            );
-
-            $('#user-select').select2({
+            $('.user-select').select2(
+                {
                     placeholder: 'Исполнитель',
                     width: '100%',
                     allowClear: true,
@@ -325,9 +326,15 @@
     </script>
 
     <script>
+        $(document).ready(function () {
+            let d = new Date();
+            d = new Date(d.getTime() - d.getTimezoneOffset() * 60000).toJSON().slice(0, 19)
+            $('#date_begin').val(d.replace('T', ' '))
+        })
+
         $('#date_begin').focus(function () {
             let d = new Date();
-            d = new Date().toJSON().slice(0, 19)
+            d = new Date(d.getTime() - d.getTimezoneOffset() * 60000).toJSON().slice(0, 19)
             $(this).val(d)
         })
         $('#date_begin').blur(function () {
