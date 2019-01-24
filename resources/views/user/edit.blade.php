@@ -188,7 +188,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-3" style="max-height: 550px; overflow-y: scroll">
+                <div class="col-3">
                     <div class="card">
                         <div class="card-body card-info">
                             <div class="collapse" id="collapseExample">
@@ -256,7 +256,8 @@
                                     </nav>
                                     <div class="tab-content" id="nav-tabContent">
                                         <div class="tab-pane fade show active" id="nav-home" role="tabpanel"
-                                             aria-labelledby="nav-home-tab">
+                                             aria-labelledby="nav-home-tab"
+                                             style="max-height: 550px; overflow-y: scroll; overflow-x: hidden">
                                             <div class="row">
                                                 @foreach(Auth::user()->todos->where('date', date('Y-m-d'))->sortByDesc('priority') as $todo)
                                                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
@@ -289,7 +290,8 @@
                                             </div>
                                         </div>
                                         <div class="tab-pane fade" id="nav-profile" role="tabpanel"
-                                             aria-labelledby="nav-profile-tab">
+                                             aria-labelledby="nav-profile-tab"
+                                             style="max-height: 550px; overflow-y: scroll; overflow-x: hidden">
                                             <div class="row">
                                                 @foreach(Auth::user()->todos->where('date', date('Y-m-d', strtotime(date('Y-m-d') . "+1 days")))->sortByDesc('priority') as $todo)
                                                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
@@ -322,7 +324,8 @@
                                             </div>
                                         </div>
                                         <div class="tab-pane fade" id="nav-contact" role="tabpanel"
-                                             aria-labelledby="nav-contact-tab">
+                                             aria-labelledby="nav-contact-tab"
+                                             style="max-height: 550px; overflow-y: scroll; overflow-x: hidden">
                                             <div class="row">
                                                 @foreach(Auth::user()->todos->where('date', '>=', date('Y-m-d'))->where('date', '<=', date('Y-m-d', strtotime(date('Y-m-d') . "+7 days")))->sortByDesc('priority') as $todo)
                                                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
