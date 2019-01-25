@@ -2,11 +2,12 @@
 @section('css')
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="{{ asset("css/dataTables.bootstrap4.min.css") }}">
-    <link rel="stylesheet" href="{{ asset('css/sel-boot4.css') }}">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.5/css/bootstrap-select.min.css">
     {{--<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap4.min.css">--}}
 @endsection
 @section('content')
-    <div class="modal fade bd-example-modal-lg" id="ModalCreateUser" role="dialog"
+    <div class="modal fade bd-example-modal-lg" id="ModalCreateUser" tabindex="-1" role="dialog"
          aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
@@ -23,10 +24,14 @@
                             <div class="card-header">Информация о заявке</div>
                             <div class="card-body">
                                 <div class="form-group">
-                                    <select class="client-select form-control" name="client">
-                                        <option value=""></option>
+                                    <select id="client-select" class="client-select form-control"
+                                            data-live-search="true" name="client"
+                                            title="Клиент">
+                                        <option value="-1">Создать нового клиента</option>
                                         @foreach($clients as $client)
-                                            <option value="{{ $client->id }}">{{ $client->fio }}</option>
+                                            <option class="client-fio"
+                                                    value="{{ $client->id }}"
+                                                    data-fio="{{ $client }}">{{ $client->fio }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -34,38 +39,47 @@
                                     <div class="card">
                                         <div class="card-body">
                                             <div class="form-group">
-                                                <input name="" id="" class="form-control" placeholder="Номер договора">
+                                                <input name="clientFio" id="clientFio" class="form-control"
+                                                       placeholder="ФИО клиента">
                                             </div>
                                             <div class="form-group">
-                                                <input type="tel" id="telephone" class="form-control" name="phone"
+                                                <input name="clientCid" id="clientCid" class="form-control"
+                                                       placeholder="Номер договора">
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="tel" id="telephone" class="form-control" name="clientTel"
                                                        placeholder="Номер телефона" required>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <select class="custom-select" name="from">
-                                        <option selected disabled>Источник</option>
+                                    <select class="custom-select form-control" name="from" title='Источник'>
                                         <option value="1">Задача</option>
                                         <option value="2">Общежитие</option>
                                         <option value="3">Университет</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <select class="custom-select" name="priority" id="priority">
-                                        <option selected value="">Приоритет</option>
+                                    <select class="custom-select form-control" name="priority" id="priority"
+                                            title="Приоритет">
                                         <option value="1">Высокий</option>
                                         <option value="2">Средний</option>
                                         <option value="3">Низкий</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <select class="custom-select" name="subject" id="choose-topic">
-                                        <option selected value="">Тема</option>
+                                    <select class="custom-select form-control" name="subject" id="choose-topic"
+                                            title="Тема">
                                         @foreach($subjects as $subject)
                                             <option value="{{ $subject->id }}">{{ $subject->name }}</option>
                                         @endforeach
+                                        <option value="-1">Другое</option>
                                     </select>
+                                </div>
+                                <div class="form-group hidden-topic-input">
+                                    <input placeholder="Новая тема" type="text" class="form-control"
+                                           name="newSubject" id="hidden-topic">
                                 </div>
                                 <div class="form-group">
                                     <input placeholder="Крайний срок" class="form-control" type="text"
@@ -80,17 +94,17 @@
                         <div class="card">
                             <div class="card-header">Выбор сотрудников</div>
                             <div class="card-body">
-                                <div class="form-group">
-                                    <select class="user-select" name="worker">
-                                        <option value=""></option>
+                                <div class="form-group ">
+                                    <select class="user-select form-control" name="worker" title="Исполнитель"
+                                            data-live-search="true">
                                         @foreach($users as $user)
                                             <option value="{{ $user->id }}">{{ $user->fio }}</option>
                                         @endforeach
                                     </select>
                                 </div>
-                                <div class="form-group">
-                                    <select id="help-select" class="help-select" name="helper[]"
-                                            multiple="multiple">
+                                <div class="form-group ">
+                                    <select id="help-select" class="help-select form-control" name="helper[]"
+                                            multiple title="Помощники" data-live-search="true">
                                         @foreach($users as $user)
                                             <option value="{{ $user->id }}">{{ $user->fio }}</option>
                                         @endforeach
@@ -104,8 +118,8 @@
                             </div>
                             <div class="card-body">
                                 <div class="form-group">
-                                    <select class="custom-select" name="building">
-                                        <option selected value="">Здание</option>
+                                    <select class="custom-select form-control" name="building" title="Здание"
+                                            data-live-search="true">
                                         @foreach($buildings as $building)
                                             <option value="{{ $building->id }}">{{ $building->name }}</option>
                                         @endforeach
@@ -202,39 +216,27 @@
     <script src='https://cloud.tinymce.com/stable/tinymce.min.js'></script>
     <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap4.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.5/js/bootstrap-select.min.js"></script>
+
+    <!-- (Optional) Latest compiled and minified JavaScript translation files -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.5/js/i18n/defaults-ru_RU.min.js"></script>
 
     <script>
         $(document).ready(function () {
 
-            $('.client-select').select2({
-                    placeholder: 'Клиент',
-                    width: '100%',
-                    allowClear: true,
-                    theme: 'bootstrap4'
-                }
-            );
+            $('select').selectpicker()
 
-            $('.help-select').select2({
-                    placeholder: 'Помощь',
-                    width: '100%',
-                    allowClear: true,
-                    theme: 'bootstrap4'
+            $('.client-select').selectpicker();
 
-                }
-            );
+            $('.help-select').selectpicker();
 
-            $('.user-select').select2(
-                {
-                    placeholder: 'Исполнитель',
-                    width: '100%',
-                    allowClear: true,
-                    theme: 'bootstrap4'
-                }
-            );
+            $('.user-select').selectpicker();
 
         });
     </script>
+
+
 
     <script src="{{ asset('js/jquery.maskedinput.js') }}"></script>
 
@@ -249,12 +251,32 @@
         });
     </script>
 
+
     <script>
         $('#client-select').change(function () {
-            if ($(this).val() != '') {
+            if ($(this).val() == '-1') {
                 $('.user-info-popup').show();
+                $('#clientCid').prop('disabled', '');
+                $('#clientFio').prop('disabled', '');
+                $('#telephone').prop('disabled', '');
+                $('#clientCid').val('')
+                $('#clientFio').val('')
+                $('#telephone').val('')
+            } else if ($(this).val() != '') {
+                $('.user-info-popup').show();
+                let data = $(this).find(":selected").data('fio');
+                $('#clientCid').prop('disabled', '');
+                $('#clientFio').prop('disabled', '');
+                $('#telephone').prop('disabled', '');
+                $('#clientCid').val(data.cid)
+                $('#clientFio').val(data.fio)
+                $('#telephone').val(data.phone)
+                console.log(data)
             } else {
                 $('.user-info-popup').hide();
+                $('#clientCid').prop('disabled', 'disabled');
+                $('#clientFio').prop('disabled', 'disabled');
+                $('#telephone').prop('disabled', 'disabled');
             }
         })
     </script>
@@ -318,8 +340,14 @@
             $('#example').DataTable();
             $('#choose-topic').val() == '-1' ? $('.hidden-topic-input').show() : $('.hidden-topic-input').hide();
             $('#choose-topic').change(function () {
-                $(this).val() == '-1' ? $('.hidden-topic-input').show().children('input').removeProp('disabled') :
+                if ($(this).val() == '-1') {
+                    $('.hidden-topic-input').show().children('input').prop('disabled', '')
+                    $('#hidden-topic').focus()
+                } else {
                     $('.hidden-topic-input').hide().children('input').prop('disabled', 'disabled');
+
+                }
+
 
             })
         });

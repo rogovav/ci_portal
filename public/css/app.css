@@ -883,7 +883,7 @@ a {
 }
 
 .media-body {
-    height: 100%;
+    height: 40px;
     max-width: 50%;
     line-height: 1rem;
     padding: 0;
