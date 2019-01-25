@@ -882,6 +882,17 @@ a {
     z-index: 1;
 }
 
+#sohbet {
+    box-shadow: none;
+}
+
+.close-button {
+    border: none;
+    background-color: transparent;
+    box-shadow: none;
+    cursor: pointer;
+}
+
 .media-body {
     height: 40px;
     max-width: 50%;

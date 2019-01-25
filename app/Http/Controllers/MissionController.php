@@ -40,8 +40,9 @@ class MissionController extends Controller
         $from = $this->from;
         $status = $this->status;
         $per = (strtotime("now") - strtotime($mission->created_at))/(strtotime($mission->date_to) - strtotime($mission->created_at)) * 100;
+        $users     = User::orderBy('fio')->get();
 
-        return view('mission.show', compact('mission', 'from', 'status', 'per'));
+        return view('mission.show', compact('mission', 'from', 'status', 'per', 'users'));
     }
 
     public function store(Request $request)
