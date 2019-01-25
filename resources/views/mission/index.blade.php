@@ -85,7 +85,7 @@
                                            id="date_end"
                                            onfocus="(this.type='datetime-local')"
                                            onblur="(this.type='text')"
-                                           name="date_end"
+                                           name="date_to"
                                            required>
                                 </div>
                             </div>
@@ -133,11 +133,11 @@
                             <div class="card-header">Дополнительная информация</div>
                             <div class="card-body">
                                 <div class="form-group">
-                            <textarea name="comment" id="comment-user-mission" cols="30" rows="10" class="form-control"
+                            <textarea name="info" id="comment-user-mission" cols="30" rows="10" class="form-control"
                                       placeholder="Комментарий"></textarea>
                                 </div>
                                 <div class="form-group">
-                                    <input type="file" name="file_group" id="" class="form-control" multiple></input>
+                                    <input type="file" name="file_group" id="" class="form-control" multiple>
                                 </div>
                             </div>
                         </div>

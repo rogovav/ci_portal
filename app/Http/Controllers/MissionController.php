@@ -62,18 +62,19 @@ class MissionController extends Controller
 
         $mission->save();
 
-        foreach ($request->file('files') as $file)
-        {
-            $original = $file->getClientOriginalName();
-            $fileName = $mission->id . '_' . $original;
+        if ($request->hasFile('files')) {
+            foreach ($request->file('files') as $file) {
+                $original = $file->getClientOriginalName();
+                $fileName = $mission->id . '_' . $original;
 
-            $file->storeAs('public/missions', $fileName);
+                $file->storeAs('public/missions', $fileName);
 
-            MissionFile::create([
-                'name'       => $fileName,
-                'original'   => $original,
-                'mission_id' => $mission->id
-            ]);
+                MissionFile::create([
+                    'name' => $fileName,
+                    'original' => $original,
+                    'mission_id' => $mission->id
+                ]);
+            }
         }
 
         $mission->helpers()->sync($request->helper);
