@@ -82,10 +82,10 @@
                                 </div>
                                 <div class="form-group">
                                     <input placeholder="Крайний срок" class="form-control" type="text"
-                                           id="date_to"
+                                           id="date_end"
                                            onfocus="(this.type='datetime-local')"
                                            onblur="(this.type='text')"
-                                           name="date_end"
+                                           name="date_to"
                                            required>
                                 </div>
                             </div>
