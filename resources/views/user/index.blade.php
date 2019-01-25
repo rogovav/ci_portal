@@ -1,4 +1,7 @@
 @extends('layout.index')
+@section('css')
+    <link rel="stylesheet" href="{{ asset('css/croppie.css') }}">
+@endsection
 @section('content')
     <div class="modal fade" id="ModalCreateUser" tabindex="-1" role="dialog"
          aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -16,16 +19,15 @@
                         <div class="form-group">
                             <input type="text" class="form-control" name="fio" placeholder="ФИО" required>
                         </div>
-                        <div id="photo" class="form-group">
-                            <img src="http://via.placeholder.com/185x185"
-                                 style="" id="photo_preview"
-                                 class="img-thumbnail" alt="Фото группы">
+                        <div class="form-group">
+                            <input type="file" id="upload" class="form-control" accept="image/*">
                         </div>
-                        <label class="custom-file hidden-print" style="">
-                            <input type="file" name="avatar" id="btnImagemPaciente" style="width: 160px;"
-                                   class="form-control form-control-sm">
-                            <span class="custom-file-control"></span>
-                        </label>
+                        <div id="main-cropper"></div>
+                        <div class="form-group" id="img-button">
+                            <button id="getImage" type="button" class="btn btn-info">Сохранить выделенную область</button>
+                        </div>
+                        <input type="text" name="avatar" id="avatar" class="hidden-print">
+
                         <div class="form-group">
                             <select class="custom-select" id="inputGroupSelect01" name="position">
                                 <option selected>Выберите должность</option>
@@ -123,18 +125,58 @@
     </div>
 @endsection
 @section('js')
+    <script src="{{ asset('js/croppie.js') }}"></script>
     <script>
-        $("#photo").click(function () {
-            $("#btnImagemPaciente").trigger('click');
-        });
-
-
-        $('#btnImagemPaciente').change(function () {
-            if (this.files && this.files[0]) {
-                let img = document.getElementById('photo_preview');
-                img.src = URL.createObjectURL(this.files[0]); // set src to file url
+        $(document).ready(function () {
+            if ($('#upload').val() == '') {
+                $('#main-cropper').hide();
+                $('#getImage').hide()
             }
+        })
+        ///images/avatars/users/cool.jpg
+        var basic = $('#main-cropper').croppie({
+            viewport: {width: 300, height: 300, type: 'square'},
+            boundary: {width: 300, height: 300},
+            showZoomer: false,
+
         });
+
+        $('#getImage').click(function () {
+            basic.croppie('result', 'base64').then(function (base) {
+                console.log()
+                $('#avatar').val(base)
+            })
+        })
+
+        function readFile(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#main-cropper').croppie('bind', {
+                        url: e.target.result
+                    });
+                    $('.actionDone').toggle();
+                    $('.actionUpload').toggle();
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $('#getImage').click(function () {
+            $(this).prop('disabled', true)
+            $(this).text('Сохранено')
+        })
+
+        $('#upload').change(function () {
+            $('#main-cropper').show()
+            $('#getImage').show()
+            $('#getImage').text('Сохранить выделенную область')
+            $('#getImage').prop('disabled', false)
+            readFile(this);
+        })
+
     </script>
     <script src="{{ asset('js/jquery.maskedinput.js') }}"></script>
     <script>

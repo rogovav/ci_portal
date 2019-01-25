@@ -148,12 +148,22 @@
                         </div>
                         <div class="card-body">
                             <form action="">
-                                <select class="user-select form-control" name="worker" title="Исполнитель"
-                                        data-live-search="true">
-                                    @foreach($users as $user)
-                                        <option value="{{ $user->id }}">{{ $user->fio }}</option>
-                                    @endforeach
-                                </select>
+                                <div class="form-group">
+                                    <select class="user-select form-control" name="worker" title="Исполнитель"
+                                            data-live-search="true">
+                                        @foreach($users as $user)
+                                            <option value="{{ $user->id }}">{{ $user->fio }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="form-group ">
+                                    <select id="help-select" class="help-select form-control" name="helper[]"
+                                            multiple title="Помощники" data-live-search="true">
+                                        @foreach($users as $user)
+                                            <option value="{{ $user->id }}">{{ $user->fio }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </form>
                         </div>
                         <div class="card-footer">
@@ -476,7 +486,10 @@
     </script>
 
     <script>
-        $('.user-select').selectpicker()
+        $(document).ready(function () {
+            $('.help-select').selectpicker();
+            $('.user-select').selectpicker()
+        })
     </script>
 
     <script>
