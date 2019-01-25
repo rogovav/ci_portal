@@ -236,8 +236,6 @@
         });
     </script>
 
-
-
     <script src="{{ asset('js/jquery.maskedinput.js') }}"></script>
 
     <script>
@@ -250,7 +248,6 @@
             plugins: 'table',
         });
     </script>
-
 
     <script>
         $('#client-select').change(function () {

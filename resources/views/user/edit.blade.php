@@ -10,7 +10,6 @@
                                 <div class="card">
                                     <div class="card-header ">
                                         <h5 class="card-subtitle text-center">{{ Auth::user()->fio }}
-                                            {{--<span class="badge badge-info">{{ Auth::user()->login }}</span>--}}
                                         </h5>
                                     </div>
                                     <div class="card-body">
@@ -18,7 +17,7 @@
                                              class="account-profile-avatar"
                                              alt="">
                                         <p class="text-center mb-0"><span
-                                                class="badge badge-pill">{{ Auth::user()->position }}</span></p>
+                                                    class="badge badge-pill">{{ Auth::user()->position }}</span></p>
                                     </div>
                                 </div>
                                 <div class="card">
@@ -259,27 +258,53 @@
                                              aria-labelledby="nav-home-tab"
                                              style="max-height: 550px; overflow-y: scroll; overflow-x: hidden">
                                             <div class="row">
-                                                @foreach(Auth::user()->todos->where('date', date('Y-m-d'))->sortByDesc('priority') as $todo)
+                                                @foreach(Auth::user()->todos->where('date', date('Y-m-d'))->where('success', false)->sortByDesc('priority') as $todo)
                                                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                                                        <div class="card {{ $todo->success? 'todo-done' : Null }}">
+                                                        <div class="card">
                                                             <div
-                                                                class="card-header card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}-header">
+                                                                    class="card-header card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}-header">
                                                                 <div class="row">
                                                                     <div class="col-6">{{ $todo->name }}</div>
                                                                     <div class="col-6"><span
-                                                                            class="badge badge-light float-right">Задание на {{ $todo->date }}</span>
+                                                                                class="badge badge-light float-right">Задание на {{ $todo->date }}</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <div
-                                                                class="card-body card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}">
+                                                                    class="card-body card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}">
                                                                 <p>{{ $todo->info }}</p>
                                                                 <div class="row">
                                                                     <div class="col-12">
                                                                         <a href="{{ route('todo.update', $todo->id) }}"
-                                                                           class="badge badge-{{ $todo->success? 'dark' : 'success' }} text-center col-12">
-                                                                            {{ $todo->success? 'Восстановить задание' : 'Завершить
-                                                                            задание' }}
+                                                                           class="badge badge-success text-center col-12">
+                                                                            Завершить задание
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                @endforeach
+                                                @foreach(Auth::user()->todos->where('date', date('Y-m-d'))->where('success', true)->sortByDesc('priority') as $todo)
+                                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                        <div class="card todo-done">
+                                                            <div
+                                                                    class="card-header card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}-header">
+                                                                <div class="row">
+                                                                    <div class="col-6"><s>{{ $todo->name }}</s></div>
+                                                                    <div class="col-6"><span
+                                                                                class="badge badge-light float-right">Задание на {{ $todo->date }}</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div
+                                                                    class="card-body card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}">
+                                                                <p><s>{{ $todo->info }}</s></p>
+                                                                <div class="row">
+                                                                    <div class="col-12">
+                                                                        <a href="{{ route('todo.update', $todo->id) }}"
+                                                                           class="badge badge-dark text-center col-12">
+                                                                            Восстановить задание
                                                                         </a>
                                                                     </div>
                                                                 </div>
@@ -293,27 +318,53 @@
                                              aria-labelledby="nav-profile-tab"
                                              style="max-height: 550px; overflow-y: scroll; overflow-x: hidden">
                                             <div class="row">
-                                                @foreach(Auth::user()->todos->where('date', date('Y-m-d', strtotime(date('Y-m-d') . "+1 days")))->sortByDesc('priority') as $todo)
+                                                @foreach(Auth::user()->todos->where('date', date('Y-m-d', strtotime(date('Y-m-d') . "+1 days")))->where('success', false)->sortByDesc('priority') as $todo)
                                                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                                                        <div class="card {{ $todo->success? 'todo-done' : Null }}">
+                                                        <div class="card">
                                                             <div
-                                                                class="card-header card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}-header">
+                                                                    class="card-header card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}-header">
                                                                 <div class="row">
                                                                     <div class="col-6">{{ $todo->name }}</div>
                                                                     <div class="col-6"><span
-                                                                            class="badge badge-light float-right">Задание на {{ $todo->date }}</span>
+                                                                                class="badge badge-light float-right">Задание на {{ $todo->date }}</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <div
-                                                                class="card-body card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}">
+                                                                    class="card-body card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}">
                                                                 <p>{{ $todo->info }}</p>
                                                                 <div class="row">
                                                                     <div class="col-12">
                                                                         <a href="{{ route('todo.update', $todo->id) }}"
-                                                                           class="badge badge-{{ $todo->success? 'dark' : 'success' }} text-center col-12">
-                                                                            {{ $todo->success? 'Восстановить задание' : 'Завершить
-                                                                            задание' }}
+                                                                           class="badge badge-success text-center col-12">
+                                                                            Завершить задание
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                @endforeach
+                                                @foreach(Auth::user()->todos->where('date', date('Y-m-d', strtotime(date('Y-m-d') . "+1 days")))->where('success', false)->sortByDesc('priority') as $todo)
+                                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                        <div class="card todo-done">
+                                                            <div
+                                                                    class="card-header card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}-header">
+                                                                <div class="row">
+                                                                    <div class="col-6"><s>{{ $todo->name }}</s></div>
+                                                                    <div class="col-6"><span
+                                                                                class="badge badge-light float-right">Задание на {{ $todo->date }}</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div
+                                                                    class="card-body card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}">
+                                                                <p><s>{{ $todo->info }}</s></p>
+                                                                <div class="row">
+                                                                    <div class="col-12">
+                                                                        <a href="{{ route('todo.update', $todo->id) }}"
+                                                                           class="badge badge-dark text-center col-12">
+                                                                            Восстановить задание
                                                                         </a>
                                                                     </div>
                                                                 </div>
@@ -327,27 +378,53 @@
                                              aria-labelledby="nav-contact-tab"
                                              style="max-height: 550px; overflow-y: scroll; overflow-x: hidden">
                                             <div class="row">
-                                                @foreach(Auth::user()->todos->where('date', '>=', date('Y-m-d'))->where('date', '<=', date('Y-m-d', strtotime(date('Y-m-d') . "+7 days")))->sortByDesc('priority') as $todo)
+                                                @foreach(Auth::user()->todos->where('date', '>=', date('Y-m-d'))->where('date', '<=', date('Y-m-d', strtotime(date('Y-m-d') . "+7 days")))->where('success', false)->sortByDesc('priority') as $todo)
                                                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                                                        <div class="card {{ $todo->success? 'todo-done' : Null }}">
+                                                        <div class="card">
                                                             <div
-                                                                class="card-header card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}-header">
+                                                                    class="card-header card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}-header">
                                                                 <div class="row">
                                                                     <div class="col-6">{{ $todo->name }}</div>
                                                                     <div class="col-6"><span
-                                                                            class="badge badge-light float-right">Задание на {{ $todo->date }}</span>
+                                                                                class="badge badge-light float-right">Задание на {{ $todo->date }}</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <div
-                                                                class="card-body card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}">
+                                                                    class="card-body card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}">
                                                                 <p>{{ $todo->info }}</p>
                                                                 <div class="row">
                                                                     <div class="col-12">
                                                                         <a href="{{ route('todo.update', $todo->id) }}"
-                                                                           class="badge badge-{{ $todo->success? 'dark' : 'success' }} text-center col-12">
-                                                                            {{ $todo->success? 'Восстановить задание' : 'Завершить
-                                                                            задание' }}
+                                                                           class="badge badge-success text-center col-12">
+                                                                            Завершить задание
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                @endforeach
+                                                @foreach(Auth::user()->todos->where('date', '>=', date('Y-m-d'))->where('date', '<=', date('Y-m-d', strtotime(date('Y-m-d') . "+7 days")))->where('success', true)->sortByDesc('priority') as $todo)
+                                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                        <div class="card todo-done">
+                                                            <div
+                                                                    class="card-header card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}-header">
+                                                                <div class="row">
+                                                                    <div class="col-6"><s>{{ $todo->name }}</s></div>
+                                                                    <div class="col-6"><span
+                                                                                class="badge badge-light float-right">Задание на {{ $todo->date }}</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div
+                                                                    class="card-body card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}">
+                                                                <p><s>{{ $todo->info }}</s></p>
+                                                                <div class="row">
+                                                                    <div class="col-12">
+                                                                        <a href="{{ route('todo.update', $todo->id) }}"
+                                                                           class="badge badge-dark text-center col-12">
+                                                                            Восстановить задание
                                                                         </a>
                                                                     </div>
                                                                 </div>

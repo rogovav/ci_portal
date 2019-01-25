@@ -38,10 +38,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/group/new_comment', 'GroupPostController@add_comment');
 
     Route::get('/missions', 'MissionController@index')->name('mission.index');
-    Route::get('/mission/{id}', 'MissionController@show')->name('mission.show');
     Route::post('/missions', 'MissionController@store')->name('mission.store');
     Route::get('/mission/{id}', 'MissionController@show')->name('mission.show');
     Route::post('/mission/{id}', 'MissionController@update')->name('mission.update');
+    Route::post('/mission/comment/{id}', 'MissionController@storeComment')->name('mission.storeComment');
 
     Route::get('/users', 'UserController@index');
     Route::get('/user/{id}', 'UserController@edit')->name('user.edit');
