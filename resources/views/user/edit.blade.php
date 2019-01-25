@@ -113,7 +113,8 @@
                                                             <div class="progress">
                                                                 <div class="progress-bar bg-success" role="progressbar"
                                                                      style="width: 20%" aria-valuenow="25"
-                                                                     aria-valuemin="0" aria-valuemax="100"></div>
+                                                                     aria-valuemin="0"
+                                                                     aria-valuemax="100"></div>
                                                             </div>
                                                             <div class="row">
                                                                 <div class="col-12">
