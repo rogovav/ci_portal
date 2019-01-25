@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMissionFilesTable extends Migration
+class CreateMissionCommentFilesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateMissionFilesTable extends Migration
      */
     public function up()
     {
-        Schema::create('mission_files', function (Blueprint $table) {
+        Schema::create('mission_comment_files', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('comment_id');
             $table->string('name');
             $table->string('original');
-            $table->integer('mission_id')->unsigned();
-            $table->foreign('mission_id')->references('id')->on('missions')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -30,9 +29,6 @@ class CreateMissionFilesTable extends Migration
      */
     public function down()
     {
-        Schema::table('mission_files', function (Blueprint $table) {
-            $table->dropForeign('mission_files_mission_id_foreign');
-        });
-        Schema::dropIfExists('mission_files');
+        Schema::dropIfExists('mission_comment_files');
     }
 }

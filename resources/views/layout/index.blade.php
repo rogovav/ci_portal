@@ -100,10 +100,10 @@
                         <div class="card-body-label card-task"><a href="{{ route('user.edit', Auth::id()) }}"><i
                                     class="fas fa-tag fa-3x"></i></a></div>
                         <div class="card-body-text"><span>Заданий</span><br><span
-                                class="real-time-counter">{{ Auth::user()->todos->count() }}</span>
+                                class="real-time-counter">{{ Auth::user()->todos->where('date', '>=', date('Y-m-d'))->where('date', '<=', date('Y-m-d', strtotime(date('Y-m-d') . "+7 days")))->where('success', false)->count() }}</span>
                             <hr>
                             <span
-                                class="real-time-counter-user">{{ Auth::user()->todos->where('date', date('Y-m-d'))->count() }}</span>
+                                class="real-time-counter-user">{{ Auth::user()->todos->where('date', date('Y-m-d'))->where('success', false)->count() }}</span>
                             <span> на сегодня</span>
                         </div>
                     </div>

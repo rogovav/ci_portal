@@ -12,7 +12,7 @@
                             <span class="badge badge-info">{{ $mission->created_at }}</span> {{-- Вт, 22-го янв., 13:22:44 --}}
                         </div>
                         <div class="col-4 text-center ">
-                            <span class="badge badge-success"><i class="far fa-calendar{{ $mission->status == 1? Null : ($mission->status == 2? '-minus' : '-check') }}"></i> {{ $status[$mission->status] }} </span>
+                            <span class="badge badge-success"><i class="far fa-calendar{{ $per > 100? '-times' : ($mission->status == 1? Null : ($mission->status == 2? '-minus' : '-check')) }}"></i> {{ $status[$mission->status] }} </span>
                         </div>
                         <div class="col-4 text-right ">
                             <span class="badge badge-info">{{ $mission->date_to }}</span>
@@ -28,8 +28,18 @@
                     </div>
                 </div>
                 <div class="col-2">
-                    <button type="button" class="btn btn-secondary btn-sm col-6 float-right">Выполнить
-                    </button>
+                    @switch($mission->status)
+                        @case(1)
+                            <button type="button" class="btn btn-secondary btn-sm float-right">Выполнить</button>
+                            @break
+                        @case(2)
+                            <span class="badge badge-warning float-right">На проверке</span>
+                            @break
+                        @case(3)
+                            <span class="badge badge-success float-right">Выполнена</span>
+                            @break
+                    @endswitch
+
                 </div>
             </div>
         </div>
@@ -75,11 +85,11 @@
                                     <div class="row">
                                         @foreach($mission->files as $file)
                                         <div class="col-1">
-                                            <a href="{{ asset('storage/missions/' . $file->name) }}" class="black-file" download
+                                            <a href="{{ asset('storage/missions/' . $file->name) }}" class="black-file" download="{{ $file->original }}"
                                                data-container="body" data-trigger="hover"
                                                data-toggle="popover"
                                                data-placement="bottom"
-                                               data-content="{{ $file->name }}">
+                                               data-content="{{ $file->original }}">
                                                 <i class="far fa-2x fa-file"></i>
                                             </a>
                                         </div>
@@ -199,75 +209,52 @@
                                                 <div id="sohbet"
                                                      class="card border-0 m-0 p-0 position-relative bg-transparent"
                                                      style="overflow-y: scroll;">
-                                                    <div class="balon1 p-2 m-0 position-relative"
-                                                         data-is="You - 3:20 pm">
-                                                        <a class="float-right mb-1"> Hey there! What's up? </a>
-                                                        <div
-                                                            class="float-right col-12 mt-1 media-attachment-right-doc ma-right">
-                                                            <div class="avatar bg-primary float-right col-2">
-                                                                <i class="material-icons">insert_drive_file</i>
+                                                    @foreach($mission->comments as $comment)
+                                                        @if($comment->user_id == Auth::id())
+                                                            <div class="balon1 p-2 m-0 position-relative"
+                                                                 data-is="Вы - {{ $comment->created_at->format('H:i') }}">
+                                                                <a class="float-right mb-1"> {{ $comment->info }} </a>
+                                                                @foreach($comment->files as $file)
+                                                                <div
+                                                                        class="float-right col-12 mt-1 media-attachment-right-doc ma-right">
+                                                                    <div class="avatar bg-primary float-right col-2">
+                                                                        <i class="material-icons">insert_drive_file</i>
+                                                                    </div>
+                                                                    <div class=" media-body float-right col-10 pt-1 pr-2">
+                                                                        <a href="{{ asset('storage/comments/' . $file->name) }}" data-filter-by="text"
+                                                                           class="A-filter-by-text float-right text-right" download="{{ $file->original }}">{{ $file->original }}</a>
+                                                                    </div>
+                                                                </div>
+                                                                @endforeach
                                                             </div>
-                                                            <div class="media-body float-right col-10 pt-1 pr-2">
-                                                                <a href="#" data-filter-by="text"
-                                                                   class="A-filter-by-text float-right">Документ
-                                                                    к заявке.doc</a>
-                                                                <br>
-                                                                <span data-filter-by="text"
-                                                                      class="SPAN-filter-by-text float-right">24kb Document</span>
+                                                        @else
+                                                            <div class="balon2 p-2 m-0 position-relative"
+                                                                 data-is="{{ $comment->user->fio }} - {{ $comment->created_at->format('H:i') }}">
+                                                                <a class="float-left mb-1"> {{ $comment->info }} </a>
                                                             </div>
-                                                        </div>
-                                                        <div
-                                                            class="float-right col-12 mt-1 media-attachment-right-doc">
-                                                            <div
-                                                                class="avatar bg-primary bg-primary float-right col-2">
-                                                                <i class="material-icons">insert_drive_file</i>
-                                                            </div>
-                                                            <div class="media-body float-right col-10 pt-1 pr-2">
-                                                                <a href="#" data-filter-by="text"
-                                                                   class="A-filter-by-text float-right">документ.pdf</a>
-                                                                <br>
-                                                                <span data-filter-by="text"
-                                                                      class="SPAN-filter-by-text float-right">24kb Document</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="balon2 p-2 m-0 position-relative"
-                                                         data-is="Yusuf - 3:22 pm">
-                                                        <a class="float-left sohbet2"> Checking out iOS7 you
-                                                            know.. </a>
-                                                        <div
-                                                            class="float-left col-12 mt-1 media-attachment-left-doc">
-                                                            <div class="avatar bg-primary float-left col-2">
-                                                                <i class="material-icons">insert_drive_file</i>
-                                                            </div>
-                                                            <div class="media-body float-left col-10 pt-1 pl-2">
-                                                                <a href="#" data-filter-by="text"
-                                                                   class="A-filter-by-text">Документ к заявке.doc</a>
-                                                                <span data-filter-by="text" class="SPAN-filter-by-text">24kb Document</span>
-                                                            </div>
-                                                        </div>
-                                                        <div
-                                                            class="float-left col-12 mt-1 media-attachment-left-doc">
-                                                            <div
-                                                                class="avatar bg-primary float-left col-2">
-                                                                <i class="material-icons">insert_drive_file</i>
-                                                            </div>
-                                                            <div class="media-body float-left col-10 pt-1 pl-2">
-                                                                <a href="#" data-filter-by="text"
-                                                                   class="A-filter-by-text">картинка.img</a>
-                                                                <span data-filter-by="text" class="SPAN-filter-by-text">24kb Document</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                            @foreach($comment->files as $file)
+                                                                <div
+                                                                        class="float-right col-12 mt-1 media-attachment-left-doc ma-right">
+                                                                    <div class="avatar bg-primary float-left col-2">
+                                                                        <i class="material-icons">insert_drive_file</i>
+                                                                    </div>
+                                                                    <div class="media-body float-left col-10 pt-1 pr-2 ml-1">
+                                                                        <a href="{{ asset('storage/comments/' . $file->name) }}" data-filter-by="text"
+                                                                           class="A-filter-by-text" download="{{ $file->original }}">{{ $file->original }}</a>
+                                                                    </div>
+                                                                </div>
+                                                            @endforeach
+                                                        @endif
+                                                    @endforeach
                                                     <div
                                                         class="w-100 card-footer mt-2">
-                                                        <form class="m-0 p-0" action="" method="POST"
-                                                              autocomplete="off">
+                                                        <form class="m-0 p-0" action="{{ route('mission.storeComment', $mission->id) }}" method="POST" autocomplete="off" enctype="multipart/form-data">
+                                                            {{ csrf_field() }}
                                                             <div class="row m-0 p-0">
                                                                 <div class="input-group">
                                                                     <input id="text"
                                                                            class="mw-100 border rounded form-control"
-                                                                           type="text" name="text"
+                                                                           type="text" name="info"
                                                                            title="Ваше сообщение..."
                                                                            placeholder="Ваше сообщение..." required>
                                                                     <div class="input-group-append ml-1">
@@ -281,7 +268,7 @@
                                                                         <div class="custom-file float-right">
                                                                             <input type="file"
                                                                                    class="custom-file-input d-none"
-                                                                                   id="customFile" multiple>
+                                                                                   id="customFile" name="commentFiles[]" multiple>
                                                                             <label
                                                                                 class="btn btn-outline-secondary rounded border"
                                                                                 for="customFile">

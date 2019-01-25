@@ -40,4 +40,9 @@ class Mission extends Model
     {
         return $this->hasMany('App\MissionFile');
     }
+
+    public function comments()
+    {
+        return $this->hasMany('App\MissionComment');
+    }
 }

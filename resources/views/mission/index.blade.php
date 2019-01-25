@@ -62,6 +62,7 @@
                                 <div class="form-group">
                                     <select class="custom-select" name="subject" id="choose-topic">
                                         <option selected value="">Тема</option>
+                                        <option value="-1">Другое</option>
                                         @foreach($subjects as $subject)
                                             <option value="{{ $subject->id }}">{{ $subject->name }}</option>
                                         @endforeach

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Building;
 use App\Client;
 use App\Mission;
+use App\MissionComment;
+use App\MissionCommentFile;
 use App\MissionFile;
 use App\Subject;
 use App\User;
@@ -62,12 +64,47 @@ class MissionController extends Controller
 
         foreach ($request->file('files') as $file)
         {
-            $fileName = $mission->id . '_' . $file->getClientOriginalName();
+            $original = $file->getClientOriginalName();
+            $fileName = $mission->id . '_' . $original;
+
             $file->storeAs('public/missions', $fileName);
-            MissionFile::create(['name' => $fileName, 'mission_id' => $mission->id]);
+
+            MissionFile::create([
+                'name'       => $fileName,
+                'original'   => $original,
+                'mission_id' => $mission->id
+            ]);
         }
 
         $mission->helpers()->sync($request->helper);
+
+        return redirect()->back();
+    }
+
+    public function storeComment(Request $request, $id)
+    {
+        $comment = MissionComment::create([
+            'info'       => $request->info,
+            'user_id'    => Auth::id(),
+            'mission_id' => $id,
+        ]);
+
+        if ($request->hasFile('commentFiles'))
+        {
+            foreach ($request->file('commentFiles') as $file)
+            {
+                $original = $file->getClientOriginalName();
+                $fileName = $comment->id . '_' . $original;
+
+                $file->storeAs('public/comments', $fileName);
+
+                MissionCommentFile::create([
+                    'name'       => $fileName,
+                    'original'   => $original,
+                    'comment_id' => $comment->id
+                ]);
+            }
+        }
 
         return redirect()->back();
     }
