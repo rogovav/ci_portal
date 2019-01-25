@@ -4,7 +4,6 @@
     <link rel="stylesheet" href="{{ asset("css/dataTables.bootstrap4.min.css") }}">
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.5/css/bootstrap-select.min.css">
-    {{--<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap4.min.css">--}}
 @endsection
 @section('content')
     <div class="modal fade bd-example-modal-lg" id="ModalCreateUser" tabindex="-1" role="dialog"
@@ -178,7 +177,7 @@
                     <tbody>
                     @foreach($missions as $mission)
                         <tr>
-                            <td>{{ $mission->id }}</td>
+                            <td><a href="{{ route('mission.show', $mission->id) }}">{{ $mission->id }}</a></td>
                             <td>{{ $mission->info }}</td>
                             <td>{{ $mission->from }}</td>
                             <td>{{ $mission->owner->fio }}</td>
