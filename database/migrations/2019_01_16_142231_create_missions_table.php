@@ -25,6 +25,7 @@ class CreateMissionsTable extends Migration
             $table->integer('building_id')->nullable();
             $table->integer('priority')->nullable();
             $table->dateTime('date_to')->nullable();
+            $table->dateTime('date_close')->nullable();
             $table->string('info')->nullable();
             $table->integer('status')->default(1);
             $table->timestamps();

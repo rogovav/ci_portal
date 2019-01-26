@@ -153,7 +153,6 @@
                                                             <th>Номер договора</th>
                                                             <th>Номер телефона</th>
                                                             <th>Email</th>
-                                                            <th>Информация</th>
                                                             <th></th>
                                                             </thead>
                                                             <tbody>
@@ -163,7 +162,6 @@
                                                                     <td>{{ $client->cid }}</td>
                                                                     <td>{{ $client->phone }}</td>
                                                                     <td>{{ $client->mail }}</td>
-                                                                    <td>{{ $client->info }}</td>
                                                                     <td>
                                                                         <button onclick="editClient({{$client}})"
                                                                                 class="btn btn-dark">Изменить
@@ -213,13 +211,6 @@
                                                            placeholder="Email"
                                                            id="client-mail"
 
-                                                    >
-                                                </div>
-                                                <div class="form-group">
-                                                    <input name="info" type="text"
-                                                           class="form-control"
-                                                           placeholder="Информация"
-                                                           id="client-info"
                                                     >
                                                 </div>
                                                 <div class="form-row">

@@ -10,6 +10,7 @@ use App\MissionCommentFile;
 use App\MissionFile;
 use App\Subject;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -27,7 +28,7 @@ class MissionController extends Controller
     {
         $buildings = Building::orderBy('name')->get();
         $clients   = Client::orderBy('fio')->get();
-        $missions  = Mission::all();
+        $missions  = Mission::orderBy('id', 'DESC')->get();
         $subjects  = Subject::orderBy('name')->get();
         $users     = User::orderBy('fio')->get();
 
@@ -37,10 +38,15 @@ class MissionController extends Controller
     public function show($id)
     {
         $mission = Mission::findOrFail($id);
-        $from = $this->from;
-        $status = $this->status;
-        $per = (strtotime("now") - strtotime($mission->created_at))/(strtotime($mission->date_to) - strtotime($mission->created_at)) * 100;
-        $users     = User::orderBy('fio')->get();
+        $users   = User::orderBy('fio')->get();
+        $from    = $this->from;
+        $status  = $this->status;
+        if (strtotime("now") > strtotime($mission->date_to))
+        {
+            $per = 100;
+        } else {
+            $per = (($mission->date_close ? strtotime($mission->date_close) : strtotime("now")) - strtotime($mission->created_at))/(strtotime($mission->date_to) - strtotime($mission->created_at)) * 100;
+        }
 
         return view('mission.show', compact('mission', 'from', 'status', 'per', 'users'));
     }
@@ -79,6 +85,52 @@ class MissionController extends Controller
         }
 
         $mission->helpers()->sync($request->helper);
+
+        return redirect()->back();
+    }
+
+    public function update(Request $request, $id)
+    {
+        $mission = Mission::findOrFail($id);
+        if (isset($request->status))
+        {
+            $mission->status = $request->status;
+
+            if($request->status == 3)
+            {
+                MissionComment::create([
+                    'info'       => $request->status_info != ''? "Заявка закрыта. Комментарий: " . $request->status_info : 'Заявка закрыта.',
+                    'user_id'    => Auth::id(),
+                    'mission_id' => $id,
+                ]);
+
+                $mission->date_close = Carbon::now();
+            }
+            if($request->status == 2)
+            {
+                MissionComment::create([
+                    'info'       => 'Отправлена на подтверждение закрытия.',
+                    'user_id'    => Auth::id(),
+                    'mission_id' => $id,
+                ]);
+            }
+            if($request->status == 1)
+            {
+                MissionComment::create([
+                    'info'       => $request->status_info != ''? 'Закрытие отменено по причине: ' . $request->status_info : 'Закрытие отменено без указания причины.',
+                    'user_id'    => Auth::id(),
+                    'mission_id' => $id,
+                ]);
+            }
+
+        }
+
+        if (isset($request->date_to))
+        {
+            $mission->date_to = $request->date_to;
+        }
+
+        $mission->save();
 
         return redirect()->back();
     }

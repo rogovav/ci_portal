@@ -69,5 +69,10 @@ class User extends Authenticatable
         return $this->hasMany('App\Todo');
     }
 
+    public function mission_helper()
+    {
+        return $this->belongsToMany('App\Mission', 'helper_mission')->withTimestamps();
+    }
+
 
 }

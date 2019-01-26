@@ -169,7 +169,6 @@
                         <th>Исполнитель</th>
                         <th>Тема</th>
                         <th>Клиент</th>
-                        <th>Дата начала</th>
                         <th>Deadline</th>
                     </tr>
                     </thead>
@@ -183,7 +182,6 @@
                             <td>{{ $mission->worker->fio }}</td>
                             <td>{{ $mission->subject->name }}</td>
                             <td>{{ $mission->client->fio }}</td>
-                            <td>{{ $mission->date_from }}</td>
                             <td>{{ $mission->date_to }}</td>
                         </tr>
                     @endforeach

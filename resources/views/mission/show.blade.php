@@ -16,11 +16,11 @@
                     <div class="row mb-1">
                         <div class="col-4 text-left">
                             <span
-                                class="badge badge-info">{{ $mission->created_at }}</span> {{-- Вт, 22-го янв., 13:22:44 --}}
+                                    class="badge badge-info">{{ $mission->created_at }}</span> {{-- Вт, 22-го янв., 13:22:44 --}}
                         </div>
                         <div class="col-4 text-center ">
                             <span class="badge badge-success"><i
-                                    class="far fa-calendar{{ $per > 100? '-times' : ($mission->status == 1? Null : ($mission->status == 2? '-minus' : '-check')) }}"></i> {{ $status[$mission->status] }} </span>
+                                        class="far fa-calendar{{ $per == 100? '-times' : ($mission->status == 1? Null : ($mission->status == 2? '-minus' : '-check')) }}"></i> {{ $status[$mission->status] }} </span>
                         </div>
                         <div class="col-4 text-right ">
                             <span class="badge badge-info">{{ $mission->date_to }}</span>
@@ -28,10 +28,10 @@
                     </div>
                     <div class="progress">
                         <div
-                            class="progress-bar progress-bar-striped progress-bar-animated {{ $per < 50? 'bg-primary' : ($per < 75? 'bg-warning' : 'bg-danger') }}"
-                            role="progressbar"
-                            style="width: {{ $per }}%" aria-valuenow="10" aria-valuemin="0"
-                            aria-valuemax="100">
+                                class="progress-bar progress-bar-striped progress-bar-animated {{ $per < 50? 'bg-primary' : ($per < 75? 'bg-warning' : 'bg-danger') }}"
+                                role="progressbar"
+                                style="width: {{ $per }}%" aria-valuenow="10" aria-valuemin="0"
+                                aria-valuemax="100">
                             {{--после 50%--}}
                         </div>
                     </div>
@@ -39,16 +39,24 @@
                 <div class="col-2">
                     @switch($mission->status)
                         @case(1)
-                        <button type="button" class="btn btn-secondary btn-sm float-right">Выполнить</button>
-                        @break
+                            @if($mission->worker == Auth::user())
+                            <form action="{{ route('mission.update', $mission->id) }}" method="post">
+                                {{ csrf_field() }}
+                                <button type="submit" class="btn btn-secondary btn-sm float-right" value="2" name="status">
+                                    Выполнить
+                                </button>
+                            </form>
+                            @else
+                                <span class="badge badge-secondary float-right">В работе</span>
+                            @endif
+                            @break
                         @case(2)
-                        <span class="badge badge-warning float-right">На проверке</span>
-                        @break
+                            <span class="badge badge-warning float-right">На проверке</span>
+                            @break
                         @case(3)
-                        <span class="badge badge-success float-right">Выполнена</span>
-                        @break
+                            <span class="badge badge-success float-right">Выполнена {{ $mission->date_close }}</span>
+                            @break
                     @endswitch
-
                 </div>
             </div>
         </div>
@@ -110,18 +118,28 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card-footer">
+                        @if($mission->status != 3 and $mission->owner == Auth::user())
+                            <div class="card-footer">
                             <div class="row">
                                 <div class="col-4">
                                     <button type="button" class="btn btn-info btn-sm col-12" id="rewrite_button">
                                         Переадресовать заявку
                                     </button>
                                 </div>
-                                <div class="col-4">
-                                    <button type="button" class="btn btn-primary btn-sm col-12" id="ok_button">
-                                        Подтвердить/Отклонить
-                                    </button>
-                                </div>
+                                @if($mission->status == 1)
+                                    <div class="col-4">
+                                        <button type="button" class="btn btn-danger btn-sm col-12" id="ok_button">
+                                            Закрыть заявку
+                                        </button>
+                                    </div>
+                                @endif
+                                @if($mission->status == 2)
+                                    <div class="col-4">
+                                        <button type="button" class="btn btn-primary btn-sm col-12" id="ok_button">
+                                            Подтвердить/Отклонить
+                                        </button>
+                                    </div>
+                                @endif
                                 <div class="col-4">
                                     <button type="button" class="btn btn-warning btn-sm col-12" id="deadline_button">
                                         Изменить Deadline
@@ -129,115 +147,116 @@
                                 </div>
                             </div>
                         </div>
+                        @endif
                     </div>
-                    <div class="card" id="rewrite_mission">
-                        <div class="card-header">
-                            <div class="row">
-                                <div class="col-9">
-                                    Переадресация заявки
-                                </div>
-                                <div class="col-3">
-                                    <button id="rewrite_close" class="float-right close-button">
-                                        <i
-                                            class="material-icons">
-                                            clear
-                                        </i>
-                                    </button>
+                    @if($mission->status != 3 and $mission->owner == Auth::user())
+                        <div class="card" id="rewrite_mission">
+                            <div class="card-header">
+                                <div class="row">
+                                    <div class="col-9">
+                                        Переадресация заявки
+                                    </div>
+                                    <div class="col-3">
+                                        <button id="rewrite_close" class="float-right close-button">
+                                            <i
+                                                    class="material-icons">
+                                                clear
+                                            </i>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="card-body">
-                            <form action="">
-                                <div class="form-group">
+                            <div class="card-body">
+                                <form action="{{ route('mission.update', $mission->id) }}" method="post">
+                                    {{ csrf_field() }}
                                     <select class="user-select form-control" name="worker" title="Исполнитель"
                                             data-live-search="true">
                                         @foreach($users as $user)
                                             <option value="{{ $user->id }}">{{ $user->fio }}</option>
                                         @endforeach
                                     </select>
+                                </form>
+                            </div>
+                            <div class="card-footer">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <button type="submit" class="btn btn-primary col-12">Переадресовать</button>
+                                    </div>
+
                                 </div>
-                                <div class="form-group ">
-                                    <select id="help-select" class="help-select form-control" name="helper[]"
-                                            multiple title="Помощники" data-live-search="true">
-                                        @foreach($users as $user)
-                                            <option value="{{ $user->id }}">{{ $user->fio }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </form>
+                            </div>
                         </div>
-                        <div class="card-footer">
-                            <div class="row">
-                                <div class="col-12">
-                                    <button type="submit" class="btn btn-primary col-12">Переадресовать</button>
+                        <div class="card" id="rewrite_deadline">
+                            <div class="card-header">
+                                <div class="row">
+                                    <div class="col-9">
+                                        Изменение deadline
+                                    </div>
+                                    <div class="col-3">
+                                        <button id="deadline_close" class="float-right close-button">
+                                            <i
+                                                    class="material-icons">
+                                                clear
+                                            </i>
+                                        </button>
+                                    </div>
                                 </div>
+                            </div>
+                            <form action="{{ route('mission.update', $mission->id) }}" method="post">
+                            <div class="card-body">
+
+                                    {{ csrf_field() }}
+                                    <input type="datetime-local" class="form-control"
+                                           value="{{ date('Y-m-d\TH:i:s', strtotime($mission->date_to)) }}" name="date_to">
 
                             </div>
-                        </div>
-                    </div>
-                    <div class="card" id="rewrite_deadline">
-                        <div class="card-header">
-                            <div class="row">
-                                <div class="col-9">
-                                    Изменение deadline
-                                </div>
-                                <div class="col-3">
-                                    <button id="deadline_close" class="float-right close-button">
-                                        <i
-                                            class="material-icons">
-                                            clear
-                                        </i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <form action="">
-                                <input type="datetime-local" class="form-control"
-                                       value="{{ date('Y-m-d\TH:i:s', strtotime($mission->date_to)) }}">
-                            </form>
-                        </div>
-                        <div class="card-footer">
-                            <div class="row">
-                                <div class="col-12">
-                                    <button type="submit" class="btn btn-primary col-12">Изменить</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card" id="ok-form">
-                        <div class="card-header">
-                            <div class="row">
-                                <div class="col-9">
-                                    Подтверждение/отклонение заявки
-                                </div>
-                                <div class="col-3">
-                                    <button id="ok_close" class="float-right close-button">
-                                        <i
-                                            class="material-icons">
-                                            clear
-                                        </i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <form action="">
-                                <div class="form-group">
-                                    <input type="text" class="form-control"
-                                           placeholder="Комментарий/причина отклонения">
-                                </div>
-                                <div class="form-row">
-                                    <div class="col">
-                                        <button class="col-12 btn btn-success" value="3">Подтвердить</button>
-                                    </div>
-                                    <div class="col">
-                                        <button class="col-12 btn btn-danger" value="1">Отклонить</button>
+                            <div class="card-footer">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <button type="submit" class="btn btn-primary col-12">Изменить</button>
                                     </div>
                                 </div>
+                            </div>
                             </form>
                         </div>
-                    </div>
+                        <div class="card" id="ok-form">
+                            <div class="card-header">
+                                <div class="row">
+                                    <div class="col-9">
+                                        {{ $mission->status == 1? 'Закрытие заявки' : 'Подтверждение/отклонение закрытия' }}
+                                    </div>
+                                    <div class="col-3">
+                                        <button id="ok_close" class="float-right close-button">
+                                            <i class="material-icons">clear</i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <form action="{{ route('mission.update', $mission->id) }}" method="post">
+                                    {{ csrf_field() }}
+                                    <div class="form-group">
+                                        <input type="text" class="form-control"
+                                               placeholder="Комментарий/причина отклонения" name="status_info">
+                                    </div>
+                                    <div class="form-row">
+                                        @if($mission->status == 1)
+                                            <div class="col">
+                                                <button class="col-12 btn btn-success" value="3" name="status">Закрыть заявку</button>
+                                            </div>
+                                        @else
+                                            <div class="col">
+                                                <button class="col-12 btn btn-success" value="3" name="status">Подтвердить</button>
+                                            </div>
+                                            <div class="col">
+                                                <button class="col-12 btn btn-danger" value="1" name="status">Отклонить</button>
+                                            </div>
+                                        @endif
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    @endif
                 </div>
                 <div class="col-6">
                     <div class="row">
@@ -261,7 +280,7 @@
                                                                  data-container="body" data-trigger="hover"
                                                                  data-toggle="popover"
                                                                  data-placement="bottom"
-                                                                 data-content="Автор"
+                                                                 data-content="{{ $mission->owner->fio }}"
                                                                  src="{{ asset('images/avatars/users/' . $mission->owner->avatar ) }}"
                                                                  alt="">
                                                         </div>
@@ -282,7 +301,7 @@
                                                                  data-container="body" data-trigger="hover"
                                                                  data-toggle="popover"
                                                                  data-placement="bottom"
-                                                                 data-content="Исполнитель"
+                                                                 data-content="{{ $mission->worker->fio }}"
                                                                  src="{{ asset('images/avatars/users/' . $mission->worker->avatar ) }}"
                                                                  alt="">
                                                         </div>
@@ -298,12 +317,12 @@
                                                 <div class="card-body card-priority-low">
                                                     <div class="row">
                                                         @foreach($mission->helpers as $helper)
-                                                            <div class="col-1">
+                                                            <div class="col-3">
                                                                 <img class="users-helpers-img"
                                                                      data-container="body" data-trigger="hover"
                                                                      data-toggle="popover"
                                                                      data-placement="bottom"
-                                                                     data-content="Помощник 1"
+                                                                     data-content="{{ $helper->fio }}"
                                                                      src="{{ asset('images/avatars/users/' . $helper->avatar ) }}"
                                                                      alt="">
                                                             </div>
@@ -333,17 +352,17 @@
                                                     @foreach($mission->comments as $comment)
                                                         @if($comment->user_id == Auth::id())
                                                             <div class="balon1 p-2 m-0 position-relative"
-                                                                 data-is="Вы - {{ $comment->created_at->format('H:i') }}">
+                                                                 data-is="Вы - {{ $comment->created_at->format('d M Y H:i') }}">
                                                                 <a class="float-right mb-1"> {{ $comment->info }} </a>
                                                                 @foreach($comment->files as $file)
                                                                     <div
-                                                                        class="float-right col-12 mt-1 media-attachment-right-doc ma-right">
+                                                                            class="float-right col-12 mt-1 media-attachment-right-doc ma-right">
                                                                         <div
-                                                                            class="avatar bg-primary float-right col-2">
+                                                                                class="avatar bg-primary float-right col-2">
                                                                             <i class="material-icons">insert_drive_file</i>
                                                                         </div>
                                                                         <div
-                                                                            class=" media-body float-right col-10 pt-1 pr-2">
+                                                                                class=" media-body float-right col-10 pt-1 pr-2">
                                                                             <a href="{{ asset('storage/comments/' . $file->name) }}"
                                                                                data-filter-by="text"
                                                                                class="A-filter-by-text float-right text-right"
@@ -359,12 +378,12 @@
                                                             </div>
                                                             @foreach($comment->files as $file)
                                                                 <div
-                                                                    class="float-right col-12 mt-1 media-attachment-left-doc ma-right">
+                                                                        class="float-right col-12 mt-1 media-attachment-left-doc ma-right">
                                                                     <div class="avatar bg-primary float-left col-2">
                                                                         <i class="material-icons">insert_drive_file</i>
                                                                     </div>
                                                                     <div
-                                                                        class="media-body float-left col-10 pt-1 pr-2 ml-1">
+                                                                            class="media-body float-left col-10 pt-1 pr-2 ml-1">
                                                                         <a href="{{ asset('storage/comments/' . $file->name) }}"
                                                                            data-filter-by="text"
                                                                            class="A-filter-by-text"
@@ -377,7 +396,7 @@
                                                 </div>
                                             </div>
                                             <div
-                                                class="w-100 card-footer mt-2">
+                                                    class="w-100 card-footer mt-2">
                                                 <form class="m-0 p-0"
                                                       action="{{ route('mission.storeComment', $mission->id) }}"
                                                       method="POST" autocomplete="off"
@@ -396,16 +415,16 @@
                                                                         title="Отправить"
                                                                         style="padding-right: 16px;">
                                                                     <i
-                                                                        class="far fa-paper-plane"
-                                                                        aria-hidden="true"></i></button>
+                                                                            class="far fa-paper-plane"
+                                                                            aria-hidden="true"></i></button>
                                                                 <div class="custom-file float-right">
                                                                     <input type="file"
                                                                            class="custom-file-input d-none"
                                                                            id="customFile" name="commentFiles[]"
                                                                            multiple>
                                                                     <label
-                                                                        class="btn btn-outline-secondary rounded border"
-                                                                        for="customFile">
+                                                                            class="btn btn-outline-secondary rounded border"
+                                                                            for="customFile">
                                                                         <i class="fas fa-paperclip"></i>
                                                                         <span id="fileNumber"
                                                                               class="badge badge-light"></span>
@@ -455,6 +474,8 @@
     </script>
 
     <script>
+        $('#sohbet').scrollTop($('#sohbet').prop("scrollHeight"));
+
         $(document).ready(function () {
             $('#rewrite_mission').hide()
             $('#rewrite_deadline').hide()
@@ -486,10 +507,7 @@
     </script>
 
     <script>
-        $(document).ready(function () {
-            $('.help-select').selectpicker();
-            $('.user-select').selectpicker()
-        })
+        $('.user-select').selectpicker()
     </script>
 
     <script>
