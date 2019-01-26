@@ -5,7 +5,7 @@
           href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.5/css/bootstrap-select.min.css">
 @endsection
 @section('content')
-    <div class="modal fade bd-example-modal-lg" id="ModalCreateUser" tabindex="-1" role="dialog"
+    <div class="modal fade bd-example-modal-lg" id="ModalCreateUser" role="dialog"
          aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
@@ -209,7 +209,8 @@
 @section('js')
     <script src="{{ asset("js/jquery.dataTables.js") }}"></script>
     <script src="{{ asset("js/dataTables.bootstrap4.min.js") }}"></script>
-    <script src='https://cloud.tinymce.com/stable/tinymce.min.js'></script>
+    <script
+        src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=ubhq9o4po4p1w2zdmnaepfxsb8h6f4e78gdvggrvli4ho8cs"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap4.min.js"></script>
     <!-- Latest compiled and minified JavaScript -->
@@ -241,7 +242,7 @@
     <script>
         tinymce.init({
             selector: '#comment-user-mission',
-            plugins: 'table',
+            plugins: "table, codesample, image, media"
         });
     </script>
 

@@ -50,11 +50,11 @@
                                     </div>
                                     <div class="card-body">
                                         <a href="" data-toggle="modal" data-target="#exampleModal"><img
-                                                    src="{{ asset('images/avatars/users/' . $user->avatar) }}"
-                                                    class="account-profile-avatar"
-                                                    alt=""></a>
+                                                src="{{ asset('images/avatars/users/' . $user->avatar) }}"
+                                                class="account-profile-avatar"
+                                                alt=""></a>
                                         <p class="text-center mb-0"><span
-                                                    class="badge badge-pill">{{ $user->position }}</span></p>
+                                                class="badge badge-pill">{{ $user->position }}</span></p>
                                     </div>
                                 </div>
                                 <div class="card">
@@ -128,18 +128,21 @@
                                                                             $per = (($mission->date_close ? strtotime($mission->date_close) : strtotime("now")) - strtotime($mission->created_at))/(strtotime($mission->date_to) - strtotime($mission->created_at)) * 100;
                                                                         }
                                                                     @endphp
-                                                                    <div class="progress-bar {{ $per < 50? 'bg-primary' : ($per < 75? 'bg-warning' : 'bg-danger') }}"
-                                                                         role="progressbar"
-                                                                         style="width: {{ $per }}%"
-                                                                         aria-valuemin="0"
-                                                                         aria-valuemax="100"></div>
+                                                                    <div
+                                                                        class="progress-bar {{ $per < 50? 'bg-primary' : ($per < 75? 'bg-warning' : 'bg-danger') }}"
+                                                                        role="progressbar"
+                                                                        style="width: {{ $per }}%"
+                                                                        aria-valuemin="0"
+                                                                        aria-valuemax="100"></div>
                                                                 </div>
                                                                 <div class="row">
                                                                     <div class="col-12">
                                                                         <table class="table table-sm mb-0">
                                                                             <tbody>
                                                                             <tr>
-                                                                                <td width="10%">#{{ $mission->id }}</td>
+                                                                                <td width="10%"><a
+                                                                                        href="{{ route('mission.show', $mission->id) }}">#{{ $mission->id }}</a>
+                                                                                </td>
                                                                                 <td width="30%">{{ $mission->subject->name }}</td>
                                                                                 <td>{!! str_limit($mission->info, 100) !!}
                                                                                 </td>
@@ -181,18 +184,21 @@
                                                                             $per = (($mission->date_close ? strtotime($mission->date_close) : strtotime("now")) - strtotime($mission->created_at))/(strtotime($mission->date_to) - strtotime($mission->created_at)) * 100;
                                                                         }
                                                                     @endphp
-                                                                    <div class="progress-bar {{ $per < 50? 'bg-primary' : ($per < 75? 'bg-warning' : 'bg-danger') }}"
-                                                                         role="progressbar"
-                                                                         style="width: {{ $per }}%"
-                                                                         aria-valuemin="0"
-                                                                         aria-valuemax="100"></div>
+                                                                    <div
+                                                                        class="progress-bar {{ $per < 50? 'bg-primary' : ($per < 75? 'bg-warning' : 'bg-danger') }}"
+                                                                        role="progressbar"
+                                                                        style="width: {{ $per }}%"
+                                                                        aria-valuemin="0"
+                                                                        aria-valuemax="100"></div>
                                                                 </div>
                                                                 <div class="row">
                                                                     <div class="col-12">
                                                                         <table class="table table-sm mb-0">
                                                                             <tbody>
                                                                             <tr>
-                                                                                <td width="10%">#{{ $mission->id }}</td>
+                                                                                <td width="10%"><a
+                                                                                        href="{{ route('mission.show', $mission->id) }}">#{{ $mission->id }}</a>
+                                                                                </td>
                                                                                 <td width="30%">{{ $mission->subject->name }}</td>
                                                                                 <td>{!! str_limit($mission->info, 100) !!}
                                                                                 </td>
@@ -234,18 +240,21 @@
                                                                             $per = (($mission->date_close ? strtotime($mission->date_close) : strtotime("now")) - strtotime($mission->created_at))/(strtotime($mission->date_to) - strtotime($mission->created_at)) * 100;
                                                                         }
                                                                     @endphp
-                                                                    <div class="progress-bar {{ $per < 50? 'bg-primary' : ($per < 75? 'bg-warning' : 'bg-danger') }}"
-                                                                         role="progressbar"
-                                                                         style="width: {{ $per }}%"
-                                                                         aria-valuemin="0"
-                                                                         aria-valuemax="100"></div>
+                                                                    <div
+                                                                        class="progress-bar {{ $per < 50? 'bg-primary' : ($per < 75? 'bg-warning' : 'bg-danger') }}"
+                                                                        role="progressbar"
+                                                                        style="width: {{ $per }}%"
+                                                                        aria-valuemin="0"
+                                                                        aria-valuemax="100"></div>
                                                                 </div>
                                                                 <div class="row">
                                                                     <div class="col-12">
                                                                         <table class="table table-sm mb-0">
                                                                             <tbody>
                                                                             <tr>
-                                                                                <td width="10%">#{{ $mission->id }}</td>
+                                                                                <td width="10%"><a
+                                                                                        href="{{ route('mission.show', $mission->id) }}">#{{ $mission->id }}</a>
+                                                                                </td>
                                                                                 <td width="30%">{{ $mission->subject->name }}</td>
                                                                                 <td>{!! str_limit($mission->info, 100) !!}
                                                                                 </td>
@@ -352,16 +361,16 @@
                                                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                                                         <div class="card">
                                                             <div
-                                                                    class="card-header card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}-header">
+                                                                class="card-header card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}-header">
                                                                 <div class="row">
                                                                     <div class="col-6">{{ $todo->name }}</div>
                                                                     <div class="col-6"><span
-                                                                                class="badge badge-light float-right">Задание на {{ $todo->date }}</span>
+                                                                            class="badge badge-light float-right">Задание на {{ $todo->date }}</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <div
-                                                                    class="card-body card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}">
+                                                                class="card-body card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}">
                                                                 <p>{{ $todo->info }}</p>
                                                                 <div class="row">
                                                                     <div class="col-12">
@@ -379,16 +388,16 @@
                                                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                                                         <div class="card todo-done">
                                                             <div
-                                                                    class="card-header card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}-header">
+                                                                class="card-header card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}-header">
                                                                 <div class="row">
                                                                     <div class="col-6"><s>{{ $todo->name }}</s></div>
                                                                     <div class="col-6"><span
-                                                                                class="badge badge-light float-right">Задание на {{ $todo->date }}</span>
+                                                                            class="badge badge-light float-right">Задание на {{ $todo->date }}</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <div
-                                                                    class="card-body card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}">
+                                                                class="card-body card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}">
                                                                 <p><s>{{ $todo->info }}</s></p>
                                                                 <div class="row">
                                                                     <div class="col-12">
@@ -412,16 +421,16 @@
                                                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                                                         <div class="card">
                                                             <div
-                                                                    class="card-header card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}-header">
+                                                                class="card-header card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}-header">
                                                                 <div class="row">
                                                                     <div class="col-6">{{ $todo->name }}</div>
                                                                     <div class="col-6"><span
-                                                                                class="badge badge-light float-right">Задание на {{ $todo->date }}</span>
+                                                                            class="badge badge-light float-right">Задание на {{ $todo->date }}</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <div
-                                                                    class="card-body card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}">
+                                                                class="card-body card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}">
                                                                 <p>{{ $todo->info }}</p>
                                                                 <div class="row">
                                                                     <div class="col-12">
@@ -439,16 +448,16 @@
                                                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                                                         <div class="card todo-done">
                                                             <div
-                                                                    class="card-header card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}-header">
+                                                                class="card-header card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}-header">
                                                                 <div class="row">
                                                                     <div class="col-6"><s>{{ $todo->name }}</s></div>
                                                                     <div class="col-6"><span
-                                                                                class="badge badge-light float-right">Задание на {{ $todo->date }}</span>
+                                                                            class="badge badge-light float-right">Задание на {{ $todo->date }}</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <div
-                                                                    class="card-body card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}">
+                                                                class="card-body card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}">
                                                                 <p><s>{{ $todo->info }}</s></p>
                                                                 <div class="row">
                                                                     <div class="col-12">
@@ -472,16 +481,16 @@
                                                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                                                         <div class="card">
                                                             <div
-                                                                    class="card-header card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}-header">
+                                                                class="card-header card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}-header">
                                                                 <div class="row">
                                                                     <div class="col-6">{{ $todo->name }}</div>
                                                                     <div class="col-6"><span
-                                                                                class="badge badge-light float-right">Задание на {{ $todo->date }}</span>
+                                                                            class="badge badge-light float-right">Задание на {{ $todo->date }}</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <div
-                                                                    class="card-body card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}">
+                                                                class="card-body card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}">
                                                                 <p>{{ $todo->info }}</p>
                                                                 <div class="row">
                                                                     <div class="col-12">
@@ -499,16 +508,16 @@
                                                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                                                         <div class="card todo-done">
                                                             <div
-                                                                    class="card-header card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}-header">
+                                                                class="card-header card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}-header">
                                                                 <div class="row">
                                                                     <div class="col-6"><s>{{ $todo->name }}</s></div>
                                                                     <div class="col-6"><span
-                                                                                class="badge badge-light float-right">Задание на {{ $todo->date }}</span>
+                                                                            class="badge badge-light float-right">Задание на {{ $todo->date }}</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <div
-                                                                    class="card-body card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}">
+                                                                class="card-body card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}">
                                                                 <p><s>{{ $todo->info }}</s></p>
                                                                 <div class="row">
                                                                     <div class="col-12">
