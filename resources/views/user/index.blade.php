@@ -96,7 +96,6 @@
                             <div class="card">
                                 <div class="card-body">
                                     <h5 class="card-subtitle text-center">{{ $user->fio }}
-                                        <span class="badge badge-info">{{ $user->login }}</span>
                                     </h5>
                                     <p class="text-center mb-0">{{ $user->position }}</p>
                                     <p class="text-center"><b>День рождения:</b> {{ $user->birthday }}</p>
