@@ -51,5 +51,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/todo', 'TodoController@store')->name('todo.store');
     Route::get('/todo/{id}', 'TodoController@update')->name('todo.update');
 
+    Route::get('/wiki', function () {
+        return view('wiki.index');
+    });
+
+    Route::get('/wiki/{id}', function () {
+        return view('wiki.show');
+    });
+
     Route::get('/users/api{params?}', 'UserController@api_json');
 });
