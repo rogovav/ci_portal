@@ -1,5 +1,39 @@
 @extends('layout.index')
+@section('css')
+    <link rel="stylesheet" href="{{ asset('css/croppie.css') }}">
+@endsection
 @section('content')
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Изменить фото профиля</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="">
+                        @csrf
+                        <div class="form-group">
+                            <input type="file" id="upload" class="form-control" accept="image/*">
+                        </div>
+                        <div id="main-cropper"></div>
+                        <div class="form-group" id="img-button">
+                            <button id="getImage" type="button" class="btn btn-info">Сохранить выделенную область
+                            </button>
+                        </div>
+                        <input type="text" name="avatar" id="avatar" class="hidden-print">
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary">Сохранить изменения</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="card">
         <div class="card-body">
             <div class="row">
@@ -13,17 +47,17 @@
                                         </h5>
                                     </div>
                                     <div class="card-body">
-                                        <img src="{{ asset('images/avatars/users/' . Auth::user()->avatar) }}"
-                                             class="account-profile-avatar"
-                                             alt="">
+                                        <a href="" data-toggle="modal" data-target="#exampleModal"><img
+                                                src="{{ asset('images/avatars/users/' . Auth::user()->avatar) }}"
+                                                class="account-profile-avatar"
+                                                alt=""></a>
                                         <p class="text-center mb-0"><span
-                                                    class="badge badge-pill">{{ Auth::user()->position }}</span></p>
+                                                class="badge badge-pill">{{ Auth::user()->position }}</span></p>
                                     </div>
                                 </div>
                                 <div class="card">
                                     <div class="card-body">
                                         <table class="table">
-
                                             <tbody>
                                             <tr>
                                                 <td><b>День рождения:</b></td>
@@ -105,6 +139,18 @@
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                        <div class="card-footer">
+                                                            <div class="row">
+                                                                <div class="col-6"><a href="#"
+                                                                                      class="badge badge-light">Рогов
+                                                                        Александр</a>
+                                                                </div>
+                                                                <div class="col-6">
+                                                                    <a href="#" class="badge badge-warning float-right">Ожидает
+                                                                        решения</a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
@@ -130,6 +176,18 @@
                                                                         </tr>
                                                                         </tbody>
                                                                     </table>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="card-footer">
+                                                            <div class="row">
+                                                                <div class="col-6"><a href="#"
+                                                                                      class="badge badge-light">Рогов
+                                                                        Александр</a>
+                                                                </div>
+                                                                <div class="col-6">
+                                                                    <a href="#" class="badge badge-warning float-right">Ожидает
+                                                                        решения</a>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -161,6 +219,18 @@
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                        <div class="card-footer">
+                                                            <div class="row">
+                                                                <div class="col-6"><a href="#"
+                                                                                      class="badge badge-light">Рогов
+                                                                        Александр</a>
+                                                                </div>
+                                                                <div class="col-6">
+                                                                    <a href="#" class="badge badge-info float-right">В
+                                                                        работе</a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -175,9 +245,7 @@
                                              aria-labelledby="nav-help-tab">
                                             <div class="row">
                                                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-6">
-                                                    <div class="card">
 
-                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -262,16 +330,16 @@
                                                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                                                         <div class="card">
                                                             <div
-                                                                    class="card-header card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}-header">
+                                                                class="card-header card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}-header">
                                                                 <div class="row">
                                                                     <div class="col-6">{{ $todo->name }}</div>
                                                                     <div class="col-6"><span
-                                                                                class="badge badge-light float-right">Задание на {{ $todo->date }}</span>
+                                                                            class="badge badge-light float-right">Задание на {{ $todo->date }}</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <div
-                                                                    class="card-body card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}">
+                                                                class="card-body card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}">
                                                                 <p>{{ $todo->info }}</p>
                                                                 <div class="row">
                                                                     <div class="col-12">
@@ -289,16 +357,16 @@
                                                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                                                         <div class="card todo-done">
                                                             <div
-                                                                    class="card-header card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}-header">
+                                                                class="card-header card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}-header">
                                                                 <div class="row">
                                                                     <div class="col-6"><s>{{ $todo->name }}</s></div>
                                                                     <div class="col-6"><span
-                                                                                class="badge badge-light float-right">Задание на {{ $todo->date }}</span>
+                                                                            class="badge badge-light float-right">Задание на {{ $todo->date }}</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <div
-                                                                    class="card-body card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}">
+                                                                class="card-body card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}">
                                                                 <p><s>{{ $todo->info }}</s></p>
                                                                 <div class="row">
                                                                     <div class="col-12">
@@ -322,16 +390,16 @@
                                                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                                                         <div class="card">
                                                             <div
-                                                                    class="card-header card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}-header">
+                                                                class="card-header card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}-header">
                                                                 <div class="row">
                                                                     <div class="col-6">{{ $todo->name }}</div>
                                                                     <div class="col-6"><span
-                                                                                class="badge badge-light float-right">Задание на {{ $todo->date }}</span>
+                                                                            class="badge badge-light float-right">Задание на {{ $todo->date }}</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <div
-                                                                    class="card-body card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}">
+                                                                class="card-body card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}">
                                                                 <p>{{ $todo->info }}</p>
                                                                 <div class="row">
                                                                     <div class="col-12">
@@ -349,16 +417,16 @@
                                                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                                                         <div class="card todo-done">
                                                             <div
-                                                                    class="card-header card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}-header">
+                                                                class="card-header card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}-header">
                                                                 <div class="row">
                                                                     <div class="col-6"><s>{{ $todo->name }}</s></div>
                                                                     <div class="col-6"><span
-                                                                                class="badge badge-light float-right">Задание на {{ $todo->date }}</span>
+                                                                            class="badge badge-light float-right">Задание на {{ $todo->date }}</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <div
-                                                                    class="card-body card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}">
+                                                                class="card-body card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}">
                                                                 <p><s>{{ $todo->info }}</s></p>
                                                                 <div class="row">
                                                                     <div class="col-12">
@@ -382,16 +450,16 @@
                                                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                                                         <div class="card">
                                                             <div
-                                                                    class="card-header card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}-header">
+                                                                class="card-header card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}-header">
                                                                 <div class="row">
                                                                     <div class="col-6">{{ $todo->name }}</div>
                                                                     <div class="col-6"><span
-                                                                                class="badge badge-light float-right">Задание на {{ $todo->date }}</span>
+                                                                            class="badge badge-light float-right">Задание на {{ $todo->date }}</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <div
-                                                                    class="card-body card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}">
+                                                                class="card-body card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}">
                                                                 <p>{{ $todo->info }}</p>
                                                                 <div class="row">
                                                                     <div class="col-12">
@@ -409,16 +477,16 @@
                                                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                                                         <div class="card todo-done">
                                                             <div
-                                                                    class="card-header card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}-header">
+                                                                class="card-header card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}-header">
                                                                 <div class="row">
                                                                     <div class="col-6"><s>{{ $todo->name }}</s></div>
                                                                     <div class="col-6"><span
-                                                                                class="badge badge-light float-right">Задание на {{ $todo->date }}</span>
+                                                                            class="badge badge-light float-right">Задание на {{ $todo->date }}</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <div
-                                                                    class="card-body card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}">
+                                                                class="card-body card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}">
                                                                 <p><s>{{ $todo->info }}</s></p>
                                                                 <div class="row">
                                                                     <div class="col-12">
@@ -446,6 +514,59 @@
 @endsection
 
 @section('js')
+    <script src="{{ asset('js/croppie.js') }}"></script>
+    <script>
+        $(document).ready(function () {
+            if ($('#upload').val() == '') {
+                $('#main-cropper').hide();
+                $('#getImage').hide()
+            }
+        })
+        ///images/avatars/users/cool.jpg
+        var basic = $('#main-cropper').croppie({
+            viewport: {width: 300, height: 300, type: 'square'},
+            boundary: {width: 300, height: 300},
+            showZoomer: false,
+
+        });
+
+        $('#getImage').click(function () {
+            basic.croppie('result', 'base64').then(function (base) {
+                console.log()
+                $('#avatar').val(base)
+            })
+        })
+
+        function readFile(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#main-cropper').croppie('bind', {
+                        url: e.target.result
+                    });
+                    $('.actionDone').toggle();
+                    $('.actionUpload').toggle();
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $('#getImage').click(function () {
+            $(this).prop('disabled', true)
+            $(this).text('Сохранено')
+        })
+
+        $('#upload').change(function () {
+            $('#main-cropper').show()
+            $('#getImage').show()
+            $('#getImage').text('Сохранить выделенную область')
+            $('#getImage').prop('disabled', false)
+            readFile(this);
+        })
+
+    </script>
     <script>
         let switchToInputP = function () {
             let $input = $("<input>", {
