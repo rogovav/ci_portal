@@ -20,7 +20,7 @@
                             <input type="text" class="form-control" name="fio" placeholder="ФИО" required>
                         </div>
                         <div class="form-group">
-                            <input type="file" id="upload" class="form-control" accept="image/*">
+                            <input type="file" id="upload" class="form-control" accept="image/*" name="ava">
                         </div>
                         <div id="main-cropper"></div>
                         <div class="form-group" id="img-button">

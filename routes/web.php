@@ -17,16 +17,13 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('/', 'HomeController@index');
+
+    Route::get('/', 'HomeController@index')->name('home');
 
     Route::get('/admin', 'AdminController@index')->name('admin.index');
     Route::post('/admin/building', 'AdminController@building')->name('admin.building');
     Route::post('/admin/client', 'AdminController@client')->name('admin.client');
     Route::post('/admin/subject', 'AdminController@subject')->name('admin.subject');
-
-    Route::get('/auth', function () {
-        return view('auth.index');
-    });
 
     Route::get('/groups', 'GroupController@index');
     Route::post('/groups', 'GroupController@add');

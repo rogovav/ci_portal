@@ -317,7 +317,7 @@
                                                 <div class="card-body card-priority-low">
                                                     <div class="row">
                                                         @foreach($mission->helpers as $helper)
-                                                            <div class="col-1">
+                                                            <div class="col-3">
                                                                 <img class="users-helpers-img"
                                                                      data-container="body" data-trigger="hover"
                                                                      data-toggle="popover"

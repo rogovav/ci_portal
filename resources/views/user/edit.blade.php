@@ -1,5 +1,41 @@
 @extends('layout.index')
+@section('css')
+    <link rel="stylesheet" href="{{ asset('css/croppie.css') }}">
+@endsection
 @section('content')
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Изменить фото профиля</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="{{ route('user.update', $user->id) }}" method="post">
+                    <div class="modal-body">
+
+                        {{ csrf_field() }}
+                        <div class="form-group">
+                            <input type="file" id="upload" class="form-control" accept="image/*">
+                        </div>
+                        <div id="main-cropper"></div>
+                        <div class="form-group" id="img-button">
+                            <button id="getImage" type="button" class="btn btn-info">Сохранить выделенную область
+                            </button>
+                        </div>
+                        <input type="text" name="avatar" id="avatar" class="hidden-print">
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Сохранить изменения</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
     <div class="card">
         <div class="card-body">
             <div class="row">
@@ -9,25 +45,25 @@
                             <div class="col account-main-info-col">
                                 <div class="card">
                                     <div class="card-header ">
-                                        <h5 class="card-subtitle text-center">{{ Auth::user()->fio }}
+                                        <h5 class="card-subtitle text-center">{{ $user->fio }}
                                         </h5>
                                     </div>
                                     <div class="card-body">
-                                        <img src="{{ asset('images/avatars/users/' . Auth::user()->avatar) }}"
-                                             class="account-profile-avatar"
-                                             alt="">
+                                        <a href="" data-toggle="modal" data-target="#exampleModal"><img
+                                                    src="{{ asset('images/avatars/users/' . $user->avatar) }}"
+                                                    class="account-profile-avatar"
+                                                    alt=""></a>
                                         <p class="text-center mb-0"><span
-                                                    class="badge badge-pill">{{ Auth::user()->position }}</span></p>
+                                                    class="badge badge-pill">{{ $user->position }}</span></p>
                                     </div>
                                 </div>
                                 <div class="card">
                                     <div class="card-body">
                                         <table class="table">
-
                                             <tbody>
                                             <tr>
                                                 <td><b>День рождения:</b></td>
-                                                <td>{{ Auth::user()->birthday }}</td>
+                                                <td>{{ $user->birthday }}</td>
                                             </tr>
                                             <tr>
                                                 <td><b>Номер телефона</b></td>
@@ -35,15 +71,15 @@
                                             </tr>
                                             <tr>
                                                 <td><b>Почта</b></td>
-                                                <td><span id="user-email">{{ Auth::user()->email }}</span></td>
+                                                <td><span id="user-email">{{ $user->email }}</span></td>
                                             </tr>
                                             <tr>
                                                 <td><b>Логин VK</b></td>
-                                                <td><span id="user-vk">{{ Auth::user()->vk }}</span></td>
+                                                <td><span id="user-vk">{{ $user->vk }}</span></td>
                                             </tr>
                                             </tbody>
                                         </table>
-                                        <form action="{{ route('user.update',Auth::id()) }}" method="POST"
+                                        <form action="{{ route('user.update', $user->id) }}" method="POST"
                                               id="changeInfo">
                                             @csrf
                                         </form>
@@ -79,106 +115,160 @@
                                         <div class="tab-pane fade show active" id="nav-my" role="tabpanel"
                                              aria-labelledby="nav-my-tab">
                                             <div class="row">
-                                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                                                    <div class="card">
-                                                        <div class="card-body task-card card-priority-mid">
-                                                            <div class="progress">
-                                                                <div class="progress-bar bg-warning" role="progressbar"
-                                                                     style="width: 60%" aria-valuenow="25"
-                                                                     aria-valuemin="0"
-                                                                     aria-valuemax="100"></div>
+                                                @foreach($user->mission_owner->where('status', '<>', 3)->sortByDesc('id')->take(3) as $mission)
+                                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                        <div class="card">
+                                                            <div class="card-body task-card card-priority-mid">
+                                                                <div class="progress">
+                                                                    @php
+                                                                        if (strtotime("now") > strtotime($mission->date_to))
+                                                                        {
+                                                                            $per = 100;
+                                                                        } else {
+                                                                            $per = (($mission->date_close ? strtotime($mission->date_close) : strtotime("now")) - strtotime($mission->created_at))/(strtotime($mission->date_to) - strtotime($mission->created_at)) * 100;
+                                                                        }
+                                                                    @endphp
+                                                                    <div class="progress-bar {{ $per < 50? 'bg-primary' : ($per < 75? 'bg-warning' : 'bg-danger') }}"
+                                                                         role="progressbar"
+                                                                         style="width: {{ $per }}%"
+                                                                         aria-valuemin="0"
+                                                                         aria-valuemax="100"></div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-12">
+                                                                        <table class="table table-sm mb-0">
+                                                                            <tbody>
+                                                                            <tr>
+                                                                                <td width="10%">#{{ $mission->id }}</td>
+                                                                                <td width="30%">{{ $mission->subject->name }}</td>
+                                                                                <td>{!! str_limit($mission->info, 100) !!}
+                                                                                </td>
+                                                                            </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
                                                             </div>
-                                                            <div class="row">
-                                                                <div class="col-12">
-                                                                    <table class="table table-sm mb-0">
-                                                                        <tbody>
-                                                                        <tr>
-                                                                            <td>#9999</td>
-                                                                            <td>Обеспечение доступа в Интернет</td>
-                                                                            <td>Lorem ipsum dolor sit amet, consectetur
-                                                                                adipisicing elit. Alias aliquam animi
-                                                                                cumque
-                                                                            </td>
-                                                                        </tr>
-                                                                        </tbody>
-                                                                    </table>
+                                                            <div class="card-footer">
+                                                                <div class="row">
+                                                                    <div class="col-6"><a href="#"
+                                                                                          class="badge badge-light">{{ $mission->worker->fio }}</a>
+                                                                    </div>
+                                                                    <div class="col-6">
+                                                                        <a href="#"
+                                                                           class="badge {{ $mission->status == 1? 'badge-info' : 'badge-warning' }} float-right">{{ $mission->status == 1? 'В работе' : 'Ожидает решения' }}</a>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                                                    <div class="card">
-                                                        <div class="card-body task-card card-priority-low">
-                                                            <div class="progress">
-                                                                <div class="progress-bar bg-success" role="progressbar"
-                                                                     style="width: 20%" aria-valuenow="25"
-                                                                     aria-valuemin="0"
-                                                                     aria-valuemax="100"></div>
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="col-12">
-                                                                    <table class="table table-sm mb-0">
-                                                                        <tbody>
-                                                                        <tr>
-                                                                            <td>#8888</td>
-                                                                            <td>Обеспечение доступа в Интернет</td>
-                                                                            <td>Lorem ipsum dolor sit amet, consectetur
-                                                                                adipisicing elit. Alias aliquam animi
-                                                                                cumque
-                                                                            </td>
-                                                                        </tr>
-                                                                        </tbody>
-                                                                    </table>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                                                    <div class="card">
-                                                        <div class="card-body task-card card-priority-high">
-                                                            <div class="progress">
-                                                                <div class="progress-bar bg-danger" role="progressbar"
-                                                                     style="width: 90%" aria-valuenow="25"
-                                                                     aria-valuemin="0"
-                                                                     aria-valuemax="100"></div>
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="col-12">
-                                                                    <table class="table table-sm mb-0">
-                                                                        <tbody>
-                                                                        <tr>
-                                                                            <td>#1000</td>
-                                                                            <td>Обеспечение доступа в Интернет</td>
-                                                                            <td>Lorem ipsum dolor sit amet, consectetur
-                                                                                adipisicing elit. Alias aliquam animi
-                                                                                cumque
-                                                                            </td>
-                                                                        </tr>
-                                                                        </tbody>
-                                                                    </table>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                @endforeach
                                             </div>
                                         </div>
                                         <div class="tab-pane fade" id="nav-me" role="tabpanel"
                                              aria-labelledby="nav-me-tab">
                                             <div class="row">
-
+                                                @foreach($user->mission_worker->where('status', '<>', 3)->sortByDesc('id')->take(3) as $mission)
+                                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                        <div class="card">
+                                                            <div class="card-body task-card card-priority-mid">
+                                                                <div class="progress">
+                                                                    @php
+                                                                        if (strtotime("now") > strtotime($mission->date_to))
+                                                                        {
+                                                                            $per = 100;
+                                                                        } else {
+                                                                            $per = (($mission->date_close ? strtotime($mission->date_close) : strtotime("now")) - strtotime($mission->created_at))/(strtotime($mission->date_to) - strtotime($mission->created_at)) * 100;
+                                                                        }
+                                                                    @endphp
+                                                                    <div class="progress-bar {{ $per < 50? 'bg-primary' : ($per < 75? 'bg-warning' : 'bg-danger') }}"
+                                                                         role="progressbar"
+                                                                         style="width: {{ $per }}%"
+                                                                         aria-valuemin="0"
+                                                                         aria-valuemax="100"></div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-12">
+                                                                        <table class="table table-sm mb-0">
+                                                                            <tbody>
+                                                                            <tr>
+                                                                                <td width="10%">#{{ $mission->id }}</td>
+                                                                                <td width="30%">{{ $mission->subject->name }}</td>
+                                                                                <td>{!! str_limit($mission->info, 100) !!}
+                                                                                </td>
+                                                                            </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="card-footer">
+                                                                <div class="row">
+                                                                    <div class="col-6"><a href="#"
+                                                                                          class="badge badge-light">{{ $mission->owner->fio }}</a>
+                                                                    </div>
+                                                                    <div class="col-6">
+                                                                        <a href="#"
+                                                                           class="badge {{ $mission->status == 1? 'badge-info' : 'badge-warning' }} float-right">{{ $mission->status == 1? 'В работе' : 'Ожидает решения' }}</a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                @endforeach
                                             </div>
                                         </div>
                                         <div class="tab-pane fade" id="nav-help" role="tabpanel"
                                              aria-labelledby="nav-help-tab">
                                             <div class="row">
-                                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-6">
-                                                    <div class="card">
-
+                                                @foreach($user->mission_helper->where('status', '<>', 3)->sortByDesc('id')->take(3) as $mission)
+                                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                        <div class="card">
+                                                            <div class="card-body task-card card-priority-mid">
+                                                                <div class="progress">
+                                                                    @php
+                                                                        if (strtotime("now") > strtotime($mission->date_to))
+                                                                        {
+                                                                            $per = 100;
+                                                                        } else {
+                                                                            $per = (($mission->date_close ? strtotime($mission->date_close) : strtotime("now")) - strtotime($mission->created_at))/(strtotime($mission->date_to) - strtotime($mission->created_at)) * 100;
+                                                                        }
+                                                                    @endphp
+                                                                    <div class="progress-bar {{ $per < 50? 'bg-primary' : ($per < 75? 'bg-warning' : 'bg-danger') }}"
+                                                                         role="progressbar"
+                                                                         style="width: {{ $per }}%"
+                                                                         aria-valuemin="0"
+                                                                         aria-valuemax="100"></div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-12">
+                                                                        <table class="table table-sm mb-0">
+                                                                            <tbody>
+                                                                            <tr>
+                                                                                <td width="10%">#{{ $mission->id }}</td>
+                                                                                <td width="30%">{{ $mission->subject->name }}</td>
+                                                                                <td>{!! str_limit($mission->info, 100) !!}
+                                                                                </td>
+                                                                            </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="card-footer">
+                                                                <div class="row">
+                                                                    <div class="col-6"><a href="#"
+                                                                                          class="badge badge-light">{{ $mission->worker->fio }}</a>
+                                                                    </div>
+                                                                    <div class="col-6">
+                                                                        <a href="#"
+                                                                           class="badge {{ $mission->status == 1? 'badge-info' : 'badge-warning' }} float-right">{{ $mission->status == 1? 'В работе' : 'Ожидает решения' }}</a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                </div>
+                                                @endforeach
                                             </div>
                                         </div>
                                     </div>
@@ -258,7 +348,7 @@
                                              aria-labelledby="nav-home-tab"
                                              style="max-height: 550px; overflow-y: scroll; overflow-x: hidden">
                                             <div class="row">
-                                                @foreach(Auth::user()->todos->where('date', date('Y-m-d'))->where('success', false)->sortByDesc('priority') as $todo)
+                                                @foreach($user->todos->where('date', date('Y-m-d'))->where('success', false)->sortByDesc('priority') as $todo)
                                                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                                                         <div class="card">
                                                             <div
@@ -285,7 +375,7 @@
                                                         </div>
                                                     </div>
                                                 @endforeach
-                                                @foreach(Auth::user()->todos->where('date', date('Y-m-d'))->where('success', true)->sortByDesc('priority') as $todo)
+                                                @foreach($user->todos->where('date', date('Y-m-d'))->where('success', true)->sortByDesc('priority') as $todo)
                                                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                                                         <div class="card todo-done">
                                                             <div
@@ -318,7 +408,7 @@
                                              aria-labelledby="nav-profile-tab"
                                              style="max-height: 550px; overflow-y: scroll; overflow-x: hidden">
                                             <div class="row">
-                                                @foreach(Auth::user()->todos->where('date', date('Y-m-d', strtotime(date('Y-m-d') . "+1 days")))->where('success', false)->sortByDesc('priority') as $todo)
+                                                @foreach($user->todos->where('date', date('Y-m-d', strtotime(date('Y-m-d') . "+1 days")))->where('success', false)->sortByDesc('priority') as $todo)
                                                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                                                         <div class="card">
                                                             <div
@@ -345,7 +435,7 @@
                                                         </div>
                                                     </div>
                                                 @endforeach
-                                                @foreach(Auth::user()->todos->where('date', date('Y-m-d', strtotime(date('Y-m-d') . "+1 days")))->where('success', false)->sortByDesc('priority') as $todo)
+                                                @foreach($user->todos->where('date', date('Y-m-d', strtotime(date('Y-m-d') . "+1 days")))->where('success', false)->sortByDesc('priority') as $todo)
                                                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                                                         <div class="card todo-done">
                                                             <div
@@ -378,7 +468,7 @@
                                              aria-labelledby="nav-contact-tab"
                                              style="max-height: 550px; overflow-y: scroll; overflow-x: hidden">
                                             <div class="row">
-                                                @foreach(Auth::user()->todos->where('date', '>=', date('Y-m-d'))->where('date', '<=', date('Y-m-d', strtotime(date('Y-m-d') . "+7 days")))->where('success', false)->sortByDesc('priority') as $todo)
+                                                @foreach($user->todos->where('date', '>=', date('Y-m-d'))->where('date', '<=', date('Y-m-d', strtotime(date('Y-m-d') . "+7 days")))->where('success', false)->sortByDesc('priority') as $todo)
                                                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                                                         <div class="card">
                                                             <div
@@ -405,7 +495,7 @@
                                                         </div>
                                                     </div>
                                                 @endforeach
-                                                @foreach(Auth::user()->todos->where('date', '>=', date('Y-m-d'))->where('date', '<=', date('Y-m-d', strtotime(date('Y-m-d') . "+7 days")))->where('success', true)->sortByDesc('priority') as $todo)
+                                                @foreach($user->todos->where('date', '>=', date('Y-m-d'))->where('date', '<=', date('Y-m-d', strtotime(date('Y-m-d') . "+7 days")))->where('success', true)->sortByDesc('priority') as $todo)
                                                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                                                         <div class="card todo-done">
                                                             <div
@@ -446,6 +536,59 @@
 @endsection
 
 @section('js')
+    <script src="{{ asset('js/croppie.js') }}"></script>
+    <script>
+        $(document).ready(function () {
+            if ($('#upload').val() == '') {
+                $('#main-cropper').hide();
+                $('#getImage').hide()
+            }
+        })
+        ///images/avatars/users/cool.jpg
+        var basic = $('#main-cropper').croppie({
+            viewport: {width: 300, height: 300, type: 'square'},
+            boundary: {width: 300, height: 300},
+            showZoomer: false,
+
+        });
+
+        $('#getImage').click(function () {
+            basic.croppie('result', 'base64').then(function (base) {
+                console.log()
+                $('#avatar').val(base)
+            })
+        })
+
+        function readFile(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#main-cropper').croppie('bind', {
+                        url: e.target.result
+                    });
+                    $('.actionDone').toggle();
+                    $('.actionUpload').toggle();
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $('#getImage').click(function () {
+            $(this).prop('disabled', true)
+            $(this).text('Сохранено')
+        })
+
+        $('#upload').change(function () {
+            $('#main-cropper').show()
+            $('#getImage').show()
+            $('#getImage').text('Сохранить выделенную область')
+            $('#getImage').prop('disabled', false)
+            readFile(this);
+        })
+
+    </script>
     <script>
         let switchToInputP = function () {
             let $input = $("<input>", {

@@ -20,16 +20,28 @@ class UserController extends Controller
 
     public function edit($id)
     {
-        $user = User::findorfail($id);
-        return view('user.edit', compact($user));
+
+        $user   = User::findorfail($id);
+        $status = [1 => 'В работе', 2 => 'На проверке'];
+
+        return view('user.edit', compact('user', 'status'));
     }
 
     public function update(Request $request, $id)
     {
-        $user = User::findorfail($id);
+        $user = User::findOrFail($id);
 
         if (isset($request['avatar'])) {
-            $user->update(['avatar' => $request['avatar']]);
+            $ava = $request['avatar'];
+
+            list($type, $ava) = explode(';', $ava);
+            list(, $ava)      = explode(',', $ava);
+
+            $ava = base64_decode($ava);
+
+            $photoName = $user->avatar;
+
+            file_put_contents(public_path('images/avatars/users') . '/' . $photoName, $ava);
         };
         if (isset($request['vk'])) {
             $user->update(['vk' => $request['vk']]);
@@ -40,12 +52,20 @@ class UserController extends Controller
         if (isset($request['phone'])) {
             $user->update(['phone' => $request['phone']]);
         };
-        return back()->withInput();
+        return redirect()->back();
     }
 
     public function add(Request $data)
     {
-        $photoName = $data['login'] . '.' . $data['avatar']->getClientOriginalExtension();
+        $ava = $data['avatar'];
+
+        list($type, $ava) = explode(';', $ava);
+        list(, $ava)      = explode(',', $ava);
+        $ava = base64_decode($ava);
+
+        $photoName = $data['login'] . '.' . $data['ava']->getClientOriginalExtension();
+
+        file_put_contents(public_path('images/avatars/users') . '/' . $photoName, $ava);
 
         User::create([
             'fio' => $data['fio'],
@@ -58,8 +78,18 @@ class UserController extends Controller
             'birthday' => $data['birthday'],
             'password' => Hash::make($data['password']),
         ]);
-
-        $data['avatar']->move(public_path('images/avatars/users'), $photoName);
+//
+//        if(isset($_POST['imagebase64'])){
+//            $data = $_POST['imagebase64'];
+//
+//            list($type, $data) = explode(';', $data['ava']);
+//            list(, $data)      = explode(',', $data['ava']);
+//            $data = base64_decode($data);
+//
+//            file_put_contents('image64.png', $data);
+//        }
+//
+//        $data['avatar']->move(public_path('images/avatars/users'), $photoName);
 
         return back()->withInput();
     }
