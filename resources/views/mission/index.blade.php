@@ -5,7 +5,7 @@
           href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.5/css/bootstrap-select.min.css">
 @endsection
 @section('content')
-    <div class="modal fade bd-example-modal-lg" id="ModalCreateUser" tabindex="-1" role="dialog"
+    <div class="modal fade bd-example-modal-lg" id="ModalCreateUser" role="dialog"
          aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
@@ -38,7 +38,7 @@
                                         <div class="card-body">
                                             <div class="form-group">
                                                 <input name="clientFio" id="clientFio" class="form-control"
-                                                       placeholder="ФИО клиента">
+                                                       placeholder="ФИО клиента" required>
                                             </div>
                                             <div class="form-group">
                                                 <input name="clientCid" id="clientCid" class="form-control"
@@ -46,7 +46,15 @@
                                             </div>
                                             <div class="form-group">
                                                 <input type="tel" id="telephone" class="form-control" name="clientTel"
-                                                       placeholder="Номер телефона" required>
+                                                       placeholder="Номер телефона">
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="tel" id="itelephone" class="form-control" name="clientITel"
+                                                       placeholder="Внутренний номер">
+                                            </div>
+                                            <div class="form-group">
+                                                <input id="clientEmail" class="form-control" name="clientEmail"
+                                                       placeholder="Электронная почта">
                                             </div>
                                         </div>
                                     </div>
@@ -175,7 +183,7 @@
                     <tbody>
                     @foreach($missions as $mission)
                         <tr>
-                            <td><a href="{{ route('mission.show', $mission->id) }}">{{ $mission->id }}</a></td>
+                            <td><a href="{{ route('mission.show', $mission->id) }}">#{{ $mission->id }}</a></td>
                             <td>{{ $mission->info }}</td>
                             <td>{{ $mission->from }}</td>
                             <td>{{ $mission->owner->fio }}</td>
@@ -239,37 +247,40 @@
     </script>
 
     <script>
-        tinymce.init({
-            selector: '#comment-user-mission',
-            plugins: 'table',
-        });
-    </script>
-
-    <script>
         $('#client-select').change(function () {
             if ($(this).val() == '-1') {
                 $('.user-info-popup').show();
                 $('#clientCid').prop('disabled', '');
                 $('#clientFio').prop('disabled', '');
+                $('#clientEmail').prop('disabled', '');
                 $('#telephone').prop('disabled', '');
+                $('#itelephone').prop('disabled', '');
                 $('#clientCid').val('')
                 $('#clientFio').val('')
+                $('#clientEmail').val('')
                 $('#telephone').val('')
+                $('#itelephone').val('')
             } else if ($(this).val() != '') {
                 $('.user-info-popup').show();
                 let data = $(this).find(":selected").data('fio');
                 $('#clientCid').prop('disabled', '');
                 $('#clientFio').prop('disabled', '');
+                $('#clientEmail').prop('disabled', '');
                 $('#telephone').prop('disabled', '');
+                $('#itelephone').prop('disabled', '');
                 $('#clientCid').val(data.cid)
                 $('#clientFio').val(data.fio)
+                $('#clientEmail').val(data.mail)
                 $('#telephone').val(data.phone)
+                $('#itelephone').val(data.iphone)
                 console.log(data)
             } else {
                 $('.user-info-popup').hide();
                 $('#clientCid').prop('disabled', 'disabled');
                 $('#clientFio').prop('disabled', 'disabled');
+                $('#clientEmail').prop('disabled', 'disabled');
                 $('#telephone').prop('disabled', 'disabled');
+                $('#itelephone').prop('disabled', 'disabled');
             }
         })
     </script>

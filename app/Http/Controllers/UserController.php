@@ -52,6 +52,9 @@ class UserController extends Controller
         if (isset($request['phone'])) {
             $user->update(['phone' => $request['phone']]);
         };
+        if (isset($request['iphone'])) {
+            $user->update(['iphone' => $request['iphone']]);
+        };
         return redirect()->back();
     }
 

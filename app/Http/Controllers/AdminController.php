@@ -35,11 +35,12 @@ class AdminController extends Controller
     {
         Client::updateOrCreate(['id' => $request->id],
             [
-                'fio'   => $request->fio,
-                'phone' => $request->phone,
-                'mail'  => $request->mail,
-                'info'  => $request->info,
-                'cid'   => $request->cid,
+                'fio'    => $request->fio,
+                'phone'  => $request->phone,
+                'iphone' => $request->iphone,
+                'mail'   => $request->mail,
+                'info'   => $request->info,
+                'cid'    => $request->cid,
             ]);
         return redirect()->back();
     }

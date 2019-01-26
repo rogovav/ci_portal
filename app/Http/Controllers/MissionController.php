@@ -58,9 +58,26 @@ class MissionController extends Controller
         $mission->from        = $request->from;
         $mission->owner_id    = Auth::id();
         $mission->worker_id   = $request->worker;
-        $mission->subject_id  = $request->subject;
-        $mission->cid         = $request->cid;
-        $mission->client_id   = $request->client;
+        if (isset($request->client))
+        {
+            $client = Client::updateOrCreate(['id' => $request->client],
+                [
+                    'fio'    => $request->clientFio,
+                    'phone'  => $request->clientTel,
+                    'iphone' => $request->clientITel,
+                    'cid'    => $request->clientCid,
+                    'mail'   => $request->clientEmail,
+                ]);
+            $mission->client_id = $client->id;
+        }
+        if ($request->subject == -1)
+        {
+            $subject = Subject::create(['name' => $request->newSubject]);
+            $mission->subject_id = $subject->id;
+        } else {
+            $mission->subject_id = $request->subject;
+        }
+
         $mission->address     = $request->address;
         $mission->building_id = $request->building;
         $mission->priority    = $request->priority;
@@ -99,7 +116,7 @@ class MissionController extends Controller
             if($request->status == 3)
             {
                 MissionComment::create([
-                    'info'       => $request->status_info != ''? "Заявка закрыта. Комментарий: " . $request->status_info : 'Заявка закрыта.',
+                    'info'       => $request->status_info != ''? "Заявка закрыта. \nКомментарий: " . $request->status_info : 'Заявка закрыта.',
                     'user_id'    => Auth::id(),
                     'mission_id' => $id,
                 ]);
@@ -117,7 +134,7 @@ class MissionController extends Controller
             if($request->status == 1)
             {
                 MissionComment::create([
-                    'info'       => $request->status_info != ''? 'Закрытие отменено по причине: ' . $request->status_info : 'Закрытие отменено без указания причины.',
+                    'info'       => $request->status_info != ''? "Закрытие отменено по причине: \n" . $request->status_info : 'Закрытие отменено без указания причины.',
                     'user_id'    => Auth::id(),
                     'mission_id' => $id,
                 ]);

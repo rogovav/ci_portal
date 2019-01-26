@@ -67,7 +67,11 @@
                                             </tr>
                                             <tr>
                                                 <td><b>Номер телефона</b></td>
-                                                <td><span id="user-phone">234323</span></td>
+                                                <td><span id="user-phone">{{ $user->phone }}</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td><b>Внутренний номер</b></td>
+                                                <td><span id="user-iphone">{{ $user->iphone }}</span></td>
                                             </tr>
                                             <tr>
                                                 <td><b>Почта</b></td>
@@ -139,7 +143,7 @@
                                                                         <table class="table table-sm mb-0">
                                                                             <tbody>
                                                                             <tr>
-                                                                                <td width="10%">#{{ $mission->id }}</td>
+                                                                                <td width="10%"><a href="{{ route('mission.show', $mission->id) }}">#{{ $mission->id }}</a></td>
                                                                                 <td width="30%">{{ $mission->subject->name }}</td>
                                                                                 <td>{!! str_limit($mission->info, 100) !!}
                                                                                 </td>
@@ -192,7 +196,7 @@
                                                                         <table class="table table-sm mb-0">
                                                                             <tbody>
                                                                             <tr>
-                                                                                <td width="10%">#{{ $mission->id }}</td>
+                                                                                <td width="10%"><a href="{{ route('mission.show', $mission->id) }}">#{{ $mission->id }}</a></td>
                                                                                 <td width="30%">{{ $mission->subject->name }}</td>
                                                                                 <td>{!! str_limit($mission->info, 100) !!}
                                                                                 </td>
@@ -245,7 +249,7 @@
                                                                         <table class="table table-sm mb-0">
                                                                             <tbody>
                                                                             <tr>
-                                                                                <td width="10%">#{{ $mission->id }}</td>
+                                                                                <td width="10%"><a href="{{ route('mission.show', $mission->id) }}">#{{ $mission->id }}</a></td>
                                                                                 <td width="30%">{{ $mission->subject->name }}</td>
                                                                                 <td>{!! str_limit($mission->info, 100) !!}
                                                                                 </td>
@@ -602,6 +606,18 @@
             $input.on("blur", switchToSpan);
             $input.select();
         };
+        let switchToInputI = function () {
+            let $input = $("<input>", {
+                val: $(this).text(),
+                type: "tel",
+                form: 'changeInfo',
+                name: 'iphone'
+            });
+            $input.addClass("form-control");
+            $(this).replaceWith($input);
+            $input.on("blur", switchToSpan);
+            $input.select();
+        };
         let switchToInputE = function () {
             let $input = $("<input>", {
                 val: $(this).text(),
@@ -633,6 +649,7 @@
             $('#changeInfo').submit();
         }
         $("#user-phone").on("click", switchToInputP);
+        $("#user-iphone").on("click", switchToInputI);
         $("#user-email").on("click", switchToInputE);
         $("#user-vk").on("click", switchToInputV);
     </script>
