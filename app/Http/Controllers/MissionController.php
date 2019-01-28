@@ -146,6 +146,12 @@ class MissionController extends Controller
         if (isset($request->date_to))
         {
             $mission->date_to = $request->date_to;
+
+            MissionComment::create([
+                'info'       => "Deadline изменен на: " . date('Y-m-d H:i', strtotime($request->date_to)),
+                'user_id'    => Auth::id(),
+                'mission_id' => $id,
+            ]);
         }
 
         $mission->save();
