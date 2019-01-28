@@ -180,8 +180,8 @@
                                                                     <div
                                                                         class="card-header card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}-header">
                                                                         <div class="row">
-                                                                            <div class="col-6">{{ $todo->name }}</div>
-                                                                            <div class="col-6"><span
+                                                                            <div class="col-12 col-md-6 col-lg-6 col-xl-6">{{ $todo->name }}</div>
+                                                                            <div class="col-12 col-md-6 col-lg-6 col-xl-6"><span
                                                                                     class="badge badge-light float-right">Задание на {{ $todo->date }}</span>
                                                                             </div>
                                                                         </div>
@@ -208,9 +208,9 @@
                                                                     <div
                                                                         class="card-header card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}-header">
                                                                         <div class="row">
-                                                                            <div class="col-6"><s>{{ $todo->name }}</s>
+                                                                            <div class="col-12 col-md-6 col-lg-6 col-xl-6"><s>{{ $todo->name }}</s>
                                                                             </div>
-                                                                            <div class="col-6"><span
+                                                                            <div class="col-12 col-md-6 col-lg-6 col-xl-6"><span
                                                                                     class="badge badge-light float-right">Задание на {{ $todo->date }}</span>
                                                                             </div>
                                                                         </div>
@@ -243,8 +243,8 @@
                                                                     <div
                                                                         class="card-header card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}-header">
                                                                         <div class="row">
-                                                                            <div class="col-6">{{ $todo->name }}</div>
-                                                                            <div class="col-6"><span
+                                                                            <div class="col-12 col-md-6 col-lg-6 col-xl-6">{{ $todo->name }}</div>
+                                                                            <div class="col-12 col-md-6 col-lg-6 col-xl-6"><span
                                                                                     class="badge badge-light float-right">Задание на {{ $todo->date }}</span>
                                                                             </div>
                                                                         </div>
@@ -271,9 +271,9 @@
                                                                     <div
                                                                         class="card-header card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}-header">
                                                                         <div class="row">
-                                                                            <div class="col-6"><s>{{ $todo->name }}</s>
+                                                                            <div class="col-12 col-md-6 col-lg-6 col-xl-6"><s>{{ $todo->name }}</s>
                                                                             </div>
-                                                                            <div class="col-6"><span
+                                                                            <div class="col-12 col-md-6 col-lg-6 col-xl-6"><span
                                                                                     class="badge badge-light float-right">Задание на {{ $todo->date }}</span>
                                                                             </div>
                                                                         </div>
@@ -306,8 +306,8 @@
                                                                     <div
                                                                         class="card-header card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}-header">
                                                                         <div class="row">
-                                                                            <div class="col-6">{{ $todo->name }}</div>
-                                                                            <div class="col-6"><span
+                                                                            <div class="col-12 col-md-6 col-lg-6 col-xl-6">{{ $todo->name }}</div>
+                                                                            <div class="col-12 col-md-6 col-lg-6 col-xl-6"><span
                                                                                     class="badge badge-light float-right">Задание на {{ $todo->date }}</span>
                                                                             </div>
                                                                         </div>
@@ -334,9 +334,9 @@
                                                                     <div
                                                                         class="card-header card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}-header">
                                                                         <div class="row">
-                                                                            <div class="col-6"><s>{{ $todo->name }}</s>
+                                                                            <div class="col-12 col-md-6 col-lg-6 col-xl-6"><s>{{ $todo->name }}</s>
                                                                             </div>
-                                                                            <div class="col-6"><span
+                                                                            <div class="col-12 col-md-6 col-lg-6 col-xl-6"><span
                                                                                     class="badge badge-light float-right">Задание на {{ $todo->date }}</span>
                                                                             </div>
                                                                         </div>

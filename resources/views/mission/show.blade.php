@@ -75,7 +75,7 @@
                                         <div class="card-header card-client-header">
                                             <b>Клиент:</b> {{ $mission->client->fio }}</div>
                                         <div class="card-body card-client">
-                                            <table class="table table-sm table-responsive mb-0 ">
+                                            <table class="table table-sm mb-0 ">
                                                 <tr>
                                                     <th>Телефон</th>
                                                     <td>{{ $mission->client->phone }}</td>
