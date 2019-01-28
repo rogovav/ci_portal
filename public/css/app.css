@@ -901,7 +901,7 @@ a {
 
 .media-body {
     height: 40px;
-    max-width: 90%;
+    max-width: 80%;
     line-height: 1rem;
     padding: 0;
 }
@@ -1104,4 +1104,16 @@ a.delete-a:hover {
     visibility: visible;
     display: block;
     transition: .4s ease all;
+}
+
+@media (max-width: 768px) {
+    body {
+        font-size: 12px !important;
+    }
+}
+
+@media (max-width: 425px) {
+    body {
+        font-size: 10px !important;
+    }
 }
