@@ -68,7 +68,8 @@
                             Информация о заявке
                         </div>
                         <div class="card-body">
-                            <div class="row">
+                            @if($mission->client)
+                                <div class="row">
                                 <div class="col-12">
                                     <div class="card">
                                         <div class="card-header card-client-header">
@@ -101,6 +102,7 @@
                                     </div>
                                 </div>
                             </div>
+                            @endif
                             <div class="card">
                                 <div class="card-header card-info-header">
                                     <span><b>Тема: </b>{{ $mission->subject->name }}</span>
