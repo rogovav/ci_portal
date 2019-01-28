@@ -75,7 +75,7 @@
                                         <div class="card-header card-client-header">
                                             <b>Клиент:</b> {{ $mission->client->fio }}</div>
                                         <div class="card-body card-client">
-                                            <table class="table table-sm table-responsive mb-0">
+                                            <table class="table table-sm table-responsive mb-0 ">
                                                 <tr>
                                                     <th>Телефон</th>
                                                     <td>{{ $mission->client->phone }}</td>
@@ -107,7 +107,7 @@
                                 <div class="card-header card-info-header">
                                     <span><b>Тема: </b>{{ $mission->subject->name }}</span>
                                 </div>
-                                <div class="card-body card-info">
+                                <div class="card-body card-info ">
                                     {!! nl2br($mission->info) !!}
                                 </div>
                                 <div class="card-footer card-info-header">
@@ -277,7 +277,7 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="row">
-                                        <div class="col-md-6 col-lg-3 col-xl-3">
+                                        <div class="col-6 col-md-6 col-lg-3 col-xl-3 ">
                                             <div class="card">
                                                 <div class="card-header text-center card-priority-high-header">
                                                     <b>Автор</b>
@@ -298,7 +298,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-6 col-lg-3 col-xl-3">
+                                        <div class="col-6 col-md-6 col-lg-3 col-xl-3 smal">
                                             <div class="card">
                                                 <div class="card-header text-center card-priority-mid-header">
                                                     <b>Исполнитель</b>
@@ -320,7 +320,7 @@
                                             </div>
                                         </div>
                                         @if($mission->helpers->count() > 0)
-                                        <div class="col-md-12 col-lg-6 col-xl-6">
+                                        <div class="col-12 col-md-12 col-lg-6 col-xl-6">
                                             <div class="card">
                                                 <div class="card-header text-center card-priority-low-header">
                                                     <b>Помощники</b>
@@ -360,7 +360,7 @@
                                             </div>
                                             <div class="card-body pb-0 pt-0">
                                                 <div id="sohbet" style="overflow-y: scroll; max-height: 300px;"
-                                                     class="card shadow-none border-0 m-0 p-0 position-relative bg-transparent">
+                                                     class="card shadow-none border-0 m-0 p-0 position-relative bg-transparent ">
                                                     @foreach($mission->comments as $comment)
                                                         @if($comment->user_id == Auth::id())
                                                             <div class="balon1 p-2 m-0 position-relative"
