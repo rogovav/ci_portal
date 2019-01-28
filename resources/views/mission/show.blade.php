@@ -9,10 +9,10 @@
     <div class="card">
         <div class="card-header card-priority-{{ $mission->priority == 1? 'low' : ($mission->priority == 2? 'mid' : 'high') }}-header">
             <div class="row align-items-center">
-                <div class="col-2 col-form-label">
+                <div class="col-12 col-md-2 col-lg-2 col-xl-2 col-form-label">
                     <h6 class="mb-0">Заявка <b>#{{ $mission->id }}</b> ({{ $from[$mission->from] }})</h6>
                 </div>
-                <div class="col-8">
+                <div class="col-12 col-md-8 col-lg-8 col-xl-8">
                     <div class="row mb-1">
                         <div class="col-4 text-left">
                             <span
@@ -36,7 +36,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-2">
+                <div class="col-12 col-md-2 col-lg-2 col-xl-2 col-form-label">
                     @switch($mission->status)
                         @case(1)
                             @if($mission->worker == Auth::user())
