@@ -94,8 +94,8 @@
                                                 </tr>
                                                 <tr>
                                                     <th>Адрес</th>
-                                                    <td>{{ $mission->building->name }}, {{ $mission->address }}
-                                                        , {{ $mission->building->address }}</td>
+                                                    <td>{{ @$mission->building->name }}, {{ $mission->address }}
+                                                        , {{ @$mission->building->address }}</td>
                                                 </tr>
                                             </table>
                                         </div>
