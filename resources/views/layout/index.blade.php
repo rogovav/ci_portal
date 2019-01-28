@@ -6,6 +6,7 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Portal CI</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="{{ asset("css/bootstrap.min.css") }}" rel="stylesheet" id="bootstrap-css">
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/rowreorder/1.2.5/css/rowReorder.dataTables.min.css">
@@ -35,11 +36,11 @@
                         Заявки <i
                             class="fas fas fa-tasks shortmenu animate"></i></a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url("groups") }}" title="Группы"><i class="fas fa-users"></i>
-                        Группы <i
-                            class="fas fa-users shortmenu animate"></i></a>
-                </li>
+                {{--<li class="nav-item">--}}
+                {{--<a class="nav-link" href="{{ url("groups") }}" title="Группы"><i class="fas fa-users"></i>--}}
+                {{--Группы <i--}}
+                {{--class="fas fa-users shortmenu animate"></i></a>--}}
+                {{--</li>--}}
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url("users") }}" title="Люди"><i class="fas fa-user-tie"></i> Люди <i
                             class="fas fa-user-tie shortmenu animate"></i></a>
@@ -68,16 +69,18 @@
                     <a class="nav-link" href="" title="Склад"><i class="fas fa-warehouse"></i> Склад <i
                             class="fas fa-warehouse shortmenu animate"></i></a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url("admin") }}" title="Склад"><i class="fas fa-users-cog"></i> Service <i
+                            class="fas fa-users-cog shortmenu animate"></i></a>
+                </li>
 
             </ul>
 
             <ul class="navbar-nav ml-md-auto d-md-flex">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url("admin") }}"><i class="fas fa-users-cog"></i> Админ-панель</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('user.edit', Auth::id()) }}"><img src="{{ asset('images/avatars/users/' . Auth::user()->avatar) }}" alt=""
-                                                      class="group-user-avatar-layout"> {{ Auth::user()->fio }}</a>
+                    <a class="nav-link" href="{{ route('user.edit', Auth::id()) }}"><img
+                            src="{{ asset('images/avatars/users/' . Auth::user()->avatar) }}" alt=""
+                            class="group-user-avatar-layout"> {{ Auth::user()->fio }}</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('logout') }}"
@@ -92,26 +95,22 @@
     </nav>
     <div class="container-fluid">
         <div class="row">
-            <marquee behavior="" direction="" onmouseout="this.start()" onmouseover="this.stop()">Lorem ipsum dolor sit
-                amet, consectetur adipisicing elit. A autem
-                consequatur, culpa cum dignissimos ducimus eos explicabo facere, illo iste laboriosam minima molestiae
-                molestias necessitatibus praesentium rerum ullam ut voluptatum?
-            </marquee>
-        </div>
-        <div class="row">
-            <div class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
+            <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-3">
                 <div class="card">
                     <div class="card-body card-body-task no-padding">
-                        <div class="card-body-label card-task"><a href=""><i class="fas fa-tag fa-3x"></i></a></div>
-                        <div class="card-body-text"><span>ЗАЯВОК</span><br><span class="real-time-counter">20</span>
+                        <div class="card-body-label card-task"><a href="{{ route('user.edit', Auth::id()) }}"><i
+                                    class="fas fa-tag fa-3x"></i></a></div>
+                        <div class="card-body-text"><span>Заданий</span><br><span
+                                class="real-time-counter">{{ Auth::user()->todos->where('date', '>=', date('Y-m-d'))->where('date', '<=', date('Y-m-d', strtotime(date('Y-m-d') . "+7 days")))->where('success', false)->count() }}</span>
                             <hr>
-                            <span class="real-time-counter-user">15</span>
-                            <span> выполнено</span>
+                            <span
+                                class="real-time-counter-user">{{ Auth::user()->todos->where('date', date('Y-m-d'))->where('success', false)->count() }}</span>
+                            <span> на сегодня</span>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
+            <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-3">
                 <div class="card card-body-message">
                     <div class="card-body no-padding">
                         <div class="card-body-label card-message"><a href=""><i class="fas fa-envelope fa-3x"></i></a>
@@ -124,7 +123,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
+            <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-3">
                 <div class="card">
                     <div class="card-body card-body-wiki no-padding">
                         <div class="card-body-label card-wiki"><a href=""><i
@@ -137,7 +136,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
+            <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-3">
                 <div class="card">
                     <div class="card-body card-body-users no-padding">
                         <div class="card-body-label card-users"><a href=""><i class="fas fa-users fa-3x"></i></a></div>

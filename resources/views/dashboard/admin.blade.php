@@ -152,8 +152,8 @@
                                                             <th>ФИО</th>
                                                             <th>Номер договора</th>
                                                             <th>Номер телефона</th>
+                                                            <th>Внутренний номер</th>
                                                             <th>Email</th>
-                                                            <th>Информация</th>
                                                             <th></th>
                                                             </thead>
                                                             <tbody>
@@ -162,8 +162,8 @@
                                                                     <td>{{ $client->fio }}</td>
                                                                     <td>{{ $client->cid }}</td>
                                                                     <td>{{ $client->phone }}</td>
+                                                                    <td>{{ $client->iphone }}</td>
                                                                     <td>{{ $client->mail }}</td>
-                                                                    <td>{{ $client->info }}</td>
                                                                     <td>
                                                                         <button onclick="editClient({{$client}})"
                                                                                 class="btn btn-dark">Изменить
@@ -208,18 +208,18 @@
                                                     >
                                                 </div>
                                                 <div class="form-group">
+                                                    <input name="iphone" type="text"
+                                                           class="form-control"
+                                                           placeholder="Внутренний номер"
+                                                           id="client-iphone"
+                                                    >
+                                                </div>
+                                                <div class="form-group">
                                                     <input name="mail" type="text"
                                                            class="form-control"
                                                            placeholder="Email"
                                                            id="client-mail"
 
-                                                    >
-                                                </div>
-                                                <div class="form-group">
-                                                    <input name="info" type="text"
-                                                           class="form-control"
-                                                           placeholder="Информация"
-                                                           id="client-info"
                                                     >
                                                 </div>
                                                 <div class="form-row">
@@ -247,6 +247,10 @@
     </div>
 @endsection
 @section('js')
+    <script src="{{ asset('js/jquery.maskedinput.js') }}"></script>
+    <script>
+        $("#client-phone").mask("+7 (999) 999-99-99");
+    </script>
     <script>
         $('.collapse').collapse('toggle');
     </script>
@@ -270,6 +274,7 @@
             $('#client-mail').val(client.mail)
             $('#client-info').val(client.info)
             $('#client-phone').val(client.phone)
+            $('#client-iphone').val(client.iphone)
 
         }
     </script>

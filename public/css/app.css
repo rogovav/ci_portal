@@ -679,8 +679,47 @@ marquee {
     background-color: rgba(0, 255, 0, 0.05);
 }
 
+.card-info-header {
+    background-color: rgba(0, 0, 255, 0.2);
+}
+
+.card-info {
+    background-color: rgba(0, 0, 255, 0.05);
+}
+
+.card-client-header {
+    background-color: rgba(0, 255, 255, 0.2);
+}
+
+.card-client {
+    background-color: rgba(0, 255, 255, 0.05);
+}
+
+.card-deadline-header {
+    background-color: rgba(205, 0, 116, 0.2);
+}
+
+.card-deadline {
+    background-color: rgba(205, 0, 116, 0.05);
+}
+
+.progress-text {
+    font-size: 12px;
+}
+
+.black-file {
+    color: #000;
+}
+
 .todo-done {
     opacity: 0.4;
+}
+
+.users-helpers-img {
+    height: 50px;
+    cursor: pointer;
+    border: 2px solid #041e42;
+    border-radius: 50%;
 
 }
 
@@ -734,6 +773,148 @@ marquee {
 .admin-form input[type="submit"] {
     background-color: #041e42;
     color: white;
+}
+
+a {
+    text-decoration: none !important;
+}
+
+
+.btn:focus, .btn:active:focus, .btn.active:focus {
+    outline: none !important;
+    box-shadow: 0 0px 0px rgba(120, 144, 156, 1.0) inset, 0 0 0px rgba(120, 144, 156, 0.8);
+}
+
+.card::-webkit-scrollbar {
+    width: 1px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 9px;
+    background: rgba(96, 125, 139, 0.99);
+}
+
+.balon1, .balon2 {
+    margin-top: 5px !important;
+    margin-bottom: 5px !important;
+}
+
+.balon1 a {
+    background: #42a5f5;
+    color: #fff !important;
+    border-radius: 20px 20px 3px 20px;
+    display: block;
+    max-width: 75%;
+    padding: 7px 13px 7px 13px;
+}
+
+.balon1:before {
+    content: attr(data-is);
+    position: absolute;
+    right: 15px;
+    bottom: -0.8em;
+    display: block;
+    font-size: .750rem;
+    color: rgba(84, 110, 122, 1.0);
+}
+
+.balon2 a {
+    background: #f1f1f1;
+    color: #000 !important;
+    border-radius: 20px 20px 20px 3px;
+    display: block;
+    max-width: 75%;
+    padding: 7px 13px 7px 13px;
+}
+
+.balon2:before {
+    content: attr(data-is);
+    position: absolute;
+    left: 13px;
+    bottom: -0.8em;
+    display: block;
+    font-size: .750rem;
+    color: rgba(84, 110, 122, 1.0);
+}
+
+/** Custom File Browser buttons **/
+
+.avatar.bg-primary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.avatar {
+    display: flex;
+    align-self: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    border: 2px solid #F7F9FA;
+    background: #F7F9FA;
+    color: #fff;
+}
+
+.bg-primary {
+    background-color: #007bff !important;
+}
+
+.avatar.bg-primary i {
+    font-size: 1.2rem;
+}
+
+.media-attachment-left-doc {
+    border-left: 4px solid #cce5ff;
+}
+
+.media-attachment-right-doc {
+    border-right: 4px solid #cce5ff;
+}
+
+.task-card > .progress {
+    height: 0.1875rem;
+    background: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1;
+}
+
+#sohbet {
+    box-shadow: none;
+}
+
+.close-button {
+    border: none;
+    background-color: transparent;
+    box-shadow: none;
+    cursor: pointer;
+}
+
+.read-more{
+    font-size: 12px;
+    color: gray;
+    text-decoration: underline !important;
+}
+
+.media-body {
+    height: 40px;
+    max-width: 50%;
+    line-height: 1rem;
+    padding: 0;
+}
+
+.balon2 a.A-filter-by-text, .balon1 a.A-filter-by-text {
+    padding: 0;
+    color: #007bff !important;
+    background-color: transparent !important;
+}
+
+.SPAN-filter-by-text {
+    color: #6c757d;
+    font-size: 12px;
 }
 
 .bg-not-found {
@@ -813,13 +994,12 @@ a.delete-a:hover {
     margin-top: 10px;
 }
 
-.live-form-group, .user-info-popup {
+.user-info-popup {
     display: none;
 }
 
 .user-info-popup {
     padding: 10px;
-    background-color: rgba(4, 30, 66, 0.1);
     margin-bottom: 5px;
 }
 

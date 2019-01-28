@@ -1,4 +1,7 @@
 @extends('layout.index')
+@section('css')
+    <link rel="stylesheet" href="{{ asset('css/croppie.css') }}">
+@endsection
 @section('content')
     <div class="modal fade" id="ModalCreateUser" tabindex="-1" role="dialog"
          aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -16,16 +19,15 @@
                         <div class="form-group">
                             <input type="text" class="form-control" name="fio" placeholder="ФИО" required>
                         </div>
-                        <div id="photo" class="form-group">
-                            <img src="http://via.placeholder.com/185x185"
-                                 style="" id="photo_preview"
-                                 class="img-thumbnail" alt="Фото группы">
+                        <div class="form-group">
+                            <input type="file" id="upload" class="form-control" accept="image/*" name="ava">
                         </div>
-                        <label class="custom-file hidden-print" style="">
-                            <input type="file" name="avatar" id="btnImagemPaciente" style="width: 160px;"
-                                   class="form-control form-control-sm">
-                            <span class="custom-file-control"></span>
-                        </label>
+                        <div id="main-cropper"></div>
+                        <div class="form-group" id="img-button">
+                            <button id="getImage" type="button" class="btn btn-info">Сохранить выделенную область</button>
+                        </div>
+                        <input type="text" name="avatar" id="avatar" class="hidden-print">
+
                         <div class="form-group">
                             <select class="custom-select" id="inputGroupSelect01" name="position">
                                 <option selected>Выберите должность</option>
@@ -80,27 +82,23 @@
     </div>
     <div class="row">
         @foreach($users as $user)
-            <div class="col-md-6 col-lg-6 col-xl-6">
-                <div class="card account-profile-main">
-                    <div class="row">
-                        <div class="col-4 account-main-info-col">
+            <div class="col-md-6 col-lg-4 col-xl-3">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="col account-main-info-col">
                             <div class="card">
                                 <div class="card-body">
-                                    <img src="{{ asset("images/avatars/users/$user->avatar") }}"
+                                    <img src="{{ asset('images/avatars/users/' . $user->avatar) }}"
                                          class="account-profile-avatar"
                                          alt="">
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-8">
                             <div class="card">
                                 <div class="card-body">
-                                    <ul class="account-profile-main_information">
-                                        <li><b>{{ $user->fio }}</b></li>
-                                        <li><b>{{ $user->position }}</b></li>
-                                        <li>Ответсвенный</li>
-                                        <li>День рождения: <b>{{ $user->birthday }}</b></li>
-                                    </ul>
+                                    <h5 class="card-subtitle text-center">{{ $user->fio }}
+                                    </h5>
+                                    <p class="text-center mb-0">{{ $user->position }}</p>
+                                    <p class="text-center"><b>День рождения:</b> {{ $user->birthday }}</p>
                                 </div>
                             </div>
                             <div class="card">
@@ -113,7 +111,7 @@
                                         <li><span><a href="tel:{{ $user->phone }}"><i
                                                         class="fas fa-phone fa-2x"></i></a></span>
                                         </li>
-                                        <li><span><a href="tel:7987543210"><i
+                                        <li><span><a href="#"><i
                                                         class="far fa-comment fa-2x"></i></a></span></li>
                                     </ul>
                                 </div>
@@ -126,18 +124,58 @@
     </div>
 @endsection
 @section('js')
+    <script src="{{ asset('js/croppie.js') }}"></script>
     <script>
-        $("#photo").click(function () {
-            $("#btnImagemPaciente").trigger('click');
-        });
-
-
-        $('#btnImagemPaciente').change(function () {
-            if (this.files && this.files[0]) {
-                let img = document.getElementById('photo_preview');
-                img.src = URL.createObjectURL(this.files[0]); // set src to file url
+        $(document).ready(function () {
+            if ($('#upload').val() == '') {
+                $('#main-cropper').hide();
+                $('#getImage').hide()
             }
+        })
+        ///images/avatars/users/cool.jpg
+        var basic = $('#main-cropper').croppie({
+            viewport: {width: 300, height: 300, type: 'square'},
+            boundary: {width: 300, height: 300},
+            showZoomer: false,
+
         });
+
+        $('#getImage').click(function () {
+            basic.croppie('result', 'base64').then(function (base) {
+                console.log()
+                $('#avatar').val(base)
+            })
+        })
+
+        function readFile(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#main-cropper').croppie('bind', {
+                        url: e.target.result
+                    });
+                    $('.actionDone').toggle();
+                    $('.actionUpload').toggle();
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $('#getImage').click(function () {
+            $(this).prop('disabled', true)
+            $(this).text('Сохранено')
+        })
+
+        $('#upload').change(function () {
+            $('#main-cropper').show()
+            $('#getImage').show()
+            $('#getImage').text('Сохранить выделенную область')
+            $('#getImage').prop('disabled', false)
+            readFile(this);
+        })
+
     </script>
     <script src="{{ asset('js/jquery.maskedinput.js') }}"></script>
     <script>
