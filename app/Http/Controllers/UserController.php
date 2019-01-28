@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
-use phpDocumentor\Reflection\Types\Null_;
 
 class UserController extends Controller
 {
@@ -23,8 +22,9 @@ class UserController extends Controller
 
         $user   = User::findorfail($id);
         $status = [1 => 'В работе', 2 => 'На проверке'];
+        $from   = [1 => 'Задача', 2 => 'Общежитие', 3 => 'Университет',];
 
-        return view('user.edit', compact('user', 'status'));
+        return view('user.edit', compact('user', 'status', 'from'));
     }
 
     public function update(Request $request, $id)

@@ -29,7 +29,7 @@ class HomeController extends Controller
 
         foreach ($user->todos as $todo)
         {
-            if (strtotime("-1 day") > strtotime($todo->date))
+            if (strtotime(date('Y - m - d')) > strtotime($todo->date))
             {
                 Todo::findOrFail($todo->id)->delete();
             }

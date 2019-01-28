@@ -28,7 +28,7 @@
                     </div>
                     <div class="progress">
                         <div
-                                class="progress-bar progress-bar-striped progress-bar-animated {{ $per < 50? 'bg-primary' : ($per < 75? 'bg-warning' : 'bg-danger') }}"
+                                class="progress-bar progress-bar-striped progress-bar-animated {{ $per < 50? 'bg-success' : ($per < 75? 'bg-warning' : 'bg-danger') }}"
                                 role="progressbar"
                                 style="width: {{ $per }}%" aria-valuenow="10" aria-valuemin="0"
                                 aria-valuemax="100">
@@ -60,7 +60,7 @@
                 </div>
             </div>
         </div>
-        <div class="card-body card-priority-mid">
+        <div class="card-body card-priority-{{ $mission->priority == 1? 'low' : ($mission->priority == 2? 'mid' : 'high') }}">
             <div class="row">
                 <div class="col-6">
                     <div class="card">

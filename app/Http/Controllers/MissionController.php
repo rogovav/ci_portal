@@ -31,8 +31,9 @@ class MissionController extends Controller
         $missions  = Mission::orderBy('id', 'DESC')->get();
         $subjects  = Subject::orderBy('name')->get();
         $users     = User::orderBy('fio')->get();
+        $from      = $this->from;
 
-        return view('mission.index', compact('buildings', 'clients', 'missions', 'subjects', 'users'));
+        return view('mission.index', compact('buildings', 'clients', 'missions', 'subjects', 'users', 'from'));
     }
 
     public function show($id)

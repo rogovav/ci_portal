@@ -122,7 +122,7 @@
                                                 @foreach($user->mission_owner->where('status', '<>', 3)->sortByDesc('id')->take(3) as $mission)
                                                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                                                         <div class="card">
-                                                            <div class="card-body task-card card-priority-mid">
+                                                            <div class="card-body task-card card-priority-{{ $mission->priority == 1? 'low' : ($mission->priority == 2? 'mid' : 'high') }} pb-0">
                                                                 <div class="progress">
                                                                     @php
                                                                         if (strtotime("now") > strtotime($mission->date_to))
@@ -132,7 +132,7 @@
                                                                             $per = (($mission->date_close ? strtotime($mission->date_close) : strtotime("now")) - strtotime($mission->created_at))/(strtotime($mission->date_to) - strtotime($mission->created_at)) * 100;
                                                                         }
                                                                     @endphp
-                                                                    <div class="progress-bar {{ $per < 50? 'bg-primary' : ($per < 75? 'bg-warning' : 'bg-danger') }}"
+                                                                    <div class="progress-bar {{ $per < 50? 'bg-success' : ($per < 75? 'bg-warning' : 'bg-danger') }}"
                                                                          role="progressbar"
                                                                          style="width: {{ $per }}%"
                                                                          aria-valuemin="0"
@@ -140,13 +140,20 @@
                                                                 </div>
                                                                 <div class="row">
                                                                     <div class="col-12">
-                                                                        <table class="table table-sm mb-0">
+                                                                        <table class="table mb-0">
+                                                                            <thead>
+                                                                            <th>#</th>
+                                                                            <th>Источник</th>
+                                                                            <th>Тема</th>
+                                                                            </thead>
                                                                             <tbody>
                                                                             <tr>
-                                                                                <td width="10%"><a href="{{ route('mission.show', $mission->id) }}">#{{ $mission->id }}</a></td>
-                                                                                <td width="30%">{{ $mission->subject->name }}</td>
-                                                                                <td>{!! str_limit($mission->info, 100) !!}
+                                                                                <td width="15%"><a
+                                                                                            href="{{ route('mission.show', $mission->id) }}">#{{ $mission->id }}</a>
                                                                                 </td>
+                                                                                <td width="30%">{{ $from[$mission->from] }}</td>
+                                                                                <td>{{ $mission->subject->name }}</td>
+
                                                                             </tr>
                                                                             </tbody>
                                                                         </table>
@@ -175,7 +182,7 @@
                                                 @foreach($user->mission_worker->where('status', '<>', 3)->sortByDesc('id')->take(3) as $mission)
                                                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                                                         <div class="card">
-                                                            <div class="card-body task-card card-priority-mid">
+                                                            <div class="card-body task-card card-priority-{{ $mission->priority == 1? 'low' : ($mission->priority == 2? 'mid' : 'high') }} pb-0">
                                                                 <div class="progress">
                                                                     @php
                                                                         if (strtotime("now") > strtotime($mission->date_to))
@@ -185,7 +192,7 @@
                                                                             $per = (($mission->date_close ? strtotime($mission->date_close) : strtotime("now")) - strtotime($mission->created_at))/(strtotime($mission->date_to) - strtotime($mission->created_at)) * 100;
                                                                         }
                                                                     @endphp
-                                                                    <div class="progress-bar {{ $per < 50? 'bg-primary' : ($per < 75? 'bg-warning' : 'bg-danger') }}"
+                                                                    <div class="progress-bar {{ $per < 50? 'bg-success' : ($per < 75? 'bg-warning' : 'bg-danger') }}"
                                                                          role="progressbar"
                                                                          style="width: {{ $per }}%"
                                                                          aria-valuemin="0"
@@ -193,13 +200,20 @@
                                                                 </div>
                                                                 <div class="row">
                                                                     <div class="col-12">
-                                                                        <table class="table table-sm mb-0">
+                                                                        <table class="table mb-0">
+                                                                            <thead>
+                                                                            <th>#</th>
+                                                                            <th>Источник</th>
+                                                                            <th>Тема</th>
+                                                                            </thead>
                                                                             <tbody>
                                                                             <tr>
-                                                                                <td width="10%"><a href="{{ route('mission.show', $mission->id) }}">#{{ $mission->id }}</a></td>
-                                                                                <td width="30%">{{ $mission->subject->name }}</td>
-                                                                                <td>{!! str_limit($mission->info, 100) !!}
+                                                                                <td width="15%"><a
+                                                                                            href="{{ route('mission.show', $mission->id) }}">#{{ $mission->id }}</a>
                                                                                 </td>
+                                                                                <td width="30%">{{ $from[$mission->from] }}</td>
+                                                                                <td>{{ $mission->subject->name }}</td>
+
                                                                             </tr>
                                                                             </tbody>
                                                                         </table>
@@ -228,7 +242,7 @@
                                                 @foreach($user->mission_helper->where('status', '<>', 3)->sortByDesc('id')->take(3) as $mission)
                                                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                                                         <div class="card">
-                                                            <div class="card-body task-card card-priority-mid">
+                                                            <div class="card-body task-card card-priority-{{ $mission->priority == 1? 'low' : ($mission->priority == 2? 'mid' : 'high') }} pb-0">
                                                                 <div class="progress">
                                                                     @php
                                                                         if (strtotime("now") > strtotime($mission->date_to))
@@ -238,7 +252,7 @@
                                                                             $per = (($mission->date_close ? strtotime($mission->date_close) : strtotime("now")) - strtotime($mission->created_at))/(strtotime($mission->date_to) - strtotime($mission->created_at)) * 100;
                                                                         }
                                                                     @endphp
-                                                                    <div class="progress-bar {{ $per < 50? 'bg-primary' : ($per < 75? 'bg-warning' : 'bg-danger') }}"
+                                                                    <div class="progress-bar {{ $per < 50? 'bg-success' : ($per < 75? 'bg-warning' : 'bg-danger') }}"
                                                                          role="progressbar"
                                                                          style="width: {{ $per }}%"
                                                                          aria-valuemin="0"
@@ -246,13 +260,20 @@
                                                                 </div>
                                                                 <div class="row">
                                                                     <div class="col-12">
-                                                                        <table class="table table-sm mb-0">
+                                                                        <table class="table mb-0">
+                                                                            <thead>
+                                                                            <th>#</th>
+                                                                            <th>Источник</th>
+                                                                            <th>Тема</th>
+                                                                            </thead>
                                                                             <tbody>
                                                                             <tr>
-                                                                                <td width="10%"><a href="{{ route('mission.show', $mission->id) }}">#{{ $mission->id }}</a></td>
-                                                                                <td width="30%">{{ $mission->subject->name }}</td>
-                                                                                <td>{!! str_limit($mission->info, 100) !!}
+                                                                                <td width="15%"><a
+                                                                                            href="{{ route('mission.show', $mission->id) }}">#{{ $mission->id }}</a>
                                                                                 </td>
+                                                                                <td width="30%">{{ $from[$mission->from] }}</td>
+                                                                                <td>{{ $mission->subject->name }}</td>
+
                                                                             </tr>
                                                                             </tbody>
                                                                         </table>
