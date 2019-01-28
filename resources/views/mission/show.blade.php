@@ -132,26 +132,26 @@
                             <div class="card-footer">
                             <div class="row">
                                 <div class="col-12 col-md-4 col-lg-4 col-xl-4">
-                                    <button type="button" class="btn btn-info btn-sm col-12" id="rewrite_button">
+                                    <button type="button" class="btn btn-info btn-sm col-12 mb-1" id="rewrite_button">
                                         Переадресовать заявку
                                     </button>
                                 </div>
                                 @if($mission->status == 1)
                                     <div class="col-12 col-md-4 col-lg-4 col-xl-4">
-                                        <button type="button" class="btn btn-danger btn-sm col-12" id="ok_button">
+                                        <button type="button" class="btn btn-danger btn-sm col-12 mb-1" id="ok_button">
                                             Закрыть заявку
                                         </button>
                                     </div>
                                 @endif
                                 @if($mission->status == 2)
                                     <div class="col-12 col-md-4 col-lg-4 col-xl-4">
-                                        <button type="button" class="btn btn-primary btn-sm col-12" id="ok_button">
+                                        <button type="button" class="btn btn-primary btn-sm col-12 mb-1" id="ok_button">
                                             Подтвердить/Отклонить
                                         </button>
                                     </div>
                                 @endif
                                 <div class="col-12 col-md-4 col-lg-4 col-xl-4">
-                                    <button type="button" class="btn btn-warning btn-sm col-12" id="deadline_button">
+                                    <button type="button" class="btn btn-warning btn-sm col-12 mb-1" id="deadline_button">
                                         Изменить Deadline
                                     </button>
                                 </div>
