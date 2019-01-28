@@ -39,62 +39,335 @@
     <div class="card">
         <div class="card-body">
             <div class="row">
-                <div class="col-3">
-                    <div class="card">
-                        <div class="card-body card-info">
-                            <div class="col account-main-info-col">
-                                <div class="card">
-                                    <div class="card-header ">
-                                        <h5 class="card-subtitle text-center">{{ $user->fio }}
-                                        </h5>
-                                    </div>
-                                    <div class="card-body">
-                                        <a href="" data-toggle="modal" data-target="#exampleModal"><img
-                                                    src="{{ asset('images/avatars/users/' . $user->avatar) }}"
-                                                    class="account-profile-avatar"
-                                                    alt=""></a>
-                                        <p class="text-center mb-0"><span
-                                                    class="badge badge-pill">{{ $user->position }}</span></p>
+                <div class="col-md-12 col-lg-12 col-xl-4">
+                    <div class="row">
+                        <div class="col-lg-6 col-xl-12">
+                            <div class="card">
+                                <div class="card-body card-info">
+                                    <div class="col account-main-info-col">
+                                        <div class="card">
+                                            <div class="card-header ">
+                                                <h5 class="card-subtitle text-center">{{ $user->fio }}
+                                                </h5>
+                                            </div>
+                                            <div class="card-body">
+                                                <a href="" data-toggle="modal" data-target="#exampleModal"><img
+                                                        src="{{ asset('images/avatars/users/' . $user->avatar) }}"
+                                                        class="account-profile-avatar"
+                                                        alt=""></a>
+                                                <p class="text-center mb-0"><span
+                                                        class="badge badge-pill">{{ $user->position }}</span></p>
+                                            </div>
+                                        </div>
+                                        <p><a id="card-show" class="btn btn-primary btn-block btn-sm mb-0" href="">Подробнее</a></p>
+                                        <div class="card" id="card-user">
+                                            <div class="card-body">
+                                                <table class="table">
+                                                    <tbody>
+                                                    <tr>
+                                                        <td><b>День рождения:</b></td>
+                                                        <td>{{ $user->birthday }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><b>Номер телефона</b></td>
+                                                        <td><span id="user-phone">{{ $user->phone }}</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><b>Внутренний номер</b></td>
+                                                        <td><span id="user-iphone">{{ $user->iphone }}</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><b>Почта</b></td>
+                                                        <td><span id="user-email">{{ $user->email }}</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><b>Логин VK</b></td>
+                                                        <td><span id="user-vk">{{ $user->vk }}</span></td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                                <form action="{{ route('user.update', $user->id) }}" method="POST"
+                                                      id="changeInfo">
+                                                    @csrf
+                                                </form>
+                                                <span
+                                                    class="badge badge-light">Нажмите на поле, чтобы изменить его</span>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="card">
-                                    <div class="card-body">
-                                        <table class="table">
-                                            <tbody>
-                                            <tr>
-                                                <td><b>День рождения:</b></td>
-                                                <td>{{ $user->birthday }}</td>
-                                            </tr>
-                                            <tr>
-                                                <td><b>Номер телефона</b></td>
-                                                <td><span id="user-phone">{{ $user->phone }}</span></td>
-                                            </tr>
-                                            <tr>
-                                                <td><b>Внутренний номер</b></td>
-                                                <td><span id="user-iphone">{{ $user->iphone }}</span></td>
-                                            </tr>
-                                            <tr>
-                                                <td><b>Почта</b></td>
-                                                <td><span id="user-email">{{ $user->email }}</span></td>
-                                            </tr>
-                                            <tr>
-                                                <td><b>Логин VK</b></td>
-                                                <td><span id="user-vk">{{ $user->vk }}</span></td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                        <form action="{{ route('user.update', $user->id) }}" method="POST"
-                                              id="changeInfo">
-                                            @csrf
-                                        </form>
-                                        <span class="badge badge-light">Нажмите на поле, чтобы изменить его</span>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-xl-12">
+
+                            <div class="card">
+                                <div class="card-body card-info">
+                                    <div class="collapse" id="collapseExample">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                Новое задание
+                                            </div>
+                                            <div class="card-body">
+                                                <form action="{{ route('todo.store') }}" class="col-12" method="post">
+                                                    {{ csrf_field() }}
+
+                                                    <div class="form-group">
+                                                        <input class="form-control" type="text"
+                                                               placeholder="Название задание"
+                                                               name="name">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input type="date" class="form-control" name="date">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <select class="form-control" name="priority">
+                                                            <option value="1">Низкий приоритет</option>
+                                                            <option value="2" selected>Средний приоритет</option>
+                                                            <option value="3">Высокий приоритет</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-row  mb-3">
+                                                        <div class="col">
+                                                <textarea placeholder="Текст TODO" class="form-control" name="info"
+                                                          id="" cols="30"
+                                                          rows="2"></textarea>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-row">
+                                                        <div class="col">
+                                                            <button type="submit" class="btn btn-dark float-right">
+                                                                Добавить
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card">
+                                        <div class="card-header">
+                                            Список заданий <a class="badge badge-primary" data-toggle="collapse"
+                                                              href="#collapseExample" role="button"
+                                                              aria-expanded="false"
+                                                              aria-controls="collapseExample">
+                                                Добавить
+                                            </a>
+                                        </div>
+                                        <div class="card-body">
+                                            <nav>
+                                                <div class="nav nav-tabs mb-3" id="nav-tab" role="tablist">
+                                                    <a class="nav-item nav-link active" id="nav-home-tab"
+                                                       data-toggle="tab"
+                                                       href="#nav-home" role="tab" aria-controls="nav-home"
+                                                       aria-selected="true">Сегодня</a>
+                                                    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab"
+                                                       href="#nav-profile" role="tab" aria-controls="nav-profile"
+                                                       aria-selected="false">Завтра</a>
+                                                    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab"
+                                                       href="#nav-contact" role="tab" aria-controls="nav-contact"
+                                                       aria-selected="false">Неделя</a>
+                                                </div>
+                                            </nav>
+                                            <div class="tab-content" id="nav-tabContent">
+                                                <div class="tab-pane fade show active" id="nav-home" role="tabpanel"
+                                                     aria-labelledby="nav-home-tab"
+                                                     style="max-height: 550px; overflow-y: scroll; overflow-x: hidden">
+                                                    <div class="row">
+                                                        @foreach($user->todos->where('date', date('Y-m-d'))->where('success', false)->sortByDesc('priority') as $todo)
+                                                            <div
+                                                                class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                                <div class="card">
+                                                                    <div
+                                                                        class="card-header card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}-header">
+                                                                        <div class="row">
+                                                                            <div class="col-6">{{ $todo->name }}</div>
+                                                                            <div class="col-6"><span
+                                                                                    class="badge badge-light float-right">Задание на {{ $todo->date }}</span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div
+                                                                        class="card-body card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}">
+                                                                        <p>{{ $todo->info }}</p>
+                                                                        <div class="row">
+                                                                            <div class="col-12">
+                                                                                <a href="{{ route('todo.update', $todo->id) }}"
+                                                                                   class="badge badge-success text-center col-12">
+                                                                                    Завершить задание
+                                                                                </a>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        @endforeach
+                                                        @foreach($user->todos->where('date', date('Y-m-d'))->where('success', true)->sortByDesc('priority') as $todo)
+                                                            <div
+                                                                class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                                <div class="card todo-done">
+                                                                    <div
+                                                                        class="card-header card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}-header">
+                                                                        <div class="row">
+                                                                            <div class="col-6"><s>{{ $todo->name }}</s>
+                                                                            </div>
+                                                                            <div class="col-6"><span
+                                                                                    class="badge badge-light float-right">Задание на {{ $todo->date }}</span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div
+                                                                        class="card-body card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}">
+                                                                        <p><s>{{ $todo->info }}</s></p>
+                                                                        <div class="row">
+                                                                            <div class="col-12">
+                                                                                <a href="{{ route('todo.update', $todo->id) }}"
+                                                                                   class="badge badge-dark text-center col-12">
+                                                                                    Восстановить задание
+                                                                                </a>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        @endforeach
+                                                    </div>
+                                                </div>
+                                                <div class="tab-pane fade" id="nav-profile" role="tabpanel"
+                                                     aria-labelledby="nav-profile-tab"
+                                                     style="max-height: 550px; overflow-y: scroll; overflow-x: hidden">
+                                                    <div class="row">
+                                                        @foreach($user->todos->where('date', date('Y-m-d', strtotime(date('Y-m-d') . "+1 days")))->where('success', false)->sortByDesc('priority') as $todo)
+                                                            <div
+                                                                class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                                <div class="card">
+                                                                    <div
+                                                                        class="card-header card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}-header">
+                                                                        <div class="row">
+                                                                            <div class="col-6">{{ $todo->name }}</div>
+                                                                            <div class="col-6"><span
+                                                                                    class="badge badge-light float-right">Задание на {{ $todo->date }}</span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div
+                                                                        class="card-body card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}">
+                                                                        <p>{{ $todo->info }}</p>
+                                                                        <div class="row">
+                                                                            <div class="col-12">
+                                                                                <a href="{{ route('todo.update', $todo->id) }}"
+                                                                                   class="badge badge-success text-center col-12">
+                                                                                    Завершить задание
+                                                                                </a>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        @endforeach
+                                                        @foreach($user->todos->where('date', date('Y-m-d', strtotime(date('Y-m-d') . "+1 days")))->where('success', false)->sortByDesc('priority') as $todo)
+                                                            <div
+                                                                class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                                <div class="card todo-done">
+                                                                    <div
+                                                                        class="card-header card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}-header">
+                                                                        <div class="row">
+                                                                            <div class="col-6"><s>{{ $todo->name }}</s>
+                                                                            </div>
+                                                                            <div class="col-6"><span
+                                                                                    class="badge badge-light float-right">Задание на {{ $todo->date }}</span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div
+                                                                        class="card-body card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}">
+                                                                        <p><s>{{ $todo->info }}</s></p>
+                                                                        <div class="row">
+                                                                            <div class="col-12">
+                                                                                <a href="{{ route('todo.update', $todo->id) }}"
+                                                                                   class="badge badge-dark text-center col-12">
+                                                                                    Восстановить задание
+                                                                                </a>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        @endforeach
+                                                    </div>
+                                                </div>
+                                                <div class="tab-pane fade" id="nav-contact" role="tabpanel"
+                                                     aria-labelledby="nav-contact-tab"
+                                                     style="max-height: 550px; overflow-y: scroll; overflow-x: hidden">
+                                                    <div class="row">
+                                                        @foreach($user->todos->where('date', '>=', date('Y-m-d'))->where('date', '<=', date('Y-m-d', strtotime(date('Y-m-d') . "+7 days")))->where('success', false)->sortByDesc('priority') as $todo)
+                                                            <div
+                                                                class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                                <div class="card">
+                                                                    <div
+                                                                        class="card-header card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}-header">
+                                                                        <div class="row">
+                                                                            <div class="col-6">{{ $todo->name }}</div>
+                                                                            <div class="col-6"><span
+                                                                                    class="badge badge-light float-right">Задание на {{ $todo->date }}</span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div
+                                                                        class="card-body card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}">
+                                                                        <p>{{ $todo->info }}</p>
+                                                                        <div class="row">
+                                                                            <div class="col-12">
+                                                                                <a href="{{ route('todo.update', $todo->id) }}"
+                                                                                   class="badge badge-success text-center col-12">
+                                                                                    Завершить задание
+                                                                                </a>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        @endforeach
+                                                        @foreach($user->todos->where('date', '>=', date('Y-m-d'))->where('date', '<=', date('Y-m-d', strtotime(date('Y-m-d') . "+7 days")))->where('success', true)->sortByDesc('priority') as $todo)
+                                                            <div
+                                                                class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                                <div class="card todo-done">
+                                                                    <div
+                                                                        class="card-header card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}-header">
+                                                                        <div class="row">
+                                                                            <div class="col-6"><s>{{ $todo->name }}</s>
+                                                                            </div>
+                                                                            <div class="col-6"><span
+                                                                                    class="badge badge-light float-right">Задание на {{ $todo->date }}</span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div
+                                                                        class="card-body card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}">
+                                                                        <p><s>{{ $todo->info }}</s></p>
+                                                                        <div class="row">
+                                                                            <div class="col-12">
+                                                                                <a href="{{ route('todo.update', $todo->id) }}"
+                                                                                   class="badge badge-dark text-center col-12">
+                                                                                    Восстановить задание
+                                                                                </a>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        @endforeach
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+
                 </div>
-                <div class="col-6">
+                <div class=" col-lg-12 col-xl-8">
                     <div class="card">
                         <div class="card-body card-info">
                             <div class="card">
@@ -122,7 +395,8 @@
                                                 @foreach($user->mission_owner->where('status', '<>', 3)->sortByDesc('id')->take(3) as $mission)
                                                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                                                         <div class="card">
-                                                            <div class="card-body task-card card-priority-{{ $mission->priority == 1? 'low' : ($mission->priority == 2? 'mid' : 'high') }} pb-0">
+                                                            <div
+                                                                class="card-body task-card card-priority-{{ $mission->priority == 1? 'low' : ($mission->priority == 2? 'mid' : 'high') }} pb-0">
                                                                 <div class="progress">
                                                                     @php
                                                                         if (strtotime("now") > strtotime($mission->date_to))
@@ -132,11 +406,12 @@
                                                                             $per = (($mission->date_close ? strtotime($mission->date_close) : strtotime("now")) - strtotime($mission->created_at))/(strtotime($mission->date_to) - strtotime($mission->created_at)) * 100;
                                                                         }
                                                                     @endphp
-                                                                    <div class="progress-bar {{ $per < 50? 'bg-success' : ($per < 75? 'bg-warning' : 'bg-danger') }}"
-                                                                         role="progressbar"
-                                                                         style="width: {{ $per }}%"
-                                                                         aria-valuemin="0"
-                                                                         aria-valuemax="100"></div>
+                                                                    <div
+                                                                        class="progress-bar {{ $per < 50? 'bg-success' : ($per < 75? 'bg-warning' : 'bg-danger') }}"
+                                                                        role="progressbar"
+                                                                        style="width: {{ $per }}%"
+                                                                        aria-valuemin="0"
+                                                                        aria-valuemax="100"></div>
                                                                 </div>
                                                                 <div class="row">
                                                                     <div class="col-12">
@@ -149,7 +424,7 @@
                                                                             <tbody>
                                                                             <tr>
                                                                                 <td width="15%"><a
-                                                                                            href="{{ route('mission.show', $mission->id) }}">#{{ $mission->id }}</a>
+                                                                                        href="{{ route('mission.show', $mission->id) }}">#{{ $mission->id }}</a>
                                                                                 </td>
                                                                                 <td width="30%">{{ $from[$mission->from] }}</td>
                                                                                 <td>{{ $mission->subject->name }}</td>
@@ -182,7 +457,8 @@
                                                 @foreach($user->mission_worker->where('status', '<>', 3)->sortByDesc('id')->take(3) as $mission)
                                                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                                                         <div class="card">
-                                                            <div class="card-body task-card card-priority-{{ $mission->priority == 1? 'low' : ($mission->priority == 2? 'mid' : 'high') }} pb-0">
+                                                            <div
+                                                                class="card-body task-card card-priority-{{ $mission->priority == 1? 'low' : ($mission->priority == 2? 'mid' : 'high') }} pb-0">
                                                                 <div class="progress">
                                                                     @php
                                                                         if (strtotime("now") > strtotime($mission->date_to))
@@ -192,11 +468,12 @@
                                                                             $per = (($mission->date_close ? strtotime($mission->date_close) : strtotime("now")) - strtotime($mission->created_at))/(strtotime($mission->date_to) - strtotime($mission->created_at)) * 100;
                                                                         }
                                                                     @endphp
-                                                                    <div class="progress-bar {{ $per < 50? 'bg-success' : ($per < 75? 'bg-warning' : 'bg-danger') }}"
-                                                                         role="progressbar"
-                                                                         style="width: {{ $per }}%"
-                                                                         aria-valuemin="0"
-                                                                         aria-valuemax="100"></div>
+                                                                    <div
+                                                                        class="progress-bar {{ $per < 50? 'bg-success' : ($per < 75? 'bg-warning' : 'bg-danger') }}"
+                                                                        role="progressbar"
+                                                                        style="width: {{ $per }}%"
+                                                                        aria-valuemin="0"
+                                                                        aria-valuemax="100"></div>
                                                                 </div>
                                                                 <div class="row">
                                                                     <div class="col-12">
@@ -209,7 +486,7 @@
                                                                             <tbody>
                                                                             <tr>
                                                                                 <td width="15%"><a
-                                                                                            href="{{ route('mission.show', $mission->id) }}">#{{ $mission->id }}</a>
+                                                                                        href="{{ route('mission.show', $mission->id) }}">#{{ $mission->id }}</a>
                                                                                 </td>
                                                                                 <td width="30%">{{ $from[$mission->from] }}</td>
                                                                                 <td>{{ $mission->subject->name }}</td>
@@ -242,7 +519,8 @@
                                                 @foreach($user->mission_helper->where('status', '<>', 3)->sortByDesc('id')->take(3) as $mission)
                                                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                                                         <div class="card">
-                                                            <div class="card-body task-card card-priority-{{ $mission->priority == 1? 'low' : ($mission->priority == 2? 'mid' : 'high') }} pb-0">
+                                                            <div
+                                                                class="card-body task-card card-priority-{{ $mission->priority == 1? 'low' : ($mission->priority == 2? 'mid' : 'high') }} pb-0">
                                                                 <div class="progress">
                                                                     @php
                                                                         if (strtotime("now") > strtotime($mission->date_to))
@@ -252,11 +530,12 @@
                                                                             $per = (($mission->date_close ? strtotime($mission->date_close) : strtotime("now")) - strtotime($mission->created_at))/(strtotime($mission->date_to) - strtotime($mission->created_at)) * 100;
                                                                         }
                                                                     @endphp
-                                                                    <div class="progress-bar {{ $per < 50? 'bg-success' : ($per < 75? 'bg-warning' : 'bg-danger') }}"
-                                                                         role="progressbar"
-                                                                         style="width: {{ $per }}%"
-                                                                         aria-valuemin="0"
-                                                                         aria-valuemax="100"></div>
+                                                                    <div
+                                                                        class="progress-bar {{ $per < 50? 'bg-success' : ($per < 75? 'bg-warning' : 'bg-danger') }}"
+                                                                        role="progressbar"
+                                                                        style="width: {{ $per }}%"
+                                                                        aria-valuemin="0"
+                                                                        aria-valuemax="100"></div>
                                                                 </div>
                                                                 <div class="row">
                                                                     <div class="col-12">
@@ -269,7 +548,7 @@
                                                                             <tbody>
                                                                             <tr>
                                                                                 <td width="15%"><a
-                                                                                            href="{{ route('mission.show', $mission->id) }}">#{{ $mission->id }}</a>
+                                                                                        href="{{ route('mission.show', $mission->id) }}">#{{ $mission->id }}</a>
                                                                                 </td>
                                                                                 <td width="30%">{{ $from[$mission->from] }}</td>
                                                                                 <td>{{ $mission->subject->name }}</td>
@@ -302,259 +581,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-3">
-                    <div class="card">
-                        <div class="card-body card-info">
-                            <div class="collapse" id="collapseExample">
-                                <div class="card">
-                                    <div class="card-header">
-                                        Новое задание
-                                    </div>
-                                    <div class="card-body">
-                                        <form action="{{ route('todo.store') }}" class="col-12" method="post">
-                                            {{ csrf_field() }}
-
-                                            <div class="form-group">
-                                                <input class="form-control" type="text"
-                                                       placeholder="Название задание"
-                                                       name="name">
-                                            </div>
-                                            <div class="form-group">
-                                                <input type="date" class="form-control" name="date">
-                                            </div>
-                                            <div class="form-group">
-                                                <select class="form-control" name="priority">
-                                                    <option value="1">Низкий приоритет</option>
-                                                    <option value="2" selected>Средний приоритет</option>
-                                                    <option value="3">Высокий приоритет</option>
-                                                </select>
-                                            </div>
-                                            <div class="form-row  mb-3">
-                                                <div class="col">
-                                                <textarea placeholder="Текст TODO" class="form-control" name="info"
-                                                          id="" cols="30"
-                                                          rows="2"></textarea>
-                                                </div>
-                                            </div>
-                                            <div class="form-row">
-                                                <div class="col">
-                                                    <button type="submit" class="btn btn-dark float-right">Добавить
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card">
-                                <div class="card-header">
-                                    Список заданий <a class="badge badge-primary" data-toggle="collapse"
-                                                      href="#collapseExample" role="button" aria-expanded="false"
-                                                      aria-controls="collapseExample">
-                                        Добавить
-                                    </a>
-                                </div>
-                                <div class="card-body">
-                                    <nav>
-                                        <div class="nav nav-tabs mb-3" id="nav-tab" role="tablist">
-                                            <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab"
-                                               href="#nav-home" role="tab" aria-controls="nav-home"
-                                               aria-selected="true">Сегодня</a>
-                                            <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab"
-                                               href="#nav-profile" role="tab" aria-controls="nav-profile"
-                                               aria-selected="false">Завтра</a>
-                                            <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab"
-                                               href="#nav-contact" role="tab" aria-controls="nav-contact"
-                                               aria-selected="false">Неделя</a>
-                                        </div>
-                                    </nav>
-                                    <div class="tab-content" id="nav-tabContent">
-                                        <div class="tab-pane fade show active" id="nav-home" role="tabpanel"
-                                             aria-labelledby="nav-home-tab"
-                                             style="max-height: 550px; overflow-y: scroll; overflow-x: hidden">
-                                            <div class="row">
-                                                @foreach($user->todos->where('date', date('Y-m-d'))->where('success', false)->sortByDesc('priority') as $todo)
-                                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                                                        <div class="card">
-                                                            <div
-                                                                    class="card-header card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}-header">
-                                                                <div class="row">
-                                                                    <div class="col-6">{{ $todo->name }}</div>
-                                                                    <div class="col-6"><span
-                                                                                class="badge badge-light float-right">Задание на {{ $todo->date }}</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div
-                                                                    class="card-body card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}">
-                                                                <p>{{ $todo->info }}</p>
-                                                                <div class="row">
-                                                                    <div class="col-12">
-                                                                        <a href="{{ route('todo.update', $todo->id) }}"
-                                                                           class="badge badge-success text-center col-12">
-                                                                            Завершить задание
-                                                                        </a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                @endforeach
-                                                @foreach($user->todos->where('date', date('Y-m-d'))->where('success', true)->sortByDesc('priority') as $todo)
-                                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                                                        <div class="card todo-done">
-                                                            <div
-                                                                    class="card-header card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}-header">
-                                                                <div class="row">
-                                                                    <div class="col-6"><s>{{ $todo->name }}</s></div>
-                                                                    <div class="col-6"><span
-                                                                                class="badge badge-light float-right">Задание на {{ $todo->date }}</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div
-                                                                    class="card-body card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}">
-                                                                <p><s>{{ $todo->info }}</s></p>
-                                                                <div class="row">
-                                                                    <div class="col-12">
-                                                                        <a href="{{ route('todo.update', $todo->id) }}"
-                                                                           class="badge badge-dark text-center col-12">
-                                                                            Восстановить задание
-                                                                        </a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                @endforeach
-                                            </div>
-                                        </div>
-                                        <div class="tab-pane fade" id="nav-profile" role="tabpanel"
-                                             aria-labelledby="nav-profile-tab"
-                                             style="max-height: 550px; overflow-y: scroll; overflow-x: hidden">
-                                            <div class="row">
-                                                @foreach($user->todos->where('date', date('Y-m-d', strtotime(date('Y-m-d') . "+1 days")))->where('success', false)->sortByDesc('priority') as $todo)
-                                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                                                        <div class="card">
-                                                            <div
-                                                                    class="card-header card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}-header">
-                                                                <div class="row">
-                                                                    <div class="col-6">{{ $todo->name }}</div>
-                                                                    <div class="col-6"><span
-                                                                                class="badge badge-light float-right">Задание на {{ $todo->date }}</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div
-                                                                    class="card-body card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}">
-                                                                <p>{{ $todo->info }}</p>
-                                                                <div class="row">
-                                                                    <div class="col-12">
-                                                                        <a href="{{ route('todo.update', $todo->id) }}"
-                                                                           class="badge badge-success text-center col-12">
-                                                                            Завершить задание
-                                                                        </a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                @endforeach
-                                                @foreach($user->todos->where('date', date('Y-m-d', strtotime(date('Y-m-d') . "+1 days")))->where('success', false)->sortByDesc('priority') as $todo)
-                                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                                                        <div class="card todo-done">
-                                                            <div
-                                                                    class="card-header card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}-header">
-                                                                <div class="row">
-                                                                    <div class="col-6"><s>{{ $todo->name }}</s></div>
-                                                                    <div class="col-6"><span
-                                                                                class="badge badge-light float-right">Задание на {{ $todo->date }}</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div
-                                                                    class="card-body card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}">
-                                                                <p><s>{{ $todo->info }}</s></p>
-                                                                <div class="row">
-                                                                    <div class="col-12">
-                                                                        <a href="{{ route('todo.update', $todo->id) }}"
-                                                                           class="badge badge-dark text-center col-12">
-                                                                            Восстановить задание
-                                                                        </a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                @endforeach
-                                            </div>
-                                        </div>
-                                        <div class="tab-pane fade" id="nav-contact" role="tabpanel"
-                                             aria-labelledby="nav-contact-tab"
-                                             style="max-height: 550px; overflow-y: scroll; overflow-x: hidden">
-                                            <div class="row">
-                                                @foreach($user->todos->where('date', '>=', date('Y-m-d'))->where('date', '<=', date('Y-m-d', strtotime(date('Y-m-d') . "+7 days")))->where('success', false)->sortByDesc('priority') as $todo)
-                                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                                                        <div class="card">
-                                                            <div
-                                                                    class="card-header card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}-header">
-                                                                <div class="row">
-                                                                    <div class="col-6">{{ $todo->name }}</div>
-                                                                    <div class="col-6"><span
-                                                                                class="badge badge-light float-right">Задание на {{ $todo->date }}</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div
-                                                                    class="card-body card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}">
-                                                                <p>{{ $todo->info }}</p>
-                                                                <div class="row">
-                                                                    <div class="col-12">
-                                                                        <a href="{{ route('todo.update', $todo->id) }}"
-                                                                           class="badge badge-success text-center col-12">
-                                                                            Завершить задание
-                                                                        </a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                @endforeach
-                                                @foreach($user->todos->where('date', '>=', date('Y-m-d'))->where('date', '<=', date('Y-m-d', strtotime(date('Y-m-d') . "+7 days")))->where('success', true)->sortByDesc('priority') as $todo)
-                                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                                                        <div class="card todo-done">
-                                                            <div
-                                                                    class="card-header card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}-header">
-                                                                <div class="row">
-                                                                    <div class="col-6"><s>{{ $todo->name }}</s></div>
-                                                                    <div class="col-6"><span
-                                                                                class="badge badge-light float-right">Задание на {{ $todo->date }}</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div
-                                                                    class="card-body card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}">
-                                                                <p><s>{{ $todo->info }}</s></p>
-                                                                <div class="row">
-                                                                    <div class="col-12">
-                                                                        <a href="{{ route('todo.update', $todo->id) }}"
-                                                                           class="badge badge-dark text-center col-12">
-                                                                            Восстановить задание
-                                                                        </a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                @endforeach
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -562,6 +588,17 @@
 
 @section('js')
     <script src="{{ asset('js/croppie.js') }}"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#card-user').hide()
+        })
+        $('#card-show').click(function (e) {
+            e.preventDefault()
+            $('#card-user').is(':visible') ? $('#card-user').hide() : $('#card-user').show()
+        })
+    </script>
+
     <script>
         $(document).ready(function () {
             if ($('#upload').val() == '') {
