@@ -69,13 +69,14 @@
                     <a class="nav-link" href="" title="Склад"><i class="fas fa-warehouse"></i> Склад <i
                             class="fas fa-warehouse shortmenu animate"></i></a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url("admin") }}" title="Склад"><i class="fas fa-users-cog"></i> Service <i
+                            class="fas fa-users-cog shortmenu animate"></i></a>
+                </li>
 
             </ul>
 
             <ul class="navbar-nav ml-md-auto d-md-flex">
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url("admin") }}"><i class="fas fa-users-cog"></i> Админ-панель</a>
-                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('user.edit', Auth::id()) }}"><img
                             src="{{ asset('images/avatars/users/' . Auth::user()->avatar) }}" alt=""
@@ -94,7 +95,7 @@
     </nav>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
+            <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-3">
                 <div class="card">
                     <div class="card-body card-body-task no-padding">
                         <div class="card-body-label card-task"><a href="{{ route('user.edit', Auth::id()) }}"><i
@@ -109,7 +110,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
+            <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-3">
                 <div class="card card-body-message">
                     <div class="card-body no-padding">
                         <div class="card-body-label card-message"><a href=""><i class="fas fa-envelope fa-3x"></i></a>
@@ -122,7 +123,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
+            <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-3">
                 <div class="card">
                     <div class="card-body card-body-wiki no-padding">
                         <div class="card-body-label card-wiki"><a href=""><i
@@ -135,7 +136,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
+            <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-3">
                 <div class="card">
                     <div class="card-body card-body-users no-padding">
                         <div class="card-body-label card-users"><a href=""><i class="fas fa-users fa-3x"></i></a></div>

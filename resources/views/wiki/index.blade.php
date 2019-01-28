@@ -64,7 +64,7 @@
         </div>
         <div class="card-body">
             <div class="row">
-                <div class="col-3 card-outer">
+                <div class=" col-md-6 col-lg-6 col-xl-4 card-outer">
                     <div class="card">
                         <div class="card-header card-info-header">
                             <div class="row">
