@@ -41,7 +41,7 @@ class UserController extends Controller
 
             $photoName = $user->avatar;
 
-            file_put_contents(public_path('images/avatars/users') . '/' . $photoName, $ava);
+            file_put_contents('images/avatars/users/' . $photoName, $ava);
         };
         if (isset($request['vk'])) {
             $user->update(['vk' => $request['vk']]);
@@ -68,7 +68,7 @@ class UserController extends Controller
 
         $photoName = $data['login'] . '.' . $data['ava']->getClientOriginalExtension();
 
-        file_put_contents(public_path('images/avatars/users') . '/' . $photoName, $ava);
+        file_put_contents('images/avatars/users/' . $photoName, $ava);
 
         User::create([
             'fio' => $data['fio'],

@@ -9,20 +9,20 @@
     <div class="card">
         <div class="card-header card-priority-{{ $mission->priority == 1? 'low' : ($mission->priority == 2? 'mid' : 'high') }}-header">
             <div class="row align-items-center">
-                <div class="col-2 col-form-label">
+                <div class="col-12 col-md-2 col-lg-2 col-xl-2 col-form-label">
                     <h6 class="mb-0">Заявка <b>#{{ $mission->id }}</b> ({{ $from[$mission->from] }})</h6>
                 </div>
-                <div class="col-8">
+                <div class="col-12 col-md-8 col-lg-8 col-xl-8">
                     <div class="row mb-1">
-                        <div class="col-4 text-left">
+                        <div class="col-12 col-md-4 col-lg-4 col-xl-4 text-left">
                             <span
                                     class="badge badge-info">{{ $mission->created_at }}</span> {{-- Вт, 22-го янв., 13:22:44 --}}
                         </div>
-                        <div class="col-4 text-center ">
+                        <div class="col-12 col-md-4 col-lg-4 col-xl-4 text-center ">
                             <span class="badge badge-success"><i
                                         class="far fa-calendar{{ $per == 100? '-times' : ($mission->status == 1? Null : ($mission->status == 2? '-minus' : '-check')) }}"></i> {{ $status[$mission->status] }} </span>
                         </div>
-                        <div class="col-4 text-right ">
+                        <div class="col-12 col-md-4 col-lg-4 col-xl-4 text-right ">
                             <span class="badge badge-info">{{ $mission->date_to }}</span>
                         </div>
                     </div>
@@ -36,7 +36,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-2">
+                <div class="col-12 col-md-2 col-lg-2 col-xl-2 col-form-label">
                     @switch($mission->status)
                         @case(1)
                             @if($mission->worker == Auth::user())
@@ -68,13 +68,14 @@
                             Информация о заявке
                         </div>
                         <div class="card-body">
-                            <div class="row">
+                            @if($mission->client)
+                                <div class="row">
                                 <div class="col-12">
                                     <div class="card">
                                         <div class="card-header card-client-header">
                                             <b>Клиент:</b> {{ $mission->client->fio }}</div>
                                         <div class="card-body card-client">
-                                            <table class="table table-sm mb-0">
+                                            <table class="table table-sm mb-0 ">
                                                 <tr>
                                                     <th>Телефон</th>
                                                     <td>{{ $mission->client->phone }}</td>
@@ -93,19 +94,20 @@
                                                 </tr>
                                                 <tr>
                                                     <th>Адрес</th>
-                                                    <td>{{ $mission->building->name }}, {{ $mission->address }}
-                                                        , {{ $mission->building->address }}</td>
+                                                    <td>{{ @$mission->building->name }}, {{ $mission->address }}
+                                                        , {{ @$mission->building->address }}</td>
                                                 </tr>
                                             </table>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            @endif
                             <div class="card">
                                 <div class="card-header card-info-header">
                                     <span><b>Тема: </b>{{ $mission->subject->name }}</span>
                                 </div>
-                                <div class="card-body card-info">
+                                <div class="card-body card-info ">
                                     {!! nl2br($mission->info) !!}
                                 </div>
                                 <div class="card-footer card-info-header">
@@ -129,27 +131,27 @@
                         @if($mission->status != 3 and $mission->owner == Auth::user())
                             <div class="card-footer">
                             <div class="row">
-                                <div class="col-4">
-                                    <button type="button" class="btn btn-info btn-sm col-12" id="rewrite_button">
+                                <div class="col-12 col-md-4 col-lg-4 col-xl-4">
+                                    <button type="button" class="btn btn-info btn-sm col-12 mb-1" id="rewrite_button">
                                         Переадресовать заявку
                                     </button>
                                 </div>
                                 @if($mission->status == 1)
-                                    <div class="col-4">
-                                        <button type="button" class="btn btn-danger btn-sm col-12" id="ok_button">
+                                    <div class="col-12 col-md-4 col-lg-4 col-xl-4">
+                                        <button type="button" class="btn btn-danger btn-sm col-12 mb-1" id="ok_button">
                                             Закрыть заявку
                                         </button>
                                     </div>
                                 @endif
                                 @if($mission->status == 2)
-                                    <div class="col-4">
-                                        <button type="button" class="btn btn-primary btn-sm col-12" id="ok_button">
+                                    <div class="col-12 col-md-4 col-lg-4 col-xl-4">
+                                        <button type="button" class="btn btn-primary btn-sm col-12 mb-1" id="ok_button">
                                             Подтвердить/Отклонить
                                         </button>
                                     </div>
                                 @endif
-                                <div class="col-4">
-                                    <button type="button" class="btn btn-warning btn-sm col-12" id="deadline_button">
+                                <div class="col-12 col-md-4 col-lg-4 col-xl-4">
+                                    <button type="button" class="btn btn-warning btn-sm col-12 mb-1" id="deadline_button">
                                         Изменить Deadline
                                     </button>
                                 </div>
@@ -275,7 +277,7 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="row">
-                                        <div class="col-md-6 col-lg-3 col-xl-3">
+                                        <div class="col-6 col-md-6 col-lg-3 col-xl-3 ">
                                             <div class="card">
                                                 <div class="card-header text-center card-priority-high-header">
                                                     <b>Автор</b>
@@ -296,7 +298,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-6 col-lg-3 col-xl-3">
+                                        <div class="col-6 col-md-6 col-lg-3 col-xl-3 smal">
                                             <div class="card">
                                                 <div class="card-header text-center card-priority-mid-header">
                                                     <b>Исполнитель</b>
@@ -318,7 +320,7 @@
                                             </div>
                                         </div>
                                         @if($mission->helpers->count() > 0)
-                                        <div class="col-md-12 col-lg-6 col-xl-6">
+                                        <div class="col-12 col-md-12 col-lg-6 col-xl-6">
                                             <div class="card">
                                                 <div class="card-header text-center card-priority-low-header">
                                                     <b>Помощники</b>
@@ -358,7 +360,7 @@
                                             </div>
                                             <div class="card-body pb-0 pt-0">
                                                 <div id="sohbet" style="overflow-y: scroll; max-height: 300px;"
-                                                     class="card shadow-none border-0 m-0 p-0 position-relative bg-transparent">
+                                                     class="card shadow-none border-0 m-0 p-0 position-relative bg-transparent ">
                                                     @foreach($mission->comments as $comment)
                                                         @if($comment->user_id == Auth::id())
                                                             <div class="balon1 p-2 m-0 position-relative"
