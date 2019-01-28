@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('vk')->nullable();
             $table->string('email')->unique();
             $table->string('phone')->nullable();
+            $table->string('iphone')->nullable();
             $table->date('birthday')->nullable();
             $table->string('password');
             $table->rememberToken();

@@ -38,7 +38,7 @@
                                         <div class="card-body">
                                             <div class="form-group">
                                                 <input name="clientFio" id="clientFio" class="form-control"
-                                                       placeholder="ФИО клиента">
+                                                       placeholder="ФИО клиента" required>
                                             </div>
                                             <div class="form-group">
                                                 <input name="clientCid" id="clientCid" class="form-control"
@@ -46,7 +46,15 @@
                                             </div>
                                             <div class="form-group">
                                                 <input type="tel" id="telephone" class="form-control" name="clientTel"
-                                                       placeholder="Номер телефона" required>
+                                                       placeholder="Номер телефона">
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="tel" id="itelephone" class="form-control" name="clientITel"
+                                                       placeholder="Внутренний номер">
+                                            </div>
+                                            <div class="form-group">
+                                                <input id="clientEmail" class="form-control" name="clientEmail"
+                                                       placeholder="Электронная почта">
                                             </div>
                                         </div>
                                     </div>
@@ -159,34 +167,66 @@
     <div class="row">
         <div class="col">
             <div class="card card-table-rendered">
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th>№</th>
-                        <th>Info</th>
-                        <th>Тип</th>
-                        <th>Автор</th>
-                        <th>Исполнитель</th>
-                        <th>Тема</th>
-                        <th>Клиент</th>
-                        <th>Deadline</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @foreach($missions as $mission)
-                        <tr>
-                            <td><a href="{{ route('mission.show', $mission->id) }}">{{ $mission->id }}</a></td>
-                            <td>{{ $mission->info }}</td>
-                            <td>{{ $mission->from }}</td>
-                            <td>{{ $mission->owner->fio }}</td>
-                            <td>{{ $mission->worker->fio }}</td>
-                            <td>{{ $mission->subject->name }}</td>
-                            <td>{{ $mission->client->fio }}</td>
-                            <td>{{ $mission->date_to }}</td>
-                        </tr>
+                <div class="row">
+                    @foreach($missions->where('status', '<>', 3)->sortByDesc('id') as $mission)
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-6">
+                            <div class="card">
+                                <div
+                                    class="card-body task-card card-priority-{{ $mission->priority == 1? 'low' : ($mission->priority == 2? 'mid' : 'high') }} pb-0">
+                                    <div class="progress">
+                                        @php
+                                            if (strtotime("now") > strtotime($mission->date_to))
+                                            {
+                                                $per = 100;
+                                            } else {
+                                                $per = (($mission->date_close ? strtotime($mission->date_close) : strtotime("now")) - strtotime($mission->created_at))/(strtotime($mission->date_to) - strtotime($mission->created_at)) * 100;
+                                            }
+                                        @endphp
+                                        <div
+                                            class="progress-bar {{ $per < 50? 'bg-success' : ($per < 75? 'bg-warning' : 'bg-danger') }}"
+                                            role="progressbar"
+                                            style="width: {{ $per }}%"
+                                            aria-valuemin="0"
+                                            aria-valuemax="100"></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <table class="table mb-0">
+                                                <thead>
+                                                <th>#</th>
+                                                <th>Источник</th>
+                                                <th>Тема</th>
+                                                <th>Исполнитель</th>
+                                                </thead>
+                                                <tbody>
+                                                <tr>
+                                                    <td width="15%"><a
+                                                            href="{{ route('mission.show', $mission->id) }}">#{{ $mission->id }}</a>
+                                                    </td>
+                                                    <td width="20%">{{ $from[$mission->from] }}</td>
+                                                    <td width="25%">{{ $mission->subject->name }}</td>
+                                                    <td>{{ $mission->worker->fio }}</td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="row">
+                                        <div class="col-6"><a href="#"
+                                                              class="badge badge-light">{{ $mission->owner->fio }}</a>
+                                        </div>
+                                        <div class="col-6">
+                                            <a href="#"
+                                               class="badge {{ $mission->status == 1? 'badge-info' : 'badge-warning' }} float-right">{{ $mission->status == 1? 'В работе' : 'Ожидает решения' }}</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     @endforeach
-                    </tbody>
-                </table>
+                </div>
                 {{--<table id="table_id" class="table table-tasks table-rendered dt-responsive nowrap">--}}
                 {{--<thead>--}}
                 {{--<tr>--}}
@@ -209,8 +249,7 @@
 @section('js')
     <script src="{{ asset("js/jquery.dataTables.js") }}"></script>
     <script src="{{ asset("js/dataTables.bootstrap4.min.js") }}"></script>
-    <script
-        src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=ubhq9o4po4p1w2zdmnaepfxsb8h6f4e78gdvggrvli4ho8cs"></script>
+    <script src='https://cloud.tinymce.com/stable/tinymce.min.js'></script>
     <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap4.min.js"></script>
     <!-- Latest compiled and minified JavaScript -->
@@ -240,37 +279,40 @@
     </script>
 
     <script>
-        tinymce.init({
-            selector: '#comment-user-mission',
-            plugins: "table, codesample, image, media"
-        });
-    </script>
-
-    <script>
         $('#client-select').change(function () {
             if ($(this).val() == '-1') {
                 $('.user-info-popup').show();
                 $('#clientCid').prop('disabled', '');
                 $('#clientFio').prop('disabled', '');
+                $('#clientEmail').prop('disabled', '');
                 $('#telephone').prop('disabled', '');
+                $('#itelephone').prop('disabled', '');
                 $('#clientCid').val('')
                 $('#clientFio').val('')
+                $('#clientEmail').val('')
                 $('#telephone').val('')
+                $('#itelephone').val('')
             } else if ($(this).val() != '') {
                 $('.user-info-popup').show();
                 let data = $(this).find(":selected").data('fio');
                 $('#clientCid').prop('disabled', '');
                 $('#clientFio').prop('disabled', '');
+                $('#clientEmail').prop('disabled', '');
                 $('#telephone').prop('disabled', '');
+                $('#itelephone').prop('disabled', '');
                 $('#clientCid').val(data.cid)
                 $('#clientFio').val(data.fio)
+                $('#clientEmail').val(data.mail)
                 $('#telephone').val(data.phone)
+                $('#itelephone').val(data.iphone)
                 console.log(data)
             } else {
                 $('.user-info-popup').hide();
                 $('#clientCid').prop('disabled', 'disabled');
                 $('#clientFio').prop('disabled', 'disabled');
+                $('#clientEmail').prop('disabled', 'disabled');
                 $('#telephone').prop('disabled', 'disabled');
+                $('#itelephone').prop('disabled', 'disabled');
             }
         })
     </script>

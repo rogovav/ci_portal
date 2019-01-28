@@ -152,6 +152,7 @@
                                                             <th>ФИО</th>
                                                             <th>Номер договора</th>
                                                             <th>Номер телефона</th>
+                                                            <th>Внутренний номер</th>
                                                             <th>Email</th>
                                                             <th></th>
                                                             </thead>
@@ -161,6 +162,7 @@
                                                                     <td>{{ $client->fio }}</td>
                                                                     <td>{{ $client->cid }}</td>
                                                                     <td>{{ $client->phone }}</td>
+                                                                    <td>{{ $client->iphone }}</td>
                                                                     <td>{{ $client->mail }}</td>
                                                                     <td>
                                                                         <button onclick="editClient({{$client}})"
@@ -203,6 +205,13 @@
                                                            class="form-control"
                                                            placeholder="Номер телефона"
                                                            id="client-phone"
+                                                    >
+                                                </div>
+                                                <div class="form-group">
+                                                    <input name="iphone" type="text"
+                                                           class="form-control"
+                                                           placeholder="Внутренний номер"
+                                                           id="client-iphone"
                                                     >
                                                 </div>
                                                 <div class="form-group">
@@ -265,6 +274,7 @@
             $('#client-mail').val(client.mail)
             $('#client-info').val(client.info)
             $('#client-phone').val(client.phone)
+            $('#client-iphone').val(client.iphone)
 
         }
     </script>

@@ -10,7 +10,7 @@
         <div class="card-header card-priority-mid-header">
             <div class="row align-items-center">
                 <div class="col-2 col-form-label">
-                    <h6 class="">Заявка <b>#{{ $mission->id }}</b> ({{ $from[$mission->from] }})</h6>
+                    <h6 class="mb-0">Заявка <b>#{{ $mission->id }}</b> ({{ $from[$mission->from] }})</h6>
                 </div>
                 <div class="col-8">
                     <div class="row mb-1">
@@ -28,7 +28,7 @@
                     </div>
                     <div class="progress">
                         <div
-                                class="progress-bar progress-bar-striped progress-bar-animated {{ $per < 50? 'bg-primary' : ($per < 75? 'bg-warning' : 'bg-danger') }}"
+                                class="progress-bar progress-bar-striped progress-bar-animated {{ $per < 50? 'bg-success' : ($per < 75? 'bg-warning' : 'bg-danger') }}"
                                 role="progressbar"
                                 style="width: {{ $per }}%" aria-valuenow="10" aria-valuemin="0"
                                 aria-valuemax="100">
@@ -60,7 +60,7 @@
                 </div>
             </div>
         </div>
-        <div class="card-body card-priority-mid">
+        <div class="card-body card-priority-{{ $mission->priority == 1? 'low' : ($mission->priority == 2? 'mid' : 'high') }}">
             <div class="row">
                 <div class="col-6">
                     <div class="card">
@@ -78,6 +78,14 @@
                                                 <tr>
                                                     <th>Телефон</th>
                                                     <td>{{ $mission->client->phone }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Внутренний номер</th>
+                                                    <td>{{ $mission->client->iphone }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Email</th>
+                                                    <td>{{ $mission->client->mail }}</td>
                                                 </tr>
                                                 <tr>
                                                     <th>Договор</th>
@@ -98,7 +106,7 @@
                                     <span><b>Тема: </b>{{ $mission->subject->name }}</span>
                                 </div>
                                 <div class="card-body card-info">
-                                    {!! $mission->info !!}
+                                    {!! nl2br($mission->info) !!}
                                 </div>
                                 <div class="card-footer card-info-header">
                                     <div class="row">
@@ -309,6 +317,7 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        @if($mission->helpers->count() > 0)
                                         <div class="col-6">
                                             <div class="card">
                                                 <div class="card-header text-center card-priority-low-header">
@@ -331,6 +340,7 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -353,7 +363,7 @@
                                                         @if($comment->user_id == Auth::id())
                                                             <div class="balon1 p-2 m-0 position-relative"
                                                                  data-is="Вы - {{ $comment->created_at->format('d M Y H:i') }}">
-                                                                <a class="float-right mb-1"> {{ $comment->info }} </a>
+                                                                <a class="float-right mb-1"> {!! nl2br($comment->info) !!} </a>
                                                                 @foreach($comment->files as $file)
                                                                     <div
                                                                             class="float-right col-12 mt-1 media-attachment-right-doc ma-right">
@@ -374,7 +384,7 @@
                                                         @else
                                                             <div class="balon2 p-2 m-0 position-relative"
                                                                  data-is="{{ $comment->user->fio }} - {{ $comment->created_at->format('H:i') }}">
-                                                                <a class="float-left mb-1"> {{ $comment->info }} </a>
+                                                                <a class="float-left mb-1"> {!! nl2br($comment->info) !!} </a>
                                                             </div>
                                                             @foreach($comment->files as $file)
                                                                 <div
@@ -404,11 +414,10 @@
                                                     {{ csrf_field() }}
                                                     <div class="row m-0 p-0">
                                                         <div class="input-group">
-                                                            <input id="text"
+                                                            <textarea id="text"
                                                                    class="mw-100 border rounded form-control"
                                                                    type="text" name="info"
-                                                                   title="Ваше сообщение..."
-                                                                   placeholder="Ваше сообщение..." required>
+                                                                   title="Ваше сообщение..." placeholder="Ваше сообщение..." rows="1" required></textarea>
                                                             <div class="input-group-append ml-1">
                                                                 <button type="submit"
                                                                         class="btn btn-outline-secondary rounded border mr-1"

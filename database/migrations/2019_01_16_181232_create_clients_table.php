@@ -17,8 +17,9 @@ class CreateClientsTable extends Migration
             $table->increments('id');
             $table->string('fio');
             $table->string('phone')->nullable();
+            $table->string('iphone')->nullable();
             $table->string('mail')->nullable();
-            $table->string('info')->nullable();
+            $table->longText('info')->nullable();
             $table->string('cid')->nullable();
             $table->timestamps();
         });
