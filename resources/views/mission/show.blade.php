@@ -7,7 +7,7 @@
 @endsection
 @section('content')
     <div class="card">
-        <div class="card-header card-priority-mid-header">
+        <div class="card-header card-priority-{{ $mission->priority == 1? 'low' : ($mission->priority == 2? 'mid' : 'high') }}-header">
             <div class="row align-items-center">
                 <div class="col-2 col-form-label">
                     <h6 class="mb-0">Заявка <b>#{{ $mission->id }}</b> ({{ $from[$mission->from] }})</h6>
@@ -68,7 +68,8 @@
                             Информация о заявке
                         </div>
                         <div class="card-body">
-                            <div class="row">
+                            @if($mission->client)
+                                <div class="row">
                                 <div class="col-12">
                                     <div class="card">
                                         <div class="card-header card-client-header">
@@ -101,6 +102,7 @@
                                     </div>
                                 </div>
                             </div>
+                            @endif
                             <div class="card">
                                 <div class="card-header card-info-header">
                                     <span><b>Тема: </b>{{ $mission->subject->name }}</span>
