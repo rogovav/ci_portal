@@ -14,15 +14,15 @@
                 </div>
                 <div class="col-12 col-md-8 col-lg-8 col-xl-8">
                     <div class="row mb-1">
-                        <div class="col-4 text-left">
+                        <div class="col-12 col-md-4 col-lg-4 col-xl-4 text-left">
                             <span
                                     class="badge badge-info">{{ $mission->created_at }}</span> {{-- Вт, 22-го янв., 13:22:44 --}}
                         </div>
-                        <div class="col-4 text-center ">
+                        <div class="col-12 col-md-4 col-lg-4 col-xl-4 text-center ">
                             <span class="badge badge-success"><i
                                         class="far fa-calendar{{ $per == 100? '-times' : ($mission->status == 1? Null : ($mission->status == 2? '-minus' : '-check')) }}"></i> {{ $status[$mission->status] }} </span>
                         </div>
-                        <div class="col-4 text-right ">
+                        <div class="col-12 col-md-4 col-lg-4 col-xl-4 text-right ">
                             <span class="badge badge-info">{{ $mission->date_to }}</span>
                         </div>
                     </div>
@@ -75,7 +75,7 @@
                                         <div class="card-header card-client-header">
                                             <b>Клиент:</b> {{ $mission->client->fio }}</div>
                                         <div class="card-body card-client">
-                                            <table class="table table-sm mb-0">
+                                            <table class="table table-sm table-responsive mb-0">
                                                 <tr>
                                                     <th>Телефон</th>
                                                     <td>{{ $mission->client->phone }}</td>
@@ -131,26 +131,26 @@
                         @if($mission->status != 3 and $mission->owner == Auth::user())
                             <div class="card-footer">
                             <div class="row">
-                                <div class="col-4">
+                                <div class="col-12 col-md-4 col-lg-4 col-xl-4">
                                     <button type="button" class="btn btn-info btn-sm col-12" id="rewrite_button">
                                         Переадресовать заявку
                                     </button>
                                 </div>
                                 @if($mission->status == 1)
-                                    <div class="col-4">
+                                    <div class="col-12 col-md-4 col-lg-4 col-xl-4">
                                         <button type="button" class="btn btn-danger btn-sm col-12" id="ok_button">
                                             Закрыть заявку
                                         </button>
                                     </div>
                                 @endif
                                 @if($mission->status == 2)
-                                    <div class="col-4">
+                                    <div class="col-12 col-md-4 col-lg-4 col-xl-4">
                                         <button type="button" class="btn btn-primary btn-sm col-12" id="ok_button">
                                             Подтвердить/Отклонить
                                         </button>
                                     </div>
                                 @endif
-                                <div class="col-4">
+                                <div class="col-12 col-md-4 col-lg-4 col-xl-4">
                                     <button type="button" class="btn btn-warning btn-sm col-12" id="deadline_button">
                                         Изменить Deadline
                                     </button>
