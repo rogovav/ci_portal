@@ -38,7 +38,7 @@
                                         <div class="card-body">
                                             <div class="form-group">
                                                 <input name="clientFio" id="clientFio" class="form-control"
-                                                       placeholder="ФИО клиента" required>
+                                                       placeholder="ФИО клиента">
                                             </div>
                                             <div class="form-group">
                                                 <input name="clientCid" id="clientCid" class="form-control"
