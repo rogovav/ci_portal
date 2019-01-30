@@ -74,5 +74,9 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Mission', 'helper_mission')->withTimestamps();
     }
 
+    public function wikis()
+    {
+        return $this->hasMany('App\Wiki');
+    }
 
 }
