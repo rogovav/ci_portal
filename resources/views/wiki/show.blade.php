@@ -39,7 +39,7 @@
         <div class="card-header card-info-header">
             <div class="row">
                 <div class="col-9 col-form-label">
-                    Вот таакая вот очень супер пупер гипер оргрооомнейшая супер тема гипер статьи
+                    {{ $wiki->name }}
                 </div>
                 <div class="col-3">
                     <div class="row">
@@ -61,9 +61,7 @@
         <div class="card-body">
             <div class="card">
                 <div class="card-body">
-                    <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam aspernatur deserunt ea fuga
-                        hic illum, libero numquam optio perspiciatis quibusdam quis sapiente ut. Earum eius ex in iusto
-                        quidem, voluptate!
+                    <div>{!! nl2br($wiki->info) !!}
                     </div>
                 </div>
             </div>
