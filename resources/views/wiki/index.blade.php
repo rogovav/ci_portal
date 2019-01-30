@@ -14,13 +14,14 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="">
+                <form action="{{ route('wiki.store') }}" method="post">
+                    {{ csrf_field() }}
                     <div class="modal-body">
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Название статьи">
+                            <input name="name" type="text" class="form-control" placeholder="Название статьи">
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Краткое описание статьи">
+                            <textarea name="short_info" type="text" class="form-control" placeholder="Краткое описание статьи"></textarea>
                         </div>
                         <div class="form-group">
                             <textarea name="info" id="wiki-body" cols="30" rows="30" class="form-control"
@@ -64,32 +65,33 @@
         </div>
         <div class="card-body">
             <div class="row">
-                <div class=" col-md-6 col-lg-6 col-xl-4 card-outer">
-                    <div class="card">
-                        <div class="card-header card-info-header">
-                            <div class="row">
-                                <div class="col-12">
-                                    <span class="badge badge-light float-left topic">Как поставить wifi-точку</span>
+                @foreach($wikis as $wiki)
+                    <div class=" col-md-6 col-lg-6 col-xl-4 card-outer">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <span class="badge badge-light float-left topic"><h5 class="mb-0">{{ $wiki->name }}</h5></span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="card-body">
-                            <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque dolorem libero magni
-                            veniam...</span>
-                            <p class="m-0"><a href="" class="read-more">Читать полностью</a></p>
-                        </div>
-                        <div class="card-footer card-info-header">
-                            <div class="row">
-                                <div class="col-6">
-                                    <span class="badge badge-light float-left">Комусов Николай</span>
-                                </div>
-                                <div class="col-6">
-                                    <span class="badge badge-light float-right">2019-01-25 07:52:42</span>
+                            <div class="card-body">
+                            <span>{!! nl2br($wiki->short_info) !!}</span>
+                                <p class="m-0"><a href="{{ route('wiki.show', $wiki->id) }}" class="read-more">Читать полностью</a></p>
+                            </div>
+                            <div class="card-footer">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <span class="badge badge-light float-left">{{ $wiki->user->fio }}</span>
+                                    </div>
+                                    <div class="col-6">
+                                        <span class="badge badge-light float-right">{{ $wiki->created_at }}</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </div>
