@@ -41,6 +41,7 @@
                 <div class="col-9 col-form-label">
                     {{ $wiki->name }}
                 </div>
+                @if( $wiki->user == Auth::user() )
                 <div class="col-3">
                     <div class="row">
                         <div class="col-6">
@@ -54,8 +55,8 @@
                             </button>
                         </div>
                     </div>
-
                 </div>
+                @endif
             </div>
         </div>
         <div class="card-body">
