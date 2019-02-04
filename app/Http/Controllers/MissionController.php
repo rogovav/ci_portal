@@ -42,14 +42,19 @@ class MissionController extends Controller
         $users   = User::orderBy('fio')->get();
         $from    = $this->from;
         $status  = $this->status;
-        if (strtotime("now") > strtotime($mission->date_to))
-        {
+        $helpers = [];
+
+        foreach ($mission->helpers as $helper) {
+            array_push($helpers, $helper->id);
+        }
+        $helpers = collect($helpers);
+        if (strtotime("now") > strtotime($mission->date_to)) {
             $per = 100;
         } else {
             $per = (($mission->date_close ? strtotime($mission->date_close) : strtotime("now")) - strtotime($mission->created_at))/(strtotime($mission->date_to) - strtotime($mission->created_at)) * 100;
         }
 
-        return view('mission.show', compact('mission', 'from', 'status', 'per', 'users'));
+        return view('mission.show', compact('mission', 'from', 'status', 'per', 'users', 'helpers'));
     }
 
     public function store(Request $request)
@@ -152,6 +157,12 @@ class MissionController extends Controller
                 'user_id'    => Auth::id(),
                 'mission_id' => $id,
             ]);
+        }
+
+        if (isset($request->worker))
+        {
+            $mission->worker_id = $request->worker;
+            $mission->helpers()->sync($request->helper);
         }
 
         $mission->save();

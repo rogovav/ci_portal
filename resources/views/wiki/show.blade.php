@@ -61,7 +61,8 @@
         <div class="card-body">
             <div class="card">
                 <div class="card-body">
-                    <div>{!! nl2br($wiki->info) !!}
+                    <div>
+                        {!! $wiki->info !!}
                     </div>
                 </div>
             </div>

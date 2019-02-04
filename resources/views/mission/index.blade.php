@@ -101,7 +101,8 @@
                             <div class="card-header">Выбор сотрудников</div>
                             <div class="card-body">
                                 <div class="form-group ">
-                                    <select class="user-select form-control" name="worker" title="Исполнитель"
+                                    <select id="worker-select" class="user-select form-control" name="worker"
+                                            title="Исполнитель"
                                             data-live-search="true">
                                         @foreach($users as $user)
                                             <option value="{{ $user->id }}">{{ $user->fio }}</option>
@@ -115,6 +116,7 @@
                                             <option value="{{ $user->id }}">{{ $user->fio }}</option>
                                         @endforeach
                                     </select>
+                                    <span id="select-error" class="badge badge-danger">Исполнитель не может быть помощником</span>
                                 </div>
                             </div>
                         </div>
@@ -150,7 +152,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Создать</button>
+                        <button id="btn-form" type="submit" class="btn btn-primary">Создать</button>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
                     </div>
                 </form>
@@ -225,21 +227,6 @@
                     </div>
                 @endforeach
                 </div>
-                {{--<table id="table_id" class="table table-tasks table-rendered dt-responsive nowrap">--}}
-                {{--<thead>--}}
-                {{--<tr>--}}
-                {{--<th>№</th>--}}
-                {{--<th>Info</th>--}}
-                {{--<th>Тип</th>--}}
-                {{--<th>Автор</th>--}}
-                {{--<th>Исполнитель</th>--}}
-                {{--<th>Тема</th>--}}
-                {{--<th>Клиент</th>--}}
-                {{--<th>Дата начала</th>--}}
-                {{--<th>Deadline</th>--}}
-                {{--</tr>--}}
-                {{--</thead>--}}
-                {{--</table>--}}
             </div>
         </div>
     </div>
@@ -258,16 +245,38 @@
 
     <script>
         $(document).ready(function () {
-
+            $('#select-error').hide()
             $('select').selectpicker()
-
             $('.client-select').selectpicker();
-
             $('.help-select').selectpicker();
-
             $('.user-select').selectpicker();
-
         });
+    </script>
+
+    <script>
+        $('#worker-select').change(function () {
+            if ($.inArray($(this).val(), $('#help-select').val()) != -1) {
+                $('#select-error').show()
+                $('#help-select').addClass('red-select')
+                $('#help-select').closest('div').addClass('red-select')
+                $('#btn-form').prop('disabled', 'disabled')
+            } else {
+                $('#select-error').hide()
+                $('#btn-form').prop('disabled', '')
+                $('#help-select').closest('div').removeClass('red-select')
+            }
+        })
+        $('#help-select').change(function () {
+            if ($.inArray($('#worker-select').val(), $(this).val()) != -1) {
+                $('#select-error').show()
+                $('#help-select').closest('div').addClass('red-select')
+                $('#btn-form').prop('disabled', 'disabled')
+            } else {
+                $('#select-error').hide()
+                $('#help-select').closest('div').removeClass('red-select')
+                $('#btn-form').prop('disabled', '')
+            }
+        })
     </script>
 
     <script src="{{ asset('js/jquery.maskedinput.js') }}"></script>
@@ -316,60 +325,6 @@
     </script>
 
     <script>
-        $('#table_id').DataTable({
-            "order": [[0, "desc"]],
-            "language": {
-                "processing": "Подождите...",
-                "search": "Поиск:",
-                "lengthMenu": "Показать _MENU_ записей",
-                "info": "Записи с _START_ до _END_ из _TOTAL_ записей",
-                "infoEmpty": "Записи с 0 до 0 из 0 записей",
-                "infoFiltered": "(отфильтровано из _MAX_ записей)",
-                "infoPostFix": "",
-                "loadingRecords": "Загрузка записей...",
-                "zeroRecords": "Записи отсутствуют.",
-                "emptyTable": "В таблице отсутствуют данные",
-                "paginate": {
-                    "first": "Первая",
-                    "previous": "Предыдущая",
-                    "next": "Следующая",
-                    "last": "Последняя"
-                },
-                "aria": {
-                    "sortAscending": ": активировать для сортировки столбца по возрастанию",
-                    "sortDescending": ": активировать для сортировки столбца по убыванию"
-                }
-            },
-            "ajax": {
-                "url": "/test.json",
-                "dataSrc": "data"
-            },
-            "createdRow": function (row, data, dataIndex) {
-                if (data["priority"].includes("green")) {
-                    $(row).addClass('deadline-middle');
-                } else if (data["priority"].includes("brown")) {
-                    $(row).addClass('deadline-expired');
-                } else {
-                    $(row).addClass('deadline-ok');
-                }
-
-                if (data["priority"].includes("clock")) {
-
-                }
-            },
-            "columns": [
-                {data: 'id'},
-                {data: 'priority'},
-                {data: 'type'},
-                {data: 'author'},
-                {data: 'worker'},
-                {data: 'topic'},
-                {data: 'client'},
-                {data: 'datefrom'},
-                {data: 'deadline'},
-            ]
-        });
-
         $(document).ready(function () {
             $('#example').DataTable();
             $('#choose-topic').val() == '-1' ? $('.hidden-topic-input').show() : $('.hidden-topic-input').hide();
@@ -381,8 +336,6 @@
                     $('.hidden-topic-input').hide().children('input').prop('disabled', 'disabled');
 
                 }
-
-
             })
         });
     </script>
@@ -394,11 +347,6 @@
             $('#date_begin').val(d.replace('T', ' '))
         })
 
-        $('#date_begin').focus(function () {
-            let d = new Date();
-            d = new Date(d.getTime() - d.getTimezoneOffset() * 60000).toJSON().slice(0, 19)
-            $(this).val(d)
-        })
         $('#date_begin').blur(function () {
             $(this).val($(this).val().replace('T', ' '))
         })
@@ -462,6 +410,14 @@
         })
 
         $('#date_end').focus(function () {
+            let d = new Date()
+            d.setDate(d.getDate() + 1)
+            d.setUTCHours(17, 0, 0, 0)
+            d = d.toJSON().slice(0, 19)
+            $(this).val(d)
+        })
+
+        $('#date_end').click(function () {
             let d = new Date()
             d.setDate(d.getDate() + 1)
             d.setUTCHours(17, 0, 0, 0)
