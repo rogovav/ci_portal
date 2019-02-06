@@ -118,6 +118,7 @@
                                     </select>
                                     <span id="select-error" class="badge badge-danger">Исполнитель не может быть помощником</span>
                                 </div>
+
                             </div>
                         </div>
                         <div class="card">
@@ -171,61 +172,63 @@
             <div class="card card-table-rendered">
                 <div class="row">
                     @foreach($missions->where('status', '<>', 3)->sortByDesc('id') as $mission)
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-6">
-                        <div class="card">
-                            <div class="card-body task-card card-priority-{{ $mission->priority == 1? 'low' : ($mission->priority == 2? 'mid' : 'high') }} pb-0">
-                                <div class="progress">
-                                    @php
-                                        if (strtotime("now") > strtotime($mission->date_to))
-                                        {
-                                            $per = 100;
-                                        } else {
-                                            $per = (($mission->date_close ? strtotime($mission->date_close) : strtotime("now")) - strtotime($mission->created_at))/(strtotime($mission->date_to) - strtotime($mission->created_at)) * 100;
-                                        }
-                                    @endphp
-                                    <div class="progress-bar {{ $per < 50? 'bg-success' : ($per < 75? 'bg-warning' : 'bg-danger') }}"
-                                         role="progressbar"
-                                         style="width: {{ $per }}%"
-                                         aria-valuemin="0"
-                                         aria-valuemax="100"></div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-12">
-                                        <table class="table mb-0">
-                                            <thead>
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-6">
+                            <div class="card">
+                                <div
+                                    class="card-body task-card card-priority-{{ $mission->priority == 1? 'low' : ($mission->priority == 2? 'mid' : 'high') }} pb-0">
+                                    <div class="progress">
+                                        @php
+                                            if (strtotime("now") > strtotime($mission->date_to))
+                                            {
+                                                $per = 100;
+                                            } else {
+                                                $per = (($mission->date_close ? strtotime($mission->date_close) : strtotime("now")) - strtotime($mission->created_at))/(strtotime($mission->date_to) - strtotime($mission->created_at)) * 100;
+                                            }
+                                        @endphp
+                                        <div
+                                            class="progress-bar {{ $per < 50? 'bg-success' : ($per < 75? 'bg-warning' : 'bg-danger') }}"
+                                            role="progressbar"
+                                            style="width: {{ $per }}%"
+                                            aria-valuemin="0"
+                                            aria-valuemax="100"></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <table class="table mb-0">
+                                                <thead>
                                                 <th>#</th>
                                                 <th>Источник</th>
                                                 <th>Тема</th>
                                                 <th>Исполнитель</th>
-                                            </thead>
-                                            <tbody>
-                                            <tr>
-                                                <td width="15%"><a
+                                                </thead>
+                                                <tbody>
+                                                <tr>
+                                                    <td width="15%"><a
                                                             href="{{ route('mission.show', $mission->id) }}">#{{ $mission->id }}</a>
-                                                </td>
-                                                <td width="20%">{{ $from[$mission->from] }}</td>
-                                                <td width="25%">{{ $mission->subject->name }}</td>
-                                                <td>{{ $mission->worker->fio }}</td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
+                                                    </td>
+                                                    <td width="20%">{{ $from[$mission->from] }}</td>
+                                                    <td width="25%">{{ $mission->subject->name }}</td>
+                                                    <td>{{ $mission->worker->fio }}</td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="card-footer">
-                                <div class="row">
-                                    <div class="col-6"><a href="#"
-                                                          class="badge badge-light">{{ $mission->owner->fio }}</a>
-                                    </div>
-                                    <div class="col-6">
-                                        <a href="#"
-                                           class="badge {{ $mission->status == 1? 'badge-info' : 'badge-warning' }} float-right">{{ $mission->status == 1? 'В работе' : 'Ожидает решения' }}</a>
+                                <div class="card-footer">
+                                    <div class="row">
+                                        <div class="col-6"><a href="#"
+                                                              class="badge badge-light">{{ $mission->owner->fio }}</a>
+                                        </div>
+                                        <div class="col-6">
+                                            <a href="#"
+                                               class="badge {{ $mission->status == 1? 'badge-info' : 'badge-warning' }} float-right">{{ $mission->status == 1? 'В работе' : 'Ожидает решения' }}</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                @endforeach
+                    @endforeach
                 </div>
             </div>
         </div>
