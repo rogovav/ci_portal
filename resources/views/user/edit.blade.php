@@ -128,7 +128,7 @@
                                                     </div>
                                                     <div class="form-row  mb-3">
                                                         <div class="col">
-                                                <textarea placeholder="Текст TODO" class="form-control" name="info"
+                                                <textarea placeholder="Текст задания" class="form-control" name="info"
                                                           id="" cols="30"
                                                           rows="2"></textarea>
                                                         </div>

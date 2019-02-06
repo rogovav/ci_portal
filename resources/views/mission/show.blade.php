@@ -7,8 +7,7 @@
 @endsection
 @section('content')
     <div class="card">
-        <div
-            class="card-header card-priority-{{ $mission->priority == 1? 'low' : ($mission->priority == 2? 'mid' : 'high') }}-header">
+        <div class="card-header card-priority-{{ $mission->priority == 1? 'low' : ($mission->priority == 2? 'mid' : 'high') }}-header">
             <div class="row align-items-center">
                 <div class="col-12 col-md-2 col-lg-2 col-xl-2 col-form-label">
                     <h6 class="mb-0">Заявка <b>#{{ $mission->id }}</b> ({{ $from[$mission->from] }})</h6>
@@ -17,11 +16,11 @@
                     <div class="row mb-1">
                         <div class="col-12 col-md-4 col-lg-4 col-xl-4 text-left">
                             <span
-                                class="badge badge-info">{{ $mission->created_at }}</span> {{-- Вт, 22-го янв., 13:22:44 --}}
+                                    class="badge badge-info">{{ $mission->created_at }}</span> {{-- Вт, 22-го янв., 13:22:44 --}}
                         </div>
                         <div class="col-12 col-md-4 col-lg-4 col-xl-4 text-center ">
                             <span class="badge badge-success"><i
-                                    class="far fa-calendar{{ $per == 100? '-times' : ($mission->status == 1? Null : ($mission->status == 2? '-minus' : '-check')) }}"></i> {{ $status[$mission->status] }} </span>
+                                        class="far fa-calendar{{ $per == 100? '-times' : ($mission->status == 1? Null : ($mission->status == 2? '-minus' : '-check')) }}"></i> {{ $status[$mission->status] }} </span>
                         </div>
                         <div class="col-12 col-md-4 col-lg-4 col-xl-4 text-right ">
                             <span class="badge badge-info">{{ $mission->date_to }}</span>
@@ -29,10 +28,10 @@
                     </div>
                     <div class="progress">
                         <div
-                            class="progress-bar progress-bar-striped progress-bar-animated {{ $per < 50? 'bg-success' : ($per < 75? 'bg-warning' : 'bg-danger') }}"
-                            role="progressbar"
-                            style="width: {{ $per }}%" aria-valuenow="10" aria-valuemin="0"
-                            aria-valuemax="100">
+                                class="progress-bar progress-bar-striped progress-bar-animated {{ $per < 50? 'bg-success' : ($per < 75? 'bg-warning' : 'bg-danger') }}"
+                                role="progressbar"
+                                style="width: {{ $per }}%" aria-valuenow="10" aria-valuemin="0"
+                                aria-valuemax="100">
                             {{--после 50%--}}
                         </div>
                     </div>
@@ -40,30 +39,28 @@
                 <div class="col-12 col-md-2 col-lg-2 col-xl-2 col-form-label">
                     @switch($mission->status)
                         @case(1)
-                        @if($mission->worker == Auth::user())
+                            @if($mission->worker == Auth::user())
                             <form action="{{ route('mission.update', $mission->id) }}" method="post">
                                 {{ csrf_field() }}
-                                <button type="submit" class="btn btn-secondary btn-sm float-right" value="2"
-                                        name="status">
+                                <button type="submit" class="btn btn-secondary btn-sm float-right" value="2" name="status">
                                     Выполнить
                                 </button>
                             </form>
-                        @else
-                            <span class="badge badge-secondary float-right">В работе</span>
-                        @endif
-                        @break
+                            @else
+                                <span class="badge badge-secondary float-right">В работе</span>
+                            @endif
+                            @break
                         @case(2)
-                        <span class="badge badge-warning float-right">На проверке</span>
-                        @break
+                            <span class="badge badge-warning float-right">На проверке</span>
+                            @break
                         @case(3)
-                        <span class="badge badge-success float-right">Выполнена {{ $mission->date_close }}</span>
-                        @break
+                            <span class="badge badge-success float-right">Выполнена {{ $mission->date_close }}</span>
+                            @break
                     @endswitch
                 </div>
             </div>
         </div>
-        <div
-            class="card-body card-priority-{{ $mission->priority == 1? 'low' : ($mission->priority == 2? 'mid' : 'high') }}">
+        <div class="card-body card-priority-{{ $mission->priority == 1? 'low' : ($mission->priority == 2? 'mid' : 'high') }}">
             <div class="row">
                 <div class=" col-lg-12 col-xl-6">
                     <div class="card">
@@ -73,38 +70,38 @@
                         <div class="card-body">
                             @if($mission->client)
                                 <div class="row">
-                                    <div class="col-12">
-                                        <div class="card">
-                                            <div class="card-header card-client-header">
-                                                <b>Клиент:</b> {{ $mission->client->fio }}</div>
-                                            <div class="card-body card-client">
-                                                <table class="table table-sm mb-0 ">
-                                                    <tr>
-                                                        <th>Телефон</th>
-                                                        <td>{{ $mission->client->phone }}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Внутренний номер</th>
-                                                        <td>{{ $mission->client->iphone }}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Email</th>
-                                                        <td>{{ $mission->client->mail }}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Договор</th>
-                                                        <td>{{ $mission->client->cid }}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Адрес</th>
-                                                        <td>{{ @$mission->building->name }}, {{ $mission->address }}
-                                                            , {{ @$mission->building->address }}</td>
-                                                    </tr>
-                                                </table>
-                                            </div>
+                                <div class="col-12">
+                                    <div class="card">
+                                        <div class="card-header card-client-header">
+                                            <b>Клиент:</b> {{ $mission->client->fio }}</div>
+                                        <div class="card-body card-client">
+                                            <table class="table table-sm mb-0 ">
+                                                <tr>
+                                                    <th>Телефон</th>
+                                                    <td>{{ $mission->client->phone }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Внутренний номер</th>
+                                                    <td>{{ $mission->client->iphone }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Email</th>
+                                                    <td>{{ $mission->client->mail }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Договор</th>
+                                                    <td>{{ $mission->client->cid }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Адрес</th>
+                                                    <td>{{ @$mission->building->name }}, {{ $mission->address }}
+                                                        , {{ @$mission->building->address }}</td>
+                                                </tr>
+                                            </table>
                                         </div>
                                     </div>
                                 </div>
+                            </div>
                             @endif
                             <div class="card">
                                 <div class="card-header card-info-header">
@@ -133,37 +130,33 @@
                         </div>
                         @if($mission->status != 3 and $mission->owner == Auth::user())
                             <div class="card-footer">
-                                <div class="row">
+                            <div class="row">
+                                <div class="col-12 col-md-4 col-lg-4 col-xl-4">
+                                    <button type="button" class="btn btn-info btn-sm col-12 mb-1" id="rewrite_button">
+                                        Переадресовать заявку
+                                    </button>
+                                </div>
+                                @if($mission->status == 1)
                                     <div class="col-12 col-md-4 col-lg-4 col-xl-4">
-                                        <button type="button" class="btn btn-info btn-sm col-12 mb-1"
-                                                id="rewrite_button">
-                                            Переадресовать заявку
+                                        <button type="button" class="btn btn-danger btn-sm col-12 mb-1" id="ok_button">
+                                            Закрыть заявку
                                         </button>
                                     </div>
-                                    @if($mission->status == 1)
-                                        <div class="col-12 col-md-4 col-lg-4 col-xl-4">
-                                            <button type="button" class="btn btn-danger btn-sm col-12 mb-1"
-                                                    id="ok_button">
-                                                Закрыть заявку
-                                            </button>
-                                        </div>
-                                    @endif
-                                    @if($mission->status == 2)
-                                        <div class="col-12 col-md-4 col-lg-4 col-xl-4">
-                                            <button type="button" class="btn btn-primary btn-sm col-12 mb-1"
-                                                    id="ok_button">
-                                                Подтвердить/Отклонить
-                                            </button>
-                                        </div>
-                                    @endif
+                                @endif
+                                @if($mission->status == 2)
                                     <div class="col-12 col-md-4 col-lg-4 col-xl-4">
-                                        <button type="button" class="btn btn-warning btn-sm col-12 mb-1"
-                                                id="deadline_button">
-                                            Изменить Deadline
+                                        <button type="button" class="btn btn-primary btn-sm col-12 mb-1" id="ok_button">
+                                            Подтвердить/Отклонить
                                         </button>
                                     </div>
+                                @endif
+                                <div class="col-12 col-md-4 col-lg-4 col-xl-4">
+                                    <button type="button" class="btn btn-warning btn-sm col-12 mb-1" id="deadline_button">
+                                        Изменить Deadline
+                                    </button>
                                 </div>
                             </div>
+                        </div>
                         @endif
                     </div>
                     @if($mission->status != 3 and $mission->owner == Auth::user())
@@ -176,15 +169,16 @@
                                     <div class="col-3">
                                         <button id="rewrite_close" class="float-right close-button">
                                             <i
-                                                class="material-icons">
+                                                    class="material-icons">
                                                 clear
                                             </i>
                                         </button>
                                     </div>
                                 </div>
                             </div>
+                            <form action="{{ route('mission.update', $mission->id) }}" method="post">
                             <div class="card-body">
-                                <form action="{{ route('mission.update', $mission->id) }}" method="post">
+
                                     {{ csrf_field() }}
                                     <div class="form-group">
                                         <select id="worker-select" class="user-select form-control" name="worker"
@@ -206,7 +200,7 @@
                                         </select>
                                         <span id="select-error" class="badge badge-danger">Исполнитель не может быть помощником</span>
                                     </div>
-                                </form>
+
                             </div>
                             <div class="card-footer">
                                 <div class="row">
@@ -216,6 +210,7 @@
 
                                 </div>
                             </div>
+                            </form>
                         </div>
                         <div class="card" id="rewrite_deadline">
                             <div class="card-header">
@@ -226,7 +221,7 @@
                                     <div class="col-3">
                                         <button id="deadline_close" class="float-right close-button">
                                             <i
-                                                class="material-icons">
+                                                    class="material-icons">
                                                 clear
                                             </i>
                                         </button>
@@ -234,21 +229,20 @@
                                 </div>
                             </div>
                             <form action="{{ route('mission.update', $mission->id) }}" method="post">
-                                <div class="card-body">
+                            <div class="card-body">
 
                                     {{ csrf_field() }}
                                     <input type="datetime-local" class="form-control"
-                                           value="{{ date('Y-m-d\TH:i:s', strtotime($mission->date_to)) }}"
-                                           name="date_to">
+                                           value="{{ date('Y-m-d\TH:i:s', strtotime($mission->date_to)) }}" name="date_to">
 
-                                </div>
-                                <div class="card-footer">
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <button type="submit" class="btn btn-primary col-12">Изменить</button>
-                                        </div>
+                            </div>
+                            <div class="card-footer">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <button type="submit" class="btn btn-primary col-12">Изменить</button>
                                     </div>
                                 </div>
+                            </div>
                             </form>
                         </div>
                         <div class="card" id="ok-form">
@@ -274,20 +268,14 @@
                                     <div class="form-row">
                                         @if($mission->status == 1)
                                             <div class="col">
-                                                <button class="col-12 btn btn-success" value="3" name="status">Закрыть
-                                                    заявку
-                                                </button>
+                                                <button class="col-12 btn btn-success" value="3" name="status">Закрыть заявку</button>
                                             </div>
                                         @else
                                             <div class="col">
-                                                <button class="col-12 btn btn-success" value="3" name="status">
-                                                    Подтвердить
-                                                </button>
+                                                <button class="col-12 btn btn-success" value="3" name="status">Подтвердить</button>
                                             </div>
                                             <div class="col">
-                                                <button class="col-12 btn btn-danger" value="1" name="status">
-                                                    Отклонить
-                                                </button>
+                                                <button class="col-12 btn btn-danger" value="1" name="status">Отклонить</button>
                                             </div>
                                         @endif
                                     </div>
@@ -348,28 +336,28 @@
                                             </div>
                                         </div>
                                         @if($mission->helpers->count() > 0)
-                                            <div class="col-12 col-md-12 col-lg-6 col-xl-6">
-                                                <div class="card">
-                                                    <div class="card-header text-center card-priority-low-header">
-                                                        <b>Помощники</b>
-                                                    </div>
-                                                    <div class="card-body card-priority-low">
-                                                        <div class="row">
-                                                            @foreach($mission->helpers as $helper)
-                                                                <div class="col-3">
-                                                                    <img class="users-helpers-img"
-                                                                         data-container="body" data-trigger="hover"
-                                                                         data-toggle="popover"
-                                                                         data-placement="bottom"
-                                                                         data-content="{{ $helper->fio }}"
-                                                                         src="{{ asset('images/avatars/users/' . $helper->avatar ) }}"
-                                                                         alt="">
-                                                                </div>
-                                                            @endforeach
-                                                        </div>
+                                        <div class="col-12 col-md-12 col-lg-6 col-xl-6">
+                                            <div class="card">
+                                                <div class="card-header text-center card-priority-low-header">
+                                                    <b>Помощники</b>
+                                                </div>
+                                                <div class="card-body card-priority-low">
+                                                    <div class="row">
+                                                        @foreach($mission->helpers as $helper)
+                                                            <div class="col-3">
+                                                                <img class="users-helpers-img"
+                                                                     data-container="body" data-trigger="hover"
+                                                                     data-toggle="popover"
+                                                                     data-placement="bottom"
+                                                                     data-content="{{ $helper->fio }}"
+                                                                     src="{{ asset('images/avatars/users/' . $helper->avatar ) }}"
+                                                                     alt="">
+                                                            </div>
+                                                        @endforeach
                                                     </div>
                                                 </div>
                                             </div>
+                                        </div>
                                         @endif
                                     </div>
                                 </div>
@@ -396,13 +384,13 @@
                                                                 <a class="float-right mb-1"> {!! nl2br($comment->info) !!} </a>
                                                                 @foreach($comment->files as $file)
                                                                     <div
-                                                                        class="float-right col-12 mt-1 media-attachment-right-doc ma-right">
+                                                                            class="float-right col-12 mt-1 media-attachment-right-doc ma-right">
                                                                         <div
-                                                                            class="avatar bg-primary float-right col-2">
+                                                                                class="avatar bg-primary float-right col-2">
                                                                             <i class="material-icons">insert_drive_file</i>
                                                                         </div>
                                                                         <div
-                                                                            class=" media-body float-right col-10 pt-1 pr-2">
+                                                                                class=" media-body float-right col-10 pt-1 pr-2">
                                                                             <a href="{{ asset('storage/comments/' . $file->name) }}"
                                                                                data-filter-by="text"
                                                                                class="A-filter-by-text float-right text-right"
@@ -418,12 +406,12 @@
                                                             </div>
                                                             @foreach($comment->files as $file)
                                                                 <div
-                                                                    class="float-right col-12 mt-1 media-attachment-left-doc ma-right">
+                                                                        class="float-right col-12 mt-1 media-attachment-left-doc ma-right">
                                                                     <div class="avatar bg-primary float-left col-2">
                                                                         <i class="material-icons">insert_drive_file</i>
                                                                     </div>
                                                                     <div
-                                                                        class="media-body float-left col-10 pt-1 pr-2 ml-1">
+                                                                            class="media-body float-left col-10 pt-1 pr-2 ml-1">
                                                                         <a href="{{ asset('storage/comments/' . $file->name) }}"
                                                                            data-filter-by="text"
                                                                            class="A-filter-by-text"
@@ -436,7 +424,7 @@
                                                 </div>
                                             </div>
                                             <div
-                                                class="w-100 card-footer mt-2">
+                                                    class="w-100 card-footer mt-2">
                                                 <form class="m-0 p-0"
                                                       action="{{ route('mission.storeComment', $mission->id) }}"
                                                       method="POST" autocomplete="off"
@@ -445,27 +433,25 @@
                                                     <div class="row m-0 p-0">
                                                         <div class="input-group">
                                                             <textarea id="text"
-                                                                      class="mw-100 border rounded form-control"
-                                                                      type="text" name="info"
-                                                                      title="Ваше сообщение..."
-                                                                      placeholder="Ваше сообщение..." rows="1"
-                                                                      required></textarea>
+                                                                   class="mw-100 border rounded form-control"
+                                                                   type="text" name="info"
+                                                                   title="Ваше сообщение..." placeholder="Ваше сообщение..." rows="1" required></textarea>
                                                             <div class="input-group-append ml-1">
                                                                 <button type="submit"
                                                                         class="btn btn-outline-secondary rounded border mr-1"
                                                                         title="Отправить"
                                                                         style="padding-right: 16px;">
                                                                     <i
-                                                                        class="far fa-paper-plane"
-                                                                        aria-hidden="true"></i></button>
+                                                                            class="far fa-paper-plane"
+                                                                            aria-hidden="true"></i></button>
                                                                 <div class="custom-file float-right">
                                                                     <input type="file"
                                                                            class="custom-file-input d-none"
                                                                            id="customFile" name="commentFiles[]"
                                                                            multiple>
                                                                     <label
-                                                                        class="btn btn-outline-secondary rounded border"
-                                                                        for="customFile">
+                                                                            class="btn btn-outline-secondary rounded border"
+                                                                            for="customFile">
                                                                         <i class="fas fa-paperclip"></i>
                                                                         <span id="fileNumber"
                                                                               class="badge badge-light"></span>
