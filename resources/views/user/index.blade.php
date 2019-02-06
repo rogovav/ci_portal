@@ -85,7 +85,7 @@
             <div class="col-md-6 col-lg-4 col-xl-3">
                 <div class="card">
                     <div class="card-body">
-                        <div class="col account-main-info-col">
+                        <div class="col account-main-info-col p-0">
                             <div class="card">
                                 <div class="card-body">
                                     <img src="{{ asset('images/avatars/users/' . $user->avatar) }}"
@@ -104,8 +104,7 @@
                             <div class="card">
                                 <div class="card-body">
                                     <ul class="profile-card-user-social">
-                                        <li><span><a href="https://vk.com/{{ $user->vk }}" target="_blank"><i
-                                                        class="fab fa-vk fa-2x"></i></a></span></li>
+                                        <li><span><a href="{{ $user == Auth::user()? route('user.edit', $user->id) : route('user.show', $user->id) }}"><i class="fas fa-user-circle  fa-2x"></i></a></span></li>
                                         <li><span><a href="mailto:{{ $user->email }}"><i
                                                         class="far fa-envelope fa-2x"></i></a></span></li>
                                         <li><span><a href="tel:{{ $user->phone }}"><i

@@ -6,6 +6,10 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
+/**
+ * @method static findorfail($id)
+ * @method static create(array $array)
+ */
 class User extends Authenticatable
 {
 
