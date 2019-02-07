@@ -1,6 +1,5 @@
 @extends('layout.index')
 @section('css')
-    <link rel="stylesheet" href="{{ asset("css/dataTables.bootstrap4.min.css") }}">
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.5/css/bootstrap-select.min.css">
 @endsection
@@ -235,11 +234,7 @@
     </div>
 @endsection
 @section('js')
-    <script src="{{ asset("js/jquery.dataTables.js") }}"></script>
-    <script src="{{ asset("js/dataTables.bootstrap4.min.js") }}"></script>
     <script src='https://cloud.tinymce.com/stable/tinymce.min.js'></script>
-    <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
-    <script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap4.min.js"></script>
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.5/js/bootstrap-select.min.js"></script>
 
