@@ -47,10 +47,11 @@
                                     <div class="col account-main-info-col">
                                         <div class="card">
                                             <div class="card-header ">
-                                                <h5 class="card-subtitle text-center">{{ $user->fio }}
+                                                <h5 class="card-subtitle text-center">
+                                                    {{ $user->fio }}
                                                 </h5>
                                             </div>
-                                            <div class="card-body">
+                                            <div class="card-body text-center">
                                                 <a href="" data-toggle="modal" data-target="#exampleModal"><img
                                                         src="{{ asset('images/avatars/users/' . $user->avatar) }}"
                                                         class="account-profile-avatar"

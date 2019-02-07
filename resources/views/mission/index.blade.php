@@ -207,7 +207,10 @@
                                                     </td>
                                                     <td width="20%">{{ $from[$mission->from] }}</td>
                                                     <td width="25%">{{ $mission->subject->name }}</td>
-                                                    <td>{{ $mission->worker->fio }}</td>
+                                                    <td>
+                                                        <a href="{{ Auth::user() == $mission->worker? route('user.edit', $mission->worker->id) : route('user.show', $mission->worker->id) }}"
+                                                           class="badge">{{ $mission->worker->fio }}</a>
+                                                    </td>
                                                 </tr>
                                                 </tbody>
                                             </table>
@@ -216,8 +219,11 @@
                                 </div>
                                 <div class="card-footer">
                                     <div class="row">
-                                        <div class="col-6"><a href="#"
+                                        <div class="col-6">
+                                            @if($mission->owner->isOnline()) <i class="fas fa-circle fa-xs text-success"></i> @endif
+                                            <a href="{{ Auth::user() == $mission->owner? route('user.edit', $mission->owner->id) : route('user.show', $mission->owner->id) }}"
                                                               class="badge badge-light">{{ $mission->owner->fio }}</a>
+
                                         </div>
                                         <div class="col-6">
                                             <a href="#"
@@ -324,7 +330,6 @@
 
     <script>
         $(document).ready(function () {
-            $('#example').DataTable();
             $('#choose-topic').val() == '-1' ? $('.hidden-topic-input').show() : $('.hidden-topic-input').hide();
             $('#choose-topic').change(function () {
                 if ($(this).val() == '-1') {

@@ -17,11 +17,14 @@
                                                 <h5 class="card-subtitle text-center">{{ $user->fio }}
                                                 </h5>
                                             </div>
-                                            <div class="card-body">
+                                            <div class="card-body text-center">
                                                 <img
                                                         src="{{ asset('images/avatars/users/' . $user->avatar) }}"
                                                         class="account-profile-avatar"
                                                         alt="">
+                                                @if($user->isOnline())
+                                                    <span class="badge badge-success">Online</span>
+                                                @endif
                                                 <p class="text-center mb-0"><span
                                                         class="badge badge-pill">{{ $user->position }}</span></p>
                                             </div>
