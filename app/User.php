@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 /**
  * @method static findorfail($id)
  * @method static create(array $array)
+ * @method static orderBy(string $string)
  */
 class User extends Authenticatable
 {
