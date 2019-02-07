@@ -83,4 +83,9 @@ class User extends Authenticatable
         return $this->hasMany('App\Wiki');
     }
 
+    public function rest()
+    {
+        return $this->belongsTo('App\Rest');
+    }
+
 }
