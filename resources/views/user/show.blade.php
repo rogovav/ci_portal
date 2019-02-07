@@ -73,10 +73,10 @@
                                         <div class="nav nav-tabs mb-3" id="nav-tab1" role="tablist">
                                             <a class="nav-item nav-link {{ $my? 'active' : Null }}" id="nav-my-tab" data-toggle="tab"
                                                href="#nav-my" role="tab" aria-controls="nav-home"
-                                               aria-selected="true">Мои заявки</a>
+                                               aria-selected="true">Заявки от пользователя</a>
                                             <a class="nav-item nav-link {{ $my? Null : 'active' }}" id="nav-me-tab" data-toggle="tab"
                                                href="#nav-me" role="tab" aria-controls="nav-profile"
-                                               aria-selected="false">Заявки мне</a>
+                                               aria-selected="false">Заявки для пользователя</a>
                                             <a class="nav-item nav-link" id="nav-help-tab" data-toggle="tab"
                                                href="#nav-help" role="tab" aria-controls="nav-contact"
                                                aria-selected="false">Заявки в помощь</a>

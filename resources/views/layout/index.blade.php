@@ -56,6 +56,10 @@
                             class="fas fa-calendar-alt shortmenu animate"></i></a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="{{ url('rest') }}" title="Календарь отпусков"><i class="fas fa-umbrella-beach"></i> Отпуска <i
+                                class="fas fa-umbrella-beach shortmenu animate"></i></a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="{{ url("reports") }}" title="Отчеты"><i class="fas fa-file-alt"></i>
                         Отчеты <i
                             class="fas fa-file-alt shortmenu animate"></i></a>
@@ -69,10 +73,7 @@
                     <a class="nav-link" href="" title="Склад"><i class="fas fa-warehouse"></i> Склад <i
                             class="fas fa-warehouse shortmenu animate"></i></a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url('rest') }}" title="Склад"><i class="fas fa-plane"></i> Отпуск <i
-                            class="fas fa-plane shortmenu animate"></i></a>
-                </li>
+
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url("admin") }}" title="Администрирование"><i class="fas fa-users-cog"></i> Service <i
                             class="fas fa-users-cog shortmenu animate"></i></a>
