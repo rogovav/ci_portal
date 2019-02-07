@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Cache;
 
 /**
  * @method static findorfail($id)
@@ -33,6 +34,11 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function isOnline()
+    {
+        return Cache::has('user-is-online-' . $this->id);
+    }
 
     public function groups_admin()
     {

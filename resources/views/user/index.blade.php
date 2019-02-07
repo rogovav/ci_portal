@@ -91,6 +91,14 @@
                                     <img src="{{ asset('images/avatars/users/' . $user->avatar) }}"
                                          class="account-profile-avatar"
                                          alt="">
+                                    <div class="text-center mt-2">
+                                        @if($user->isOnline())
+                                            <span class="badge badge-success">Online</span>
+                                        @else
+                                            <span class="badge badge-light">Offline</span>
+                                        @endif
+                                    </div>
+
                                 </div>
                             </div>
                             <div class="card">
