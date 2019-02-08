@@ -207,10 +207,7 @@
                                                     </td>
                                                     <td width="20%">{{ $from[$mission->from] }}</td>
                                                     <td width="25%">{{ $mission->subject->name }}</td>
-                                                    <td>
-                                                        <a href="{{ Auth::user() == $mission->worker? route('user.edit', $mission->worker->id) : route('user.show', $mission->worker->id) }}"
-                                                           class="badge">{{ $mission->worker->fio }}</a>
-                                                    </td>
+                                                    <td>{{ $mission->worker->fio }}</td>
                                                 </tr>
                                                 </tbody>
                                             </table>
@@ -220,14 +217,11 @@
                                 <div class="card-footer">
                                     <div class="row">
                                         <div class="col-6">
-                                            @if($mission->owner->isOnline()) <i class="fas fa-circle fa-xs text-success"></i> @endif
-                                            <a href="{{ Auth::user() == $mission->owner? route('user.edit', $mission->owner->id) : route('user.show', $mission->owner->id) }}"
-                                                              class="badge badge-light">{{ $mission->owner->fio }}</a>
+                                            <span class="badge badge-light">{{ $mission->owner->fio }}</span>
 
                                         </div>
                                         <div class="col-6">
-                                            <a href="#"
-                                               class="badge {{ $mission->status == 1? 'badge-info' : 'badge-warning' }} float-right">{{ $mission->status == 1? 'В работе' : 'Ожидает решения' }}</a>
+                                            <span class="badge {{ $mission->status == 1? 'badge-info' : 'badge-warning' }} float-right">{{ $mission->status == 1? 'В работе' : 'Ожидает решения' }}</span>
                                         </div>
                                     </div>
                                 </div>
