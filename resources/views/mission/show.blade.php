@@ -301,6 +301,7 @@
                                                 <div class="card-body card-priority-high">
                                                     <div class="row">
                                                         <div class="col-12">
+                                                            <a href="{{ route('user.show', $mission->owner->id) }}">
                                                             <img class="users-helpers-img m-auto"
                                                                  style="display: block"
                                                                  data-container="body" data-trigger="hover"
@@ -309,6 +310,14 @@
                                                                  data-content="{{ $mission->owner->fio }}"
                                                                  src="{{ asset('images/avatars/users/' . $mission->owner->avatar ) }}"
                                                                  alt="">
+                                                            </a>
+                                                            <div class="text-center mt-2">
+                                                                @if($mission->owner->isOnline())
+                                                                    <span class="badge badge-success">Online</span>
+                                                                @else
+                                                                    <span class="badge badge-secondary">Offline</span>
+                                                                @endif
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -322,6 +331,7 @@
                                                 <div class="card-body card-priority-mid">
                                                     <div class="row">
                                                         <div class="col-12">
+                                                            <a href="{{ route('user.show', $mission->worker->id) }}">
                                                             <img class="users-helpers-img m-auto"
                                                                  style="display: block"
                                                                  data-container="body" data-trigger="hover"
@@ -330,6 +340,14 @@
                                                                  data-content="{{ $mission->worker->fio }}"
                                                                  src="{{ asset('images/avatars/users/' . $mission->worker->avatar ) }}"
                                                                  alt="">
+                                                            </a>
+                                                            <div class="text-center mt-2">
+                                                                @if($mission->worker->isOnline())
+                                                                    <span class="badge badge-success">Online</span>
+                                                                @else
+                                                                    <span class="badge badge-secondary">Offline</span>
+                                                                @endif
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -345,6 +363,7 @@
                                                     <div class="row">
                                                         @foreach($mission->helpers as $helper)
                                                             <div class="col-3">
+                                                                <a href="{{ route('user.show', $helper->id) }}">
                                                                 <img class="users-helpers-img"
                                                                      data-container="body" data-trigger="hover"
                                                                      data-toggle="popover"
@@ -352,6 +371,14 @@
                                                                      data-content="{{ $helper->fio }}"
                                                                      src="{{ asset('images/avatars/users/' . $helper->avatar ) }}"
                                                                      alt="">
+                                                                </a>
+                                                                <div class="text-center mt-2">
+                                                                    @if($helper->isOnline())
+                                                                        <span class="badge badge-success">Online</span>
+                                                                    @else
+                                                                        <span class="badge badge-secondary">Offline</span>
+                                                                    @endif
+                                                                </div>
                                                             </div>
                                                         @endforeach
                                                     </div>

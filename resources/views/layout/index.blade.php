@@ -50,11 +50,11 @@
                             class="fas fa-graduation-cap"></i> WIKI <i
                             class="fas fa-graduation-cap shortmenu animate"></i></a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url("calendar") }}" title="Календарь"><i
-                            class="fas fa-calendar-alt"></i> Календарь <i
-                            class="fas fa-calendar-alt shortmenu animate"></i></a>
-                </li>
+                {{--<li class="nav-item">--}}
+                    {{--<a class="nav-link" href="{{ route('calendar.index') }}" title="Календарь"><i--}}
+                            {{--class="fas fa-calendar-alt"></i> Календарь <i--}}
+                            {{--class="fas fa-calendar-alt shortmenu animate"></i></a>--}}
+                {{--</li>--}}
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('rest.index') }}" title="Календарь отпусков"><i class="fas fa-umbrella-beach"></i> Отпуска <i
                                 class="fas fa-umbrella-beach shortmenu animate"></i></a>
@@ -83,7 +83,7 @@
 
             <ul class="navbar-nav ml-md-auto d-md-flex">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('user.edit', Auth::id()) }}"><img
+                    <a class="nav-link" href="{{ route('user.show', Auth::id()) }}"><img
                             src="{{ asset('images/avatars/users/' . Auth::user()->avatar) }}" alt=""
                             class="group-user-avatar-layout"> {{ Auth::user()->fio }}</a>
                 </li>
@@ -103,7 +103,7 @@
             <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-3">
                 <div class="card">
                     <div class="card-body card-body-task no-padding">
-                        <div class="card-body-label card-task"><a href="{{ route('user.edit', Auth::id()) }}"><i
+                        <div class="card-body-label card-task"><a href="{{ route('user.show', Auth::id()) }}"><i
                                     class="fas fa-tag fa-3x"></i></a></div>
                         <div class="card-body-text"><span>Заданий</span><br><span
                                 class="real-time-counter">{{ Auth::user()->todos->where('date', '>=', date('Y-m-d'))->where('date', '<=', date('Y-m-d', strtotime(date('Y-m-d') . "+7 days")))->where('success', false)->count() }}</span>

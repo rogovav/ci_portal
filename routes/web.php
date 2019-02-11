@@ -41,9 +41,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/mission/comment/{id}', 'MissionController@storeComment')->name('mission.storeComment');
 
     Route::get('/users', 'UserController@index')->name('user.index');
-    Route::get('/user/{id}', 'UserController@edit')->name('user.edit');
+//    Route::get('/user/{id}', 'UserController@edit')->name('user.edit');
     Route::post('/user/{id}', 'UserController@update')->name('user.update');
-    Route::get('/user/{id}/show', 'UserController@show')->name('user.show');
+    Route::get('/user/{id}', 'UserController@show')->name('user.show');
     Route::post('/users', 'UserController@add');
 
     Route::post('/todo', 'TodoController@store')->name('todo.store');
@@ -58,4 +58,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/rest', 'RestController@index')->name('rest.index');
     Route::post('/rest', 'RestController@store')->name('rest.store');
     Route::post('/rest/{id}', 'RestController@update')->name('rest.update');
+
+    Route::get('/calendar', 'CalendarController@index')->name('calendar.index');
 });

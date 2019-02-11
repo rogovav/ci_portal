@@ -134,12 +134,10 @@
                                                             </div>
                                                             <div class="card-footer">
                                                                 <div class="row">
-                                                                    <div class="col-6"><a href="#"
-                                                                                          class="badge badge-light">{{ $mission->worker->fio }}</a>
+                                                                    <div class="col-6"><span class="badge badge-light">{{ $mission->worker->fio }}</span>
                                                                     </div>
                                                                     <div class="col-6">
-                                                                        <a href="#"
-                                                                           class="badge {{ $mission->status == 1? 'badge-info' : 'badge-warning' }} float-right">{{ $mission->status == 1? 'В работе' : 'Ожидает решения' }}</a>
+                                                                        <span class="badge {{ $mission->status == 1? 'badge-info' : 'badge-warning' }} float-right">{{ $mission->status == 1? 'В работе' : 'Ожидает решения' }}</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -196,12 +194,10 @@
                                                             </div>
                                                             <div class="card-footer">
                                                                 <div class="row">
-                                                                    <div class="col-6"><a href="#"
-                                                                                          class="badge badge-light">{{ $mission->owner->fio }}</a>
+                                                                    <div class="col-6"><span class="badge badge-light">{{ $mission->owner->fio }}</span>
                                                                     </div>
                                                                     <div class="col-6">
-                                                                        <a href="#"
-                                                                           class="badge {{ $mission->status == 1? 'badge-info' : 'badge-warning' }} float-right">{{ $mission->status == 1? 'В работе' : 'Ожидает решения' }}</a>
+                                                                        <span class="badge {{ $mission->status == 1? 'badge-info' : 'badge-warning' }} float-right">{{ $mission->status == 1? 'В работе' : 'Ожидает решения' }}</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -258,12 +254,10 @@
                                                             </div>
                                                             <div class="card-footer">
                                                                 <div class="row">
-                                                                    <div class="col-6"><a href="#"
-                                                                                          class="badge badge-light">{{ $mission->worker->fio }}</a>
+                                                                    <div class="col-6"><span class="badge badge-light">{{ $mission->worker->fio }}</span>
                                                                     </div>
                                                                     <div class="col-6">
-                                                                        <a href="#"
-                                                                           class="badge {{ $mission->status == 1? 'badge-info' : 'badge-warning' }} float-right">{{ $mission->status == 1? 'В работе' : 'Ожидает решения' }}</a>
+                                                                        <span class="badge {{ $mission->status == 1? 'badge-info' : 'badge-warning' }} float-right">{{ $mission->status == 1? 'В работе' : 'Ожидает решения' }}</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
