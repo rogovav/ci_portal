@@ -40,9 +40,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/mission/{id}', 'MissionController@update')->name('mission.update');
     Route::post('/mission/comment/{id}', 'MissionController@storeComment')->name('mission.storeComment');
 
-    Route::get('/users', 'UserController@index');
+    Route::get('/users', 'UserController@index')->name('user.index');
     Route::get('/user/{id}', 'UserController@edit')->name('user.edit');
     Route::post('/user/{id}', 'UserController@update')->name('user.update');
+    Route::get('/user/{id}/show', 'UserController@show')->name('user.show');
     Route::post('/users', 'UserController@add');
 
     Route::post('/todo', 'TodoController@store')->name('todo.store');
@@ -53,4 +54,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/wiki/{id}', 'WikiController@show')->name('wiki.show');
 
     Route::get('/users/api{params?}', 'UserController@api_json');
+
+    Route::get('/rest', 'RestController@index')->name('rest.index');
+    Route::post('/rest', 'RestController@store')->name('rest.store');
+    Route::post('/rest/{id}', 'RestController@update')->name('rest.update');
 });

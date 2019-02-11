@@ -47,10 +47,11 @@
                                     <div class="col account-main-info-col">
                                         <div class="card">
                                             <div class="card-header ">
-                                                <h5 class="card-subtitle text-center">{{ $user->fio }}
+                                                <h5 class="card-subtitle text-center">
+                                                    {{ $user->fio }}
                                                 </h5>
                                             </div>
-                                            <div class="card-body">
+                                            <div class="card-body text-center">
                                                 <a href="" data-toggle="modal" data-target="#exampleModal"><img
                                                         src="{{ asset('images/avatars/users/' . $user->avatar) }}"
                                                         class="account-profile-avatar"
@@ -128,7 +129,7 @@
                                                     </div>
                                                     <div class="form-row  mb-3">
                                                         <div class="col">
-                                                <textarea placeholder="Текст TODO" class="form-control" name="info"
+                                                <textarea placeholder="Текст задания" class="form-control" name="info"
                                                           id="" cols="30"
                                                           rows="2"></textarea>
                                                         </div>
@@ -377,10 +378,10 @@
                                 <div class="card-body ">
                                     <nav>
                                         <div class="nav nav-tabs mb-3" id="nav-tab1" role="tablist">
-                                            <a class="nav-item nav-link active" id="nav-my-tab" data-toggle="tab"
+                                            <a class="nav-item nav-link {{ $my? 'active' : Null }}" id="nav-my-tab" data-toggle="tab"
                                                href="#nav-my" role="tab" aria-controls="nav-home"
                                                aria-selected="true">Мои заявки</a>
-                                            <a class="nav-item nav-link" id="nav-me-tab" data-toggle="tab"
+                                            <a class="nav-item nav-link {{ $my? Null : 'active' }}" id="nav-me-tab" data-toggle="tab"
                                                href="#nav-me" role="tab" aria-controls="nav-profile"
                                                aria-selected="false">Заявки мне</a>
                                             <a class="nav-item nav-link" id="nav-help-tab" data-toggle="tab"
@@ -389,10 +390,10 @@
                                         </div>
                                     </nav>
                                     <div class="tab-content" id="nav-tabContent">
-                                        <div class="tab-pane fade show active" id="nav-my" role="tabpanel"
+                                        <div class="tab-pane fade {{ $my? 'show active' : Null }}" id="nav-my" role="tabpanel"
                                              aria-labelledby="nav-my-tab">
                                             <div class="row">
-                                                @foreach($user->mission_owner->where('status', '<>', 3)->sortByDesc('id')->take(3) as $mission)
+                                                @foreach($mission_owner->sortByDesc('id')->take(3) as $mission)
                                                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                                                         <div class="card">
                                                             <div
@@ -451,10 +452,10 @@
                                                 @endforeach
                                             </div>
                                         </div>
-                                        <div class="tab-pane fade" id="nav-me" role="tabpanel"
+                                        <div class="tab-pane fade {{ $my? Null : 'show active' }}" id="nav-me" role="tabpanel"
                                              aria-labelledby="nav-me-tab">
                                             <div class="row">
-                                                @foreach($user->mission_worker->where('status', '<>', 3)->sortByDesc('id')->take(3) as $mission)
+                                                @foreach($mission_worker->sortByDesc('id')->take(3) as $mission)
                                                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                                                         <div class="card">
                                                             <div

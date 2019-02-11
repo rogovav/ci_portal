@@ -27,12 +27,12 @@
         <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav animate side-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url("") }}" title="Cart"><i class="fas fa-tachometer-alt"></i>
+                    <a class="nav-link" href="{{ route('home') }}" title="Cart"><i class="fas fa-tachometer-alt"></i>
                         Панель <i
                             class="fas fa-tachometer-alt shortmenu animate"></i></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url("missions") }}" title="Cart"><i class="fas fa-tasks"></i>
+                    <a class="nav-link" href="{{ route('mission.index') }}" title="Cart"><i class="fas fa-tasks"></i>
                         Заявки <i
                             class="fas fas fa-tasks shortmenu animate"></i></a>
                 </li>
@@ -42,11 +42,11 @@
                 {{--class="fas fa-users shortmenu animate"></i></a>--}}
                 {{--</li>--}}
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url("users") }}" title="Люди"><i class="fas fa-user-tie"></i> Люди <i
+                    <a class="nav-link" href="{{ route('user.index') }}" title="Люди"><i class="fas fa-user-tie"></i> Люди <i
                             class="fas fa-user-tie shortmenu animate"></i></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url("wiki") }}" title="WIKI"><i
+                    <a class="nav-link" href="{{ route('wiki.index') }}" title="WIKI"><i
                             class="fas fa-graduation-cap"></i> WIKI <i
                             class="fas fa-graduation-cap shortmenu animate"></i></a>
                 </li>
@@ -54,6 +54,10 @@
                     <a class="nav-link" href="{{ url("calendar") }}" title="Календарь"><i
                             class="fas fa-calendar-alt"></i> Календарь <i
                             class="fas fa-calendar-alt shortmenu animate"></i></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('rest.index') }}" title="Календарь отпусков"><i class="fas fa-umbrella-beach"></i> Отпуска <i
+                                class="fas fa-umbrella-beach shortmenu animate"></i></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url("reports") }}" title="Отчеты"><i class="fas fa-file-alt"></i>
@@ -69,8 +73,9 @@
                     <a class="nav-link" href="" title="Склад"><i class="fas fa-warehouse"></i> Склад <i
                             class="fas fa-warehouse shortmenu animate"></i></a>
                 </li>
+
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url("admin") }}" title="Склад"><i class="fas fa-users-cog"></i> Service <i
+                    <a class="nav-link" href="{{ url("admin") }}" title="Администрирование"><i class="fas fa-users-cog"></i> Service <i
                             class="fas fa-users-cog shortmenu animate"></i></a>
                 </li>
 

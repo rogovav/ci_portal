@@ -4,9 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
 {
@@ -17,14 +15,42 @@ class UserController extends Controller
         return view('user.index', compact('users'));
     }
 
+    public function show($id)
+    {
+        $user           = User::findorfail($id);
+        $status         = [1 => 'В работе', 2 => 'На проверке'];
+        $from           = [1 => 'Задача', 2 => 'Общежитие', 3 => 'Университет',];
+        $mission_owner  = $user->mission_owner->where('status', '<>', 3);
+        $mission_worker = $user->mission_worker->where('status', '<>', 3);
+        $my             = $mission_owner->count() >= $mission_worker->count();
+
+        return view('user.show', compact(
+            'user',
+            'status',
+            'from',
+            'mission_owner',
+            'mission_worker',
+            'my'
+        ));
+    }
+
     public function edit($id)
     {
+        $user           = User::findorfail($id);
+        $status         = [1 => 'В работе', 2 => 'На проверке'];
+        $from           = [1 => 'Задача', 2 => 'Общежитие', 3 => 'Университет',];
+        $mission_owner  = $user->mission_owner->where('status', '<>', 3);
+        $mission_worker = $user->mission_worker->where('status', '<>', 3);
+        $my             = $mission_owner->count() >= $mission_worker->count();
 
-        $user   = User::findorfail($id);
-        $status = [1 => 'В работе', 2 => 'На проверке'];
-        $from   = [1 => 'Задача', 2 => 'Общежитие', 3 => 'Университет',];
-
-        return view('user.edit', compact('user', 'status', 'from'));
+        return view('user.edit', compact(
+            'user',
+            'status',
+            'from',
+            'mission_owner',
+            'mission_worker',
+            'my'
+        ));
     }
 
     public function update(Request $request, $id)
@@ -34,7 +60,7 @@ class UserController extends Controller
         if (isset($request['avatar'])) {
             $ava = $request['avatar'];
 
-            list($type, $ava) = explode(';', $ava);
+            list(, $ava) = explode(';', $ava);
             list(, $ava)      = explode(',', $ava);
 
             $ava = base64_decode($ava);
@@ -109,7 +135,7 @@ class UserController extends Controller
             if (!in_array($user->id, $not_users))
                 $data[] = [
                     'value' => $user->id,
-                    'text' => "<img src='/images/avatars/users/$user->avatar' class='user-selector'> " . $user->fio,
+                    'text' => "<img src='/images/avatars/users/$user->avatar' class='user-selector' alt=''> " . $user->fio,
                 ];
         }
 

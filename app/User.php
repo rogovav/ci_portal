@@ -5,7 +5,13 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Cache;
 
+/**
+ * @method static findorfail($id)
+ * @method static create(array $array)
+ * @method static orderBy(string $string)
+ */
 class User extends Authenticatable
 {
 
@@ -28,6 +34,11 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function isOnline()
+    {
+        return Cache::has('user-is-online-' . $this->id);
+    }
 
     public function groups_admin()
     {
@@ -77,6 +88,11 @@ class User extends Authenticatable
     public function wikis()
     {
         return $this->hasMany('App\Wiki');
+    }
+
+    public function rest()
+    {
+        return $this->belongsTo('App\Rest');
     }
 
 }
