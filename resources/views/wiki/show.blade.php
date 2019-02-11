@@ -37,29 +37,9 @@
     </div>
     <div class="card">
         <div class="card-header card-info-header">
-            <div class="row">
-                <div class="col-9 col-form-label">
-                    {{ $wiki->name }}
-                </div>
-                @if( $wiki->user == Auth::user() )
-                <div class="col-3">
-                    <div class="row">
-                        <div class="col-6">
-                            <button class="btn btn-light float-right col-12" data-toggle="modal" data-target="#exampleModal">
-                                Редактировать
-                            </button>
-                        </div>
-                        <div class="col-6">
-                            <button class="btn btn-danger float-right col-12" data-toggle="modal" data-target="#exampleModal">
-                                Удалить
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                @endif
-            </div>
+            <h6>{{ $wiki->name }}</h6>
         </div>
-        <div class="card-body">
+        <div class="card-body padding-0">
             <div class="card">
                 <div class="card-body">
                     <div>
@@ -67,6 +47,22 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="card-footer">
+            @if( $wiki->user == Auth::user() )
+                    <div class="row">
+                        <div class="col-6">
+                            <button class="btn btn-light float-left btn-sm" data-toggle="modal" data-target="#exampleModal">
+                                Редактировать
+                            </button>
+                        </div>
+                        <div class="col-6">
+                            <button class="btn btn-danger float-right btn-sm" data-toggle="modal" data-target="#exampleModal">
+                                Удалить
+                            </button>
+                        </div>
+                    </div>
+            @endif
         </div>
     </div>
 @endsection

@@ -1131,4 +1131,21 @@ a.delete-a:hover {
     body {
         font-size: 10px !important;
     }
+
+    .card-body-label {
+        width: auto;
+    }
+
+    .card-body-text {
+        width: auto;
+    }
+
+    .padding-0 {
+        padding: 0;
+    }
+
+    .create-user-button {
+        padding: 0 5px;
+        text-transform: none;
+    }
 }

@@ -42,7 +42,7 @@
             <div class="row">
                 <div class="col-12 m-0">
                     <div class="form-row">
-                        <div class="col-10">
+                        <div class="col-12 col-md-9 col-lg-9 col-xl-10 mt-1">
                             <div class="input-group mb-0">
                                 <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon1">
@@ -54,8 +54,8 @@
                                        aria-describedby="basic-addon1">
                             </div>
                         </div>
-                        <div class="col-2">
-                            <button class="btn btn-info float-right" data-toggle="modal" data-target="#exampleModal">
+                        <div class="col-12 col-md-3 col-lg-3 col-xl-2 mt-1">
+                            <button class="btn btn-info float-right btn-block" data-toggle="modal" data-target="#exampleModal">
                                 Создать статью
                             </button>
                         </div>
@@ -71,7 +71,7 @@
                             <div class="card-header">
                                 <div class="row">
                                     <div class="col-12">
-                                        <span class="badge badge-light float-left topic"><h5 class="mb-0">{{ $wiki->name }}</h5></span>
+                                        <span class="badge badge-light float-left topic"><h6 class="mb-0">{{ $wiki->name }}</h6></span>
                                     </div>
                                 </div>
                             </div>

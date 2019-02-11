@@ -84,9 +84,9 @@
         @foreach($users as $user)
             <div class="col-md-6 col-lg-4 col-xl-3">
                 <div class="card">
-                    <div class="card-body">
+                    <div class="card-body padding-0">
                         <div class="col account-main-info-col p-0">
-                            <div class="card">
+                            <div class="card mb-0">
                                 <div class="card-body">
                                     <img src="{{ asset('images/avatars/users/' . $user->avatar) }}"
                                          class="account-profile-avatar"
@@ -101,7 +101,7 @@
 
                                 </div>
                             </div>
-                            <div class="card">
+                            <div class="card mb-0">
                                 <div class="card-body">
                                     <h5 class="card-subtitle text-center">{{ $user->fio }}
                                     </h5>
@@ -109,7 +109,7 @@
                                     <p class="text-center"><b>День рождения:</b> {{ $user->birthday }}</p>
                                 </div>
                             </div>
-                            <div class="card">
+                            <div class="card mb-0">
                                 <div class="card-body">
                                     <ul class="profile-card-user-social">
                                         <li><span><a href="{{ route('user.show', $user->id) }}"><i class="fas fa-user-circle  fa-2x"></i></a></span></li>
