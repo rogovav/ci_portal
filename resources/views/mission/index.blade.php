@@ -1,6 +1,5 @@
 @extends('layout.index')
 @section('css')
-    <link rel="stylesheet" href="{{ asset("css/dataTables.bootstrap4.min.css") }}">
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.5/css/bootstrap-select.min.css">
 @endsection
@@ -101,7 +100,8 @@
                             <div class="card-header">Выбор сотрудников</div>
                             <div class="card-body">
                                 <div class="form-group ">
-                                    <select class="user-select form-control" name="worker" title="Исполнитель"
+                                    <select id="worker-select" class="user-select form-control" name="worker"
+                                            title="Исполнитель"
                                             data-live-search="true">
                                         @foreach($users as $user)
                                             <option value="{{ $user->id }}">{{ $user->fio }}</option>
@@ -115,7 +115,9 @@
                                             <option value="{{ $user->id }}">{{ $user->fio }}</option>
                                         @endforeach
                                     </select>
+                                    <span id="select-error" class="badge badge-danger">Исполнитель не может быть помощником</span>
                                 </div>
+
                             </div>
                         </div>
                         <div class="card">
@@ -150,7 +152,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Создать</button>
+                        <button id="btn-form" type="submit" class="btn btn-primary">Создать</button>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
                     </div>
                 </form>
@@ -169,87 +171,76 @@
             <div class="card card-table-rendered">
                 <div class="row">
                     @foreach($missions->where('status', '<>', 3)->sortByDesc('id') as $mission)
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-6">
-                        <div class="card">
-                            <div class="card-body task-card card-priority-{{ $mission->priority == 1? 'low' : ($mission->priority == 2? 'mid' : 'high') }} pb-0">
-                                <div class="progress">
-                                    @php
-                                        if (strtotime("now") > strtotime($mission->date_to))
-                                        {
-                                            $per = 100;
-                                        } else {
-                                            $per = (($mission->date_close ? strtotime($mission->date_close) : strtotime("now")) - strtotime($mission->created_at))/(strtotime($mission->date_to) - strtotime($mission->created_at)) * 100;
-                                        }
-                                    @endphp
-                                    <div class="progress-bar {{ $per < 50? 'bg-success' : ($per < 75? 'bg-warning' : 'bg-danger') }}"
-                                         role="progressbar"
-                                         style="width: {{ $per }}%"
-                                         aria-valuemin="0"
-                                         aria-valuemax="100"></div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-12">
-                                        <table class="table mb-0">
-                                            <thead>
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-6">
+                            <div class="card">
+                                <div
+                                    class="card-body task-card card-priority-{{ $mission->priority == 1? 'low' : ($mission->priority == 2? 'mid' : 'high') }} pb-0">
+                                    <div class="progress">
+                                        @php
+                                            if (strtotime("now") > strtotime($mission->date_to))
+                                            {
+                                                $per = 100;
+                                            } else {
+                                                $per = (($mission->date_close ? strtotime($mission->date_close) : strtotime("now")) - strtotime($mission->created_at))/(strtotime($mission->date_to) - strtotime($mission->created_at)) * 100;
+                                            }
+                                        @endphp
+                                        <div
+                                            class="progress-bar {{ $per < 50? 'bg-success' : ($per < 75? 'bg-warning' : 'bg-danger') }}"
+                                            role="progressbar"
+                                            style="width: {{ $per }}%"
+                                            aria-valuemin="0"
+                                            aria-valuemax="100"></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <table class="table mb-0">
+                                                <thead>
                                                 <th>#</th>
                                                 <th>Источник</th>
                                                 <th>Тема</th>
                                                 <th>Исполнитель</th>
-                                            </thead>
-                                            <tbody>
-                                            <tr>
-                                                <td width="15%"><a
+                                                </thead>
+                                                <tbody>
+                                                <tr>
+                                                    <td width="15%"><a
                                                             href="{{ route('mission.show', $mission->id) }}">#{{ $mission->id }}</a>
-                                                </td>
-                                                <td width="20%">{{ $from[$mission->from] }}</td>
-                                                <td width="25%">{{ $mission->subject->name }}</td>
-                                                <td>{{ $mission->worker->fio }}</td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
+                                                    </td>
+                                                    <td width="20%">{{ $from[$mission->from] }}</td>
+                                                    <td width="25%">{{ $mission->subject->name }}</td>
+                                                    <td>
+                                                        <a href="{{ Auth::user() == $mission->worker? route('user.edit', $mission->worker->id) : route('user.show', $mission->worker->id) }}"
+                                                           class="badge">{{ $mission->worker->fio }}</a>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="card-footer">
-                                <div class="row">
-                                    <div class="col-6"><a href="#"
-                                                          class="badge badge-light">{{ $mission->owner->fio }}</a>
-                                    </div>
-                                    <div class="col-6">
-                                        <a href="#"
-                                           class="badge {{ $mission->status == 1? 'badge-info' : 'badge-warning' }} float-right">{{ $mission->status == 1? 'В работе' : 'Ожидает решения' }}</a>
+                                <div class="card-footer">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            @if($mission->owner->isOnline()) <i class="fas fa-circle fa-xs text-success"></i> @endif
+                                            <a href="{{ Auth::user() == $mission->owner? route('user.edit', $mission->owner->id) : route('user.show', $mission->owner->id) }}"
+                                                              class="badge badge-light">{{ $mission->owner->fio }}</a>
+
+                                        </div>
+                                        <div class="col-6">
+                                            <a href="#"
+                                               class="badge {{ $mission->status == 1? 'badge-info' : 'badge-warning' }} float-right">{{ $mission->status == 1? 'В работе' : 'Ожидает решения' }}</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                @endforeach
+                    @endforeach
                 </div>
-                {{--<table id="table_id" class="table table-tasks table-rendered dt-responsive nowrap">--}}
-                {{--<thead>--}}
-                {{--<tr>--}}
-                {{--<th>№</th>--}}
-                {{--<th>Info</th>--}}
-                {{--<th>Тип</th>--}}
-                {{--<th>Автор</th>--}}
-                {{--<th>Исполнитель</th>--}}
-                {{--<th>Тема</th>--}}
-                {{--<th>Клиент</th>--}}
-                {{--<th>Дата начала</th>--}}
-                {{--<th>Deadline</th>--}}
-                {{--</tr>--}}
-                {{--</thead>--}}
-                {{--</table>--}}
             </div>
         </div>
     </div>
 @endsection
 @section('js')
-    <script src="{{ asset("js/jquery.dataTables.js") }}"></script>
-    <script src="{{ asset("js/dataTables.bootstrap4.min.js") }}"></script>
     <script src='https://cloud.tinymce.com/stable/tinymce.min.js'></script>
-    <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
-    <script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap4.min.js"></script>
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.5/js/bootstrap-select.min.js"></script>
 
@@ -258,16 +249,38 @@
 
     <script>
         $(document).ready(function () {
-
+            $('#select-error').hide()
             $('select').selectpicker()
-
             $('.client-select').selectpicker();
-
             $('.help-select').selectpicker();
-
             $('.user-select').selectpicker();
-
         });
+    </script>
+
+    <script>
+        $('#worker-select').change(function () {
+            if ($.inArray($(this).val(), $('#help-select').val()) != -1) {
+                $('#select-error').show()
+                $('#help-select').addClass('red-select')
+                $('#help-select').closest('div').addClass('red-select')
+                $('#btn-form').prop('disabled', 'disabled')
+            } else {
+                $('#select-error').hide()
+                $('#btn-form').prop('disabled', '')
+                $('#help-select').closest('div').removeClass('red-select')
+            }
+        })
+        $('#help-select').change(function () {
+            if ($.inArray($('#worker-select').val(), $(this).val()) != -1) {
+                $('#select-error').show()
+                $('#help-select').closest('div').addClass('red-select')
+                $('#btn-form').prop('disabled', 'disabled')
+            } else {
+                $('#select-error').hide()
+                $('#help-select').closest('div').removeClass('red-select')
+                $('#btn-form').prop('disabled', '')
+            }
+        })
     </script>
 
     <script src="{{ asset('js/jquery.maskedinput.js') }}"></script>
@@ -317,7 +330,6 @@
 
     <script>
         $(document).ready(function () {
-            $('#example').DataTable();
             $('#choose-topic').val() == '-1' ? $('.hidden-topic-input').show() : $('.hidden-topic-input').hide();
             $('#choose-topic').change(function () {
                 if ($(this).val() == '-1') {

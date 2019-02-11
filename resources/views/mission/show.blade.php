@@ -176,16 +176,31 @@
                                     </div>
                                 </div>
                             </div>
+                            <form action="{{ route('mission.update', $mission->id) }}" method="post">
                             <div class="card-body">
-                                <form action="{{ route('mission.update', $mission->id) }}" method="post">
+
                                     {{ csrf_field() }}
-                                    <select class="user-select form-control" name="worker" title="Исполнитель"
-                                            data-live-search="true">
-                                        @foreach($users as $user)
-                                            <option value="{{ $user->id }}">{{ $user->fio }}</option>
-                                        @endforeach
-                                    </select>
-                                </form>
+                                    <div class="form-group">
+                                        <select id="worker-select" class="user-select form-control" name="worker"
+                                                title="Исполнитель"
+                                                data-live-search="true">
+                                            @foreach($users as $user)
+                                                <option
+                                                    {{ $user->id == $mission->worker->id ? 'selected' : Null }} value="{{ $user->id }}">{{ $user->fio }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <select data-content="{{ $helpers }}" id="help-select"
+                                                class="help-select form-control" name="helper[]"
+                                                multiple title="Помощники" data-live-search="true">
+                                            @foreach($users as $user)
+                                                <option value="{{ $user->id }}">{{ $user->fio }}</option>
+                                            @endforeach
+                                        </select>
+                                        <span id="select-error" class="badge badge-danger">Исполнитель не может быть помощником</span>
+                                    </div>
+
                             </div>
                             <div class="card-footer">
                                 <div class="row">
@@ -195,6 +210,7 @@
 
                                 </div>
                             </div>
+                            </form>
                         </div>
                         <div class="card" id="rewrite_deadline">
                             <div class="card-header">
@@ -485,9 +501,42 @@
     </script>
 
     <script>
+        $(document).ready(function () {
+            $('#help-select').selectpicker('val', $('#help-select').data('content'))
+        })
+    </script>
+
+    <script>
+        $('#worker-select').change(function () {
+            if ($.inArray($(this).val(), $('#help-select').val()) != -1) {
+                $('#select-error').show()
+                $('#help-select').addClass('red-select')
+                $('#help-select').closest('div').addClass('red-select')
+                $('#btn-form').prop('disabled', 'disabled')
+            } else {
+                $('#select-error').hide()
+                $('#btn-form').prop('disabled', '')
+                $('#help-select').closest('div').removeClass('red-select')
+            }
+        })
+        $('#help-select').change(function () {
+            if ($.inArray($('#worker-select').val(), $(this).val()) != -1) {
+                $('#select-error').show()
+                $('#help-select').closest('div').addClass('red-select')
+                $('#btn-form').prop('disabled', 'disabled')
+            } else {
+                $('#select-error').hide()
+                $('#help-select').closest('div').removeClass('red-select')
+                $('#btn-form').prop('disabled', '')
+            }
+        })
+    </script>
+
+    <script>
         $('#sohbet').scrollTop($('#sohbet').prop("scrollHeight"));
 
         $(document).ready(function () {
+            $('#select-error').hide()
             $('#rewrite_mission').hide()
             $('#rewrite_deadline').hide()
             $('#ok-form').hide()
@@ -519,6 +568,7 @@
 
     <script>
         $('.user-select').selectpicker()
+        $('#help-select').selectpicker()
     </script>
 
     <script>
