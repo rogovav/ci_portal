@@ -161,20 +161,20 @@
     </div>
     <div class="row">
         <div class="col">
-            <button class="btn btn-primary create-user-button" data-toggle="modal" data-target="#ModalCreateUser">
+            <button class="btn btn-primary create-user-button btn-sm" data-toggle="modal" data-target="#ModalCreateUser">
                 Создать заявку
             </button>
         </div>
     </div>
     <div class="row">
         <div class="col">
-            <div class="card card-table-rendered">
+            <div class="card card-table-rendered padding-0">
                 <div class="row">
                     @foreach($missions->where('status', '<>', 3)->sortByDesc('id') as $mission)
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-6">
                             <div class="card">
                                 <div
-                                    class="card-body task-card card-priority-{{ $mission->priority == 1? 'low' : ($mission->priority == 2? 'mid' : 'high') }} pb-0">
+                                    class="card-body task-card card-priority-{{ $mission->priority == 1? 'low' : ($mission->priority == 2? 'mid' : 'high') }} pb-0 padding-0">
                                     <div class="progress">
                                         @php
                                             if (strtotime("now") > strtotime($mission->date_to))

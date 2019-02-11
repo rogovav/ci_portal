@@ -4,14 +4,14 @@
 @endsection
 @section('content')
     <div class="card">
-        <div class="card-body">
+        <div class="card-body padding-0">
             <div class="row">
                 <div class="col-md-12 col-lg-12 col-xl-4">
                     <div class="row">
                         <div class="col-lg-6 col-xl-12">
                             <div class="card">
-                                <div class="card-body card-info">
-                                    <div class="col account-main-info-col">
+                                <div class="card-body card-info padding-0">
+                                    <div class="col account-main-info-col padding-0">
                                         <div class="card">
                                             <div class="card-header ">
                                                 <h5 class="card-subtitle text-center">{{ $user->fio }}
@@ -66,12 +66,12 @@
                 </div>
                 <div class=" col-lg-12 col-xl-8">
                     <div class="card">
-                        <div class="card-body card-info">
+                        <div class="card-body card-info padding-0">
                             <div class="card">
                                 <div class="card-header">
                                     Список заявок
                                 </div>
-                                <div class="card-body ">
+                                <div class="card-body padding-0">
                                     <nav>
                                         <div class="nav nav-tabs mb-3" id="nav-tab1" role="tablist">
                                             <a class="nav-item nav-link {{ $my? 'active' : Null }}" id="nav-my-tab" data-toggle="tab"
