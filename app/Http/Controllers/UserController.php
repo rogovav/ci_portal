@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -24,7 +25,7 @@ class UserController extends Controller
         $mission_worker = $user->mission_worker->where('status', '<>', 3);
         $my             = $mission_owner->count() >= $mission_worker->count();
 
-        return view('user.show', compact(
+        return view(Auth::user()->id != $id ? 'user.show' : 'user.edit', compact(
             'user',
             'status',
             'from',
@@ -34,24 +35,24 @@ class UserController extends Controller
         ));
     }
 
-    public function edit($id)
-    {
-        $user           = User::findorfail($id);
-        $status         = [1 => 'В работе', 2 => 'На проверке'];
-        $from           = [1 => 'Задача', 2 => 'Общежитие', 3 => 'Университет',];
-        $mission_owner  = $user->mission_owner->where('status', '<>', 3);
-        $mission_worker = $user->mission_worker->where('status', '<>', 3);
-        $my             = $mission_owner->count() >= $mission_worker->count();
-
-        return view('user.edit', compact(
-            'user',
-            'status',
-            'from',
-            'mission_owner',
-            'mission_worker',
-            'my'
-        ));
-    }
+//    public function edit($id)
+//    {
+//        $user           = User::findorfail($id);
+//        $status         = [1 => 'В работе', 2 => 'На проверке'];
+//        $from           = [1 => 'Задача', 2 => 'Общежитие', 3 => 'Университет',];
+//        $mission_owner  = $user->mission_owner->where('status', '<>', 3);
+//        $mission_worker = $user->mission_worker->where('status', '<>', 3);
+//        $my             = $mission_owner->count() >= $mission_worker->count();
+//
+//        return view('user.edit', compact(
+//            'user',
+//            'status',
+//            'from',
+//            'mission_owner',
+//            'mission_worker',
+//            'my'
+//        ));
+//    }
 
     public function update(Request $request, $id)
     {

@@ -35,6 +35,6 @@ class HomeController extends Controller
             }
         }
 
-        return redirect()->route('user.edit', Auth::id());
+        return redirect()->route('user.show', Auth::id());
     }
 }
