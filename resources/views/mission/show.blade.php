@@ -9,20 +9,20 @@
     <div class="card">
         <div class="card-header card-priority-{{ $mission->priority == 1? 'low' : ($mission->priority == 2? 'mid' : 'high') }}-header">
             <div class="row align-items-center">
-                <div class="col-12 col-md-2 col-lg-2 col-xl-2 col-form-label">
+                <div class="col-12 col-md-4 col-lg-2 col-xl-2 col-form-label">
                     <h6 class="mb-0">Заявка <b>#{{ $mission->id }}</b> ({{ $from[$mission->from] }})</h6>
                 </div>
-                <div class="col-12 col-md-8 col-lg-8 col-xl-8">
+                <div class="col-12 col-md-6 col-lg-8 col-xl-8">
                     <div class="row mb-1">
-                        <div class="col-12 col-md-4 col-lg-4 col-xl-4 text-left">
+                        <div class="col-5 col-md-5 col-lg-4 col-xl-4 text-left">
                             <span
                                     class="badge badge-info">{{ $mission->created_at }}</span> {{-- Вт, 22-го янв., 13:22:44 --}}
                         </div>
-                        <div class="col-12 col-md-4 col-lg-4 col-xl-4 text-center ">
+                        <div class="col-2 col-md-2 col-lg-4 col-xl-4 text-center ">
                             <span class="badge badge-success"><i
                                         class="far fa-calendar{{ $per == 100? '-times' : ($mission->status == 1? Null : ($mission->status == 2? '-minus' : '-check')) }}"></i> {{ $status[$mission->status] }} </span>
                         </div>
-                        <div class="col-12 col-md-4 col-lg-4 col-xl-4 text-right ">
+                        <div class="col-5 col-md-5 col-lg-4 col-xl-4 text-right ">
                             <span class="badge badge-info">{{ $mission->date_to }}</span>
                         </div>
                     </div>
@@ -60,14 +60,14 @@
                 </div>
             </div>
         </div>
-        <div class="card-body card-priority-{{ $mission->priority == 1? 'low' : ($mission->priority == 2? 'mid' : 'high') }}">
+        <div class="card-body padding-0 card-priority-{{ $mission->priority == 1? 'low' : ($mission->priority == 2? 'mid' : 'high') }}">
             <div class="row">
                 <div class=" col-lg-12 col-xl-6">
                     <div class="card">
                         <div class="card-header">
                             Информация о заявке
                         </div>
-                        <div class="card-body">
+                        <div class="card-body padding-0">
                             @if($mission->client)
                                 <div class="row">
                                 <div class="col-12">
@@ -293,9 +293,9 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="row">
-                                        <div class="col-6 col-md-6 col-lg-3 col-xl-3 ">
+                                        <div class="col-6 col-md-3 col-lg-3 col-xl-3 ">
                                             <div class="card">
-                                                <div class="card-header text-center card-priority-high-header">
+                                                <div class="card-header text-center card-priority-high-header small">
                                                     <b>Автор</b>
                                                 </div>
                                                 <div class="card-body card-priority-high">
@@ -323,7 +323,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-6 col-md-6 col-lg-3 col-xl-3 smal">
+                                        <div class="col-6 col-md-3 col-lg-3 col-xl-3 small">
                                             <div class="card">
                                                 <div class="card-header text-center card-priority-mid-header">
                                                     <b>Исполнитель</b>
@@ -354,9 +354,9 @@
                                             </div>
                                         </div>
                                         @if($mission->helpers->count() > 0)
-                                        <div class="col-12 col-md-12 col-lg-6 col-xl-6">
+                                        <div class="col-12 col-md-6 col-lg-6 col-xl-6">
                                             <div class="card">
-                                                <div class="card-header text-center card-priority-low-header">
+                                                <div class="card-header text-center card-priority-low-header small">
                                                     <b>Помощники</b>
                                                 </div>
                                                 <div class="card-body card-priority-low">
@@ -364,7 +364,8 @@
                                                         @foreach($mission->helpers as $helper)
                                                             <div class="col-3">
                                                                 <a href="{{ route('user.show', $helper->id) }}">
-                                                                <img class="users-helpers-img"
+                                                                <img class="users-helpers-img m-auto"
+                                                                     style="display: block"
                                                                      data-container="body" data-trigger="hover"
                                                                      data-toggle="popover"
                                                                      data-placement="bottom"
