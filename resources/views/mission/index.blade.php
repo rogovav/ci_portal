@@ -161,20 +161,20 @@
     </div>
     <div class="row">
         <div class="col">
-            <button class="btn btn-primary create-user-button" data-toggle="modal" data-target="#ModalCreateUser">
+            <button class="btn btn-primary create-user-button btn-sm" data-toggle="modal" data-target="#ModalCreateUser">
                 Создать заявку
             </button>
         </div>
     </div>
     <div class="row">
         <div class="col">
-            <div class="card card-table-rendered">
+            <div class="card card-table-rendered padding-0">
                 <div class="row">
                     @foreach($missions->where('status', '<>', 3)->sortByDesc('id') as $mission)
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-6">
                             <div class="card">
                                 <div
-                                    class="card-body task-card card-priority-{{ $mission->priority == 1? 'low' : ($mission->priority == 2? 'mid' : 'high') }} pb-0">
+                                    class="card-body task-card card-priority-{{ $mission->priority == 1? 'low' : ($mission->priority == 2? 'mid' : 'high') }} pb-0 padding-0">
                                     <div class="progress">
                                         @php
                                             if (strtotime("now") > strtotime($mission->date_to))
@@ -207,10 +207,7 @@
                                                     </td>
                                                     <td width="20%">{{ $from[$mission->from] }}</td>
                                                     <td width="25%">{{ $mission->subject->name }}</td>
-                                                    <td>
-                                                        <a href="{{ Auth::user() == $mission->worker? route('user.edit', $mission->worker->id) : route('user.show', $mission->worker->id) }}"
-                                                           class="badge">{{ $mission->worker->fio }}</a>
-                                                    </td>
+                                                    <td>{{ $mission->worker->fio }}</td>
                                                 </tr>
                                                 </tbody>
                                             </table>
@@ -220,14 +217,11 @@
                                 <div class="card-footer">
                                     <div class="row">
                                         <div class="col-6">
-                                            @if($mission->owner->isOnline()) <i class="fas fa-circle fa-xs text-success"></i> @endif
-                                            <a href="{{ Auth::user() == $mission->owner? route('user.edit', $mission->owner->id) : route('user.show', $mission->owner->id) }}"
-                                                              class="badge badge-light">{{ $mission->owner->fio }}</a>
+                                            <span class="badge badge-light">{{ $mission->owner->fio }}</span>
 
                                         </div>
                                         <div class="col-6">
-                                            <a href="#"
-                                               class="badge {{ $mission->status == 1? 'badge-info' : 'badge-warning' }} float-right">{{ $mission->status == 1? 'В работе' : 'Ожидает решения' }}</a>
+                                            <span class="badge {{ $mission->status == 1? 'badge-info' : 'badge-warning' }} float-right">{{ $mission->status == 1? 'В работе' : 'Ожидает решения' }}</span>
                                         </div>
                                     </div>
                                 </div>

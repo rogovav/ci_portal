@@ -81,9 +81,9 @@
     <div class="card">
         <div class="card-header">
             <div class="row">
-                <div class="col-6 col-form-label">Отпуска сотрудников на 2019 год</div>
-                <div class="col-6">
-                    <button class="btn btn-sm float-right" {{-- data-toggle="modal" data-target="#exampleModal" --}} onclick="clearModal()">Добавить
+                <div class="col-12 col-md-8 col-lg-9 col-xl-10 col-form-label">Отпуска сотрудников на 2019 год</div>
+                <div class="col-12 col-md-4 col-lg-3 col-xl-2">
+                    <button class="btn btn-sm float-right btn-block" {{-- data-toggle="modal" data-target="#exampleModal" --}} onclick="clearModal()">Добавить
                         отпуск
                     </button>
                 </div>
@@ -97,11 +97,11 @@
                             <div class="card-header">{{ $rest->user->fio }}</div>
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4">
+                                    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-4">
                                         <img class="group-user-avatar-card mb-2"
                                              src="{{ asset('images/avatars/users/' . $rest->user->avatar) }}" alt="">
                                     </div>
-                                    <div class="col-sm-12 col-md-12 col-lg-8 col-xl-8">
+                                    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-8">
                                         <table class="table table-sm small">
                                             <tr>
                                                 <td><b>№ недели</b></td>

@@ -50,11 +50,11 @@
                             class="fas fa-graduation-cap"></i> WIKI <i
                             class="fas fa-graduation-cap shortmenu animate"></i></a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url("calendar") }}" title="Календарь"><i
-                            class="fas fa-calendar-alt"></i> Календарь <i
-                            class="fas fa-calendar-alt shortmenu animate"></i></a>
-                </li>
+                {{--<li class="nav-item">--}}
+                    {{--<a class="nav-link" href="{{ route('calendar.index') }}" title="Календарь"><i--}}
+                            {{--class="fas fa-calendar-alt"></i> Календарь <i--}}
+                            {{--class="fas fa-calendar-alt shortmenu animate"></i></a>--}}
+                {{--</li>--}}
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('rest.index') }}" title="Календарь отпусков"><i class="fas fa-umbrella-beach"></i> Отпуска <i
                                 class="fas fa-umbrella-beach shortmenu animate"></i></a>
@@ -69,10 +69,10 @@
                         <i
                             class="fas fa-comments shortmenu animate"></i></a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="" title="Склад"><i class="fas fa-warehouse"></i> Склад <i
-                            class="fas fa-warehouse shortmenu animate"></i></a>
-                </li>
+                {{--<li class="nav-item">--}}
+                    {{--<a class="nav-link" href="" title="Склад"><i class="fas fa-warehouse"></i> Склад <i--}}
+                            {{--class="fas fa-warehouse shortmenu animate"></i></a>--}}
+                {{--</li>--}}
 
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url("admin") }}" title="Администрирование"><i class="fas fa-users-cog"></i> Service <i
@@ -83,7 +83,7 @@
 
             <ul class="navbar-nav ml-md-auto d-md-flex">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('user.edit', Auth::id()) }}"><img
+                    <a class="nav-link" href="{{ route('user.show', Auth::id()) }}"><img
                             src="{{ asset('images/avatars/users/' . Auth::user()->avatar) }}" alt=""
                             class="group-user-avatar-layout"> {{ Auth::user()->fio }}</a>
                 </li>
@@ -98,64 +98,65 @@
             </ul>
         </div>
     </nav>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-3">
-                <div class="card">
-                    <div class="card-body card-body-task no-padding">
-                        <div class="card-body-label card-task"><a href="{{ route('user.edit', Auth::id()) }}"><i
-                                    class="fas fa-tag fa-3x"></i></a></div>
-                        <div class="card-body-text"><span>Заданий</span><br><span
-                                class="real-time-counter">{{ Auth::user()->todos->where('date', '>=', date('Y-m-d'))->where('date', '<=', date('Y-m-d', strtotime(date('Y-m-d') . "+7 days")))->where('success', false)->count() }}</span>
-                            <hr>
-                            <span
-                                class="real-time-counter-user">{{ Auth::user()->todos->where('date', date('Y-m-d'))->where('success', false)->count() }}</span>
-                            <span> на сегодня</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-3">
-                <div class="card card-body-message">
-                    <div class="card-body no-padding">
-                        <div class="card-body-label card-message"><a href=""><i class="fas fa-envelope fa-3x"></i></a>
-                        </div>
-                        <div class="card-body-text"><span>СООБЩЕНИЙ</span><br><span class="real-time-counter">21</span>
-                            <hr>
-                            <span class="real-time-counter-user">10</span>
-                            <span> Ваши</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-3">
-                <div class="card">
-                    <div class="card-body card-body-wiki no-padding">
-                        <div class="card-body-label card-wiki"><a href=""><i
-                                    class="fas fa-graduation-cap fa-3x"></i></a></div>
-                        <div class="card-body-text"><span>СТАТЕЙ</span><br><span class="real-time-counter">35</span>
-                            <hr>
-                            <span class="real-time-counter-user">4</span>
-                            <span> написано Вами</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-3">
-                <div class="card">
-                    <div class="card-body card-body-users no-padding">
-                        <div class="card-body-label card-users"><a href=""><i class="fas fa-users fa-3x"></i></a></div>
-                        <div class="card-body-text"><span>ПОЛЬЗОВАТЕЛЕЙ</span><br><span
-                                class="real-time-counter">{{ $users_layout['all'] }}</span>
-                            <hr>
-                            <span class="real-time-counter-user">{{ $users_layout['online'] }}</span>
-                            <span> on-line</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    {{--<div class="container-fluid">--}}
+        {{--<div class="row">--}}
+            {{--<div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-3">--}}
+                {{--<div class="card">--}}
+                    {{--<div class="card-body card-body-task no-padding">--}}
+                        {{--<div class="card-body-label card-task"><a href="{{ route('user.show', Auth::id()) }}"><i--}}
+                                    {{--class="fas fa-tag fa-3x"></i></a></div>--}}
+                        {{--<div class="card-body-text"><span>Заданий:</span> <span--}}
+                                {{--class="real-time-counter">{{ Auth::user()->todos->where('date', '>=', date('Y-m-d'))->where('date', '<=', date('Y-m-d', strtotime(date('Y-m-d') . "+7 days")))->where('success', false)->count() }}</span>--}}
+                            {{--<hr>--}}
+                            {{--<span>На сегодня: </span>--}}
+                            {{--<span--}}
+                                {{--class="real-time-counter-user">{{ Auth::user()->todos->where('date', date('Y-m-d'))->where('success', false)->count() }}</span>--}}
+
+                        {{--</div>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
+            {{--</div>--}}
+            {{--<div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-3">--}}
+                {{--<div class="card card-body-message">--}}
+                    {{--<div class="card-body no-padding">--}}
+                        {{--<div class="card-body-label card-message"><a href=""><i class="fas fa-envelope fa-3x"></i></a>--}}
+                        {{--</div>--}}
+                        {{--<div class="card-body-text"><span>Сообщений: </span><span class="real-time-counter">21</span>--}}
+                            {{--<hr>--}}
+                            {{--<span class="real-time-counter-user">10</span>--}}
+                            {{--<span> Ваши</span>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
+            {{--</div>--}}
+            {{--<div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-3">--}}
+                {{--<div class="card">--}}
+                    {{--<div class="card-body card-body-wiki no-padding">--}}
+                        {{--<div class="card-body-label card-wiki"><a href=""><i--}}
+                                    {{--class="fas fa-graduation-cap fa-3x"></i></a></div>--}}
+                        {{--<div class="card-body-text"><span>СТАТЕЙ</span><br><span class="real-time-counter">35</span>--}}
+                            {{--<hr>--}}
+                            {{--<span class="real-time-counter-user">4</span>--}}
+                            {{--<span> написано Вами</span>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
+            {{--</div>--}}
+            {{--<div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-3">--}}
+                {{--<div class="card">--}}
+                    {{--<div class="card-body card-body-users no-padding">--}}
+                        {{--<div class="card-body-label card-users"><a href=""><i class="fas fa-users fa-3x"></i></a></div>--}}
+                        {{--<div class="card-body-text"><span>ПОЛЬЗОВАТЕЛЕЙ</span><br><span--}}
+                                {{--class="real-time-counter">{{ $users_layout['all'] }}</span>--}}
+                            {{--<hr>--}}
+                            {{--<span class="real-time-counter-user">{{ $users_layout['online'] }}</span>--}}
+                            {{--<span> on-line</span>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
+            {{--</div>--}}
+        {{--</div>--}}
+    {{--</div>--}}
     <div class="container-fluid">
         @yield('content')
     </div>
