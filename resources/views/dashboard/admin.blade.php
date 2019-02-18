@@ -11,6 +11,8 @@
                        aria-controls="nav-build" aria-selected="false">Здания</a>
                     <a class="nav-item nav-link" id="nav-topic-tab" data-toggle="tab" href="#nav-topic" role="tab"
                        aria-controls="nav-topic" aria-selected="false">Темы заявок</a>
+                    <a class="nav-item nav-link" id="nav-pos-tab" data-toggle="tab" href="#nav-pos" role="tab"
+                       aria-controls="nav-pos" aria-selected="false">Должности</a>
 
                 </div>
             </nav>
@@ -241,6 +243,59 @@
                         </div>
                     </div>
                 </div>
+                <div class="tab-pane fade" id="nav-pos" role="tabpanel" aria-labelledby="nav-pos-tab">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 admin-card">
+                        <div class="card admin-card-header">
+                            <h4>Должности</h4>
+                            <div class="card-body row">
+                                <div id="accordion2" class="col-8">
+                                    <div class="row">
+                                        @foreach($subjects as $subject)
+                                            <div class="col-3">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <p class="card-text">{{ $subject->name }}</p>
+                                                        <button onclick="editPosition({{$subject}})"
+                                                                class="btn btn-dark">Изменить
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <form action="{{ route('admin.subject') }}" class="admin-form"
+                                                  method="post">
+                                                {{ csrf_field() }}
+                                                <input type="text" class="hidden-print" name="id" id="pos-id">
+                                                <div class="form-group"><input name="name" type="text"
+                                                                               class="form-control"
+                                                                               placeholder="Название должности"
+                                                                               id="pos-name"
+                                                    >
+                                                </div>
+                                                <div class="form-row">
+                                                    <div class="col">
+                                                        <input type="submit" class="form-control">
+                                                    </div>
+                                                    <div class="col">
+                                                        <button type="button"
+                                                                class="btn btn-warning clear-form form-control">Очистить
+                                                            форму
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -265,6 +320,11 @@
         function editTopic(topic) {
             $('#topic-id').val(topic.id)
             $('#topic-name').val(topic.name)
+        }
+
+        function editPosition(pos) {
+            $('#pos-id').val(pos.id)
+            $('#pos-name').val(pos.name)
         }
 
         function editClient(client) {
