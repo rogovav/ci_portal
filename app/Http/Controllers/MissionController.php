@@ -95,7 +95,8 @@ class MissionController extends Controller
         if ($request->hasFile('files')) {
             foreach ($request->file('files') as $file) {
                 $original = $file->getClientOriginalName();
-                $fileName = $mission->id . '_' . $original;
+                $date = new \DateTime();
+                $fileName = $mission->id . '_' . $date->format('Ymd_His') . '_' . $original;
 
                 $file->storeAs('public/missions', $fileName);
 
@@ -109,56 +110,97 @@ class MissionController extends Controller
 
         $mission->helpers()->sync($request->helper);
 
+
+        // Сообщение о новой заявке
+        // Исполнителю
+
+        $helpersFio = "";
+
+        foreach ($mission->helpers as $helper)
+        {
+            $helpersFio .= $helper->fio . " ";
+
+            $message = "&#128101; Вы назначены помощником к заявке №$mission->id " .
+                "\n&#128100; Автор: " . Auth::user()->fio .
+                "\n&#128100; Исполнитель: " . $mission->worker->fio .
+                "\n&#128221; Описание: $request->info ".
+                "\n&#127760; Ссылка: " . route('mission.show', $mission->id);
+            $this->sendMessageToVK($message, $helper->vk);
+        }
+
+        $message = "&#127381; Новая заявка №$mission->id" .
+            "\n&#128100; Автор: " . Auth::user()->fio .
+            ($helpersFio? "\n&#128101; Помощники: $helpersFio" : "") .
+            "\n&#128197; Deadline: " . date('Y-m-d H:i', strtotime($request->date_to)) .
+            "\n&#128221; Описание: $request->info " .
+            "\n&#127760; Ссылка: " . route('mission.show', $mission->id);
+
+        $this->sendMessageToVK($message, $mission->worker->vk);
+
         return redirect()->back();
     }
 
     public function update(Request $request, $id)
     {
         $mission = Mission::findOrFail($id);
+
+        // изменение статуса заявки
         if (isset($request->status))
         {
             $mission->status = $request->status;
 
+            // Сообщение о закрытии
             if($request->status == 3)
             {
-                MissionComment::create([
-                    'info'       => $request->status_info != ''? "Заявка закрыта. \nКомментарий: " . $request->status_info : 'Заявка закрыта.',
-                    'user_id'    => Auth::id(),
-                    'mission_id' => $id,
-                ]);
-
+                $info = $request->status_info != ''? "Заявка закрыта. \nКомментарий: " . $request->status_info : 'Заявка закрыта.';
                 $mission->date_close = Carbon::now();
+
+                $message = "&#10004; Заявка №$id успешно закрыта" .
+                    "\n&#127760; Ссылка: " . route('mission.show', $id);
+
+                $this->sendMessageToVK($message, $mission->worker->vk);
+                $this->sendMessageToVK($message, $mission->owner->vk);
+                foreach ($mission->helpers as $helper)
+                {
+                    $this->sendMessageToVK($message, $helper->vk);
+                }
             }
+
+            // запросе на закрытие
             if($request->status == 2)
             {
-                MissionComment::create([
-                    'info'       => 'Отправлена на подтверждение закрытия.',
-                    'user_id'    => Auth::id(),
-                    'mission_id' => $id,
-                ]);
+                $info = 'Отправлена на подтверждение закрытия.';
+                $message = "&#128591; Запрос на закрытие заявки №$id " .
+                    "\n&#128100; Исполнитель: " . Auth::user()->fio .
+                    "\n&#127760; Ссылка: " . route('mission.show', $id);
+                $this->sendMessageToVK($message, $mission->owner->vk);
             }
+
+            // отклонении запроса на закрытие
             if($request->status == 1)
             {
-                MissionComment::create([
-                    'info'       => $request->status_info != ''? "Закрытие отменено по причине: \n" . $request->status_info : 'Закрытие отменено без указания причины.',
-                    'user_id'    => Auth::id(),
-                    'mission_id' => $id,
-                ]);
+                $info = $request->status_info != ''? "Закрытие отменено по причине: \n" . $request->status_info : 'Закрытие отменено без указания причины.';
+                $message = "&#10060; Запрос на закрытие заявки №$id отклонен" .
+                    "\n&#128221; Причина: " . ($request->status_info != ''? $request->status_info : 'Причина не указана') .
+                    "\n&#127760; Ссылка: " . route('mission.show', $id);
+                $this->sendMessageToVK($message, $mission->worker->vk);
             }
-
         }
 
+        // изменениие Deadline
         if (isset($request->date_to))
         {
             $mission->date_to = $request->date_to;
+            $info = "Deadline изменен на: " . date('Y-m-d H:i', strtotime($request->date_to));
 
-            MissionComment::create([
-                'info'       => "Deadline изменен на: " . date('Y-m-d H:i', strtotime($request->date_to)),
-                'user_id'    => Auth::id(),
-                'mission_id' => $id,
-            ]);
+            $message = "&#9200; В заявке №$id изменен Deadline" .
+                "\n&#128197; Deadline: " . date('Y-m-d H:i', strtotime($request->date_to)) .
+                "\n&#127760; Ссылка: " . route('mission.show', $id);
+
+            $this->sendMessageToVK($message, $mission->worker->vk);
         }
 
+        // изменениие рабочей группы
         if (isset($request->worker))
         {
             $mission->worker_id = $request->worker;
@@ -166,6 +208,12 @@ class MissionController extends Controller
         }
 
         $mission->save();
+
+        MissionComment::create([
+            'info'       => $info,
+            'user_id'    => Auth::id(),
+            'mission_id' => $id,
+        ]);
 
         return redirect()->back();
     }
@@ -178,12 +226,41 @@ class MissionController extends Controller
             'mission_id' => $id,
         ]);
 
+
+        // Сообщение о Deadline
+        // Автору и Исполнителю
+
+        $message = "&#128219; Deadline! Заявка №$id " .
+            "\n&#127760; Ссылка: " . route('mission.show', $id);
+
+
+        // Сообщение о новом комментарии
+        // Всем кроме автора комментария
+
+        $message = "&#9993; Комментарий! Заявка №$id " .
+            "\n&#128100; Автор: " . Auth::user()->fio .
+            "\n&#128221; Текст: $request->info ".
+            "\n&#127760; Ссылка: " . route('mission.show', $id);
+
+        $mission = Mission::find($id);
+        Auth::user() != $mission->worker? $this->sendMessageToVK($message, $mission->worker->vk) : Null;
+        Auth::user() != $mission->owner? $this->sendMessageToVK($message, $mission->owner->vk) : Null;
+        foreach ($mission->helpers as $helper)
+        {
+            Auth::user() != $helper? $this->sendMessageToVK($message, $helper->vk) : Null;
+        }
+
+        // Сообщение о изменении рабочей группы
+        // Новому и старому исполнителям
+        // Новым помощникам и старым
+
         if ($request->hasFile('commentFiles'))
         {
             foreach ($request->file('commentFiles') as $file)
             {
                 $original = $file->getClientOriginalName();
-                $fileName = $comment->id . '_' . $original;
+                $date = new \DateTime();
+                $fileName = $comment->id . '_' . $date->format('Ymd_His') . '_' . $original;
 
                 $file->storeAs('public/comments', $fileName);
 
