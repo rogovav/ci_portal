@@ -60,4 +60,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/rest/{id}', 'RestController@update')->name('rest.update');
 
     Route::get('/calendar', 'CalendarController@index')->name('calendar.index');
+
+    Route::get('/reports', function () {
+        return view('report.index');
+    });
 });

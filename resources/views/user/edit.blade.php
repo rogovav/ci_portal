@@ -93,12 +93,46 @@
                                                 </form>
                                                 <span
                                                     class="badge badge-light">Нажмите на поле, чтобы изменить его</span>
+                                                <br>
+                                                <a data-toggle="modal"
+                                                   data-target="#change-pass" class="badge small change-pass">Изменить
+                                                    пароль</a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
+                        {{--change pass modal--}}
+                        <div class="modal fade" id="change-pass" tabindex="-1" role="dialog"
+                             aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <form action="">
+                                        <div class="modal-body">
+                                            <div class="form-group">
+                                                <input type="password" placeholder="Пароль" id="pass"
+                                                       class="form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="password" placeholder="Повторите пароль" id="pass_conf"
+                                                       class="form-control">
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <div class="modal-footer">
+                                        <button type="button" id="pass_conf_btn" class="btn btn-primary">Сохранить
+                                            изменения
+                                        </button>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {{--end change pass modal--}}
+
                         <div class="col-lg-6 col-xl-12">
 
                             <div class="card">
@@ -585,8 +619,20 @@
     <script src="{{ asset('js/croppie.js') }}"></script>
 
     <script>
+        $('#pass_conf').keyup(function () {
+            if ($(this).val() != $('#pass').val()) {
+                $('#pass_conf_btn').attr('disabled', true)
+            }
+            else {
+                $('#pass_conf_btn').attr('disabled', false)
+            }
+        })
+    </script>
+
+    <script>
         $(document).ready(function () {
             $('#card-user').hide()
+            $('#pass_conf_btn').attr('disabled', true)
         })
         $('#card-show').click(function (e) {
             e.preventDefault()

@@ -443,6 +443,7 @@ marquee {
     height: 5px;
 }
 
+
 .group-user svg {
     cursor: pointer;
     display: block;
@@ -878,6 +879,11 @@ a {
     background-color: #007bff !important;
 }
 
+.change-pass {
+    text-decoration: underline !important;
+    cursor: pointer;
+}
+
 .avatar.bg-primary i {
     font-size: 1.2rem;
 }
@@ -898,6 +904,48 @@ a {
     left: 0;
     width: 100%;
     z-index: 1;
+}
+
+.login-bg {
+    position: absolute;
+    z-index: -10;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    /*background-color: #041e42;*/
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.login-form {
+    height: 400px;
+    display: block;
+    background-color: #041e42 !important;
+}
+
+.login-form input[type=email], .login-form input[type=password] {
+    border: none;
+    background-color: transparent;
+    color: white;
+    border-bottom: 2px solid white;
+}
+
+.login-form button[type=submit] {
+    border: 2px solid white;
+    background-color: transparent;
+    color: white;
+
+}
+
+.login-form input[type=text]::placeholder {
+    color: white;
+    font-size: 12px;
+}
+
+.cont-login {
+    height: 100vh;
 }
 
 #sohbet {
@@ -1099,21 +1147,27 @@ a.delete-a:hover {
     position: initial;
 }
 
+
 .side-nav .dropdown-menu {
     position: relative;
     opacity: 0;
     left: 120%;
     top: 0;
-    height: 100%;
+    height: 50%;
     border: 0;
     padding: 0;
     margin: 0;
     border-radius: 0;
     box-shadow: 5px 0 5px rgba(0, 0, 0, 0.1);
     background: #eee;
+    color: black !important;
     visibility: hidden;
     display: block;
     transition: .4s ease all;
+}
+
+.dropdown a.dropdown-item {
+    color: black !important;
 }
 
 .side-nav .dropdown-menu.show {
@@ -1128,11 +1182,20 @@ a.delete-a:hover {
     body {
         font-size: 12px !important;
     }
+
+    .dropdown-menu {
+        font-size: 12px !important;
+    }
+
+    .dropdown-item {
+        padding-top: 0;
+        padding-bottom: 0;
+    }
 }
 
 @media (max-width: 425px) {
     body {
-        font-size: 10px !important;
+        font-size: 12px !important;
     }
 
     .card-body-label {
