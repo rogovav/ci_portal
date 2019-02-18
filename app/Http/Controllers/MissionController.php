@@ -203,6 +203,7 @@ class MissionController extends Controller
         // изменениие рабочей группы
         if (isset($request->worker))
         {
+            $info = "";
             $mission->worker_id = $request->worker;
             $mission->helpers()->sync($request->helper);
         }
@@ -247,7 +248,7 @@ class MissionController extends Controller
         Auth::user() != $mission->owner? $this->sendMessageToVK($message, $mission->owner->vk) : Null;
         foreach ($mission->helpers as $helper)
         {
-            Auth::user() != $helper? $this->sendMessageToVK($message, $helper->vk) : Null;
+            Auth::id() != $helper->id? $this->sendMessageToVK($message, $helper->vk) : Null;
         }
 
         // Сообщение о изменении рабочей группы

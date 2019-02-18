@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Building;
 use App\Client;
 use App\Event;
+use App\Position;
 use App\Subject;
 use Illuminate\Http\Request;
 
@@ -15,8 +16,9 @@ class AdminController extends Controller
         $buildings = Building::orderBy('name')->get();
         $clients   = Client::orderBy('fio')->get();
         $subjects  = Subject::orderBy('name')->get();
+        $positions  = Position::orderBy('name')->get();
 
-        return view('dashboard.admin', compact('buildings','clients', 'subjects'));
+        return view('dashboard.admin', compact('buildings','clients', 'subjects', 'positions'));
     }
 
     public function building(Request $request)
@@ -48,6 +50,12 @@ class AdminController extends Controller
     public function subject(Request $request)
     {
         Subject::updateOrCreate(['id' => $request->id], ['name' => $request->name]);
+        return redirect()->back();
+    }
+
+    public function position(Request $request)
+    {
+        Position::updateOrCreate(['id' => $request->id], ['name' => $request->name]);
         return redirect()->back();
     }
 }

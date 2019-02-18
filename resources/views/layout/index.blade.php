@@ -99,7 +99,7 @@
             </ul>
         </div>
     </nav>
-    <div class="container-fluid">
+    <div class="container-fluid pt-2">
         @yield('content')
     </div>
 </div>

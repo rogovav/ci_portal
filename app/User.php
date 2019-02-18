@@ -35,6 +35,10 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function position(){
+        return $this->belongsTo('App\Position', 'position_id');
+    }
+
     public function isOnline()
     {
         return Cache::has('user-is-online-' . $this->id);

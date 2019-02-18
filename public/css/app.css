@@ -323,8 +323,8 @@
 }
 
 .account-profile-avatar {
-    width: 150px;
-    height: 150px;
+    width: 250px;
+    height: 250px;
     display: block;
     margin: auto;
     object-fit: cover;
@@ -694,7 +694,6 @@ marquee {
 }
 
 .card-priority-low {
-    background-color: rgba(0, 255, 0, 0.05);
     font-size: 14px;
 }
 
@@ -920,7 +919,8 @@ a {
 }
 
 .login-form {
-    height: 400px;
+    height: 500px;
+    font-size: 20px;
     display: block;
     background-color: #041e42 !important;
 }
@@ -1214,4 +1214,5 @@ a.delete-a:hover {
         padding: 0 5px;
         text-transform: none;
     }
+
 }

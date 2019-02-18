@@ -82,6 +82,9 @@ class UserController extends Controller
         if (isset($request['iphone'])) {
             $user->update(['iphone' => $request['iphone']]);
         };
+        if (isset($request['password'])) {
+            $user->update(['password' => Hash::make($request['password'])]);
+        };
         return redirect()->back();
     }
 
