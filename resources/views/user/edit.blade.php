@@ -60,7 +60,8 @@
                                                         class="badge badge-pill">{{ $user->position }}</span></p>
                                             </div>
                                         </div>
-                                        <p><a id="card-show" class="btn btn-primary btn-block btn-sm mb-0" href="">Подробнее</a></p>
+                                        <p><a id="card-show" class="btn btn-primary btn-block btn-sm mb-0" href="">Подробнее</a>
+                                        </p>
                                         <div class="card" id="card-user">
                                             <div class="card-body">
                                                 <table class="table">
@@ -93,12 +94,46 @@
                                                 </form>
                                                 <span
                                                     class="badge badge-light">Нажмите на поле, чтобы изменить его</span>
+                                                <br>
+                                                <a data-toggle="modal"
+                                                   data-target="#change-pass" class="badge small change-pass">Изменить
+                                                    пароль</a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
+                        {{--change pass modal--}}
+                        <div class="modal fade" id="change-pass" tabindex="-1" role="dialog"
+                             aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <form action="">
+                                        <div class="modal-body">
+                                            <div class="form-group">
+                                                <input type="password" placeholder="Пароль" id="pass"
+                                                       class="form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="password" placeholder="Повторите пароль" id="pass_conf"
+                                                       class="form-control">
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <div class="modal-footer">
+                                        <button type="button" id="pass_conf_btn" class="btn btn-primary">Сохранить
+                                            изменения
+                                        </button>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {{--end change pass modal--}}
+
                         <div class="col-lg-6 col-xl-12">
 
                             <div class="card">
@@ -181,8 +216,10 @@
                                                                     <div
                                                                         class="card-header card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}-header">
                                                                         <div class="row">
-                                                                            <div class="col-12 col-md-6 col-lg-6 col-xl-6">{{ $todo->name }}</div>
-                                                                            <div class="col-12 col-md-6 col-lg-6 col-xl-6"><span
+                                                                            <div
+                                                                                class="col-12 col-md-6 col-lg-6 col-xl-6">{{ $todo->name }}</div>
+                                                                            <div
+                                                                                class="col-12 col-md-6 col-lg-6 col-xl-6"><span
                                                                                     class="badge badge-light float-right">Задание на {{ $todo->date }}</span>
                                                                             </div>
                                                                         </div>
@@ -209,9 +246,12 @@
                                                                     <div
                                                                         class="card-header card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}-header">
                                                                         <div class="row">
-                                                                            <div class="col-12 col-md-6 col-lg-6 col-xl-6"><s>{{ $todo->name }}</s>
+                                                                            <div
+                                                                                class="col-12 col-md-6 col-lg-6 col-xl-6">
+                                                                                <s>{{ $todo->name }}</s>
                                                                             </div>
-                                                                            <div class="col-12 col-md-6 col-lg-6 col-xl-6"><span
+                                                                            <div
+                                                                                class="col-12 col-md-6 col-lg-6 col-xl-6"><span
                                                                                     class="badge badge-light float-right">Задание на {{ $todo->date }}</span>
                                                                             </div>
                                                                         </div>
@@ -244,8 +284,10 @@
                                                                     <div
                                                                         class="card-header card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}-header">
                                                                         <div class="row">
-                                                                            <div class="col-12 col-md-6 col-lg-6 col-xl-6">{{ $todo->name }}</div>
-                                                                            <div class="col-12 col-md-6 col-lg-6 col-xl-6"><span
+                                                                            <div
+                                                                                class="col-12 col-md-6 col-lg-6 col-xl-6">{{ $todo->name }}</div>
+                                                                            <div
+                                                                                class="col-12 col-md-6 col-lg-6 col-xl-6"><span
                                                                                     class="badge badge-light float-right">Задание на {{ $todo->date }}</span>
                                                                             </div>
                                                                         </div>
@@ -272,9 +314,12 @@
                                                                     <div
                                                                         class="card-header card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}-header">
                                                                         <div class="row">
-                                                                            <div class="col-12 col-md-6 col-lg-6 col-xl-6"><s>{{ $todo->name }}</s>
+                                                                            <div
+                                                                                class="col-12 col-md-6 col-lg-6 col-xl-6">
+                                                                                <s>{{ $todo->name }}</s>
                                                                             </div>
-                                                                            <div class="col-12 col-md-6 col-lg-6 col-xl-6"><span
+                                                                            <div
+                                                                                class="col-12 col-md-6 col-lg-6 col-xl-6"><span
                                                                                     class="badge badge-light float-right">Задание на {{ $todo->date }}</span>
                                                                             </div>
                                                                         </div>
@@ -307,8 +352,10 @@
                                                                     <div
                                                                         class="card-header card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}-header">
                                                                         <div class="row">
-                                                                            <div class="col-12 col-md-6 col-lg-6 col-xl-6">{{ $todo->name }}</div>
-                                                                            <div class="col-12 col-md-6 col-lg-6 col-xl-6"><span
+                                                                            <div
+                                                                                class="col-12 col-md-6 col-lg-6 col-xl-6">{{ $todo->name }}</div>
+                                                                            <div
+                                                                                class="col-12 col-md-6 col-lg-6 col-xl-6"><span
                                                                                     class="badge badge-light float-right">Задание на {{ $todo->date }}</span>
                                                                             </div>
                                                                         </div>
@@ -335,9 +382,12 @@
                                                                     <div
                                                                         class="card-header card-priority-{{ $todo->priority == 1? 'low' : ($todo->priority == 2? 'mid' : 'high') }}-header">
                                                                         <div class="row">
-                                                                            <div class="col-12 col-md-6 col-lg-6 col-xl-6"><s>{{ $todo->name }}</s>
+                                                                            <div
+                                                                                class="col-12 col-md-6 col-lg-6 col-xl-6">
+                                                                                <s>{{ $todo->name }}</s>
                                                                             </div>
-                                                                            <div class="col-12 col-md-6 col-lg-6 col-xl-6"><span
+                                                                            <div
+                                                                                class="col-12 col-md-6 col-lg-6 col-xl-6"><span
                                                                                     class="badge badge-light float-right">Задание на {{ $todo->date }}</span>
                                                                             </div>
                                                                         </div>
@@ -378,10 +428,12 @@
                                 <div class="card-body padding-0">
                                     <nav>
                                         <div class="nav nav-tabs mb-3" id="nav-tab1" role="tablist">
-                                            <a class="nav-item nav-link {{ $my? 'active' : Null }}" id="nav-my-tab" data-toggle="tab"
+                                            <a class="nav-item nav-link {{ $my? 'active' : Null }}" id="nav-my-tab"
+                                               data-toggle="tab"
                                                href="#nav-my" role="tab" aria-controls="nav-home"
                                                aria-selected="true">Мои заявки</a>
-                                            <a class="nav-item nav-link {{ $my? Null : 'active' }}" id="nav-me-tab" data-toggle="tab"
+                                            <a class="nav-item nav-link {{ $my? Null : 'active' }}" id="nav-me-tab"
+                                               data-toggle="tab"
                                                href="#nav-me" role="tab" aria-controls="nav-profile"
                                                aria-selected="false">Заявки мне</a>
                                             <a class="nav-item nav-link" id="nav-help-tab" data-toggle="tab"
@@ -390,7 +442,8 @@
                                         </div>
                                     </nav>
                                     <div class="tab-content" id="nav-tabContent">
-                                        <div class="tab-pane fade {{ $my? 'show active' : Null }}" id="nav-my" role="tabpanel"
+                                        <div class="tab-pane fade {{ $my? 'show active' : Null }}" id="nav-my"
+                                             role="tabpanel"
                                              aria-labelledby="nav-my-tab">
                                             <div class="row">
                                                 @foreach($mission_owner->sortByDesc('id')->take(3) as $mission)
@@ -438,10 +491,12 @@
                                                             </div>
                                                             <div class="card-footer">
                                                                 <div class="row">
-                                                                    <div class="col-6"><span class="badge badge-light">{{ $mission->worker->fio }}</span>
+                                                                    <div class="col-6"><span
+                                                                            class="badge badge-light">{{ $mission->worker->fio }}</span>
                                                                     </div>
                                                                     <div class="col-6">
-                                                                        <span class="badge {{ $mission->status == 1? 'badge-info' : 'badge-warning' }} float-right">{{ $mission->status == 1? 'В работе' : 'Ожидает решения' }}</span>
+                                                                        <span
+                                                                            class="badge {{ $mission->status == 1? 'badge-info' : 'badge-warning' }} float-right">{{ $mission->status == 1? 'В работе' : 'Ожидает решения' }}</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -450,7 +505,8 @@
                                                 @endforeach
                                             </div>
                                         </div>
-                                        <div class="tab-pane fade {{ $my? Null : 'show active' }}" id="nav-me" role="tabpanel"
+                                        <div class="tab-pane fade {{ $my? Null : 'show active' }}" id="nav-me"
+                                             role="tabpanel"
                                              aria-labelledby="nav-me-tab">
                                             <div class="row">
                                                 @foreach($mission_worker->sortByDesc('id')->take(3) as $mission)
@@ -498,10 +554,12 @@
                                                             </div>
                                                             <div class="card-footer">
                                                                 <div class="row">
-                                                                    <div class="col-6"><span class="badge badge-light">{{ $mission->owner->fio }}</span>
+                                                                    <div class="col-6"><span
+                                                                            class="badge badge-light">{{ $mission->owner->fio }}</span>
                                                                     </div>
                                                                     <div class="col-6">
-                                                                        <span class="badge {{ $mission->status == 1? 'badge-info' : 'badge-warning' }} float-right">{{ $mission->status == 1? 'В работе' : 'Ожидает решения' }}</span>
+                                                                        <span
+                                                                            class="badge {{ $mission->status == 1? 'badge-info' : 'badge-warning' }} float-right">{{ $mission->status == 1? 'В работе' : 'Ожидает решения' }}</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -558,10 +616,12 @@
                                                             </div>
                                                             <div class="card-footer">
                                                                 <div class="row">
-                                                                    <div class="col-6"><span class="badge badge-light">{{ $mission->worker->fio }}</span>
+                                                                    <div class="col-6"><span
+                                                                            class="badge badge-light">{{ $mission->worker->fio }}</span>
                                                                     </div>
                                                                     <div class="col-6">
-                                                                        <span class="badge {{ $mission->status == 1? 'badge-info' : 'badge-warning' }} float-right">{{ $mission->status == 1? 'В работе' : 'Ожидает решения' }}</span>
+                                                                        <span
+                                                                            class="badge {{ $mission->status == 1? 'badge-info' : 'badge-warning' }} float-right">{{ $mission->status == 1? 'В работе' : 'Ожидает решения' }}</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -585,8 +645,20 @@
     <script src="{{ asset('js/croppie.js') }}"></script>
 
     <script>
+        $('#pass_conf').keyup(function () {
+            if ($(this).val() != $('#pass').val()) {
+                $('#pass_conf_btn').attr('disabled', true)
+            }
+            else {
+                $('#pass_conf_btn').attr('disabled', false)
+            }
+        })
+    </script>
+
+    <script>
         $(document).ready(function () {
             $('#card-user').hide()
+            $('#pass_conf_btn').attr('disabled', true)
         })
         $('#card-show').click(function (e) {
             e.preventDefault()
