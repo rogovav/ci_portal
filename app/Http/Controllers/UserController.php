@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Position;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -11,9 +12,10 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::all();
+        $users = User::orderBy('fio')->get();
+        $positions = Position::orderBy('name')->get();
 
-        return view('user.index', compact('users'));
+        return view('user.index', compact('users', 'positions'));
     }
 
     public function show($id)
@@ -62,7 +64,7 @@ class UserController extends Controller
             $ava = $request['avatar'];
 
             list(, $ava) = explode(';', $ava);
-            list(, $ava)      = explode(',', $ava);
+            list(, $ava) = explode(',', $ava);
 
             $ava = base64_decode($ava);
 
@@ -85,6 +87,12 @@ class UserController extends Controller
         if (isset($request['password'])) {
             $user->update(['password' => Hash::make($request['password'])]);
         };
+        if (isset($request['super'])) {
+            $user->update(['super' => $request['super']]);
+        };
+        if (isset($request['blocked'])) {
+            $user->update(['blocked' => $request['blocked']]);
+        };
         return redirect()->back();
     }
 
@@ -106,6 +114,7 @@ class UserController extends Controller
             'position' => $data['position'],
             'login' => $data['login'],
             'vk' => $data['vk'],
+            'super' => $data['super'],
             'email' => $data['email'],
             'phone' => $data['phone'],
             'birthday' => $data['birthday'],

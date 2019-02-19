@@ -17,6 +17,13 @@
                     @csrf
                     <div class="modal-body">
                         <div class="form-group">
+                            <div class="" data-toggle="buttons">
+                                <label class="btn btn-light active">
+                                    <input type="checkbox" autocomplete="off" name="super" value="1">&nbsp; Администратор
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <input type="text" class="form-control" name="fio" placeholder="ФИО" required>
                         </div>
                         <div class="form-group">
@@ -31,9 +38,9 @@
                         <div class="form-group">
                             <select class="custom-select" id="inputGroupSelect01" name="position">
                                 <option selected>Выберите должность</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
+                                @foreach($positions as $position)
+                                    <option value="{{ $position->id }}">{{ $position->name }}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="form-group">
@@ -73,6 +80,7 @@
             </div>
         </div>
     </div>
+    @if(Auth::user()->super)
     <div class="row">
         <div class="col">
             <button class="btn btn-primary create-user-button" data-toggle="modal" data-target="#ModalCreateUser">
@@ -80,6 +88,7 @@
             </button>
         </div>
     </div>
+    @endif
     <div class="row">
         @foreach($users as $user)
             <div class="col-md-6 col-lg-4 col-xl-3">

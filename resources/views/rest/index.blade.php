@@ -83,9 +83,9 @@
             <div class="row">
                 <div class="col-12 col-md-8 col-lg-9 col-xl-10 col-form-label">Отпуска сотрудников на 2019 год</div>
                 <div class="col-12 col-md-4 col-lg-3 col-xl-2">
-                    <button class="btn btn-sm float-right btn-block" {{-- data-toggle="modal" data-target="#exampleModal" --}} onclick="clearModal()">Добавить
-                        отпуск
-                    </button>
+                    @if(Auth::user()->super)
+                        <button class="btn btn-sm float-right btn-block" onclick="clearModal()">Добавить отпуск </button>
+                    @endif
                 </div>
             </div>
         </div>
@@ -124,7 +124,9 @@
                                                 <td>{{ date('d.m.Y', strtotime($rest->week4)) }} - {{ date('d.m.Y', strtotime($rest->week4 . ' + 6 days')) }}</td>
                                             </tr>
                                         </table>
-                                        <button class="btn btn-block btn-sm" onclick="changeRest({{ $rest }})">Редактировать отпуск</button>
+                                        @if(Auth::user()->super)
+                                            <button class="btn btn-block btn-sm" onclick="changeRest({{ $rest }})">Редактировать отпуск</button>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
