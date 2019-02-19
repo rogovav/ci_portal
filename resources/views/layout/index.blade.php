@@ -58,22 +58,21 @@
                             class="fas fa-umbrella-beach"></i> Отпуска <i
                             class="fas fa-umbrella-beach shortmenu animate"></i></a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url("reports") }}" title="Отчеты"><i class="fas fa-file-alt"></i>
-                        Отчеты <i
-                            class="fas fa-file-alt shortmenu animate"></i></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url("chats") }}" title="Чат"><i class="fas fa-comments"></i> Чат
-                        <i
-                            class="fas fa-comments shortmenu animate"></i></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url("admin") }}" title="Администрирование"><i
-                            class="fas fa-users-cog"></i> Service <i
-                            class="fas fa-users-cog shortmenu animate"></i></a>
-                </li>
-
+                {{--<li class="nav-item">--}}
+                    {{--<a class="nav-link" href="{{ url("reports") }}" title="Отчеты"><i class="fas fa-file-alt"></i>--}}
+                        {{--Отчеты <i--}}
+                            {{--class="fas fa-file-alt shortmenu animate"></i></a>--}}
+                {{--</li>--}}
+                {{--<li class="nav-item">--}}
+                    {{--<a class="nav-link" href="{{ url("chats") }}" title="Чат"><i class="fas fa-comments"></i> Чат--}}
+                        {{--<i--}}
+                            {{--class="fas fa-comments shortmenu animate"></i></a>--}}
+                {{--</li>--}}
+                {{--<li class="nav-item">--}}
+                    {{--<a class="nav-link" href="{{ url("admin") }}" title="Администрирование"><i--}}
+                            {{--class="fas fa-users-cog"></i> Service <i--}}
+                            {{--class="fas fa-users-cog shortmenu animate"></i></a>--}}
+                {{--</li>--}}
             </ul>
 
             <ul class="navbar-nav ml-md-auto d-md-flex">
@@ -84,6 +83,7 @@
                             class="group-user-avatar-layout"> {{ Auth::user()->fio }}</a>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                         <a class="dropdown-item" href="{{ route('user.show', Auth::id()) }}">Профиль</a>
+                        @if(Auth::user()->super)<a class="dropdown-item" href="{{ url("admin") }}">Администрирование</a>@endif
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{{ route('logout') }}"
                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">

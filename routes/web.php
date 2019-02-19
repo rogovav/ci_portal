@@ -65,4 +65,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/reports', function () {
         return view('report.index');
     });
+
+    Route::get('/{url}', 'HomeController@url')->name('home.url');
 });
