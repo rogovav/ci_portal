@@ -250,12 +250,12 @@
                             <div class="card-body row">
                                 <div id="accordion2" class="col-8">
                                     <div class="row">
-                                        @foreach($subjects as $subject)
-                                            <div class="col-3">
+                                        @foreach($positions as $position)
+                                            <div class="col-4">
                                                 <div class="card">
                                                     <div class="card-body">
-                                                        <p class="card-text">{{ $subject->name }}</p>
-                                                        <button onclick="editPosition({{$subject}})"
+                                                        <p class="card-text">{{ $position->name }}</p>
+                                                        <button onclick="editPosition({{$position}})"
                                                                 class="btn btn-dark">Изменить
                                                         </button>
                                                     </div>
@@ -267,11 +267,12 @@
                                 <div class="col-md-4">
                                     <div class="card">
                                         <div class="card-body">
-                                            <form action="{{ route('admin.subject') }}" class="admin-form"
+                                            <form action="{{ route('admin.position') }}" class="admin-form"
                                                   method="post">
                                                 {{ csrf_field() }}
                                                 <input type="text" class="hidden-print" name="id" id="pos-id">
-                                                <div class="form-group"><input name="name" type="text"
+                                                <div class="form-group">
+                                                    <input name="name" type="text"
                                                                                class="form-control"
                                                                                placeholder="Название должности"
                                                                                id="pos-name"

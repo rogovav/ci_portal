@@ -18,12 +18,12 @@ class UserController extends Controller
 
     public function show($id)
     {
-        $user           = User::findorfail($id);
-        $status         = [1 => 'В работе', 2 => 'На проверке'];
-        $from           = [1 => 'Задача', 2 => 'Общежитие', 3 => 'Университет',];
-        $mission_owner  = $user->mission_owner->where('status', '<>', 3);
+        $user = User::findorfail($id);
+        $status = [1 => 'В работе', 2 => 'На проверке'];
+        $from = [1 => 'Задача', 2 => 'Общежитие', 3 => 'Университет',];
+        $mission_owner = $user->mission_owner->where('status', '<>', 3);
         $mission_worker = $user->mission_worker->where('status', '<>', 3);
-        $my             = $mission_owner->count() >= $mission_worker->count();
+        $my = $mission_owner->count() >= $mission_worker->count();
 
         return view(Auth::user()->id != $id ? 'user.show' : 'user.edit', compact(
             'user',
@@ -62,7 +62,7 @@ class UserController extends Controller
             $ava = $request['avatar'];
 
             list(, $ava) = explode(';', $ava);
-            list(, $ava)      = explode(',', $ava);
+            list(, $ava) = explode(',', $ava);
 
             $ava = base64_decode($ava);
 
@@ -82,6 +82,9 @@ class UserController extends Controller
         if (isset($request['iphone'])) {
             $user->update(['iphone' => $request['iphone']]);
         };
+        if (isset($request['password'])) {
+            $user->update(['password' => Hash::make($request['password'])]);
+        };
         return redirect()->back();
     }
 
@@ -90,7 +93,7 @@ class UserController extends Controller
         $ava = $data['avatar'];
 
         list($type, $ava) = explode(';', $ava);
-        list(, $ava)      = explode(',', $ava);
+        list(, $ava) = explode(',', $ava);
         $ava = base64_decode($ava);
 
         $photoName = $data['login'] . '.' . $data['ava']->getClientOriginalExtension();
@@ -103,6 +106,7 @@ class UserController extends Controller
             'position' => $data['position'],
             'login' => $data['login'],
             'vk' => $data['vk'],
+            'super' => $data['super'],
             'email' => $data['email'],
             'phone' => $data['phone'],
             'birthday' => $data['birthday'],

@@ -26,4 +26,15 @@ class Controller extends BaseController
 
         return 'ok';
     }
+
+    function generateUrl() {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $length = 6;
+        $randomUrl = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomUrl .= $characters[rand(0, $charactersLength - 1)];
+        }
+        return $randomUrl;
+    }
 }

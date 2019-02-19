@@ -90,6 +90,14 @@ class MissionController extends Controller
         $mission->date_to     = $request->date_to;
         $mission->info        = $request->info;
 
+        $short_url = $this->generateUrl();
+
+        while (Mission::where('short_url', $short_url)->exists()) {
+            $short_url = $this->generateUrl();
+        }
+
+        $mission->short_url = $short_url;
+
         $mission->save();
 
         if ($request->hasFile('files')) {
@@ -124,7 +132,7 @@ class MissionController extends Controller
                 "\n&#128100; Автор: " . Auth::user()->fio .
                 "\n&#128100; Исполнитель: " . $mission->worker->fio .
                 "\n&#128221; Описание: $request->info ".
-                "\n&#127760; Ссылка: " . route('mission.show', $mission->id);
+                "\n&#127760; Ссылка: " . route('home.url', $mission->short_url);
             $this->sendMessageToVK($message, $helper->vk);
         }
 
@@ -133,7 +141,7 @@ class MissionController extends Controller
             ($helpersFio? "\n&#128101; Помощники: $helpersFio" : "") .
             "\n&#128197; Deadline: " . date('Y-m-d H:i', strtotime($request->date_to)) .
             "\n&#128221; Описание: $request->info " .
-            "\n&#127760; Ссылка: " . route('mission.show', $mission->id);
+            "\n&#127760; Ссылка: " . route('home.url', $mission->short_url);
 
         $this->sendMessageToVK($message, $mission->worker->vk);
 
@@ -156,7 +164,7 @@ class MissionController extends Controller
                 $mission->date_close = Carbon::now();
 
                 $message = "&#10004; Заявка №$id успешно закрыта" .
-                    "\n&#127760; Ссылка: " . route('mission.show', $id);
+                    "\n&#127760; Ссылка: " . route('home.url', $mission->short_url);
 
                 $this->sendMessageToVK($message, $mission->worker->vk);
                 $this->sendMessageToVK($message, $mission->owner->vk);
@@ -171,8 +179,8 @@ class MissionController extends Controller
             {
                 $info = 'Отправлена на подтверждение закрытия.';
                 $message = "&#128591; Запрос на закрытие заявки №$id " .
-                    "\n&#128100; Исполнитель: " . Auth::user()->fio .
-                    "\n&#127760; Ссылка: " . route('mission.show', $id);
+                    "\n&#128100; Исполнитель: " . $mission->worker->fio .
+                    "\n&#127760; Ссылка: " . route('home.url', $mission->short_url);
                 $this->sendMessageToVK($message, $mission->owner->vk);
             }
 
@@ -182,7 +190,7 @@ class MissionController extends Controller
                 $info = $request->status_info != ''? "Закрытие отменено по причине: \n" . $request->status_info : 'Закрытие отменено без указания причины.';
                 $message = "&#10060; Запрос на закрытие заявки №$id отклонен" .
                     "\n&#128221; Причина: " . ($request->status_info != ''? $request->status_info : 'Причина не указана') .
-                    "\n&#127760; Ссылка: " . route('mission.show', $id);
+                    "\n&#127760; Ссылка: " . route('home.url', $mission->short_url);
                 $this->sendMessageToVK($message, $mission->worker->vk);
             }
         }
@@ -195,7 +203,7 @@ class MissionController extends Controller
 
             $message = "&#9200; В заявке №$id изменен Deadline" .
                 "\n&#128197; Deadline: " . date('Y-m-d H:i', strtotime($request->date_to)) .
-                "\n&#127760; Ссылка: " . route('mission.show', $id);
+                "\n&#127760; Ссылка: " . route('home.url', $mission->short_url);
 
             $this->sendMessageToVK($message, $mission->worker->vk);
         }
@@ -203,8 +211,42 @@ class MissionController extends Controller
         // изменениие рабочей группы
         if (isset($request->worker))
         {
-            $mission->worker_id = $request->worker;
+            $info = "Изменена рабочая группа.";
+            if ($mission->worker_id != $request->worker) {
+                $message = "&#9940; Вы больше не являетесь исполнителем в заявке №$mission->id ";
+                $this->sendMessageToVK($message, $mission->worker->vk);
+
+                $mission->worker_id = $request->worker;
+                $user = User::findorfail($request->worker);
+
+                $message = "&#128101; Вы назначены исполнителем в заявке №$mission->id " .
+                    "\n&#128100; Автор: " . $mission->owner->fio .
+                    "\n&#128221; Описание: $request->info ".
+                    "\n&#127760; Ссылка: " . route('home.url', $mission->short_url);
+                $this->sendMessageToVK($message, $user->vk);
+            }
+            $missionHelpersIds = collect($mission->helpers->pluck('id')->all());
+            $requestHelpersIds = collect($request->helper);
+
             $mission->helpers()->sync($request->helper);
+
+            $deleteHelpers = $missionHelpersIds->diff($requestHelpersIds);
+            $deleteHelpers = User::find($deleteHelpers);
+            $message = "&#9940; Вы больше не являетесь помощником в заявке №$mission->id";
+            foreach ($deleteHelpers as $deleteHelper) {
+                $this->sendMessageToVK($message, $deleteHelper->vk);
+            }
+
+            $newHelpersIds = $requestHelpersIds->diff($missionHelpersIds);
+            $newHelpers = User::find($newHelpersIds);
+            $message = "&#128101; Вы назначены помощником к заявке №$mission->id " .
+                "\n&#128100; Автор: " . $mission->owner->fio .
+                "\n&#128100; Исполнитель: " . $mission->worker->fio .
+                "\n&#128221; Описание: $request->info ".
+                "\n&#127760; Ссылка: " . route('home.url', $mission->short_url);
+            foreach ($newHelpers as $newHelper) {
+                $this->sendMessageToVK($message, $newHelper->vk);
+            }
         }
 
         $mission->save();
@@ -225,13 +267,13 @@ class MissionController extends Controller
             'user_id'    => Auth::id(),
             'mission_id' => $id,
         ]);
-
+        $mission = Mission::find($id);
 
         // Сообщение о Deadline
         // Автору и Исполнителю
 
         $message = "&#128219; Deadline! Заявка №$id " .
-            "\n&#127760; Ссылка: " . route('mission.show', $id);
+            "\n&#127760; Ссылка: " . route('home.url', $mission->short_url);
 
 
         // Сообщение о новом комментарии
@@ -240,14 +282,14 @@ class MissionController extends Controller
         $message = "&#9993; Комментарий! Заявка №$id " .
             "\n&#128100; Автор: " . Auth::user()->fio .
             "\n&#128221; Текст: $request->info ".
-            "\n&#127760; Ссылка: " . route('mission.show', $id);
+            "\n&#127760; Ссылка: " . route('home.url', $mission->short_url);
 
-        $mission = Mission::find($id);
+
         Auth::user() != $mission->worker? $this->sendMessageToVK($message, $mission->worker->vk) : Null;
         Auth::user() != $mission->owner? $this->sendMessageToVK($message, $mission->owner->vk) : Null;
         foreach ($mission->helpers as $helper)
         {
-            Auth::user() != $helper? $this->sendMessageToVK($message, $helper->vk) : Null;
+            Auth::id() != $helper->id? $this->sendMessageToVK($message, $helper->vk) : Null;
         }
 
         // Сообщение о изменении рабочей группы

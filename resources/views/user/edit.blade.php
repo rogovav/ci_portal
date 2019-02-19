@@ -50,18 +50,40 @@
                                                 <h5 class="card-subtitle text-center">
                                                     {{ $user->fio }}
                                                 </h5>
+                                                <p class="text-center mb-0 small">({{ $user->position->name }})</p>
+                                                <div class="text-center">
+                                                    @if($user->super)
+                                                        <span class="badge badge-info font-weight-normal">Admin</span>
+                                                    @endif
+                                                    @if($user->isOnline())
+                                                        <span
+                                                            class="badge badge-success font-weight-normal">Online</span>
+                                                    @else
+                                                        <span
+                                                            class="badge badge-secondary font-weight-normal">Offline</span>
+                                                    @endif
+                                                </div>
                                             </div>
                                             <div class="card-body text-center padding-0">
                                                 <a href="" data-toggle="modal" data-target="#exampleModal"><img
                                                         src="{{ asset('images/avatars/users/' . $user->avatar) }}"
                                                         class="account-profile-avatar"
                                                         alt=""></a>
-                                                <p class="text-center mb-0"><span
-                                                        class="badge badge-pill">{{ $user->position }}</span></p>
                                             </div>
                                         </div>
                                         <p><a id="card-show" class="btn btn-primary btn-block btn-sm mb-0" href="">Подробнее</a>
                                         </p>
+                                        <div class="row">
+                                            <div class="btn-group-toggle col-6" data-toggle="buttons">
+                                                <label class="btn col-12 btn-sm btn-success">
+                                                    <input type="checkbox" checked autocomplete="off" name="super">
+                                                    Администратор
+                                                </label>
+                                            </div>
+                                            <div class="col-6">
+                                                <button class="btn btn-danger btn-sm col-12">Заблокировать</button>
+                                            </div>
+                                        </div>
                                         <div class="card" id="card-user">
                                             <div class="card-body">
                                                 <table class="table">
@@ -109,27 +131,32 @@
                         <div class="modal fade" id="change-pass" tabindex="-1" role="dialog"
                              aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <form action="">
+                                <form action="{{ route('user.update', $user->id) }}" method="POST">
+                                    {{ csrf_field() }}
+                                    <div class="modal-content">
+
                                         <div class="modal-body">
                                             <div class="form-group">
-                                                <input type="password" placeholder="Пароль" id="pass"
-                                                       class="form-control">
+                                                <input type="password" placeholder="Пароль" id="password"
+                                                       class="form-control" name="password">
                                             </div>
                                             <div class="form-group">
-                                                <input type="password" placeholder="Повторите пароль" id="pass_conf"
-                                                       class="form-control">
+                                                <input type="password" placeholder="Повторите пароль"
+                                                       id="password_confirmation"
+                                                       class="form-control" name="password_confirmation">
                                             </div>
                                         </div>
-                                    </form>
-                                    <div class="modal-footer">
-                                        <button type="button" id="pass_conf_btn" class="btn btn-primary">Сохранить
-                                            изменения
-                                        </button>
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть
-                                        </button>
+
+                                        <div class="modal-footer">
+                                            <button type="submit" id="pass_conf_btn" class="btn btn-primary">Сохранить
+                                                изменения
+                                            </button>
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть
+                                            </button>
+                                        </div>
+
                                     </div>
-                                </div>
+                                </form>
                             </div>
                         </div>
                         {{--end change pass modal--}}
@@ -645,11 +672,10 @@
     <script src="{{ asset('js/croppie.js') }}"></script>
 
     <script>
-        $('#pass_conf').keyup(function () {
-            if ($(this).val() != $('#pass').val()) {
+        $('#password_confirmation').keyup(function () {
+            if ($(this).val() != $('#password').val()) {
                 $('#pass_conf_btn').attr('disabled', true)
-            }
-            else {
+            } else {
                 $('#pass_conf_btn').attr('disabled', false)
             }
         })

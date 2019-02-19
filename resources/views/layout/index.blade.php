@@ -29,7 +29,7 @@
         <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav animate side-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url("") }}" title="Cart"><i class="fas fa-tachometer-alt"></i>
+                    <a class="nav-link" href="{{ route('home') }}" title="Cart"><i class="fas fa-tachometer-alt"></i>
                         Панель <i
                             class="fas fa-tachometer-alt shortmenu animate"></i></a>
                 </li>
@@ -38,11 +38,11 @@
                         Заявки <i
                             class="fas fas fa-tasks shortmenu animate"></i></a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url("groups") }}" title="Группы"><i class="fas fa-users"></i>
-                        Группы <i
-                            class="fas fa-users shortmenu animate"></i></a>
-                </li>
+                {{--<li class="nav-item">--}}
+                {{--<a class="nav-link" href="{{ url("groups") }}" title="Группы"><i class="fas fa-users"></i>--}}
+                {{--Группы <i--}}
+                {{--class="fas fa-users shortmenu animate"></i></a>--}}
+                {{--</li>--}}
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('user.index') }}" title="Люди"><i class="fas fa-user-tie"></i>
                         Люди <i
@@ -58,22 +58,21 @@
                             class="fas fa-umbrella-beach"></i> Отпуска <i
                             class="fas fa-umbrella-beach shortmenu animate"></i></a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url("reports") }}" title="Отчеты"><i class="fas fa-file-alt"></i>
-                        Отчеты <i
-                            class="fas fa-file-alt shortmenu animate"></i></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url("chats") }}" title="Чат"><i class="fas fa-comments"></i> Чат
-                        <i
-                            class="fas fa-comments shortmenu animate"></i></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url("admin") }}" title="Администрирование"><i
-                            class="fas fa-users-cog"></i> Service <i
-                            class="fas fa-users-cog shortmenu animate"></i></a>
-                </li>
-
+                {{--<li class="nav-item">--}}
+                    {{--<a class="nav-link" href="{{ url("reports") }}" title="Отчеты"><i class="fas fa-file-alt"></i>--}}
+                        {{--Отчеты <i--}}
+                            {{--class="fas fa-file-alt shortmenu animate"></i></a>--}}
+                {{--</li>--}}
+                {{--<li class="nav-item">--}}
+                    {{--<a class="nav-link" href="{{ url("chats") }}" title="Чат"><i class="fas fa-comments"></i> Чат--}}
+                        {{--<i--}}
+                            {{--class="fas fa-comments shortmenu animate"></i></a>--}}
+                {{--</li>--}}
+                {{--<li class="nav-item">--}}
+                    {{--<a class="nav-link" href="{{ url("admin") }}" title="Администрирование"><i--}}
+                            {{--class="fas fa-users-cog"></i> Service <i--}}
+                            {{--class="fas fa-users-cog shortmenu animate"></i></a>--}}
+                {{--</li>--}}
             </ul>
 
             <ul class="navbar-nav ml-md-auto d-md-flex">
@@ -84,6 +83,7 @@
                             class="group-user-avatar-layout"> {{ Auth::user()->fio }}</a>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                         <a class="dropdown-item" href="{{ route('user.show', Auth::id()) }}">Профиль</a>
+                        @if(Auth::user()->super)<a class="dropdown-item" href="{{ url("admin") }}">Администрирование</a>@endif
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{{ route('logout') }}"
                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
@@ -99,7 +99,7 @@
             </ul>
         </div>
     </nav>
-    <div class="container-fluid">
+    <div class="container-fluid pt-2">
         @yield('content')
     </div>
 </div>

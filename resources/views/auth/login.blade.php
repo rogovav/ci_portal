@@ -69,13 +69,13 @@
 {{--</div>--}}
 <div class="login-bg"></div>
 <div class="container cont-login d-flex align-items-center">
-    <div class="col-8 m-auto">
+    <div class="col-12 col-md-10 col-lg-6 col-xl-6 m-auto">
         <form method="POST" action="{{ route('login') }}" class="login-form pl-5 pr-5 pb-5 pt-5">
             @csrf
-            <img src="{{ asset('images/hd.png') }}" height="40"
+            <img src="{{ asset('images/hd.png') }}" height="100"
                  class="d-block m-auto align-top mt-4 mb-0" alt="">
-            <input class="col-12 mb-4" id="email" type="email"  name="email" placeholder="Email">
-            <input class="col-12 mb-4" id="password" type="password" name="password" placeholder="Пароль">
+            <input class="col-12 mb-5 mt-5" id="email" type="email"  name="email" placeholder="Email">
+            <input class="col-12 mb-5" id="password" type="password" name="password" placeholder="Пароль">
             <button class="col-12 pb-2 pt-2" type="submit">Войти</button>
         </form>
     </div>

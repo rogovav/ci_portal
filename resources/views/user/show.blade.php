@@ -16,17 +16,23 @@
                                             <div class="card-header ">
                                                 <h5 class="card-subtitle text-center">{{ $user->fio }}
                                                 </h5>
+                                                <p class="text-center mb-0 small">({{ $user->position->name }})</p>
+                                                <div class="text-center">
+                                                    @if($user->super)
+                                                        <span class="badge badge-info font-weight-normal">Admin</span>
+                                                    @endif
+                                                    @if($user->isOnline())
+                                                        <span class="badge badge-success font-weight-normal">Online</span>
+                                                    @else
+                                                        <span class="badge badge-secondary font-weight-normal">Offline</span>
+                                                    @endif
+                                                </div>
                                             </div>
                                             <div class="card-body text-center">
                                                 <img
                                                         src="{{ asset('images/avatars/users/' . $user->avatar) }}"
                                                         class="account-profile-avatar"
                                                         alt="">
-                                                @if($user->isOnline())
-                                                    <span class="badge badge-success">Online</span>
-                                                @endif
-                                                <p class="text-center mb-0"><span
-                                                        class="badge badge-pill">{{ $user->position }}</span></p>
                                             </div>
                                         </div>
                                         <div class="card" id="card-user">

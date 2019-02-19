@@ -24,6 +24,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/admin/building', 'AdminController@building')->name('admin.building');
     Route::post('/admin/client', 'AdminController@client')->name('admin.client');
     Route::post('/admin/subject', 'AdminController@subject')->name('admin.subject');
+    Route::post('/admin/position', 'AdminController@position')->name('admin.position');
 
     Route::get('/groups', 'GroupController@index');
     Route::post('/groups', 'GroupController@add');
@@ -64,4 +65,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/reports', function () {
         return view('report.index');
     });
+
+    Route::get('/{url}', 'HomeController@url')->name('home.url');
 });
