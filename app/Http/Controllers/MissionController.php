@@ -232,18 +232,19 @@ class MissionController extends Controller
 
             $deleteHelpers = $missionHelpersIds->diff($requestHelpersIds);
             $deleteHelpers = User::find($deleteHelpers);
+            $message = "&#9940; Вы больше не являетесь помощником в заявке №$mission->id";
             foreach ($deleteHelpers as $deleteHelper) {
-                $message = "&#9940; Вы больше не являетесь помощником в заявке №$mission->id";
                 $this->sendMessageToVK($message, $deleteHelper->vk);
             }
+
             $newHelpersIds = $requestHelpersIds->diff($missionHelpersIds);
             $newHelpers = User::find($newHelpersIds);
+            $message = "&#128101; Вы назначены помощником к заявке №$mission->id " .
+                "\n&#128100; Автор: " . $mission->owner->fio .
+                "\n&#128100; Исполнитель: " . $mission->worker->fio .
+                "\n&#128221; Описание: $request->info ".
+                "\n&#127760; Ссылка: " . route('home.url', $mission->short_url);
             foreach ($newHelpers as $newHelper) {
-                $message = "&#128101; Вы назначены помощником к заявке №$mission->id " .
-                    "\n&#128100; Автор: " . $mission->owner->fio .
-                    "\n&#128100; Исполнитель: " . $mission->worker->fio .
-                    "\n&#128221; Описание: $request->info ".
-                    "\n&#127760; Ссылка: " . route('home.url', $mission->short_url);
                 $this->sendMessageToVK($message, $newHelper->vk);
             }
         }
