@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mission;
 use App\Todo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -37,4 +38,15 @@ class HomeController extends Controller
 
         return redirect()->route('user.show', Auth::id());
     }
+
+    public function url($url) {
+        $mission = Mission::where('short_url', $url)->first();
+        if ($mission) {
+            return redirect()->route('mission.show', $mission->id);
+        } else {
+            return redirect()->route('home');
+        }
+
+    }
+
 }

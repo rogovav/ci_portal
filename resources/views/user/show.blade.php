@@ -16,17 +16,28 @@
                                             <div class="card-header ">
                                                 <h5 class="card-subtitle text-center">{{ $user->fio }}
                                                 </h5>
+                                                <p class="text-center mb-0 small">({{ $user->position->name }})</p>
+                                                <div class="text-center">
+                                                    @if($user->blocked)
+                                                        <span class="badge badge-danger font-weight-normal">Blocked</span>
+                                                    @endif
+                                                    @if($user->super)
+                                                        <span class="badge badge-info font-weight-normal">Admin</span>
+                                                    @endif
+                                                    @if($user->isOnline())
+                                                        <span
+                                                            class="badge badge-success font-weight-normal">Online</span>
+                                                    @else
+                                                        <span
+                                                            class="badge badge-secondary font-weight-normal">Offline</span>
+                                                    @endif
+                                                </div>
                                             </div>
                                             <div class="card-body text-center">
                                                 <img
-                                                        src="{{ asset('images/avatars/users/' . $user->avatar) }}"
-                                                        class="account-profile-avatar"
-                                                        alt="">
-                                                @if($user->isOnline())
-                                                    <span class="badge badge-success">Online</span>
-                                                @endif
-                                                <p class="text-center mb-0"><span
-                                                        class="badge badge-pill">{{ $user->position }}</span></p>
+                                                    src="{{ asset('images/avatars/users/' . $user->avatar) }}"
+                                                    class="account-profile-avatar"
+                                                    alt="">
                                             </div>
                                         </div>
                                         <div class="card" id="card-user">
@@ -55,6 +66,29 @@
                                                     </tr>
                                                     </tbody>
                                                 </table>
+                                                @if(Auth::user()->super)
+                                                    <button type="button" data-toggle="modal"
+                                                            data-target="#change-pass"
+                                                            class="btn btn-link small badge change-pass font-weight-normal">
+                                                        Изменить
+                                                        пароль
+                                                    </button>
+
+                                                    <form action="{{ route('user.update', $user->id) }}" method="POST">
+                                                        {{ csrf_field() }}
+                                                        <button type="submit" name="blocked" value="{{ $user->blocked? 0 : 1 }}"
+                                                                class="btn btn-link small badge change-pass font-weight-normal">
+                                                            {{ $user->blocked? 'Разблокировать пользователя' : 'Заблокировать пользователя' }}
+                                                        </button>
+                                                    </form>
+                                                    <form action="{{ route('user.update', $user->id) }}" method="POST">
+                                                        {{ csrf_field() }}
+                                                        <button type="submit" name="super" value="{{ $user->super? 0 : 1 }}"
+                                                                class="btn btn-link small badge change-pass font-weight-normal">
+                                                            {{ $user->super? 'Снять права администратора' : 'Назначить права администратора' }}
+                                                        </button>
+                                                    </form>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
@@ -74,10 +108,12 @@
                                 <div class="card-body padding-0">
                                     <nav>
                                         <div class="nav nav-tabs mb-3" id="nav-tab1" role="tablist">
-                                            <a class="nav-item nav-link {{ $my? 'active' : Null }}" id="nav-my-tab" data-toggle="tab"
+                                            <a class="nav-item nav-link {{ $my? 'active' : Null }}" id="nav-my-tab"
+                                               data-toggle="tab"
                                                href="#nav-my" role="tab" aria-controls="nav-home"
                                                aria-selected="true">Заявки от пользователя</a>
-                                            <a class="nav-item nav-link {{ $my? Null : 'active' }}" id="nav-me-tab" data-toggle="tab"
+                                            <a class="nav-item nav-link {{ $my? Null : 'active' }}" id="nav-me-tab"
+                                               data-toggle="tab"
                                                href="#nav-me" role="tab" aria-controls="nav-profile"
                                                aria-selected="false">Заявки для пользователя</a>
                                             <a class="nav-item nav-link" id="nav-help-tab" data-toggle="tab"
@@ -86,7 +122,8 @@
                                         </div>
                                     </nav>
                                     <div class="tab-content" id="nav-tabContent">
-                                        <div class="tab-pane fade {{ $my? 'show active' : Null }}" id="nav-my" role="tabpanel"
+                                        <div class="tab-pane fade {{ $my? 'show active' : Null }}" id="nav-my"
+                                             role="tabpanel"
                                              aria-labelledby="nav-my-tab">
                                             <div class="row">
                                                 @foreach($mission_owner->sortByDesc('id')->take(3) as $mission)
@@ -125,7 +162,6 @@
                                                                                 </td>
                                                                                 <td width="30%">{{ $from[$mission->from] }}</td>
                                                                                 <td>{{ $mission->subject->name }}</td>
-
                                                                             </tr>
                                                                             </tbody>
                                                                         </table>
@@ -134,10 +170,12 @@
                                                             </div>
                                                             <div class="card-footer">
                                                                 <div class="row">
-                                                                    <div class="col-6"><span class="badge badge-light">{{ $mission->worker->fio }}</span>
+                                                                    <div class="col-6"><span
+                                                                            class="badge badge-light">{{ $mission->worker->fio }}</span>
                                                                     </div>
                                                                     <div class="col-6">
-                                                                        <span class="badge {{ $mission->status == 1? 'badge-info' : 'badge-warning' }} float-right">{{ $mission->status == 1? 'В работе' : 'Ожидает решения' }}</span>
+                                                                        <span
+                                                                            class="badge {{ $mission->status == 1? 'badge-info' : 'badge-warning' }} float-right font-weight-normal">{{ $mission->status == 1? 'В работе' : 'Ожидает решения' }}</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -146,7 +184,8 @@
                                                 @endforeach
                                             </div>
                                         </div>
-                                        <div class="tab-pane fade {{ $my? Null : 'show active' }}" id="nav-me" role="tabpanel"
+                                        <div class="tab-pane fade {{ $my? Null : 'show active' }}" id="nav-me"
+                                             role="tabpanel"
                                              aria-labelledby="nav-me-tab">
                                             <div class="row">
                                                 @foreach($mission_worker->sortByDesc('id')->take(3) as $mission)
@@ -194,10 +233,12 @@
                                                             </div>
                                                             <div class="card-footer">
                                                                 <div class="row">
-                                                                    <div class="col-6"><span class="badge badge-light">{{ $mission->owner->fio }}</span>
+                                                                    <div class="col-6"><span
+                                                                            class="badge badge-light">{{ $mission->owner->fio }}</span>
                                                                     </div>
                                                                     <div class="col-6">
-                                                                        <span class="badge {{ $mission->status == 1? 'badge-info' : 'badge-warning' }} float-right">{{ $mission->status == 1? 'В работе' : 'Ожидает решения' }}</span>
+                                                                        <span
+                                                                            class="badge {{ $mission->status == 1? 'badge-info' : 'badge-warning' }} float-right font-weight-normal">{{ $mission->status == 1? 'В работе' : 'Ожидает решения' }}</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -254,10 +295,12 @@
                                                             </div>
                                                             <div class="card-footer">
                                                                 <div class="row">
-                                                                    <div class="col-6"><span class="badge badge-light">{{ $mission->worker->fio }}</span>
+                                                                    <div class="col-6"><span
+                                                                            class="badge badge-light">{{ $mission->worker->fio }}</span>
                                                                     </div>
                                                                     <div class="col-6">
-                                                                        <span class="badge {{ $mission->status == 1? 'badge-info' : 'badge-warning' }} float-right">{{ $mission->status == 1? 'В работе' : 'Ожидает решения' }}</span>
+                                                                        <span
+                                                                            class="badge {{ $mission->status == 1? 'badge-info' : 'badge-warning' }} float-right font-weight-normal">{{ $mission->status == 1? 'В работе' : 'Ожидает решения' }}</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -275,6 +318,39 @@
             </div>
         </div>
     </div>
+
+    {{--change pass modal--}}
+    <div class="modal fade" id="change-pass" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <form action="{{ route('user.update', $user->id) }}" method="POST">
+                {{ csrf_field() }}
+                <div class="modal-content">
+
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <input type="password" placeholder="Пароль" id="password"
+                                   class="form-control" name="password">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" placeholder="Повторите пароль" id="password_confirmation"
+                                   class="form-control" name="password_confirmation">
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="submit" id="pass_conf_btn" class="btn btn-primary">Сохранить
+                            изменения
+                        </button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть
+                        </button>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+    {{--end change pass modal--}}
 @endsection
 
 @section('js')
