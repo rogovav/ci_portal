@@ -221,7 +221,7 @@
 
                                         </div>
                                         <div class="col-6">
-                                            <span class="badge {{ $mission->status == 1? 'badge-info' : 'badge-warning' }} float-right">{{ $mission->status == 1? 'В работе' : 'Ожидает решения' }}</span>
+                                            <span class="badge {{ $mission->status == 1? 'badge-info' : 'badge-warning' }} float-right font-weight-normal">{{ $mission->status == 1? 'В работе' : 'Ожидает решения' }}</span>
                                         </div>
                                     </div>
                                 </div>

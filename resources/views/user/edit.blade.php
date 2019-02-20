@@ -52,15 +52,16 @@
                                                 </h5>
                                                 <p class="text-center mb-0 small">({{ $user->position->name }})</p>
                                                 <div class="text-center">
+                                                    @if($user->blocked)
+                                                        <span class="badge badge-danger font-weight-normal">Blocked</span>
+                                                    @endif
                                                     @if($user->super)
                                                         <span class="badge badge-info font-weight-normal">Admin</span>
                                                     @endif
                                                     @if($user->isOnline())
-                                                        <span
-                                                            class="badge badge-success font-weight-normal">Online</span>
+                                                        <span class="badge badge-success font-weight-normal">Online</span>
                                                     @else
-                                                        <span
-                                                            class="badge badge-secondary font-weight-normal">Offline</span>
+                                                        <span class="badge badge-secondary font-weight-normal">Offline</span>
                                                     @endif
                                                 </div>
                                             </div>
@@ -73,17 +74,7 @@
                                         </div>
                                         <p><a id="card-show" class="btn btn-primary btn-block btn-sm mb-0" href="">Подробнее</a>
                                         </p>
-                                        <div class="row">
-                                            <div class="btn-group-toggle col-6" data-toggle="buttons">
-                                                <label class="btn col-12 btn-sm btn-success">
-                                                    <input type="checkbox" checked autocomplete="off" name="super">
-                                                    Администратор
-                                                </label>
-                                            </div>
-                                            <div class="col-6">
-                                                <button class="btn btn-danger btn-sm col-12">Заблокировать</button>
-                                            </div>
-                                        </div>
+
                                         <div class="card" id="card-user">
                                             <div class="card-body">
                                                 <table class="table">
@@ -110,10 +101,6 @@
                                                     </tr>
                                                     </tbody>
                                                 </table>
-                                                <form action="{{ route('user.update', $user->id) }}" method="POST"
-                                                      id="changeInfo">
-                                                    @csrf
-                                                </form>
                                                 <span
                                                     class="badge badge-light">Нажмите на поле, чтобы изменить его</span>
                                                 <br>
@@ -133,7 +120,7 @@
                             <div class="modal-dialog" role="document">
                                 <form action="{{ route('user.update', $user->id) }}" method="POST">
                                     {{ csrf_field() }}
-                                    <div class="modal-content">
+                                <div class="modal-content">
 
                                         <div class="modal-body">
                                             <div class="form-group">
@@ -141,21 +128,20 @@
                                                        class="form-control" name="password">
                                             </div>
                                             <div class="form-group">
-                                                <input type="password" placeholder="Повторите пароль"
-                                                       id="password_confirmation"
+                                                <input type="password" placeholder="Повторите пароль" id="password_confirmation"
                                                        class="form-control" name="password_confirmation">
                                             </div>
                                         </div>
 
-                                        <div class="modal-footer">
-                                            <button type="submit" id="pass_conf_btn" class="btn btn-primary">Сохранить
-                                                изменения
-                                            </button>
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть
-                                            </button>
-                                        </div>
-
+                                    <div class="modal-footer">
+                                        <button type="submit" id="pass_conf_btn" class="btn btn-primary">Сохранить
+                                            изменения
+                                        </button>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть
+                                        </button>
                                     </div>
+
+                                </div>
                                 </form>
                             </div>
                         </div>
@@ -209,7 +195,7 @@
                                     </div>
                                     <div class="card">
                                         <div class="card-header">
-                                            Список заданий <a class="badge badge-primary" data-toggle="collapse"
+                                            Список заданий <a class="badge badge-primary font-weight-normal" data-toggle="collapse"
                                                               href="#collapseExample" role="button"
                                                               aria-expanded="false"
                                                               aria-controls="collapseExample">
@@ -247,7 +233,7 @@
                                                                                 class="col-12 col-md-6 col-lg-6 col-xl-6">{{ $todo->name }}</div>
                                                                             <div
                                                                                 class="col-12 col-md-6 col-lg-6 col-xl-6"><span
-                                                                                    class="badge badge-light float-right">Задание на {{ $todo->date }}</span>
+                                                                                    class="badge badge-light float-right font-weight-normal">Задание на {{ $todo->date }}</span>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -257,7 +243,7 @@
                                                                         <div class="row">
                                                                             <div class="col-12">
                                                                                 <a href="{{ route('todo.update', $todo->id) }}"
-                                                                                   class="badge badge-success text-center col-12">
+                                                                                   class="badge badge-success text-center col-12 font-weight-normal">
                                                                                     Завершить задание
                                                                                 </a>
                                                                             </div>
@@ -279,7 +265,7 @@
                                                                             </div>
                                                                             <div
                                                                                 class="col-12 col-md-6 col-lg-6 col-xl-6"><span
-                                                                                    class="badge badge-light float-right">Задание на {{ $todo->date }}</span>
+                                                                                    class="badge badge-light float-right font-weight-normal">Задание на {{ $todo->date }}</span>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -289,7 +275,7 @@
                                                                         <div class="row">
                                                                             <div class="col-12">
                                                                                 <a href="{{ route('todo.update', $todo->id) }}"
-                                                                                   class="badge badge-dark text-center col-12">
+                                                                                   class="badge badge-dark text-center col-12 font-weight-normal">
                                                                                     Восстановить задание
                                                                                 </a>
                                                                             </div>
@@ -315,7 +301,7 @@
                                                                                 class="col-12 col-md-6 col-lg-6 col-xl-6">{{ $todo->name }}</div>
                                                                             <div
                                                                                 class="col-12 col-md-6 col-lg-6 col-xl-6"><span
-                                                                                    class="badge badge-light float-right">Задание на {{ $todo->date }}</span>
+                                                                                    class="badge badge-light float-right font-weight-normal">Задание на {{ $todo->date }}</span>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -325,7 +311,7 @@
                                                                         <div class="row">
                                                                             <div class="col-12">
                                                                                 <a href="{{ route('todo.update', $todo->id) }}"
-                                                                                   class="badge badge-success text-center col-12">
+                                                                                   class="badge badge-success text-center col-12 font-weight-normal">
                                                                                     Завершить задание
                                                                                 </a>
                                                                             </div>
@@ -347,7 +333,7 @@
                                                                             </div>
                                                                             <div
                                                                                 class="col-12 col-md-6 col-lg-6 col-xl-6"><span
-                                                                                    class="badge badge-light float-right">Задание на {{ $todo->date }}</span>
+                                                                                    class="badge badge-light float-right font-weight-normal">Задание на {{ $todo->date }}</span>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -357,7 +343,7 @@
                                                                         <div class="row">
                                                                             <div class="col-12">
                                                                                 <a href="{{ route('todo.update', $todo->id) }}"
-                                                                                   class="badge badge-dark text-center col-12">
+                                                                                   class="badge badge-dark text-center col-12 font-weight-normal">
                                                                                     Восстановить задание
                                                                                 </a>
                                                                             </div>
@@ -383,7 +369,7 @@
                                                                                 class="col-12 col-md-6 col-lg-6 col-xl-6">{{ $todo->name }}</div>
                                                                             <div
                                                                                 class="col-12 col-md-6 col-lg-6 col-xl-6"><span
-                                                                                    class="badge badge-light float-right">Задание на {{ $todo->date }}</span>
+                                                                                    class="badge badge-light float-right font-weight-normal">Задание на {{ $todo->date }}</span>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -393,7 +379,7 @@
                                                                         <div class="row">
                                                                             <div class="col-12">
                                                                                 <a href="{{ route('todo.update', $todo->id) }}"
-                                                                                   class="badge badge-success text-center col-12">
+                                                                                   class="badge badge-success text-center col-12 font-weight-normal">
                                                                                     Завершить задание
                                                                                 </a>
                                                                             </div>
@@ -415,7 +401,7 @@
                                                                             </div>
                                                                             <div
                                                                                 class="col-12 col-md-6 col-lg-6 col-xl-6"><span
-                                                                                    class="badge badge-light float-right">Задание на {{ $todo->date }}</span>
+                                                                                    class="badge badge-light float-right font-weight-normal">Задание на {{ $todo->date }}</span>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -425,7 +411,7 @@
                                                                         <div class="row">
                                                                             <div class="col-12">
                                                                                 <a href="{{ route('todo.update', $todo->id) }}"
-                                                                                   class="badge badge-dark text-center col-12">
+                                                                                   class="badge badge-dark text-center col-12 font-weight-normal">
                                                                                     Восстановить задание
                                                                                 </a>
                                                                             </div>
@@ -523,7 +509,7 @@
                                                                     </div>
                                                                     <div class="col-6">
                                                                         <span
-                                                                            class="badge {{ $mission->status == 1? 'badge-info' : 'badge-warning' }} float-right">{{ $mission->status == 1? 'В работе' : 'Ожидает решения' }}</span>
+                                                                            class="badge {{ $mission->status == 1? 'badge-info' : 'badge-warning' }} float-right font-weight-normal">{{ $mission->status == 1? 'В работе' : 'Ожидает решения' }}</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -586,7 +572,7 @@
                                                                     </div>
                                                                     <div class="col-6">
                                                                         <span
-                                                                            class="badge {{ $mission->status == 1? 'badge-info' : 'badge-warning' }} float-right">{{ $mission->status == 1? 'В работе' : 'Ожидает решения' }}</span>
+                                                                            class="badge {{ $mission->status == 1? 'badge-info' : 'badge-warning' }} float-right font-weight-normal">{{ $mission->status == 1? 'В работе' : 'Ожидает решения' }}</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -648,7 +634,7 @@
                                                                     </div>
                                                                     <div class="col-6">
                                                                         <span
-                                                                            class="badge {{ $mission->status == 1? 'badge-info' : 'badge-warning' }} float-right">{{ $mission->status == 1? 'В работе' : 'Ожидает решения' }}</span>
+                                                                            class="badge {{ $mission->status == 1? 'badge-info' : 'badge-warning' }} float-right font-weight-normal">{{ $mission->status == 1? 'В работе' : 'Ожидает решения' }}</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -675,7 +661,8 @@
         $('#password_confirmation').keyup(function () {
             if ($(this).val() != $('#password').val()) {
                 $('#pass_conf_btn').attr('disabled', true)
-            } else {
+            }
+            else {
                 $('#pass_conf_btn').attr('disabled', false)
             }
         })

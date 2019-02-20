@@ -17,13 +17,13 @@
                 <form action="">
                     <div class="modal-body">
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Название статьи">
+                            <input type="text" name="name" id="wiki_name" class="form-control" placeholder="Название статьи">
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Краткое описание статьи">
+                            <input type="text" name="short_info" id="wiki_short_info" class="form-control" placeholder="Краткое описание статьи">
                         </div>
                         <div class="form-group">
-                            <textarea name="info" id="wiki-body" cols="30" rows="10" class="form-control"
+                            <textarea name="info" id="wiki_body" cols="30" rows="10" class="form-control"
                                       placeholder="Комментарий"></textarea>
                         </div>
                     </div>
@@ -50,18 +50,19 @@
         </div>
         <div class="card-footer">
             @if( $wiki->user == Auth::user() )
-                    <div class="row">
-                        <div class="col-6">
-                            <button class="btn btn-light float-left btn-sm" data-toggle="modal" data-target="#exampleModal">
-                                Редактировать
-                            </button>
-                        </div>
-                        <div class="col-6">
-                            <button class="btn btn-danger float-right btn-sm" data-toggle="modal" data-target="#exampleModal">
-                                Удалить
-                            </button>
-                        </div>
+                <div class="row">
+                    <div class="col-6">
+                        <button class="btn btn-light float-left btn-sm" onclick="change_info({{ $wiki }})" data-toggle="modal"
+                                data-target="#exampleModal">
+                            Редактировать
+                        </button>
                     </div>
+                    <div class="col-6">
+                        <button class="btn btn-danger float-right btn-sm">
+                            Удалить
+                        </button>
+                    </div>
+                </div>
             @endif
         </div>
     </div>
@@ -72,8 +73,15 @@
         src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=ubhq9o4po4p1w2zdmnaepfxsb8h6f4e78gdvggrvli4ho8cs"></script>
     <script>
         tinymce.init({
-            selector: '#wiki-body',
+            selector: '#wiki_body',
             plugins: "table, codesample, textcolor, image, media, formatpainter, emoticons"
         });
+    </script>
+    <script>
+        function change_info(wiki) {
+            $('#wiki_name').val(wiki.name)
+            $('#wiki_short_info').val(wiki.short_info)
+            $('#wiki_body').val(wiki.info)
+        }
     </script>
 @endsection
