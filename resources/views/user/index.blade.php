@@ -19,7 +19,7 @@
                         <div class="form-group">
                             <div class="btn-group-toggle" data-toggle="buttons">
                                 <label class="btn btn-light active">
-                                    <input type="checkbox" checked autocomplete="off" name="super"> Администратор
+                                    <input type="checkbox" checked autocomplete="off" value="1" name="super"> Администратор
                                 </label>
                             </div>
                         </div>
