@@ -16,14 +16,14 @@
                     <div class="row mb-1">
                         <div class="col-5 col-md-5 col-lg-4 col-xl-4 text-left">
                             <span
-                                    class="badge badge-info">{{ $mission->created_at }}</span> {{-- Вт, 22-го янв., 13:22:44 --}}
+                                    class="badge badge-info font-weight-normal">{{ $mission->created_at }}</span> {{-- Вт, 22-го янв., 13:22:44 --}}
                         </div>
                         <div class="col-2 col-md-2 col-lg-4 col-xl-4 text-center ">
-                            <span class="badge badge-success"><i
+                            <span class="badge badge-success font-weight-normal"><i
                                         class="far fa-calendar{{ $per == 100? '-times' : ($mission->status == 1? Null : ($mission->status == 2? '-minus' : '-check')) }}"></i> {{ $status[$mission->status] }} </span>
                         </div>
                         <div class="col-5 col-md-5 col-lg-4 col-xl-4 text-right ">
-                            <span class="badge badge-info">{{ $mission->date_to }}</span>
+                            <span class="badge badge-info font-weight-normal">{{ $mission->date_to }}</span>
                         </div>
                     </div>
                     <div class="progress">
@@ -47,14 +47,14 @@
                                 </button>
                             </form>
                             @else
-                                <span class="badge badge-secondary float-right">В работе</span>
+                                <span class="badge badge-secondary float-right font-weight-normal">В работе</span>
                             @endif
                             @break
                         @case(2)
-                            <span class="badge badge-warning float-right">На проверке</span>
+                            <span class="badge badge-warning float-right font-weight-normal">На проверке</span>
                             @break
                         @case(3)
-                            <span class="badge badge-success float-right">Выполнена {{ $mission->date_close }}</span>
+                            <span class="badge badge-success float-right font-weight-normal">Выполнена {{ $mission->date_close }}</span>
                             @break
                     @endswitch
                 </div>
@@ -313,9 +313,9 @@
                                                             </a>
                                                             <div class="text-center mt-2">
                                                                 @if($mission->owner->isOnline())
-                                                                    <span class="badge badge-success">Online</span>
+                                                                    <span class="badge badge-success font-weight-normal">Online</span>
                                                                 @else
-                                                                    <span class="badge badge-secondary">Offline</span>
+                                                                    <span class="badge badge-secondary font-weight-normal">Offline</span>
                                                                 @endif
                                                             </div>
                                                         </div>
@@ -343,9 +343,9 @@
                                                             </a>
                                                             <div class="text-center mt-2">
                                                                 @if($mission->worker->isOnline())
-                                                                    <span class="badge badge-success">Online</span>
+                                                                    <span class="badge badge-success font-weight-normal">Online</span>
                                                                 @else
-                                                                    <span class="badge badge-secondary">Offline</span>
+                                                                    <span class="badge badge-secondary font-weight-normal">Offline</span>
                                                                 @endif
                                                             </div>
                                                         </div>
@@ -375,9 +375,9 @@
                                                                 </a>
                                                                 <div class="text-center mt-2">
                                                                     @if($helper->isOnline())
-                                                                        <span class="badge badge-success">Online</span>
+                                                                        <span class="badge badge-success font-weight-normal">Online</span>
                                                                     @else
-                                                                        <span class="badge badge-secondary">Offline</span>
+                                                                        <span class="badge badge-secondary font-weight-normal">Offline</span>
                                                                     @endif
                                                                 </div>
                                                             </div>
@@ -406,9 +406,9 @@
                                                 <div id="sohbet" style="overflow-y: scroll; max-height: 300px;"
                                                      class="card shadow-none border-0 m-0 p-0 position-relative bg-transparent ">
                                                     @foreach($mission->comments as $comment)
-                                                        @if($comment->user_id == Auth::id())
+                                                        @if($comment->user == Auth::user())
                                                             <div class="balon1 p-2 m-0 position-relative"
-                                                                 data-is="Вы - {{ $comment->created_at->format('d M Y H:i') }}">
+                                                                 data-is="Вы - {{ $comment->created_at->format('H:i') }}">
                                                                 <a class="float-right mb-1"> {!! nl2br($comment->info) !!} </a>
                                                                 @foreach($comment->files as $file)
                                                                     <div

@@ -23,7 +23,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'fio', 'avatar', 'position', 'login', 'vk', 'email', 'phone', 'birthday', 'password', 'iphone',
+        'fio', 'avatar', 'position', 'login', 'vk', 'email', 'phone', 'birthday', 'password', 'iphone', 'super', 'blocked'
     ];
 
     /**
@@ -34,6 +34,10 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function position(){
+        return $this->belongsTo('App\Position', 'position_id');
+    }
 
     public function isOnline()
     {

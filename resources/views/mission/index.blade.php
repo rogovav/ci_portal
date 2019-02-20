@@ -103,7 +103,7 @@
                                     <select id="worker-select" class="user-select form-control" name="worker"
                                             title="Исполнитель"
                                             data-live-search="true">
-                                        @foreach($users as $user)
+                                        @foreach($users->where('id', '<>', Auth::id()) as $user)
                                             <option value="{{ $user->id }}">{{ $user->fio }}</option>
                                         @endforeach
                                     </select>
@@ -111,7 +111,7 @@
                                 <div class="form-group ">
                                     <select id="help-select" class="help-select form-control" name="helper[]"
                                             multiple title="Помощники" data-live-search="true">
-                                        @foreach($users as $user)
+                                        @foreach($users->where('id', '<>', Auth::id()) as $user)
                                             <option value="{{ $user->id }}">{{ $user->fio }}</option>
                                         @endforeach
                                     </select>
@@ -221,7 +221,7 @@
 
                                         </div>
                                         <div class="col-6">
-                                            <span class="badge {{ $mission->status == 1? 'badge-info' : 'badge-warning' }} float-right">{{ $mission->status == 1? 'В работе' : 'Ожидает решения' }}</span>
+                                            <span class="badge {{ $mission->status == 1? 'badge-info' : 'badge-warning' }} float-right font-weight-normal">{{ $mission->status == 1? 'В работе' : 'Ожидает решения' }}</span>
                                         </div>
                                     </div>
                                 </div>
