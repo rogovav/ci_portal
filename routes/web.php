@@ -54,6 +54,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/wiki', 'WikiController@store')->name('wiki.store');
     Route::get('/wiki/{id}', 'WikiController@show')->name('wiki.show');
 
+
     Route::get('/users/api{params?}', 'UserController@api_json');
 
     Route::get('/rest', 'RestController@index')->name('rest.index');

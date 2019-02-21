@@ -58,9 +58,9 @@
                         </button>
                     </div>
                     <div class="col-6">
-                        <button class="btn btn-danger float-right btn-sm">
+                        <a href="" class="btn btn-danger float-right btn-sm">
                             Удалить
-                        </button>
+                        </a>
                     </div>
                 </div>
             @endif
@@ -81,7 +81,8 @@
         function change_info(wiki) {
             $('#wiki_name').val(wiki.name)
             $('#wiki_short_info').val(wiki.short_info)
-            $('#wiki_body').val(wiki.info)
+            tinymce.activeEditor.setContent(wiki.info)
+            // $('#tinymce').val(wiki.info)
         }
     </script>
 @endsection

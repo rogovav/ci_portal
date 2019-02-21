@@ -32,4 +32,11 @@ class WikiController extends Controller
 
         return view('wiki.show', compact('wiki'));
     }
+
+    public function destroy(Request $request, $id)
+    {
+        $wiki = Wiki::findOrFail($id);
+        $wiki->delete();
+        return view('wiki.index');
+    }
 }
