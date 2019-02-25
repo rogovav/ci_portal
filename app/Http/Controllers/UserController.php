@@ -111,7 +111,7 @@ class UserController extends Controller
         User::create([
             'fio' => $data['fio'],
             'avatar' => $photoName,
-            'position' => $data['position'],
+            'position_id' => $data['position'],
             'login' => $data['login'],
             'vk' => $data['vk'],
             'super' => $data['super'],
