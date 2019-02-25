@@ -53,15 +53,18 @@
                                                 <p class="text-center mb-0 small">({{ $user->position->name }})</p>
                                                 <div class="text-center">
                                                     @if($user->blocked)
-                                                        <span class="badge badge-danger font-weight-normal">Blocked</span>
+                                                        <span
+                                                            class="badge badge-danger font-weight-normal">Blocked</span>
                                                     @endif
                                                     @if($user->super)
                                                         <span class="badge badge-info font-weight-normal">Admin</span>
                                                     @endif
                                                     @if($user->isOnline())
-                                                        <span class="badge badge-success font-weight-normal">Online</span>
+                                                        <span
+                                                            class="badge badge-success font-weight-normal">Online</span>
                                                     @else
-                                                        <span class="badge badge-secondary font-weight-normal">Offline</span>
+                                                        <span
+                                                            class="badge badge-secondary font-weight-normal">Offline</span>
                                                     @endif
                                                 </div>
                                             </div>
@@ -74,7 +77,10 @@
                                         </div>
                                         <p><a id="card-show" class="btn btn-primary btn-block btn-sm mb-0" href="">Подробнее</a>
                                         </p>
-
+                                        <form method="post" action="{{ route('user.update', $user->id) }}" class="d-none"
+                                              id="changeInfo">
+                                            {{ csrf_field() }}
+                                        </form>
                                         <div class="card" id="card-user">
                                             <div class="card-body">
                                                 <table class="table">
@@ -120,7 +126,7 @@
                             <div class="modal-dialog" role="document">
                                 <form action="{{ route('user.update', $user->id) }}" method="POST">
                                     {{ csrf_field() }}
-                                <div class="modal-content">
+                                    <div class="modal-content">
 
                                         <div class="modal-body">
                                             <div class="form-group">
@@ -128,20 +134,21 @@
                                                        class="form-control" name="password">
                                             </div>
                                             <div class="form-group">
-                                                <input type="password" placeholder="Повторите пароль" id="password_confirmation"
+                                                <input type="password" placeholder="Повторите пароль"
+                                                       id="password_confirmation"
                                                        class="form-control" name="password_confirmation">
                                             </div>
                                         </div>
 
-                                    <div class="modal-footer">
-                                        <button type="submit" id="pass_conf_btn" class="btn btn-primary">Сохранить
-                                            изменения
-                                        </button>
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть
-                                        </button>
-                                    </div>
+                                        <div class="modal-footer">
+                                            <button type="submit" id="pass_conf_btn" class="btn btn-primary">Сохранить
+                                                изменения
+                                            </button>
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть
+                                            </button>
+                                        </div>
 
-                                </div>
+                                    </div>
                                 </form>
                             </div>
                         </div>
@@ -195,7 +202,8 @@
                                     </div>
                                     <div class="card">
                                         <div class="card-header">
-                                            Список заданий <a class="badge badge-primary font-weight-normal" data-toggle="collapse"
+                                            Список заданий <a class="badge badge-primary font-weight-normal"
+                                                              data-toggle="collapse"
                                                               href="#collapseExample" role="button"
                                                               aria-expanded="false"
                                                               aria-controls="collapseExample">
@@ -661,8 +669,14 @@
         $('#password_confirmation').keyup(function () {
             if ($(this).val() != $('#password').val()) {
                 $('#pass_conf_btn').attr('disabled', true)
+            } else {
+                $('#pass_conf_btn').attr('disabled', false)
             }
-            else {
+        })
+        $('#password').keyup(function () {
+            if ($(this).val() != $('#password_confirmation').val()) {
+                $('#pass_conf_btn').attr('disabled', true)
+            } else {
                 $('#pass_conf_btn').attr('disabled', false)
             }
         })
