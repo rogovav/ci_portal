@@ -53,6 +53,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/wiki', 'WikiController@index')->name('wiki.index');
     Route::post('/wiki', 'WikiController@store')->name('wiki.store');
     Route::get('/wiki/{id}', 'WikiController@show')->name('wiki.show');
+    Route::post('/wiki/{id}', 'WikiController@update')->name('wiki.update');
+    Route::delete('/wiki/{id}', 'WikiController@destroy')->name('wiki.destroy');
 
 
     Route::get('/users/api{params?}', 'UserController@api_json');

@@ -20,12 +20,12 @@ class UserController extends Controller
 
     public function show($id)
     {
-        $user = User::findorfail($id);
-        $status = [1 => 'В работе', 2 => 'На проверке'];
-        $from = [1 => 'Задача', 2 => 'Общежитие', 3 => 'Университет',];
-        $mission_owner = $user->mission_owner->where('status', '<>', 3);
+        $user           = User::findorfail($id);
+        $status         = [1 => 'В работе', 2 => 'На проверке'];
+        $from           = [1 => 'Задача', 2 => 'Общежитие', 3 => 'Университет',];
+        $mission_owner  = $user->mission_owner->where('status', '<>', 3);
         $mission_worker = $user->mission_worker->where('status', '<>', 3);
-        $my = $mission_owner->count() >= $mission_worker->count();
+        $my             = $mission_owner->count() >= $mission_worker->count();
 
         return view(Auth::user()->id != $id ? 'user.show' : 'user.edit', compact(
             'user',
@@ -101,7 +101,7 @@ class UserController extends Controller
         $ava = $data['avatar'];
 
         list($type, $ava) = explode(';', $ava);
-        list(, $ava) = explode(',', $ava);
+        list(, $ava)      = explode(',', $ava);
         $ava = base64_decode($ava);
 
         $photoName = $data['login'] . '.' . $data['ava']->getClientOriginalExtension();
@@ -111,12 +111,13 @@ class UserController extends Controller
         User::create([
             'fio' => $data['fio'],
             'avatar' => $photoName,
-            'position' => $data['position'],
-            'login' => $data['login'],
+            'position_id' => $data['position'],
+            'login' => $data['email'],
             'vk' => $data['vk'],
-            'super' => $data['super'],
+            'super' => $data['super']? $data['super'] : false,
             'email' => $data['email'],
             'phone' => $data['phone'],
+            'iphone' => $data['iphone'],
             'birthday' => $data['birthday'],
             'password' => Hash::make($data['password']),
         ]);

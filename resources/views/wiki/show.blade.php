@@ -4,7 +4,7 @@
           rel="stylesheet">
 @endsection
 @section('content')
-    <div class="modal fade " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    <div class="modal fade " id="exampleModal" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
@@ -14,13 +14,16 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="">
+                <form action="{{ route('wiki.update', $wiki->id) }}" method="post">
+                    {{ csrf_field() }}
                     <div class="modal-body">
                         <div class="form-group">
-                            <input type="text" name="name" id="wiki_name" class="form-control" placeholder="Название статьи">
+                            <input type="text" name="name" id="wiki_name" class="form-control"
+                                   placeholder="Название статьи">
                         </div>
                         <div class="form-group">
-                            <input type="text" name="short_info" id="wiki_short_info" class="form-control" placeholder="Краткое описание статьи">
+                            <input type="text" name="short_info" id="wiki_short_info" class="form-control"
+                                   placeholder="Краткое описание статьи">
                         </div>
                         <div class="form-group">
                             <textarea name="info" id="wiki_body" cols="30" rows="10" class="form-control"
@@ -52,15 +55,28 @@
             @if( $wiki->user == Auth::user() )
                 <div class="row">
                     <div class="col-6">
-                        <button class="btn btn-light float-left btn-sm" onclick="change_info({{ $wiki }})" data-toggle="modal"
+                        <button class="btn btn-light float-left btn-sm" onclick="change_info({{ $wiki }})"
+                                data-toggle="modal"
                                 data-target="#exampleModal">
                             Редактировать
                         </button>
                     </div>
                     <div class="col-6">
-                        <a href="" class="btn btn-danger float-right btn-sm">
-                            Удалить
-                        </a>
+                        <form id="delete-form-{{ $wiki->id }}" action="{{ route('wiki.destroy', $wiki->id) }}"
+                              method="post">
+                            {{ csrf_field() }}
+                            {{ method_field('DELETE') }}
+                        </form>
+                        <a href="" class="btn btn-danger float-right btn-sm" onclick="
+                            if(confirm('Вы действительно хотите удалить статью?'))
+                            {
+                            event.preventDefault();
+                            document.getElementById('delete-form-{{ $wiki->id }}').submit()
+                            }
+                            else
+                            {
+                            event.preventDefault();
+                            }">Удалить</a>
                     </div>
                 </div>
             @endif
