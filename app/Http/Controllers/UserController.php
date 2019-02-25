@@ -114,7 +114,7 @@ class UserController extends Controller
             'position_id' => $data['position'],
             'login' => $data['login'],
             'vk' => $data['vk'],
-            'super' => $data['super'],
+            'super' => $data['super']? $data['super'] : false,
             'email' => $data['email'],
             'phone' => $data['phone'],
             'birthday' => $data['birthday'],
