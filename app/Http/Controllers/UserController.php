@@ -112,11 +112,12 @@ class UserController extends Controller
             'fio' => $data['fio'],
             'avatar' => $photoName,
             'position_id' => $data['position'],
-            'login' => $data['login'],
+            'login' => $data['email'],
             'vk' => $data['vk'],
             'super' => $data['super']? $data['super'] : false,
             'email' => $data['email'],
             'phone' => $data['phone'],
+            'iphone' => $data['iphone'],
             'birthday' => $data['birthday'],
             'password' => Hash::make($data['password']),
         ]);

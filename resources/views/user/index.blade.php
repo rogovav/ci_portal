@@ -44,9 +44,6 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" name="login" placeholder="Логин" required>
-                        </div>
-                        <div class="form-group">
                             <input type="text" class="form-control" name="vk" placeholder="VK ID" required>
                         </div>
                         <div class="form-group">
@@ -55,6 +52,9 @@
                         <div class="form-group">
                             <input type="tel" id="telephone" class="form-control" name="phone"
                                    placeholder="Номер телефона" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="iphone" placeholder="Внутренний номер телефона" required>
                         </div>
                         <div class="form-group">
                             <input type="text"
