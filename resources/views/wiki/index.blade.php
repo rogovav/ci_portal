@@ -21,7 +21,7 @@
                             <input name="name" type="text" class="form-control" placeholder="Название статьи">
                         </div>
                         <div class="form-group">
-                            <input name="short_info" type="text" class="form-control" placeholder="Краткое описание статьи">
+                            <input name="short_info" type="text" class="form-control" placeholder="Тема статьи">
                         </div>
                         <div class="form-group">
                             <textarea name="info" id="wiki-body" cols="30" rows="30" class="form-control"
@@ -127,7 +127,7 @@
             if (input == '') {
                 $('.card-outer').show()
             } else {
-                $('.topic').each(function (index) {
+                $('.wiki-name').each(function (index) {
                     if ($(this).text().toLowerCase().search(input.toLowerCase()) == -1) {
                         $(this).closest('.card-outer').hide();
                     } else {
