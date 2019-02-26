@@ -4,9 +4,9 @@
           rel="stylesheet">
 @endsection
 @section('content')
-    <div class="modal fade " id="exampleModal" role="dialog" aria-labelledby="exampleModalLabel"
+    <div class="modal fade" id="exampleModal" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-dialog modal-lg-custom" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Создание статьи</h5>
@@ -21,7 +21,7 @@
                             <input name="name" type="text" class="form-control" placeholder="Название статьи">
                         </div>
                         <div class="form-group">
-                            <textarea name="short_info" type="text" class="form-control" placeholder="Краткое описание статьи"></textarea>
+                            <input name="short_info" type="text" class="form-control" placeholder="Краткое описание статьи">
                         </div>
                         <div class="form-group">
                             <textarea name="info" id="wiki-body" cols="30" rows="30" class="form-control"
@@ -55,7 +55,8 @@
                             </div>
                         </div>
                         <div class="col-12 col-md-3 col-lg-3 col-xl-2 mt-1">
-                            <button class="btn btn-info float-right btn-block" data-toggle="modal" data-target="#exampleModal">
+                            <button class="btn btn-info float-right btn-block" data-toggle="modal"
+                                    data-target="#exampleModal">
                                 Создать статью
                             </button>
                         </div>
@@ -63,15 +64,21 @@
                 </div>
             </div>
         </div>
-        <div class="card-body">
-            <ul class="ml-5">
+        @foreach($wikiTop as $name => $wikis)
+        <div class="card-outer ml-5 mt-3">
+            <h5>{{ $name }}</h5>
+            <ul style="list-style: none" class="ml-4">
                 @foreach($wikis as $wiki)
-                    <li>
-                        <h6><a href="{{ route('wiki.show', $wiki->id) }}">{{ $wiki->name }}</a></h6>
+                    <li class="wiki-name">
+                        <h6>
+                            <a href="{{ route('wiki.show', $wiki->id) }}">{{ $wiki->name }}</a>
+                            <span class="read-more"> (Автор: {{ $wiki->user->fio }})</span>
+                        </h6>
                     </li>
                 @endforeach
             </ul>
         </div>
+        @endforeach
 
                 {{--@foreach($wikis as $wiki)--}}
                     {{--<div class=" col-md-6 col-lg-6 col-xl-4 card-outer">--}}

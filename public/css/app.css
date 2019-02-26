@@ -774,6 +774,10 @@ marquee {
     /*overflow-y: scroll;*/
 }
 
+.modal-lg-custom {
+    max-width: 80%;
+}
+
 #accordion1 .card-header, #accordion2 .card-header {
     padding: 5px;
     background-color: white !important;
@@ -976,7 +980,6 @@ a {
 .read-more {
     font-size: 12px;
     color: gray;
-    text-decoration: underline !important;
 }
 
 .media-body {
