@@ -5,7 +5,7 @@
 @endsection
 @section('content')
     <div class="modal fade bd-example-modal-lg" id="ModalCreateUser" role="dialog"
-         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+         aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-keyboard="false" data-backdrop="static">
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -25,6 +25,15 @@
                                         <option value="1">Задача</option>
                                         <option value="2">Общежитие</option>
                                         <option value="3">Университет</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <select class="custom-select form-control" name="subject" id="choose-topic"
+                                            title="Тема">
+                                        @foreach($subjects as $subject)
+                                            <option value="{{ $subject->id }}">{{ $subject->name }}</option>
+                                        @endforeach
+                                        <option value="-1">Другое</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
@@ -73,15 +82,7 @@
                                         <option value="3">Низкий</option>
                                     </select>
                                 </div>
-                                <div class="form-group">
-                                    <select class="custom-select form-control" name="subject" id="choose-topic"
-                                            title="Тема">
-                                        @foreach($subjects as $subject)
-                                            <option value="{{ $subject->id }}">{{ $subject->name }}</option>
-                                        @endforeach
-                                        <option value="-1">Другое</option>
-                                    </select>
-                                </div>
+
                                 <div class="form-group hidden-topic-input">
                                     <input placeholder="Новая тема" type="text" class="form-control"
                                            name="newSubject" id="hidden-topic">

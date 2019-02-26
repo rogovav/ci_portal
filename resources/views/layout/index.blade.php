@@ -76,7 +76,7 @@
             </ul>
 
             <ul class="navbar-nav ml-md-auto d-md-flex">
-                <li class="nav-item dropdown show">
+                <li class="nav-item dropdown show" style="cursor: pointer">
                     <a class="nav-link dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
                        aria-expanded="false"><img
                             src="{{ asset('images/avatars/users/' . Auth::user()->avatar) }}" alt=""

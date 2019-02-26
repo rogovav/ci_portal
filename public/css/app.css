@@ -770,8 +770,8 @@ marquee {
 }
 
 #accordion1, #accordion2 {
-    height: 400px;
-    overflow-y: scroll;
+    /*height: 400px;*/
+    /*overflow-y: scroll;*/
 }
 
 #accordion1 .card-header, #accordion2 .card-header {

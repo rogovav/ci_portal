@@ -16,9 +16,10 @@ class AdminController extends Controller
         $buildings = Building::orderBy('name')->get();
         $clients   = Client::orderBy('fio')->get();
         $subjects  = Subject::orderBy('name')->get();
+        $subjectTypes  = $subjects->groupBy('type');
         $positions  = Position::orderBy('name')->get();
 
-        return view('dashboard.admin', compact('buildings','clients', 'subjects', 'positions'));
+        return view('dashboard.admin', compact('buildings','clients', 'positions', 'subjectTypes'));
     }
 
     public function building(Request $request)
@@ -49,7 +50,7 @@ class AdminController extends Controller
 
     public function subject(Request $request)
     {
-        Subject::updateOrCreate(['id' => $request->id], ['name' => $request->name]);
+        Subject::updateOrCreate(['id' => $request->id], ['name' => $request->name , 'type' => $request->type]);
         return redirect()->back();
     }
 
