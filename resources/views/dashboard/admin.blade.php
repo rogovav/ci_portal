@@ -88,21 +88,27 @@
                 <div class="tab-pane fade" id="nav-topic" role="tabpanel" aria-labelledby="nav-topic-tab">
                     <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 admin-card">
                         <div class="card admin-card-header">
-                            <h4>Темы</h4>
+                            <h4 class="mt-1">Темы</h4>
                             <div class="card-body row">
                                 <div id="accordion2" class="col-8">
                                     <div class="row">
+                                        @foreach($subjectTypes as $name => $subjects)
+                                        <div class="col-12">
+                                            <h5>{{ $name }}</h5>
+                                        </div>
                                         @foreach($subjects as $subject)
                                             <div class="col-3">
                                                 <div class="card">
                                                     <div class="card-body">
-                                                        <p class="card-text">{{ $subject->name }}</p>
+                                                        <h5 class="card-text">{{ $subject->name }}</h5>
+                                                        <p>({{ $subject->type }})</p>
                                                         <button onclick="editTopic({{$subject}})"
                                                                 class="btn btn-dark">Изменить
                                                         </button>
                                                     </div>
                                                 </div>
                                             </div>
+                                        @endforeach
                                         @endforeach
                                     </div>
                                 </div>
@@ -121,9 +127,9 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <span class="badge badge-light float-left mb-1">Источник заявки</span>
-                                                    <select type="text" name="type" class="form-control">
-                                                        <option value="1">Общежитие</option>
-                                                        <option value="2">Университет</option>
+                                                    <select type="text" name="type" class="form-control" id="topic-type">
+                                                        <option value="Общежитие">Общежитие</option>
+                                                        <option value="Университет">Университет</option>
                                                     </select>
                                                 </div>
                                                 <div class="form-row">

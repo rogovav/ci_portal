@@ -4,9 +4,9 @@
           rel="stylesheet">
 @endsection
 @section('content')
-    <div class="modal fade " id="exampleModal" role="dialog" aria-labelledby="exampleModalLabel"
+    <div class="modal fade" id="exampleModal" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-dialog modal-lg-custom" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Создание статьи</h5>
@@ -21,8 +21,7 @@
                             <input name="name" type="text" class="form-control" placeholder="Название статьи">
                         </div>
                         <div class="form-group">
-                            <textarea name="short_info" type="text" class="form-control"
-                                      placeholder="Краткое описание статьи"></textarea>
+                            <input name="short_info" type="text" class="form-control" placeholder="Тема статьи">
                         </div>
                         <div class="form-group">
                             <textarea name="info" id="wiki-body" cols="30" rows="30" class="form-control"
@@ -65,44 +64,49 @@
                 </div>
             </div>
         </div>
+        @foreach($wikiTop as $name => $wikis)
         <div class="card-outer ml-5 mt-3">
-            <h5>Тема 1</h5>
+            <h5>{{ $name }}</h5>
             <ul style="list-style: none" class="ml-4">
                 @foreach($wikis as $wiki)
                     <li class="wiki-name">
-                        <h6><a href="{{ route('wiki.show', $wiki->id) }}">{{ $wiki->name }}</a></h6>
+                        <h6>
+                            <a href="{{ route('wiki.show', $wiki->id) }}">{{ $wiki->name }}</a>
+                            <span class="read-more"> (Автор: {{ $wiki->user->fio }})</span>
+                        </h6>
                     </li>
                 @endforeach
             </ul>
         </div>
+        @endforeach
 
-        {{--@foreach($wikis as $wiki)--}}
-        {{--<div class=" col-md-6 col-lg-6 col-xl-4 card-outer">--}}
-        {{--<div class="card">--}}
-        {{--<div class="card-header">--}}
-        {{--<div class="row">--}}
-        {{--<div class="col-12">--}}
-        {{--<span class="badge badge-light float-left topic"><h6 class="mb-0">{{ $wiki->name }}</h6></span>--}}
-        {{--</div>--}}
-        {{--</div>--}}
-        {{--</div>--}}
-        {{--<div class="card-body">--}}
-        {{--<span>{!! nl2br($wiki->short_info) !!}</span>--}}
-        {{--<p class="m-0"><a href="{{ route('wiki.show', $wiki->id) }}" class="read-more">Читать полностью</a></p>--}}
-        {{--</div>--}}
-        {{--<div class="card-footer">--}}
-        {{--<div class="row">--}}
-        {{--<div class="col-6">--}}
-        {{--<span class="badge badge-light float-left">{{ $wiki->user->fio }}</span>--}}
-        {{--</div>--}}
-        {{--<div class="col-6">--}}
-        {{--<span class="badge badge-light float-right">{{ $wiki->created_at }}</span>--}}
-        {{--</div>--}}
-        {{--</div>--}}
-        {{--</div>--}}
-        {{--</div>--}}
-        {{--</div>--}}
-        {{--@endforeach--}}
+                {{--@foreach($wikis as $wiki)--}}
+                    {{--<div class=" col-md-6 col-lg-6 col-xl-4 card-outer">--}}
+                        {{--<div class="card">--}}
+                            {{--<div class="card-header">--}}
+                                {{--<div class="row">--}}
+                                    {{--<div class="col-12">--}}
+                                        {{--<span class="badge badge-light float-left topic"><h6 class="mb-0">{{ $wiki->name }}</h6></span>--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
+                            {{--<div class="card-body">--}}
+                                {{--<span>{!! nl2br($wiki->short_info) !!}</span>--}}
+                                {{--<p class="m-0"><a href="{{ route('wiki.show', $wiki->id) }}" class="read-more">Читать полностью</a></p>--}}
+                            {{--</div>--}}
+                            {{--<div class="card-footer">--}}
+                                {{--<div class="row">--}}
+                                    {{--<div class="col-6">--}}
+                                        {{--<span class="badge badge-light float-left">{{ $wiki->user->fio }}</span>--}}
+                                    {{--</div>--}}
+                                    {{--<div class="col-6">--}}
+                                        {{--<span class="badge badge-light float-right">{{ $wiki->created_at }}</span>--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                {{--@endforeach--}}
 
     </div>
 @endsection

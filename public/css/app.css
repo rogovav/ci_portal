@@ -770,8 +770,12 @@ marquee {
 }
 
 #accordion1, #accordion2 {
-    height: 400px;
-    overflow-y: scroll;
+    /*height: 400px;*/
+    /*overflow-y: scroll;*/
+}
+
+.modal-lg-custom {
+    max-width: 80%;
 }
 
 #accordion1 .card-header, #accordion2 .card-header {
@@ -976,7 +980,6 @@ a {
 .read-more {
     font-size: 12px;
     color: gray;
-    text-decoration: underline !important;
 }
 
 .media-body {
@@ -1099,14 +1102,6 @@ a.delete-a:hover {
         display: block;
         margin: 7px 20px 4px 0;
         cursor: pointer;
-    }
-
-    #wrapper {
-        padding: 75px 15px 15px 75px;
-    }
-
-    #wrapper.open {
-        padding: 75px 15px 15px 225px;
     }
 
     .navbar-nav.side-nav.open {

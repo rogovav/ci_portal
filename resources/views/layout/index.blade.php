@@ -28,7 +28,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarText">
 
-            <ul class="navbar-nav ml-md-auto d-md-flex justify-content-between w-50 float-right text-right">
+            <ul class="navbar-nav ml-md-auto d-md-flex justify-content-between w-75 float-right text-right">
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('mission.index') }}" title="Cart">
                         Заявки </a>
