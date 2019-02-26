@@ -71,7 +71,7 @@
                                                             data-target="#change-pass"
                                                             class="btn btn-link small badge change-pass font-weight-normal">
                                                         Изменить
-                                                        пароль
+                                                        пароль или должность
                                                     </button>
 
                                                     <form action="{{ route('user.update', $user->id) }}" method="POST">
@@ -343,6 +343,14 @@
                 <div class="modal-content">
 
                     <div class="modal-body">
+                        <div class="form-group">
+                            <select class="custom-select" id="inputGroupSelect01" name="position">
+                                <option selected>Выберите должность</option>
+                                @foreach($positions as $position)
+                                    <option value="{{ $position->id }}" {{ $user->position->id == $position->id ? 'selected' : Null }}>{{ $position->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
                         <div class="form-group">
                             <input type="password" placeholder="Пароль" id="password"
                                    class="form-control" name="password">

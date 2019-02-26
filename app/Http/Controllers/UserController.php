@@ -21,6 +21,7 @@ class UserController extends Controller
     public function show($id)
     {
         $user           = User::findorfail($id);
+        $positions      = Position::orderBy('name')->get();
         $status         = [1 => 'В работе', 2 => 'На проверке'];
         $from           = [1 => 'Задача', 2 => 'Общежитие', 3 => 'Университет',];
         $mission_owner  = $user->mission_owner->where('status', '<>', 3);
@@ -33,7 +34,8 @@ class UserController extends Controller
             'from',
             'mission_owner',
             'mission_worker',
-            'my'
+            'my',
+            'positions'
         ));
     }
 
@@ -75,6 +77,9 @@ class UserController extends Controller
         };
         if (isset($request['vk'])) {
             $user->update(['vk' => $request['vk']]);
+        };
+        if (isset($request['position'])) {
+            $user->update(['position_id' => $request['position']]);
         };
         if (isset($request['email'])) {
             $user->update(['email' => $request['email']]);

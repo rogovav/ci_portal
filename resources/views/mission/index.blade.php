@@ -30,9 +30,6 @@
                                 <div class="form-group">
                                     <select class="custom-select form-control" name="subject" id="choose-topic"
                                             title="Тема">
-                                        @foreach($subjects as $subject)
-                                            <option value="{{ $subject->id }}">{{ $subject->name }}</option>
-                                        @endforeach
                                         <option value="-1">Другое</option>
                                     </select>
                                 </div>
