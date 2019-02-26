@@ -52,7 +52,7 @@
             </div>
         </div>
         <div class="card-footer">
-            @if( $wiki->user == Auth::user() )
+            {{--@if( $wiki->user == Auth::user() )--}}
                 <div class="row">
                     <div class="col-6">
                         <button class="btn btn-light float-left btn-sm" onclick="change_info({{ $wiki }})"
@@ -79,7 +79,7 @@
                             }">Удалить</a>
                     </div>
                 </div>
-            @endif
+            {{--@endif--}}
         </div>
     </div>
 @endsection

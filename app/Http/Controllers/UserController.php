@@ -68,7 +68,8 @@ class UserController extends Controller
 
             $ava = base64_decode($ava);
 
-            $photoName = $user->avatar;
+//            $photoName = $user->avatar;
+            $photoName = $user->login . '.' . $ava->getClientOriginalExtension();
 
             file_put_contents('images/avatars/users/' . $photoName, $ava);
         };
@@ -100,13 +101,17 @@ class UserController extends Controller
     {
         $ava = $data['avatar'];
 
-        list($type, $ava) = explode(';', $ava);
-        list(, $ava)      = explode(',', $ava);
-        $ava = base64_decode($ava);
+        $photoName = 'default.png';
 
-        $photoName = $data['login'] . '.' . $data['ava']->getClientOriginalExtension();
+        if ($ava) {
+            list($type, $ava) = explode(';', $ava);
+            list(, $ava)      = explode(',', $ava);
+            $ava = base64_decode($ava);
 
-        file_put_contents('images/avatars/users/' . $photoName, $ava);
+            $photoName = $data['login'] . '.' . $data['ava']->getClientOriginalExtension();
+
+            file_put_contents('images/avatars/users/' . $photoName, $ava);
+        }
 
         User::create([
             'fio' => $data['fio'],
@@ -137,22 +142,27 @@ class UserController extends Controller
         return back()->withInput();
     }
 
-    public function api_json(Request $params)
-    {
-        $users = User::all();
-
-        $data = [];
-
-        $not_users = array_map('intval', explode(',', $params['users']));
-
-        foreach ($users as $user) {
-            if (!in_array($user->id, $not_users))
-                $data[] = [
-                    'value' => $user->id,
-                    'text' => "<img src='/images/avatars/users/$user->avatar' class='user-selector' alt=''> " . $user->fio,
-                ];
-        }
-
-        return json_encode($data);
+    public function destroy ($id) {
+        User::findorfail($id)->delete();
+        return redirect()->route('user.index');
     }
+
+//    public function api_json(Request $params)
+//    {
+//        $users = User::all();
+//
+//        $data = [];
+//
+//        $not_users = array_map('intval', explode(',', $params['users']));
+//
+//        foreach ($users as $user) {
+//            if (!in_array($user->id, $not_users))
+//                $data[] = [
+//                    'value' => $user->id,
+//                    'text' => "<img src='/images/avatars/users/$user->avatar' class='user-selector' alt=''> " . $user->fio,
+//                ];
+//        }
+//
+//        return json_encode($data);
+//    }
 }

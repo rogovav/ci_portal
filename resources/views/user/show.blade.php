@@ -88,6 +88,21 @@
                                                             {{ $user->super? 'Снять права администратора' : 'Назначить права администратора' }}
                                                         </button>
                                                     </form>
+                                                    <form id="delete-form-{{ $user->id }}" action="{{ route('user.destroy', $user->id) }}"
+                                                          method="post">
+                                                        {{ csrf_field() }}
+                                                        {{ method_field('DELETE') }}
+                                                    </form>
+                                                    <button type="submit" class="btn btn-link small badge change-pass text-danger font-weight-normal" onclick="
+                                                        if(confirm('Вы действительно хотите удалить пользователя?'))
+                                                        {
+                                                        event.preventDefault();
+                                                        document.getElementById('delete-form-{{ $user->id }}').submit()
+                                                        }
+                                                        else
+                                                        {
+                                                        event.preventDefault();
+                                                        }">Удалить</button>
                                                 @endif
                                             </div>
                                         </div>

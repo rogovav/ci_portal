@@ -330,6 +330,21 @@
     object-fit: cover;
 }
 
+.account-profile-avatar-index {
+    width: 100%;
+    display: block;
+    margin: auto;
+    object-fit: cover;
+}
+
+.avatar-index-border-online {
+    border-top: 2px solid #2db04f;
+}
+
+.avatar-index-border-admin {
+    border-bottom: 2px solid #17acc0;
+}
+
 .avatar-border {
     border: 5px solid #d9175f;
 }

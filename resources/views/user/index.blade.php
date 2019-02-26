@@ -16,12 +16,9 @@
                 <form method="POST" action="{{ url('users') }}" enctype="multipart/form-data">
                     @csrf
                     <div class="modal-body">
-                        <div class="form-group">
-                            <div class="" data-toggle="buttons">
-                                <label class="btn btn-light active">
-                                    <input type="checkbox" autocomplete="off" name="super" value="1">&nbsp; Администратор
-                                </label>
-                            </div>
+                        <div class="form-group form-check">
+                            <input type="checkbox" class="form-check-input" id="exampleCheck1" name="super" value="1">
+                            <label class="form-check-label" for="exampleCheck1">Администратор</label>
                         </div>
                         <div class="form-group">
                             <input type="text" class="form-control" name="fio" placeholder="ФИО" required>
@@ -70,11 +67,10 @@
                                    placeholder="Повторите пароль"
                                    required>
                         </div>
-
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
                         <button type="submit" class="btn btn-primary">Создать</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
                     </div>
                 </form>
             </div>
@@ -91,32 +87,23 @@
     @endif
     <div class="row">
         @foreach($users as $user)
-            <div class="col-md-6 col-lg-4 col-xl-3">
-                <div class="card">
-                    <div class="card-header">
-                        <h5 class="card-subtitle text-center">
+            <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+                <div class="card {{ $user->isOnline()? "avatar-index-border-online" : Null }} {{ $user->super? "avatar-index-border-admin" : Null}}">
+                    <div class="card-header ">
+                        <h6 class="card-subtitle text-center">
                             {{ $user->fio }}
-                        </h5>
+                        </h6>
                         <p class="text-center mb-0 small">({{ $user->position->name }})</p>
-                        <div class="text-center">
-                            @if($user->super)
-                                <span class="badge badge-info font-weight-normal">Admin</span>
-                            @endif
-                            @if($user->isOnline())
-                                <span class="badge badge-success font-weight-normal">Online</span>
-                            @else
-                                <span class="badge badge-secondary font-weight-normal">Offline</span>
-                            @endif
-                        </div>
+
                     </div>
-                    <div class="card-body">
+                    <div class="card-body p-0">
                         <img src="{{ asset('images/avatars/users/' . $user->avatar) }}"
-                             class="account-profile-avatar"
+                             class="account-profile-avatar-index"
                              alt="">
                     </div>
                     <div class="card-footer">
                         <ul class="profile-card-user-social">
-                            <li><span><a href="{{ route('user.show', $user->id) }}"><i class="fas fa-user-circle  fa-2x"></i></a></span></li>
+                            <li><span><a href="{{ route('user.show', $user->id) }}"><i class="fas fa-user-circle fa-2x"></i></a></span></li>
                             <li><span><a href="mailto:{{ $user->email }}"><i
                                             class="far fa-envelope fa-2x"></i></a></span></li>
                             <li><span><a href="tel:{{ $user->phone }}"><i
@@ -126,70 +113,6 @@
                     </div>
                 </div>
             </div>
-            {{--<div class="col-md-6 col-lg-4 col-xl-3">--}}
-                {{--<div class="card">--}}
-
-                    {{--<div class="card-body padding-0">--}}
-                        {{--<div class="col account-main-info-col p-0">--}}
-                            {{--<div class="card mb-0">--}}
-                                {{--<div class="card-header">--}}
-                                    {{--<h5 class="card-subtitle text-center">--}}
-                                        {{--{{ $user->fio }}--}}
-                                    {{--</h5>--}}
-                                    {{--<div class="text-center">--}}
-                                        {{--@if($user->isOnline())--}}
-                                            {{--<span class="badge badge-success">Online</span>--}}
-                                        {{--@else--}}
-                                            {{--<span class="badge badge-secondary">Offline</span>--}}
-                                        {{--@endif--}}
-                                    {{--</div>--}}
-                                {{--</div>--}}
-                                {{--<div class="card-body">--}}
-                                    {{--<img src="{{ asset('images/avatars/users/' . $user->avatar) }}"--}}
-                                         {{--class="account-profile-avatar"--}}
-                                         {{--alt="">--}}
-                                    {{--<div class="text-center mt-2">--}}
-                                        {{--@if($user->isOnline())--}}
-                                            {{--<span class="badge badge-success">Online</span>--}}
-                                        {{--@else--}}
-                                            {{--<span class="badge badge-secondary">Offline</span>--}}
-                                        {{--@endif--}}
-                                    {{--</div>--}}
-
-                                {{--</div>--}}
-                                {{--<div class="card-footer">--}}
-                                    {{--<ul class="profile-card-user-social">--}}
-                                        {{--<li><span><a href="{{ route('user.show', $user->id) }}"><i class="fas fa-user-circle  fa-2x"></i></a></span></li>--}}
-                                        {{--<li><span><a href="mailto:{{ $user->email }}"><i--}}
-                                                        {{--class="far fa-envelope fa-2x"></i></a></span></li>--}}
-                                        {{--<li><span><a href="tel:{{ $user->phone }}"><i--}}
-                                                        {{--class="fas fa-phone fa-2x"></i></a></span>--}}
-                                        {{--</li>--}}
-                                    {{--</ul>--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
-                            {{--<div class="card mb-0">--}}
-                                {{--<div class="card-body">--}}
-                                    {{--<p class="text-center mb-0">{{ $user->position->name }}</p>--}}
-                                    {{--<p class="text-center"><b>День рождения:</b> {{ $user->birthday }}</p>--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
-                            {{--<div class="card mb-0">--}}
-                                {{--<div class="card-body">--}}
-                                    {{--<ul class="profile-card-user-social">--}}
-                                        {{--<li><span><a href="{{ route('user.show', $user->id) }}"><i class="fas fa-user-circle  fa-2x"></i></a></span></li>--}}
-                                        {{--<li><span><a href="mailto:{{ $user->email }}"><i--}}
-                                                        {{--class="far fa-envelope fa-2x"></i></a></span></li>--}}
-                                        {{--<li><span><a href="tel:{{ $user->phone }}"><i--}}
-                                                        {{--class="fas fa-phone fa-2x"></i></a></span>--}}
-                                        {{--</li>--}}
-                                    {{--</ul>--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-                {{--</div>--}}
-            {{--</div>--}}
         @endforeach
     </div>
 @endsection

@@ -64,36 +64,43 @@
             </div>
         </div>
         <div class="card-body">
-            <div class="row">
+            <ul class="ml-5">
                 @foreach($wikis as $wiki)
-                    <div class=" col-md-6 col-lg-6 col-xl-4 card-outer">
-                        <div class="card">
-                            <div class="card-header">
-                                <div class="row">
-                                    <div class="col-12">
-                                        <span class="badge badge-light float-left topic"><h6 class="mb-0">{{ $wiki->name }}</h6></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                            <span>{!! nl2br($wiki->short_info) !!}</span>
-                                <p class="m-0"><a href="{{ route('wiki.show', $wiki->id) }}" class="read-more">Читать полностью</a></p>
-                            </div>
-                            <div class="card-footer">
-                                <div class="row">
-                                    <div class="col-6">
-                                        <span class="badge badge-light float-left">{{ $wiki->user->fio }}</span>
-                                    </div>
-                                    <div class="col-6">
-                                        <span class="badge badge-light float-right">{{ $wiki->created_at }}</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <li>
+                        <h6><a href="{{ route('wiki.show', $wiki->id) }}">{{ $wiki->name }}</a></h6>
+                    </li>
                 @endforeach
-            </div>
+            </ul>
         </div>
+
+                {{--@foreach($wikis as $wiki)--}}
+                    {{--<div class=" col-md-6 col-lg-6 col-xl-4 card-outer">--}}
+                        {{--<div class="card">--}}
+                            {{--<div class="card-header">--}}
+                                {{--<div class="row">--}}
+                                    {{--<div class="col-12">--}}
+                                        {{--<span class="badge badge-light float-left topic"><h6 class="mb-0">{{ $wiki->name }}</h6></span>--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
+                            {{--<div class="card-body">--}}
+                                {{--<span>{!! nl2br($wiki->short_info) !!}</span>--}}
+                                {{--<p class="m-0"><a href="{{ route('wiki.show', $wiki->id) }}" class="read-more">Читать полностью</a></p>--}}
+                            {{--</div>--}}
+                            {{--<div class="card-footer">--}}
+                                {{--<div class="row">--}}
+                                    {{--<div class="col-6">--}}
+                                        {{--<span class="badge badge-light float-left">{{ $wiki->user->fio }}</span>--}}
+                                    {{--</div>--}}
+                                    {{--<div class="col-6">--}}
+                                        {{--<span class="badge badge-light float-right">{{ $wiki->created_at }}</span>--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                {{--@endforeach--}}
+
     </div>
 @endsection
 @section('js')
