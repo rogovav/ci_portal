@@ -149,8 +149,74 @@
                     <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 admin-card">
                         <div class="card admin-card-header">
                             <h4>Клиенты</h4>
+                            <button class="btn btn-sm btn-primary d-inline m-auto col-2" onclick="$('#client_show_hide').toggle()">Создать</button>
                             <div class="card-body row">
-                                <div id="accordion2" class="col-8">
+                                <div id="accordion2" class="col-12">
+                                    <div class="row" id="client_show_hide">
+                                        <div class="col-12">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <form action="{{ route('admin.client') }}" class="admin-form" method="post">
+                                                        {{ csrf_field() }}
+                                                        <input type="text" name="id" id="client-id" class="hidden-print">
+                                                       <div class="form-row">
+                                                           <div class="form-group col-6">
+                                                               <input name="fio" type="text"
+                                                                      class="form-control"
+                                                                      placeholder="ФИО"
+                                                                      id="client-fio"
+                                                               >
+                                                           </div>
+                                                           <div class="form-group col-6">
+                                                               <input name="cid" type="text"
+                                                                      class="form-control"
+                                                                      placeholder="Номер договра"
+                                                                      id="client-cid"
+                                                               >
+                                                           </div>
+                                                       </div>
+                                                        <div class="form-row">
+                                                            <div class="form-group col-6">
+                                                                <input name="phone" type="text"
+                                                                       class="form-control"
+                                                                       placeholder="Номер телефона"
+                                                                       id="client-phone"
+                                                                >
+                                                            </div>
+                                                            <div class="form-group col-6">
+                                                                <input name="iphone" type="text"
+                                                                       class="form-control"
+                                                                       placeholder="Внутренний номер"
+                                                                       id="client-iphone"
+                                                                >
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-row">
+                                                            <div class="form-group col-6">
+                                                                <input name="mail" type="text"
+                                                                       class="form-control"
+                                                                       placeholder="Email"
+                                                                       id="client-mail"
+
+                                                                >
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-row">
+                                                            <div class="col">
+                                                                <input type="submit" class="form-control">
+                                                            </div>
+                                                            <div class="col">
+                                                                <button type="button"
+                                                                        class="btn btn-warning clear-form form-control">Очистить
+                                                                    форму
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="row">
                                         <div class="col-12">
                                             <div class="card">
@@ -174,7 +240,7 @@
                                                                     <td>{{ $client->iphone }}</td>
                                                                     <td>{{ $client->mail }}</td>
                                                                     <td>
-                                                                        <button onclick="editClient({{$client}})"
+                                                                        <button onclick="editClient({{$client}}); $('#client_show_hide').show()"
                                                                                 class="btn btn-dark">Изменить
                                                                         </button>
                                                                     </td>
@@ -187,63 +253,6 @@
                                             </div>
                                         </div>
 
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <form action="{{ route('admin.client') }}" class="admin-form" method="post">
-                                                {{ csrf_field() }}
-                                                <input type="text" name="id" id="client-id" class="hidden-print">
-                                                <div class="form-group">
-                                                    <input name="fio" type="text"
-                                                           class="form-control"
-                                                           placeholder="ФИО"
-                                                           id="client-fio"
-                                                    >
-                                                </div>
-                                                <div class="form-group">
-                                                    <input name="cid" type="text"
-                                                           class="form-control"
-                                                           placeholder="Номер договра"
-                                                           id="client-cid"
-                                                    >
-                                                </div>
-                                                <div class="form-group">
-                                                    <input name="phone" type="text"
-                                                           class="form-control"
-                                                           placeholder="Номер телефона"
-                                                           id="client-phone"
-                                                    >
-                                                </div>
-                                                <div class="form-group">
-                                                    <input name="iphone" type="text"
-                                                           class="form-control"
-                                                           placeholder="Внутренний номер"
-                                                           id="client-iphone"
-                                                    >
-                                                </div>
-                                                <div class="form-group">
-                                                    <input name="mail" type="text"
-                                                           class="form-control"
-                                                           placeholder="Email"
-                                                           id="client-mail"
-
-                                                    >
-                                                </div>
-                                                <div class="form-row">
-                                                    <div class="col">
-                                                        <input type="submit" class="form-control">
-                                                    </div>
-                                                    <div class="col">
-                                                        <button type="button"
-                                                                class="btn btn-warning clear-form form-control">Очистить
-                                                            форму
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -311,6 +320,11 @@
 @endsection
 @section('js')
     <script src="{{ asset('js/jquery.maskedinput.js') }}"></script>
+    <script>
+        $(document).ready(function () {
+            $('#client_show_hide').hide();
+        })
+    </script>
     <script>
         $("#client-phone").mask("+7 (999) 999-99-99");
     </script>
