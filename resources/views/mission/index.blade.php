@@ -21,7 +21,8 @@
                             <div class="card-header">Информация о заявке</div>
                             <div class="card-body">
                                 <div class="form-group">
-                                    <select class="custom-select form-control" id="from_input" name="from" title='Источник'>
+                                    <select class="custom-select form-control" id="from_input" name="from"
+                                            title='Источник'>
                                         <option value="1">Задача</option>
                                         <option value="2">Общежитие</option>
                                         <option value="3">Университет</option>
@@ -30,9 +31,7 @@
                                 <div class="form-group" id="choose-topic">
                                     <select class="custom-select form-control" name="subject"
                                             title="Тема" id="choose_select_inner">
-                                        @foreach($subjects as $subject)
-                                            <option value="{{ $subject->id }}">{{ $subject->name }}</option>
-                                        @endforeach
+
                                         <option value="-1">Другое</option>
                                     </select>
                                 </div>
@@ -162,7 +161,8 @@
     </div>
     <div class="row">
         <div class="col">
-            <button class="btn btn-primary create-user-button btn-sm" data-toggle="modal" data-target="#ModalCreateUser">
+            <button class="btn btn-primary create-user-button btn-sm" data-toggle="modal"
+                    data-target="#ModalCreateUser">
                 Создать заявку
             </button>
         </div>
@@ -194,6 +194,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-12">
+
                                             <table class="table mb-0">
                                                 <thead>
                                                 <th>#</th>
@@ -222,7 +223,8 @@
 
                                         </div>
                                         <div class="col-6">
-                                            <span class="badge {{ $mission->status == 1? 'badge-info' : 'badge-warning' }} float-right font-weight-normal">{{ $mission->status == 1? 'В работе' : 'Ожидает решения' }}</span>
+                                            <span
+                                                class="badge {{ $mission->status == 1? 'badge-info' : 'badge-warning' }} float-right font-weight-normal">{{ $mission->status == 1? 'В работе' : 'Ожидает решения' }}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -250,7 +252,43 @@
     </script>
 
     <script>
+        $('#from_input').change(function () {
+            url = ''
+            if ($(this).val() == 2) {
+                url = 'Общежитие'
+            }
+            else if ($(this).val() == 3) {
+                url = 'Университет'
+            }
+            if ($(this).val() != 1) {
+                $.get({
+                    url: '/api/subjects/' + url,
+                    success: function (result) {
+                        console.log(result[0])
+                        $('#choose_select_inner').find('option').remove().end();
+
+                        $.each(result, function (value, key) {
+                            $('#choose_select_inner').append('<option value="' + key.id + '">' + key.name + '</option>')
+                        });
+                        $('#choose_select_inner').selectpicker('refresh');
+                    }
+                })
+                $('#choose-topic').show()
+                $('.hidden-topic-input').hide().children('input').prop('disabled', 'disabled');
+            }
+            else {
+                $('.hidden-topic-input').show().children('input').prop('disabled', '')
+                //$('#choose-topic').hide()
+                $('#choose_select_inner').selectpicker('val', '-1')
+                $('#hidden-topic').focus()
+                $('#choose-topic').hide();
+            }
+        })
+    </script>
+
+    <script>
         $(document).ready(function () {
+            $('.hidden-topic-input').hide();
             $('#select-error').hide()
             $('select').selectpicker()
             $('.client-select').selectpicker();
@@ -328,25 +366,6 @@
                 $('#itelephone').prop('disabled', 'disabled');
             }
         })
-    </script>
-
-    <script>
-        $(document).ready(function () {
-            $('#from_input').change(function () {
-                if ($(this).val() == '1') {
-                    $('.hidden-topic-input').show().children('input').prop('disabled', '')
-                    //$('#choose-topic').hide()
-                    $('#choose_select_inner').selectpicker('val','-1')
-                    $('#hidden-topic').focus()
-                } else {
-                    $('#choose-topic').show()
-                    $('.hidden-topic-input').hide().children('input').prop('disabled', 'disabled');
-
-                }
-            })
-
-
-        });
     </script>
 
     <script>
