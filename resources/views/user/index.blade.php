@@ -91,7 +91,7 @@
     @endif
     <div class="row">
         @foreach($users as $user)
-            <div class="col-md-6 col-lg-4 col-xl-3">
+            <div class="col-md-6 col-lg-4 col-xl-2">
                 <div class="card">
                     <div class="card-header">
                         <h5 class="card-subtitle text-center">
@@ -109,7 +109,7 @@
                             @endif
                         </div>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body p-0">
                         <img src="{{ asset('images/avatars/users/' . $user->avatar) }}"
                              class="account-profile-avatar"
                              alt="">

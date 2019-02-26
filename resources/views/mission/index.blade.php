@@ -21,6 +21,13 @@
                             <div class="card-header">Информация о заявке</div>
                             <div class="card-body">
                                 <div class="form-group">
+                                    <select class="custom-select form-control" name="from" title='Источник'>
+                                        <option value="1">Задача</option>
+                                        <option value="2">Общежитие</option>
+                                        <option value="3">Университет</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
                                     <select id="client-select" class="client-select form-control"
                                             data-live-search="true" name="client"
                                             title="Клиент">
@@ -59,13 +66,6 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <select class="custom-select form-control" name="from" title='Источник'>
-                                        <option value="1">Задача</option>
-                                        <option value="2">Общежитие</option>
-                                        <option value="3">Университет</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
                                     <select class="custom-select form-control" name="priority" id="priority"
                                             title="Приоритет">
                                         <option value="1">Высокий</option>
@@ -87,6 +87,7 @@
                                            name="newSubject" id="hidden-topic">
                                 </div>
                                 <div class="form-group">
+                                    <span class="badge badge-light">Выполнить до:</span>
                                     <input placeholder="Крайний срок" class="form-control" type="text"
                                            id="date_end"
                                            onfocus="(this.type='datetime-local')"
@@ -240,6 +241,13 @@
 
     <!-- (Optional) Latest compiled and minified JavaScript translation files -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.5/js/i18n/defaults-ru_RU.min.js"></script>
+
+    <script>
+        tinymce.init({
+            selector: '#comment-user-mission',
+            plugins: "table, codesample, textcolor image, media"
+        });
+    </script>
 
     <script>
         $(document).ready(function () {

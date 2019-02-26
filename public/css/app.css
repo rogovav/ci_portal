@@ -323,8 +323,7 @@
 }
 
 .account-profile-avatar {
-    width: 250px;
-    height: 250px;
+    width: 100%;
     display: block;
     margin: auto;
     object-fit: cover;
