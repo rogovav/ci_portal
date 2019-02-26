@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Mission;
+use App\Subject;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -25,9 +26,9 @@ class MissionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function subjects($type)
     {
-        //
+        return Subject::where('type', $type)->get();
     }
 
     /**

@@ -21,6 +21,7 @@ class UserController extends Controller
     public function show($id)
     {
         $user           = User::findorfail($id);
+        $positions      = Position::orderBy('name')->get();
         $status         = [1 => 'В работе', 2 => 'На проверке'];
         $from           = [1 => 'Задача', 2 => 'Общежитие', 3 => 'Университет',];
         $mission_owner  = $user->mission_owner->where('status', '<>', 3);
@@ -33,7 +34,8 @@ class UserController extends Controller
             'from',
             'mission_owner',
             'mission_worker',
-            'my'
+            'my',
+            'positions'
         ));
     }
 
@@ -68,12 +70,16 @@ class UserController extends Controller
 
             $ava = base64_decode($ava);
 
-            $photoName = $user->avatar;
+//            $photoName = $user->avatar;
+            $photoName = $user->login . '.' . $ava->getClientOriginalExtension();
 
             file_put_contents('images/avatars/users/' . $photoName, $ava);
         };
         if (isset($request['vk'])) {
             $user->update(['vk' => $request['vk']]);
+        };
+        if (isset($request['position'])) {
+            $user->update(['position_id' => $request['position']]);
         };
         if (isset($request['email'])) {
             $user->update(['email' => $request['email']]);
@@ -100,13 +106,17 @@ class UserController extends Controller
     {
         $ava = $data['avatar'];
 
-        list($type, $ava) = explode(';', $ava);
-        list(, $ava)      = explode(',', $ava);
-        $ava = base64_decode($ava);
+        $photoName = 'default.png';
 
-        $photoName = $data['login'] . '.' . $data['ava']->getClientOriginalExtension();
+        if ($ava) {
+            list($type, $ava) = explode(';', $ava);
+            list(, $ava)      = explode(',', $ava);
+            $ava = base64_decode($ava);
 
-        file_put_contents('images/avatars/users/' . $photoName, $ava);
+            $photoName = $data['login'] . '.' . $data['ava']->getClientOriginalExtension();
+
+            file_put_contents('images/avatars/users/' . $photoName, $ava);
+        }
 
         User::create([
             'fio' => $data['fio'],
@@ -137,22 +147,27 @@ class UserController extends Controller
         return back()->withInput();
     }
 
-    public function api_json(Request $params)
-    {
-        $users = User::all();
-
-        $data = [];
-
-        $not_users = array_map('intval', explode(',', $params['users']));
-
-        foreach ($users as $user) {
-            if (!in_array($user->id, $not_users))
-                $data[] = [
-                    'value' => $user->id,
-                    'text' => "<img src='/images/avatars/users/$user->avatar' class='user-selector' alt=''> " . $user->fio,
-                ];
-        }
-
-        return json_encode($data);
+    public function destroy ($id) {
+        User::findorfail($id)->delete();
+        return redirect()->route('user.index');
     }
+
+//    public function api_json(Request $params)
+//    {
+//        $users = User::all();
+//
+//        $data = [];
+//
+//        $not_users = array_map('intval', explode(',', $params['users']));
+//
+//        foreach ($users as $user) {
+//            if (!in_array($user->id, $not_users))
+//                $data[] = [
+//                    'value' => $user->id,
+//                    'text' => "<img src='/images/avatars/users/$user->avatar' class='user-selector' alt=''> " . $user->fio,
+//                ];
+//        }
+//
+//        return json_encode($data);
+//    }
 }

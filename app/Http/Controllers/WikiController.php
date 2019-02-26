@@ -11,7 +11,8 @@ class WikiController extends Controller
     public function index()
     {
         $wikis = Wiki::orderBy('name')->get();
-        return view('wiki.index', compact('wikis'));
+        $wikiTop = $wikis->groupBy('short_info');
+        return view('wiki.index', compact('wikiTop'));
     }
 
     public function store(Request $request)
