@@ -119,6 +119,13 @@
                                                                                id="topic-name"
                                                     >
                                                 </div>
+                                                <div class="form-group">
+                                                    <span class="badge badge-light float-left mb-1">Источник заявки</span>
+                                                    <select type="text" name="type" class="form-control">
+                                                        <option value="1">Общежитие</option>
+                                                        <option value="2">Университет</option>
+                                                    </select>
+                                                </div>
                                                 <div class="form-row">
                                                     <div class="col">
                                                         <input type="submit" class="form-control">
