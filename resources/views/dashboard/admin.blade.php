@@ -348,6 +348,7 @@
         function editTopic(topic) {
             $('#topic-id').val(topic.id)
             $('#topic-name').val(topic.name)
+            $('#topic-type').val(topic.type)
         }
 
         function editPosition(pos) {

@@ -17,7 +17,7 @@
 
 <div id="wrapper" class="animate">
     <nav class="navbar header-top fixed-top navbar-expand-lg navbar-dark bg-dark justify-content-between">
-        <a class="navbar-brand" href="{{ route('home') }}">
+        <a class="navbar-brand" href="#">
             <img src="{{ asset('images/hd.png') }}" height="40"
                  class="d-inline-block align-top mt-0 mb-0" alt="">
         </a>
