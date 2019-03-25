@@ -80,7 +80,7 @@
     <div class="row">
         <div class="col">
             <button class="btn btn-primary create-user-button" data-toggle="modal" data-target="#ModalCreateUser">
-                Создать пользователя
+                Создать сотрудника
             </button>
         </div>
     </div>

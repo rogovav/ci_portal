@@ -1104,14 +1104,6 @@ a.delete-a:hover {
         cursor: pointer;
     }
 
-    #wrapper {
-        padding: 75px 15px 15px 75px;
-    }
-
-    #wrapper.open {
-        padding: 75px 15px 15px 225px;
-    }
-
     .navbar-nav.side-nav.open {
         left: 0;
     }
