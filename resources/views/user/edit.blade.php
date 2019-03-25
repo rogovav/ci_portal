@@ -47,6 +47,9 @@
                                     <div class="col account-main-info-col padding-0">
                                         <div class="card">
                                             <div class="card-header ">
+                                                @if($user->super)
+                                                    <span class="small d-block mb-2 font-weight-normal text-center col-12">Администратор</span>
+                                                @endif
                                                 <h5 class="card-subtitle text-center">
                                                     {{ $user->fio }}
                                                 </h5>
@@ -56,9 +59,9 @@
                                                         <span
                                                             class="badge badge-danger font-weight-normal">Blocked</span>
                                                     @endif
-                                                    @if($user->super)
-                                                        <span class="badge badge-info font-weight-normal">Администратор</span>
-                                                    @endif
+                                                    {{--@if($user->super)--}}
+                                                        {{--<span class="badge badge-info font-weight-normal">Администратор</span>--}}
+                                                    {{--@endif--}}
                                                     @if($user->isOnline())
                                                         <span
                                                             class="badge badge-success font-weight-normal">Online</span>
@@ -452,14 +455,14 @@
                                             <a class="nav-item nav-link {{ $my? 'active' : Null }}" id="nav-my-tab"
                                                data-toggle="tab"
                                                href="#nav-my" role="tab" aria-controls="nav-home"
-                                               aria-selected="true">Мои заявки</a>
+                                               aria-selected="true">Созданные мной</a>
                                             <a class="nav-item nav-link {{ $my? Null : 'active' }}" id="nav-me-tab"
                                                data-toggle="tab"
                                                href="#nav-me" role="tab" aria-controls="nav-profile"
-                                               aria-selected="false">Заявки мне</a>
+                                               aria-selected="false">Назначенные мне</a>
                                             <a class="nav-item nav-link" id="nav-help-tab" data-toggle="tab"
                                                href="#nav-help" role="tab" aria-controls="nav-contact"
-                                               aria-selected="false">Заявки в помощь</a>
+                                               aria-selected="false">В помощь</a>
                                         </div>
                                     </nav>
                                     <div class="tab-content" id="nav-tabContent">
