@@ -41,6 +41,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('wiki.index') }}" title="WIKI"> WIKI </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/reports" title="WIKI"> Отчеты </a>
+                </li>
                 {{--<li class="nav-item">--}}
                     {{--<a class="nav-link" href="{{ route('rest.index') }}" title="Календарь отпусков"> Отпуска </a>--}}
                 {{--</li>--}}

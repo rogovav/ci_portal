@@ -416,6 +416,13 @@ marquee {
     display: block;
 }
 
+.admin-badge {
+    border-bottom: 1px solid #01214b;
+    /*border-radius: 15px;*/
+    /*color: white;*/
+    /*background-color: #01214b;*/
+}
+
 .card-col {
     padding: 15px;
 }
