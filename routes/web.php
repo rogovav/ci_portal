@@ -45,6 +45,7 @@ Route::group(['middleware' => 'auth'], function () {
 //    Route::get('/user/{id}', 'UserController@edit')->name('user.edit');
     Route::post('/user/{id}', 'UserController@update')->name('user.update');
     Route::get('/user/{id}', 'UserController@show')->name('user.show');
+    Route::delete('/user/{id}', 'UserController@destroy')->name('user.destroy');
     Route::post('/users', 'UserController@add');
 
     Route::post('/todo', 'TodoController@store')->name('todo.store');
@@ -53,8 +54,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/wiki', 'WikiController@index')->name('wiki.index');
     Route::post('/wiki', 'WikiController@store')->name('wiki.store');
     Route::get('/wiki/{id}', 'WikiController@show')->name('wiki.show');
+    Route::post('/wiki/{id}', 'WikiController@update')->name('wiki.update');
+    Route::delete('/wiki/{id}', 'WikiController@destroy')->name('wiki.destroy');
 
-    Route::get('/users/api{params?}', 'UserController@api_json');
+
+//    Route::get('/users/api{params?}', 'UserController@api_json');
 
     Route::get('/rest', 'RestController@index')->name('rest.index');
     Route::post('/rest', 'RestController@store')->name('rest.store');

@@ -4,7 +4,7 @@
           rel="stylesheet">
 @endsection
 @section('content')
-    <div class="modal fade " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    <div class="modal fade " id="exampleModal" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
@@ -14,16 +14,19 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="">
+                <form action="{{ route('wiki.update', $wiki->id) }}" method="post">
+                    {{ csrf_field() }}
                     <div class="modal-body">
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Название статьи">
+                            <input type="text" name="name" id="wiki_name" class="form-control"
+                                   placeholder="Название статьи">
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Краткое описание статьи">
+                            <input type="text" name="short_info" id="wiki_short_info" class="form-control"
+                                   placeholder="Краткое описание статьи">
                         </div>
                         <div class="form-group">
-                            <textarea name="info" id="wiki-body" cols="30" rows="10" class="form-control"
+                            <textarea name="info" id="wiki_body" cols="30" rows="10" class="form-control"
                                       placeholder="Комментарий"></textarea>
                         </div>
                     </div>
@@ -49,20 +52,34 @@
             </div>
         </div>
         <div class="card-footer">
-            @if( $wiki->user == Auth::user() )
-                    <div class="row">
-                        <div class="col-6">
-                            <button class="btn btn-light float-left btn-sm" data-toggle="modal" data-target="#exampleModal">
-                                Редактировать
-                            </button>
-                        </div>
-                        <div class="col-6">
-                            <button class="btn btn-danger float-right btn-sm" data-toggle="modal" data-target="#exampleModal">
-                                Удалить
-                            </button>
-                        </div>
+            {{--@if( $wiki->user == Auth::user() )--}}
+                <div class="row">
+                    <div class="col-6">
+                        <button class="btn btn-light float-left btn-sm" onclick="change_info({{ $wiki }})"
+                                data-toggle="modal"
+                                data-target="#exampleModal">
+                            Редактировать
+                        </button>
                     </div>
-            @endif
+                    <div class="col-6">
+                        <form id="delete-form-{{ $wiki->id }}" action="{{ route('wiki.destroy', $wiki->id) }}"
+                              method="post">
+                            {{ csrf_field() }}
+                            {{ method_field('DELETE') }}
+                        </form>
+                        <a href="" class="btn btn-danger float-right btn-sm" onclick="
+                            if(confirm('Вы действительно хотите удалить статью?'))
+                            {
+                            event.preventDefault();
+                            document.getElementById('delete-form-{{ $wiki->id }}').submit()
+                            }
+                            else
+                            {
+                            event.preventDefault();
+                            }">Удалить</a>
+                    </div>
+                </div>
+            {{--@endif--}}
         </div>
     </div>
 @endsection
@@ -72,8 +89,16 @@
         src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=ubhq9o4po4p1w2zdmnaepfxsb8h6f4e78gdvggrvli4ho8cs"></script>
     <script>
         tinymce.init({
-            selector: '#wiki-body',
+            selector: '#wiki_body',
             plugins: "table, codesample, textcolor, image, media, formatpainter, emoticons"
         });
+    </script>
+    <script>
+        function change_info(wiki) {
+            $('#wiki_name').val(wiki.name)
+            $('#wiki_short_info').val(wiki.short_info)
+            tinymce.activeEditor.setContent(wiki.info)
+            // $('#tinymce').val(wiki.info)
+        }
     </script>
 @endsection

@@ -30,10 +30,11 @@ class MissionController extends Controller
         $clients   = Client::orderBy('fio')->get();
         $missions  = Mission::orderBy('id', 'DESC')->get();
         $subjects  = Subject::orderBy('name')->get();
+        $subjectTypes  = $subjects->groupBy('type');
         $users     = User::orderBy('fio')->get();
         $from      = $this->from;
 
-        return view('mission.index', compact('buildings', 'clients', 'missions', 'subjects', 'users', 'from'));
+        return view('mission.index', compact('buildings', 'clients', 'missions', 'users', 'from', 'subjectTypes'));
     }
 
     public function show($id)

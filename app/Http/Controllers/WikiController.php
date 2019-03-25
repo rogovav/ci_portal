@@ -11,7 +11,8 @@ class WikiController extends Controller
     public function index()
     {
         $wikis = Wiki::orderBy('name')->get();
-        return view('wiki.index', compact('wikis'));
+        $wikiTop = $wikis->groupBy('short_info');
+        return view('wiki.index', compact('wikiTop'));
     }
 
     public function store(Request $request)
@@ -31,5 +32,23 @@ class WikiController extends Controller
         $wiki = Wiki::findOrFail($id);
 
         return view('wiki.show', compact('wiki'));
+    }
+
+    public function destroy($id)
+    {
+        $wiki = Wiki::findOrFail($id);
+        $wiki->delete();
+        return redirect()->route('wiki.index');
+    }
+
+    public function update(Request $request, $id)
+    {
+        $wiki = Wiki::findOrFail($id);
+        $wiki->update([
+            'name' => $request->name,
+            'info' => $request->info,
+            'short_info' => $request->short_info,
+        ]);
+        return redirect()->back();
     }
 }

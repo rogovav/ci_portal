@@ -22,7 +22,7 @@
                                                         <span class="badge badge-danger font-weight-normal">Blocked</span>
                                                     @endif
                                                     @if($user->super)
-                                                        <span class="badge badge-info font-weight-normal">Admin</span>
+                                                        <span class="badge badge-info font-weight-normal">Администратор</span>
                                                     @endif
                                                     @if($user->isOnline())
                                                         <span
@@ -71,7 +71,7 @@
                                                             data-target="#change-pass"
                                                             class="btn btn-link small badge change-pass font-weight-normal">
                                                         Изменить
-                                                        пароль
+                                                        пароль или должность
                                                     </button>
 
                                                     <form action="{{ route('user.update', $user->id) }}" method="POST">
@@ -88,6 +88,21 @@
                                                             {{ $user->super? 'Снять права администратора' : 'Назначить права администратора' }}
                                                         </button>
                                                     </form>
+                                                    <form id="delete-form-{{ $user->id }}" action="{{ route('user.destroy', $user->id) }}"
+                                                          method="post">
+                                                        {{ csrf_field() }}
+                                                        {{ method_field('DELETE') }}
+                                                    </form>
+                                                    <button type="submit" class="btn btn-link small badge change-pass text-danger font-weight-normal" onclick="
+                                                        if(confirm('Вы действительно хотите удалить пользователя?'))
+                                                        {
+                                                        event.preventDefault();
+                                                        document.getElementById('delete-form-{{ $user->id }}').submit()
+                                                        }
+                                                        else
+                                                        {
+                                                        event.preventDefault();
+                                                        }">Удалить</button>
                                                 @endif
                                             </div>
                                         </div>
@@ -328,6 +343,14 @@
                 <div class="modal-content">
 
                     <div class="modal-body">
+                        <div class="form-group">
+                            <select class="custom-select" id="inputGroupSelect01" name="position">
+                                <option selected>Выберите должность</option>
+                                @foreach($positions as $position)
+                                    <option value="{{ $position->id }}" {{ $user->position->id == $position->id ? 'selected' : Null }}>{{ $position->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
                         <div class="form-group">
                             <input type="password" placeholder="Пароль" id="password"
                                    class="form-control" name="password">
