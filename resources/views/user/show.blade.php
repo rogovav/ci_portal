@@ -22,7 +22,7 @@
                                                         <span class="badge badge-danger font-weight-normal">Blocked</span>
                                                     @endif
                                                     @if($user->super)
-                                                        <span class="badge badge-info font-weight-normal">Admin</span>
+                                                        <span class="badge badge-info font-weight-normal">Администратор</span>
                                                     @endif
                                                     @if($user->isOnline())
                                                         <span
