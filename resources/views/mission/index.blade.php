@@ -2,10 +2,15 @@
 @section('css')
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.5/css/bootstrap-select.min.css">
+    <style>
+        .modal-lg {
+            max-width: 1000px;
+        }
+    </style>
 @endsection
 @section('content')
     <div class="modal fade bd-example-modal-lg" id="ModalCreateUser" role="dialog"
-         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+         aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -171,7 +176,7 @@
         <div class="col">
             <div class="card card-table-rendered padding-0">
                 <div class="row">
-                    @foreach($missions->where('status', '<>', 3)->sortByDesc('id') as $mission)
+                    @foreach($missions as $mission)
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-6">
                             <div class="card">
                                 <div
