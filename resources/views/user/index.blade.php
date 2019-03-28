@@ -112,7 +112,7 @@
                                     class="badge badge-success font-weight-normal">Online</span>
                             @else
                                 <span
-                                    class="badge font-weight-normal">Был в сети {{ $user->last_activity }}</span>
+                                    class="badge font-weight-normal">Был в сети {{ date('d.m.y H:i' ,strtotime($user->last_activity)) }}</span>
                             @endif
                         </div>
                     </div>
