@@ -176,7 +176,7 @@
         <div class="col">
             <div class="card card-table-rendered padding-0">
                 <div class="row">
-                    @foreach($missions->where('status', '<>', 3)->sortByDesc('id') as $mission)
+                    @foreach($missions as $mission)
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-6">
                             <div class="card">
                                 <div
