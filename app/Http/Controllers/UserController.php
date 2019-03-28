@@ -65,15 +65,18 @@ class UserController extends Controller
         if (isset($request['avatar'])) {
             $ava = $request['avatar'];
 
-            list(, $ava) = explode(';', $ava);
+            list($ava_type, $ava) = explode(';', $ava);
             list(, $ava) = explode(',', $ava);
+
+            list(, $ava_ext) = explode('/', $ava_type);
 
             $ava = base64_decode($ava);
 
 //            $photoName = $user->avatar;
-            $photoName = $user->login . '.' . $ava->getClientOriginalExtension();
+            $photoName = $user->login . '.' . $ava_ext;
 
             file_put_contents('images/avatars/users/' . $photoName, $ava);
+            $user->update(['avatar' => $photoName]);
         };
         if (isset($request['vk'])) {
             $user->update(['vk' => $request['vk']]);
