@@ -709,6 +709,7 @@ marquee {
 
 .card-priority-low {
     font-size: 14px;
+    background-color: rgba(0, 255, 0, 0.05);
 }
 
 .card-info-header {

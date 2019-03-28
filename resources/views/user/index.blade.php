@@ -28,7 +28,8 @@
                         </div>
                         <div id="main-cropper"></div>
                         <div class="form-group" id="img-button">
-                            <button id="getImage" type="button" class="btn btn-info">Сохранить выделенную область</button>
+                            <button id="getImage" type="button" class="btn btn-info">Сохранить выделенную область
+                            </button>
                         </div>
                         <input type="text" name="avatar" id="avatar" class="hidden-print">
 
@@ -51,7 +52,8 @@
                                    placeholder="Номер телефона" required>
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" name="iphone" placeholder="Внутренний номер телефона" required>
+                            <input type="text" class="form-control" name="iphone"
+                                   placeholder="Внутренний номер телефона" required>
                         </div>
                         <div class="form-group">
                             <input type="text"
@@ -77,33 +79,54 @@
         </div>
     </div>
     @if(Auth::user()->super)
-    <div class="row">
-        <div class="col">
-            <button class="btn btn-primary create-user-button" data-toggle="modal" data-target="#ModalCreateUser">
-                Создать пользователя
-            </button>
+        <div class="row">
+            <div class="col">
+                <button class="btn btn-primary create-user-button" data-toggle="modal" data-target="#ModalCreateUser">
+                    Создать сотрудника
+                </button>
+            </div>
         </div>
-    </div>
     @endif
     <div class="row">
         @foreach($users as $user)
             <div class="col-6 col-md-4 col-lg-3 col-xl-2">
-                <div class="card {{ $user->isOnline()? "avatar-index-border-online" : Null }} {{ $user->super? "avatar-index-border-admin" : Null}}">
+                <div class="card">
+                    {{--{{ $user->isOnline()? "avatar-index-border-online" : Null }} {{ $user->super? "avatar-index-border-admin" : Null}}--}}
                     <div class="card-header ">
+                        @if($user->super)
+                            <span class="small d-block mb-2 font-weight-normal text-center col-12 admin-badge">Администратор</span>
+                        @endif
                         <h6 class="card-subtitle text-center">
                             {{ $user->fio }}
                         </h6>
                         <p class="text-center mb-0 small">({{ $user->position->name }})</p>
-
+                        <div class="text-center">
+                            @if($user->blocked)
+                                <span class="badge badge-danger font-weight-normal">Blocked</span>
+                            @endif
+                            {{--@if($user->super)--}}
+                                {{--<span class="badge badge-info font-weight-normal">Администратор</span>--}}
+                            {{--@endif--}}
+                            @if($user->isOnline())
+                                <span
+                                    class="badge badge-success font-weight-normal">Online</span>
+                            @else
+                                <span
+                                    class="badge font-weight-normal">Был в сети {{ $user->last_activity }}</span>
+                            @endif
+                        </div>
                     </div>
                     <div class="card-body p-0">
-                        <img src="{{ asset('images/avatars/users/' . $user->avatar) }}"
-                             class="account-profile-avatar-index"
-                             alt="">
+                        <a href="{{ route('user.show', $user->id) }}">
+                            <img src="{{ asset('images/avatars/users/' . $user->avatar) }}"
+                                 class="account-profile-avatar-index"
+                                 alt="">
+                        </a>
                     </div>
                     <div class="card-footer">
                         <ul class="profile-card-user-social">
-                            <li><span><a href="{{ route('user.show', $user->id) }}"><i class="fas fa-user-circle fa-2x"></i></a></span></li>
+                            <li><span><a href="{{ route('user.show', $user->id) }}"><i
+                                            class="fas fa-user-circle fa-2x"></i></a></span></li>
                             <li><span><a href="mailto:{{ $user->email }}"><i
                                             class="far fa-envelope fa-2x"></i></a></span></li>
                             <li><span><a href="tel:{{ $user->phone }}"><i

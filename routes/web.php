@@ -40,6 +40,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/mission/{id}', 'MissionController@show')->name('mission.show');
     Route::post('/mission/{id}', 'MissionController@update')->name('mission.update');
     Route::post('/mission/comment/{id}', 'MissionController@storeComment')->name('mission.storeComment');
+    Route::get('/mission_archive', 'MissionController@index_archive')->name('mission.archive');
 
     Route::get('/users', 'UserController@index')->name('user.index');
 //    Route::get('/user/{id}', 'UserController@edit')->name('user.edit');
@@ -66,9 +67,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/calendar', 'CalendarController@index')->name('calendar.index');
 
-    Route::get('/reports', function () {
-        return view('report.index');
-    });
+    Route::get('/reports', 'ReportController@index');
 
     Route::get('/{url}', 'HomeController@url')->name('home.url');
 });

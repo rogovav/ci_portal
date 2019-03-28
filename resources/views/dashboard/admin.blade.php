@@ -21,63 +21,82 @@
                     <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 admin-card">
                         <div class="card admin-card-header">
                             <h4>Здания</h4>
-                            <div class="card-body row">
-                                <div class="col-8">
-                                    <div class="row">
-                                        @foreach($buildings as $building)
-                                            <div class="col-4">
-                                                <div class="card">
-                                                    <div class="card-body">
-                                                        <h5 class="card-subtitle mb-3">{{ $building->name }}</h5>
-                                                        <h6 class="card-subtitle mb-2 text-muted">{{ $building->type == 3? 'Другое' : $building->type == 1? 'Общежитие' : 'Университет'}}</h6>
-                                                        <p class="card-text">{{ $building->address }}</p>
-                                                        <button onclick="editBuilding({{$building}})"
-                                                                class="btn btn-dark">Изменить
-                                                        </button>
+                            <button class="btn btn-sm btn-primary d-inline m-auto col-2 mb-2"
+                                    onclick="$('#building_show_hide').toggle()">Создать
+                            </button>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-12 m-auto" id="building_show_hide">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <form action="{{ route('admin.building') }}" class="admin-form"
+                                                      method="post" id="builing-form">
+                                                    {{ csrf_field() }}
+                                                    <input type="text" class="hidden-print" name="id" id="building-id">
+                                                    <div class="form-group">
+                                                        <input name="name" type="text" class="form-control"
+                                                               placeholder="Название" id="building-name">
                                                     </div>
-                                                </div>
+                                                    <div class="form-group">
+                                                        <select name="type" type="text"
+                                                                class="form-control"
+                                                                placeholder="Тип" id="building-type">
+                                                            <option value="">Тип здания</option>
+                                                            <option value="1">Общежитие</option>
+                                                            <option value="2">Университет</option>
+                                                            <option value="3">Другое</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group"><input name="address" type="text"
+                                                                                   class="form-control"
+                                                                                   placeholder="Адрес"
+                                                                                   id="building-address">
+                                                    </div>
+                                                    <div class="form-row">
+                                                        <div class="col">
+                                                            <input type="submit" class="form-control">
+                                                        </div>
+                                                        <div class="col">
+                                                            <button type="button"
+                                                                    class="btn btn-warning clear-form form-control">
+                                                                Очистить
+                                                                форму
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </form>
                                             </div>
-                                        @endforeach
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <form action="{{ route('admin.building') }}" class="admin-form"
-                                                  method="post" id="builing-form">
-                                                {{ csrf_field() }}
-                                                <input type="text" class="hidden-print" name="id" id="building-id">
-                                                <div class="form-group">
-                                                    <input name="name" type="text" class="form-control"
-                                                           placeholder="Название" id="building-name">
-                                                </div>
-                                                <div class="form-group">
-                                                    <select name="type" type="text"
-                                                            class="form-control"
-                                                            placeholder="Тип" id="building-type">
-                                                        <option value="">Тип здания</option>
-                                                        <option value="1">Общежитие</option>
-                                                        <option value="2">Университет</option>
-                                                        <option value="3">Другое</option>
-                                                    </select>
-                                                </div>
-                                                <div class="form-group"><input name="address" type="text"
-                                                                               class="form-control"
-                                                                               placeholder="Адрес"
-                                                                               id="building-address">
-                                                </div>
-                                                <div class="form-row">
-                                                    <div class="col">
-                                                        <input type="submit" class="form-control">
-                                                    </div>
-                                                    <div class="col">
-                                                        <button type="button"
-                                                                class="btn btn-warning clear-form form-control">Очистить
-                                                            форму
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </form>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <table class="table">
+                                                    <thead>
+                                                    <th>Название</th>
+                                                    <th>Тип</th>
+                                                    <th>Адрес</th>
+                                                    <th></th>
+                                                    </thead>
+                                                    <tbody>
+                                                    @foreach($buildings as $building)
+                                                        <tr>
+                                                            <td>{{ $building->name }}</td>
+                                                            <td>{{ $building->type == 3? 'Другое' : $building->type == 1? 'Общежитие' : 'Университет'}}</td>
+                                                            <td>{{ $building->address }}</td>
+                                                            <td>
+                                                                <button
+                                                                    onclick="editBuilding({{$building}}); $('#building_show_hide').show()"
+                                                                    class="btn btn-dark">Изменить
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+                                                    </tbody>
+                                                </table>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -89,30 +108,11 @@
                     <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 admin-card">
                         <div class="card admin-card-header">
                             <h4 class="mt-1">Темы</h4>
+                            <button class="btn btn-sm btn-primary d-inline m-auto col-2 mb-2"
+                                    onclick="$('#subject_show_hide').toggle()">Создать
+                            </button>
                             <div class="card-body row">
-                                <div id="accordion2" class="col-8">
-                                    <div class="row">
-                                        @foreach($subjectTypes as $name => $subjects)
-                                        <div class="col-12">
-                                            <h5>{{ $name }}</h5>
-                                        </div>
-                                        @foreach($subjects as $subject)
-                                            <div class="col-3">
-                                                <div class="card">
-                                                    <div class="card-body">
-                                                        <h5 class="card-text">{{ $subject->name }}</h5>
-                                                        <p>({{ $subject->type }})</p>
-                                                        <button onclick="editTopic({{$subject}})"
-                                                                class="btn btn-dark">Изменить
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        @endforeach
-                                        @endforeach
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
+                                <div class="col-md-12" id="subject_show_hide">
                                     <div class="card">
                                         <div class="card-body">
                                             <form action="{{ route('admin.subject') }}" class="admin-form"
@@ -126,8 +126,10 @@
                                                     >
                                                 </div>
                                                 <div class="form-group">
-                                                    <span class="badge badge-light float-left mb-1">Источник заявки</span>
-                                                    <select type="text" name="type" class="form-control" id="topic-type">
+                                                    <span
+                                                        class="badge badge-light float-left mb-1">Источник заявки</span>
+                                                    <select type="text" name="type" class="form-control"
+                                                            id="topic-type">
                                                         <option value="Общежитие">Общежитие</option>
                                                         <option value="Университет">Университет</option>
                                                     </select>
@@ -147,6 +149,35 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div id="accordion2" class="col-12">
+                                    <div class="row">
+                                        @foreach($subjectTypes as $name => $subjects)
+                                            <div class="col-12">
+                                                <h5>{{ $name }}</h5>
+                                            </div>
+                                            <div class="col-12">
+                                                <table class="table text-left">
+                                                    <thead>
+                                                    <th width="90%">Название</th>
+                                                    <th width="10%"></th>
+                                                    </thead>
+                                                    <tbody>
+                                                    @foreach($subjects as $subject)
+                                                        <tr>
+                                                            <td>{{ $subject->name }}</td>
+                                                            <td>
+                                                                <button onclick="editTopic({{$subject}}); $('#subject_show_hide').show()"
+                                                                        class="btn btn-dark">Изменить
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -155,32 +186,36 @@
                     <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 admin-card">
                         <div class="card admin-card-header">
                             <h4>Клиенты</h4>
-                            <button class="btn btn-sm btn-primary d-inline m-auto col-2" onclick="$('#client_show_hide').toggle()">Создать</button>
+                            <button class="btn btn-sm btn-primary d-inline m-auto col-2"
+                                    onclick="$('#client_show_hide').toggle()">Создать
+                            </button>
                             <div class="card-body row">
                                 <div id="accordion2" class="col-12">
                                     <div class="row" id="client_show_hide">
                                         <div class="col-12">
                                             <div class="card">
                                                 <div class="card-body">
-                                                    <form action="{{ route('admin.client') }}" class="admin-form" method="post">
+                                                    <form action="{{ route('admin.client') }}" class="admin-form"
+                                                          method="post">
                                                         {{ csrf_field() }}
-                                                        <input type="text" name="id" id="client-id" class="hidden-print">
-                                                       <div class="form-row">
-                                                           <div class="form-group col-6">
-                                                               <input name="fio" type="text"
-                                                                      class="form-control"
-                                                                      placeholder="ФИО"
-                                                                      id="client-fio"
-                                                               >
-                                                           </div>
-                                                           <div class="form-group col-6">
-                                                               <input name="cid" type="text"
-                                                                      class="form-control"
-                                                                      placeholder="Номер договра"
-                                                                      id="client-cid"
-                                                               >
-                                                           </div>
-                                                       </div>
+                                                        <input type="text" name="id" id="client-id"
+                                                               class="hidden-print">
+                                                        <div class="form-row">
+                                                            <div class="form-group col-6">
+                                                                <input name="fio" type="text"
+                                                                       class="form-control"
+                                                                       placeholder="ФИО"
+                                                                       id="client-fio"
+                                                                >
+                                                            </div>
+                                                            <div class="form-group col-6">
+                                                                <input name="cid" type="text"
+                                                                       class="form-control"
+                                                                       placeholder="Номер договра"
+                                                                       id="client-cid"
+                                                                >
+                                                            </div>
+                                                        </div>
                                                         <div class="form-row">
                                                             <div class="form-group col-6">
                                                                 <input name="phone" type="text"
@@ -213,7 +248,8 @@
                                                             </div>
                                                             <div class="col">
                                                                 <button type="button"
-                                                                        class="btn btn-warning clear-form form-control">Очистить
+                                                                        class="btn btn-warning clear-form form-control">
+                                                                    Очистить
                                                                     форму
                                                                 </button>
                                                             </div>
@@ -246,8 +282,9 @@
                                                                     <td>{{ $client->iphone }}</td>
                                                                     <td>{{ $client->mail }}</td>
                                                                     <td>
-                                                                        <button onclick="editClient({{$client}}); $('#client_show_hide').show()"
-                                                                                class="btn btn-dark">Изменить
+                                                                        <button
+                                                                            onclick="editClient({{$client}}); $('#client_show_hide').show()"
+                                                                            class="btn btn-dark">Изменить
                                                                         </button>
                                                                     </td>
                                                                 </tr>
@@ -269,24 +306,11 @@
                     <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 admin-card">
                         <div class="card admin-card-header">
                             <h4>Должности</h4>
+                            <button class="btn btn-sm btn-primary d-inline m-auto col-2"
+                                    onclick="$('#position_show_hide').toggle()">Создать
+                            </button>
                             <div class="card-body row">
-                                <div id="accordion2" class="col-8">
-                                    <div class="row">
-                                        @foreach($positions as $position)
-                                            <div class="col-4">
-                                                <div class="card">
-                                                    <div class="card-body">
-                                                        <p class="card-text">{{ $position->name }}</p>
-                                                        <button onclick="editPosition({{$position}})"
-                                                                class="btn btn-dark">Изменить
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        @endforeach
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
+                                <div class="col-12" id="position_show_hide">
                                     <div class="card">
                                         <div class="card-body">
                                             <form action="{{ route('admin.position') }}" class="admin-form"
@@ -295,9 +319,9 @@
                                                 <input type="text" class="hidden-print" name="id" id="pos-id">
                                                 <div class="form-group">
                                                     <input name="name" type="text"
-                                                                               class="form-control"
-                                                                               placeholder="Название должности"
-                                                                               id="pos-name"
+                                                           class="form-control"
+                                                           placeholder="Название должности"
+                                                           id="pos-name"
                                                     >
                                                 </div>
                                                 <div class="form-row">
@@ -315,6 +339,28 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div id="accordion2" class="col-12">
+                                    <div class="row">
+                                        <table class="table">
+                                            <thead>
+                                            <th>Название</th>
+                                            <th></th>
+                                            </thead>
+                                            <tbody>
+                                            @foreach($positions as $position)
+                                            <tr>
+                                                <td>{{ $position->name }}</td>
+                                                <td>
+                                                    <button onclick="editPosition({{$position}});$('#position_show_hide').show()"
+                                                            class="btn btn-dark">Изменить
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -329,6 +375,9 @@
     <script>
         $(document).ready(function () {
             $('#client_show_hide').hide();
+            $('#building_show_hide').hide();
+            $('#subject_show_hide').hide();
+            $('#position_show_hide').hide();
         })
     </script>
     <script>
@@ -348,6 +397,7 @@
         function editTopic(topic) {
             $('#topic-id').val(topic.id)
             $('#topic-name').val(topic.name)
+            $('#topic-type').val(topic.type)
         }
 
         function editPosition(pos) {
