@@ -114,9 +114,10 @@ class UserController extends Controller
         if ($ava) {
             list($type, $ava) = explode(';', $ava);
             list(, $ava)      = explode(',', $ava);
+            list(, $ava_ext) = explode('/', $type);
             $ava = base64_decode($ava);
 
-            $photoName = $data['login'] . '.' . $data['ava']->getClientOriginalExtension();
+            $photoName = $data['login'] . '.' . $ava_ext;
 
             file_put_contents('images/avatars/users/' . $photoName, $ava);
         }
