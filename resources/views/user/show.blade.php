@@ -47,10 +47,10 @@
                                             <div class="card-body">
                                                 <table class="table">
                                                     <tbody>
-                                                    <tr>
-                                                        <td><b>День рождения:</b></td>
-                                                        <td>{{ $user->birthday }}</td>
-                                                    </tr>
+{{--                                                    <tr>--}}
+{{--                                                        <td><b>День рождения:</b></td>--}}
+{{--                                                        <td>{{ $user->birthday }}</td>--}}
+{{--                                                    </tr>--}}
                                                     <tr>
                                                         <td><b>Номер телефона</b></td>
                                                         <td><span id="user-phone">{{ $user->phone }}</span></td>
