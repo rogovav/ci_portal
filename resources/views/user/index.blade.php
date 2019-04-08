@@ -56,8 +56,8 @@
                                    placeholder="Внутренний номер телефона" required>
                         </div>
                         <div class="form-group">
-                            <input type="text"
-                                   onfocus="(this.type='date')" onblur="(this.type='text')" class="form-control"
+                            <input type="text" value="1991-01-01"
+                                   onfocus="(this.type='date')" onblur="(this.type='text')" class="form-control hidden-print"
                                    name="birthday"
                                    placeholder="День рождения" required>
                         </div>
