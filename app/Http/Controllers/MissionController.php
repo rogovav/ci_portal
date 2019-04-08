@@ -28,13 +28,21 @@ class MissionController extends Controller
     {
         $buildings = Building::orderBy('name')->get();
         $clients   = Client::orderBy('fio')->get();
-        $missions  = Mission::orderBy('id', 'DESC')->get();
+        $missions  = Mission::where('status', '<>', 3)->orderBy('id', 'DESC')->get();
         $subjects  = Subject::orderBy('name')->get();
         $subjectTypes  = $subjects->groupBy('type');
         $users     = User::orderBy('fio')->get();
         $from      = $this->from;
 
         return view('mission.index', compact('buildings', 'clients', 'missions', 'users', 'from', 'subjectTypes'));
+    }
+
+    public function index_archive()
+    {
+        $missions  = Mission::where('status', 3)->get();
+        $from      = $this->from;
+
+        return view('mission.index_archive', compact('missions', 'from'));
     }
 
     public function show($id)

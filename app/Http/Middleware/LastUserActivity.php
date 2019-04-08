@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\User;
 use Carbon\Carbon;
 use Closure;
 use Illuminate\Support\Facades\Auth;
@@ -21,6 +22,7 @@ class LastUserActivity
         if(Auth::check())
         {
             $expiresAt = Carbon::now()->addMinutes(1);
+            User::findorfail(Auth::user()->id)->update(['last_activity' => $expiresAt]);
             Cache::put('user-is-online-' . Auth::user()->id, true, $expiresAt);
         }
 

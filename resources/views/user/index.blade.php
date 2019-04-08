@@ -56,7 +56,7 @@
                                    placeholder="Внутренний номер телефона" required>
                         </div>
                         <div class="form-group">
-                            <input type="text" value="1991-01-01"
+                            <input type="text" value="1999-01-01"
                                    onfocus="(this.type='date')" onblur="(this.type='text')" class="form-control hidden-print"
                                    name="birthday"
                                    placeholder="День рождения" required>
@@ -94,7 +94,7 @@
                     {{--{{ $user->isOnline()? "avatar-index-border-online" : Null }} {{ $user->super? "avatar-index-border-admin" : Null}}--}}
                     <div class="card-header ">
                         @if($user->super)
-                            <span class="small d-block mb-2 font-weight-normal text-center col-12">Администратор</span>
+                            <span class="small d-block mb-2 font-weight-normal text-center col-12 admin-badge">Администратор</span>
                         @endif
                         <h6 class="card-subtitle text-center">
                             {{ $user->fio }}
@@ -112,7 +112,7 @@
                                     class="badge badge-success font-weight-normal">Online</span>
                             @else
                                 <span
-                                    class="badge badge-secondary font-weight-normal">Offline</span>
+                                    class="badge font-weight-normal">Был в сети {{ date('d.m.y H:i' ,strtotime($user->last_activity)) }}</span>
                             @endif
                         </div>
                     </div>
