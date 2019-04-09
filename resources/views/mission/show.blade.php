@@ -39,7 +39,7 @@
                 <div class="col-12 col-md-2 col-lg-2 col-xl-2 col-form-label">
                     @switch($mission->status)
                         @case(1)
-                            @if($mission->worker == Auth::user())
+                            @if($mission->worker->id == Auth::id())
                             <form action="{{ route('mission.update', $mission->id) }}" method="post">
                                 {{ csrf_field() }}
                                 <button type="submit" class="btn btn-secondary btn-sm float-right" value="2" name="status">
@@ -128,7 +128,7 @@
                                 </div>
                             </div>
                         </div>
-                        @if($mission->status != 3 and $mission->owner == Auth::user())
+                        @if($mission->status != 3 && $mission->owner->id == Auth::id())
                             <div class="card-footer">
                             <div class="row">
                                 <div class="col-12 col-md-4 col-lg-4 col-xl-4">
@@ -159,7 +159,7 @@
                         </div>
                         @endif
                     </div>
-                    @if($mission->status != 3 and $mission->owner == Auth::user())
+                    @if($mission->status != 3 and $mission->owner->id == Auth::id())
                         <div class="card" id="rewrite_mission">
                             <div class="card-header">
                                 <div class="row">
