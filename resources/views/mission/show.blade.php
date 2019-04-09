@@ -406,7 +406,7 @@
                                                 <div id="sohbet" style="overflow-y: scroll; max-height: 300px;"
                                                      class="card shadow-none border-0 m-0 p-0 position-relative bg-transparent ">
                                                     @foreach($mission->comments as $comment)
-                                                        @if($comment->user == Auth::user())
+                                                        @if($comment->user->id == Auth::id())
                                                             <div class="balon1 p-2 m-0 position-relative"
                                                                  data-is="Вы - {{ $comment->created_at->format('H:i') }}">
                                                                 <a class="float-right mb-1"> {!! nl2br($comment->info) !!} </a>
