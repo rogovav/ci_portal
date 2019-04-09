@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <link rel="stylesheet" href="{{asset("css/app.css")}}">
-    <title>Document</title>
+    <title>HelpDesk Center "Internet"</title>
 </head>
 <body>
 {{--<div class="container">--}}
