@@ -121,6 +121,7 @@
                                                 <input type="text" class="hidden-print" name="id" id="topic-id">
                                                 <div class="form-group"><input name="name" type="text"
                                                                                class="form-control"
+                                                                               required
                                                                                placeholder="Название темы"
                                                                                id="topic-name"
                                                     >
@@ -128,7 +129,7 @@
                                                 <div class="form-group">
                                                     <span
                                                         class="badge badge-light float-left mb-1">Источник заявки</span>
-                                                    <select type="text" name="type" class="form-control"
+                                                    <select type="text" name="type" class="form-control" required
                                                             id="topic-type">
                                                         <option value="Общежитие">Общежитие</option>
                                                         <option value="Университет">Университет</option>
@@ -203,6 +204,7 @@
                                                         <div class="form-row">
                                                             <div class="form-group col-6">
                                                                 <input name="fio" type="text"
+                                                                       required
                                                                        class="form-control"
                                                                        placeholder="ФИО"
                                                                        id="client-fio"
@@ -319,6 +321,7 @@
                                                 <input type="text" class="hidden-print" name="id" id="pos-id">
                                                 <div class="form-group">
                                                     <input name="name" type="text"
+                                                           required
                                                            class="form-control"
                                                            placeholder="Название должности"
                                                            id="pos-name"
