@@ -29,7 +29,7 @@
 
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Сохранить изменения</button>
+                        <button type="submit" id="image-save-btn" class="btn btn-primary">Сохранить изменения</button>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
                     </div>
                 </form>
@@ -701,6 +701,7 @@
             if ($('#upload').val() == '') {
                 $('#main-cropper').hide();
                 $('#getImage').hide()
+                $('#image-save-btn').hide();
             }
         })
         ///images/avatars/users/cool.jpg
@@ -737,6 +738,7 @@
         $('#getImage').click(function () {
             $(this).prop('disabled', true)
             $(this).text('Сохранено')
+            $('#image-save-btn').show();
         })
 
         $('#upload').change(function () {
