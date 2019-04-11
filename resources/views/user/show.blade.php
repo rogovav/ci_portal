@@ -47,30 +47,50 @@
                                         </div>
                                         <div class="card" id="card-user">
                                             <div class="card-body">
-                                                <table class="table">
-                                                    <tbody>
-                                                    {{--                                                    <tr>--}}
-                                                    {{--                                                        <td><b>День рождения:</b></td>--}}
-                                                    {{--                                                        <td>{{ $user->birthday }}</td>--}}
-                                                    {{--                                                    </tr>--}}
-                                                    <tr>
-                                                        <td><b>Номер телефона</b></td>
-                                                        <td><span id="user-phone">{{ $user->phone }}</span></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><b>Внутренний номер</b></td>
-                                                        <td><span id="user-iphone">{{ $user->iphone }}</span></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><b>Почта</b></td>
-                                                        <td><span id="user-email">{{ $user->email }}</span></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><b>Логин VK</b></td>
-                                                        <td><span id="user-vk">{{ $user->vk }}</span></td>
-                                                    </tr>
-                                                    </tbody>
-                                                </table>
+                                                <span class="badge badge-light">Номер телефона: </span>
+                                                <br>
+                                                <span id="user-phone"
+                                                      class="col-12">{{ $user->phone }}</span>
+                                                <hr>
+                                                <span class="badge badge-light">Внутренний номер: </span>
+                                                <br>
+                                                <span id="user-iphone" class="col-12">{{ $user->iphone }}</span>
+                                                <hr>
+                                                <span class="badge badge-light">Почта: </span>
+                                                <br>
+                                                <span id="user-email" class="col-12">{{ $user->email }}</span>
+                                                <hr>
+                                                <span class="badge badge-light">Логин VK: </span>
+                                                <br>
+                                                <span id="user-vk" class="col-12">{{ $user->vk }}</span>
+                                                <br>
+                                                {{--                                                <table class="table">--}}
+                                                {{--                                                    <tbody>--}}
+                                                {{--                                                    --}}{{--                                                    <tr>--}}
+                                                {{--                                                    --}}{{--                                                        <td><b>День рождения:</b></td>--}}
+                                                {{--                                                    --}}{{--                                                        <td>{{ $user->birthday }}</td>--}}
+                                                {{--                                                    --}}{{--                                                    </tr>--}}
+                                                {{--                                                    <tr>--}}
+                                                {{--                                                        <td><b>Номер телефона</b></td>--}}
+                                                {{--                                                        <td><span id="user-phone">{{ $user->phone }}</span></td>--}}
+                                                {{--                                                    </tr>--}}
+                                                {{--                                                    <tr>--}}
+                                                {{--                                                        <td><b>Внутренний номер</b></td>--}}
+                                                {{--                                                        <td><span id="user-iphone">{{ $user->iphone }}</span></td>--}}
+                                                {{--                                                    </tr>--}}
+                                                {{--                                                    <tr>--}}
+                                                {{--                                                        <td><b>Почта</b></td>--}}
+                                                {{--                                                        <td><span id="user-email">{{ $user->email }}</span></td>--}}
+                                                {{--                                                    </tr>--}}
+                                                {{--                                                    <tr>--}}
+                                                {{--                                                        <td><b>Логин VK</b></td>--}}
+                                                {{--                                                        <td><span id="user-vk">{{ $user->vk }}</span></td>--}}
+                                                {{--                                                    </tr>--}}
+                                                {{--                                                    </tbody>--}}
+                                                {{--                                                </table>--}}
+
+                                            </div>
+                                            <div class="card-footer">
                                                 @if(Auth::user()->super)
                                                     <button type="button" data-toggle="modal"
                                                             data-target="#change-pass"
@@ -173,7 +193,7 @@
                                                                 <td class="align-middle">{{ $mission->worker->fio }}</td>
                                                                 <td class="align-middle">
                                                                     <span
-                                                                        class="badge {{ $mission->status == 1? 'badge-info' : 'badge-warning' }} float-right font-weight-normal">{{ $mission->status == 1? 'В работе' : 'Ожидает решения' }}</span>
+                                                                        class="badge {{ $mission->status == 1? 'badge-info' : 'badge-warning' }} font-weight-normal">{{ $mission->status == 1? 'В работе' : 'Ожидает решения' }}</span>
                                                                 </td>
                                                             </tr>
                                                             <tr>
@@ -284,7 +304,7 @@
                                                                 <td class="align-middle">{{ $mission->owner->fio }}</td>
                                                                 <td class="align-middle">
                                                                     <span
-                                                                        class="badge {{ $mission->status == 1? 'badge-info' : 'badge-warning' }} float-right font-weight-normal">{{ $mission->status == 1? 'В работе' : 'Ожидает решения' }}</span>
+                                                                        class="badge {{ $mission->status == 1? 'badge-info' : 'badge-warning' }} font-weight-normal">{{ $mission->status == 1? 'В работе' : 'Ожидает решения' }}</span>
                                                                 </td>
                                                             </tr>
                                                             <tr>
@@ -395,7 +415,7 @@
                                                                 <td class="align-middle">{{ $mission->worker->fio }}</td>
                                                                 <td class="align-middle">
                                                                     <span
-                                                                        class="badge {{ $mission->status == 1? 'badge-info' : 'badge-warning' }} float-right font-weight-normal">{{ $mission->status == 1? 'В работе' : 'Ожидает решения' }}</span>
+                                                                        class="badge {{ $mission->status == 1? 'badge-info' : 'badge-warning' }} font-weight-normal">{{ $mission->status == 1? 'В работе' : 'Ожидает решения' }}</span>
                                                                 </td>
                                                             </tr>
                                                             <tr>
