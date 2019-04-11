@@ -88,30 +88,49 @@
                                         </form>
                                         <div class="card" id="card-user">
                                             <div class="card-body">
-                                                <table class="table">
-                                                    <tbody>
-                                                    {{--                                                    <tr>--}}
-                                                    {{--                                                        <td><b>День рождения:</b></td>--}}
-                                                    {{--                                                        <td>{{ $user->birthday }}</td>--}}
-                                                    {{--                                                    </tr>--}}
-                                                    <tr>
-                                                        <td><b>Номер телефона</b></td>
-                                                        <td><span id="user-phone">{{ $user->phone }}</span></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><b>Внутренний номер</b></td>
-                                                        <td><span id="user-iphone">{{ $user->iphone }}</span></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><b>Почта</b></td>
-                                                        <td><span id="user-email">{{ $user->email }}</span></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><b>Логин VK</b></td>
-                                                        <td><span id="user-vk">{{ $user->vk }}</span></td>
-                                                    </tr>
-                                                    </tbody>
-                                                </table>
+                                                <span class="badge badge-light">Номер телефона: </span>
+                                                <br>
+                                                <span id="user-phone"
+                                                      class="col-12">{{ $user->phone }}</span>
+                                                <hr>
+                                                <span class="badge badge-light">Внутренний номер: </span>
+                                                <br>
+                                                <span id="user-iphone" class="col-12">{{ $user->iphone }}</span>
+                                                <hr>
+                                                <span class="badge badge-light">Почта: </span>
+                                                <br>
+                                                <span id="user-email" class="col-12">{{ $user->email }}</span>
+                                                <hr>
+                                                <span class="badge badge-light">Логин VK: </span>
+                                                <br>
+                                                <span id="user-vk" class="col-12">{{ $user->vk }}</span>
+                                                <br>
+                                                {{--                                                <table class="table">--}}
+                                                {{--                                                    <tbody>--}}
+                                                {{--                                                    --}}{{--                                                    <tr>--}}
+                                                {{--                                                    --}}{{--                                                        <td><b>День рождения:</b></td>--}}
+                                                {{--                                                    --}}{{--                                                        <td>{{ $user->birthday }}</td>--}}
+                                                {{--                                                    --}}{{--                                                    </tr>--}}
+                                                {{--                                                    <tr>--}}
+                                                {{--                                                        <td><b>Номер телефона</b></td>--}}
+                                                {{--                                                        <td><span id="user-phone">{{ $user->phone }}</span></td>--}}
+                                                {{--                                                    </tr>--}}
+                                                {{--                                                    <tr>--}}
+                                                {{--                                                        <td><b>Внутренний номер</b></td>--}}
+                                                {{--                                                        <td><span id="user-iphone">{{ $user->iphone }}</span></td>--}}
+                                                {{--                                                    </tr>--}}
+                                                {{--                                                    <tr>--}}
+                                                {{--                                                        <td><b>Почта</b></td>--}}
+                                                {{--                                                        <td><span id="user-email">{{ $user->email }}</span></td>--}}
+                                                {{--                                                    </tr>--}}
+                                                {{--                                                    <tr>--}}
+                                                {{--                                                        <td><b>Логин VK</b></td>--}}
+                                                {{--                                                        <td><span id="user-vk">{{ $user->vk }}</span></td>--}}
+                                                {{--                                                    </tr>--}}
+                                                {{--                                                    </tbody>--}}
+                                                {{--                                                </table>--}}
+                                            </div>
+                                            <div class="card-footer">
                                                 <span
                                                     class="badge badge-light">Нажмите на поле, чтобы изменить его</span>
                                                 <br>
@@ -493,12 +512,13 @@
                                                                 <td class="align-middle">{{ $mission->worker->fio }}</td>
                                                                 <td class="align-middle">
                                                                     <span
-                                                                        class="badge {{ $mission->status == 1? 'badge-info' : 'badge-warning' }} float-right font-weight-normal">{{ $mission->status == 1? 'В работе' : 'Ожидает решения' }}</span>
+                                                                        class="badge {{ $mission->status == 1? 'badge-info' : 'badge-warning' }} font-weight-normal">{{ $mission->status == 1? 'В работе' : 'Ожидает решения' }}</span>
                                                                 </td>
                                                             </tr>
                                                             <tr>
                                                                 <td colspan="5">
-                                                                    <div class="progress mb-3" style="height: 3px !important;">
+                                                                    <div class="progress mb-3"
+                                                                         style="height: 3px !important;">
                                                                         @php
                                                                             if (strtotime("now") > strtotime($mission->date_to))
                                                                             {
@@ -520,63 +540,63 @@
                                                         </tbody>
                                                     </table>
                                                 </div>
-{{--                                                @foreach($mission_owner->sortByDesc('id') as $mission)--}}
-{{--                                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">--}}
-{{--                                                        <div class="card">--}}
-{{--                                                            <div--}}
-{{--                                                                class="card-body task-card card-priority-{{ $mission->priority == 1? 'low' : ($mission->priority == 2? 'mid' : 'high') }} pb-0">--}}
-{{--                                                                <div class="progress">--}}
-{{--                                                                    @php--}}
-{{--                                                                        if (strtotime("now") > strtotime($mission->date_to))--}}
-{{--                                                                        {--}}
-{{--                                                                            $per = 100;--}}
-{{--                                                                        } else {--}}
-{{--                                                                            $per = (($mission->date_close ? strtotime($mission->date_close) : strtotime("now")) - strtotime($mission->created_at))/(strtotime($mission->date_to) - strtotime($mission->created_at)) * 100;--}}
-{{--                                                                        }--}}
-{{--                                                                    @endphp--}}
-{{--                                                                    <div--}}
-{{--                                                                        class="progress-bar {{ $per < 50? 'bg-success' : ($per < 75? 'bg-warning' : 'bg-danger') }}"--}}
-{{--                                                                        role="progressbar"--}}
-{{--                                                                        style="width: {{ $per }}%"--}}
-{{--                                                                        aria-valuemin="0"--}}
-{{--                                                                        aria-valuemax="100"></div>--}}
-{{--                                                                </div>--}}
-{{--                                                                <div class="row">--}}
-{{--                                                                    <div class="col-12">--}}
-{{--                                                                        <table class="table mb-0">--}}
-{{--                                                                            <thead>--}}
-{{--                                                                            <th>#</th>--}}
-{{--                                                                            <th>Источник</th>--}}
-{{--                                                                            <th>Тема</th>--}}
-{{--                                                                            </thead>--}}
-{{--                                                                            <tbody>--}}
-{{--                                                                            <tr>--}}
-{{--                                                                                <td width="15%"><a--}}
-{{--                                                                                        href="{{ route('mission.show', $mission->id) }}">#{{ $mission->id }}</a>--}}
-{{--                                                                                </td>--}}
-{{--                                                                                <td width="30%">{{ $from[$mission->from] }}</td>--}}
-{{--                                                                                <td>{{ $mission->subject->name }}</td>--}}
+                                                {{--                                                @foreach($mission_owner->sortByDesc('id') as $mission)--}}
+                                                {{--                                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">--}}
+                                                {{--                                                        <div class="card">--}}
+                                                {{--                                                            <div--}}
+                                                {{--                                                                class="card-body task-card card-priority-{{ $mission->priority == 1? 'low' : ($mission->priority == 2? 'mid' : 'high') }} pb-0">--}}
+                                                {{--                                                                <div class="progress">--}}
+                                                {{--                                                                    @php--}}
+                                                {{--                                                                        if (strtotime("now") > strtotime($mission->date_to))--}}
+                                                {{--                                                                        {--}}
+                                                {{--                                                                            $per = 100;--}}
+                                                {{--                                                                        } else {--}}
+                                                {{--                                                                            $per = (($mission->date_close ? strtotime($mission->date_close) : strtotime("now")) - strtotime($mission->created_at))/(strtotime($mission->date_to) - strtotime($mission->created_at)) * 100;--}}
+                                                {{--                                                                        }--}}
+                                                {{--                                                                    @endphp--}}
+                                                {{--                                                                    <div--}}
+                                                {{--                                                                        class="progress-bar {{ $per < 50? 'bg-success' : ($per < 75? 'bg-warning' : 'bg-danger') }}"--}}
+                                                {{--                                                                        role="progressbar"--}}
+                                                {{--                                                                        style="width: {{ $per }}%"--}}
+                                                {{--                                                                        aria-valuemin="0"--}}
+                                                {{--                                                                        aria-valuemax="100"></div>--}}
+                                                {{--                                                                </div>--}}
+                                                {{--                                                                <div class="row">--}}
+                                                {{--                                                                    <div class="col-12">--}}
+                                                {{--                                                                        <table class="table mb-0">--}}
+                                                {{--                                                                            <thead>--}}
+                                                {{--                                                                            <th>#</th>--}}
+                                                {{--                                                                            <th>Источник</th>--}}
+                                                {{--                                                                            <th>Тема</th>--}}
+                                                {{--                                                                            </thead>--}}
+                                                {{--                                                                            <tbody>--}}
+                                                {{--                                                                            <tr>--}}
+                                                {{--                                                                                <td width="15%"><a--}}
+                                                {{--                                                                                        href="{{ route('mission.show', $mission->id) }}">#{{ $mission->id }}</a>--}}
+                                                {{--                                                                                </td>--}}
+                                                {{--                                                                                <td width="30%">{{ $from[$mission->from] }}</td>--}}
+                                                {{--                                                                                <td>{{ $mission->subject->name }}</td>--}}
 
-{{--                                                                            </tr>--}}
-{{--                                                                            </tbody>--}}
-{{--                                                                        </table>--}}
-{{--                                                                    </div>--}}
-{{--                                                                </div>--}}
-{{--                                                            </div>--}}
-{{--                                                            <div class="card-footer">--}}
-{{--                                                                <div class="row">--}}
-{{--                                                                    <div class="col-6"><span--}}
-{{--                                                                            class="badge badge-light">{{ $mission->worker->fio }}</span>--}}
-{{--                                                                    </div>--}}
-{{--                                                                    <div class="col-6">--}}
-{{--                                                                        <span--}}
-{{--                                                                            class="badge {{ $mission->status == 1? 'badge-info' : 'badge-warning' }} float-right font-weight-normal">{{ $mission->status == 1? 'В работе' : 'Ожидает решения' }}</span>--}}
-{{--                                                                    </div>--}}
-{{--                                                                </div>--}}
-{{--                                                            </div>--}}
-{{--                                                        </div>--}}
-{{--                                                    </div>--}}
-{{--                                                @endforeach--}}
+                                                {{--                                                                            </tr>--}}
+                                                {{--                                                                            </tbody>--}}
+                                                {{--                                                                        </table>--}}
+                                                {{--                                                                    </div>--}}
+                                                {{--                                                                </div>--}}
+                                                {{--                                                            </div>--}}
+                                                {{--                                                            <div class="card-footer">--}}
+                                                {{--                                                                <div class="row">--}}
+                                                {{--                                                                    <div class="col-6"><span--}}
+                                                {{--                                                                            class="badge badge-light">{{ $mission->worker->fio }}</span>--}}
+                                                {{--                                                                    </div>--}}
+                                                {{--                                                                    <div class="col-6">--}}
+                                                {{--                                                                        <span--}}
+                                                {{--                                                                            class="badge {{ $mission->status == 1? 'badge-info' : 'badge-warning' }} float-right font-weight-normal">{{ $mission->status == 1? 'В работе' : 'Ожидает решения' }}</span>--}}
+                                                {{--                                                                    </div>--}}
+                                                {{--                                                                </div>--}}
+                                                {{--                                                            </div>--}}
+                                                {{--                                                        </div>--}}
+                                                {{--                                                    </div>--}}
+                                                {{--                                                @endforeach--}}
                                             </div>
                                         </div>
                                         <div class="tab-pane fade {{ $my? Null : 'show active' }}" id="nav-me"
@@ -604,12 +624,13 @@
                                                                 <td class="align-middle">{{ $mission->owner->fio }}</td>
                                                                 <td class="align-middle">
                                                                     <span
-                                                                        class="badge {{ $mission->status == 1? 'badge-info' : 'badge-warning' }} float-right font-weight-normal">{{ $mission->status == 1? 'В работе' : 'Ожидает решения' }}</span>
+                                                                        class="badge {{ $mission->status == 1? 'badge-info' : 'badge-warning' }} font-weight-normal">{{ $mission->status == 1? 'В работе' : 'Ожидает решения' }}</span>
                                                                 </td>
                                                             </tr>
                                                             <tr>
                                                                 <td colspan="5">
-                                                                    <div class="progress mb-3" style="height: 3px !important;">
+                                                                    <div class="progress mb-3"
+                                                                         style="height: 3px !important;">
                                                                         @php
                                                                             if (strtotime("now") > strtotime($mission->date_to))
                                                                             {
@@ -631,63 +652,63 @@
                                                         </tbody>
                                                     </table>
                                                 </div>
-{{--                                                @foreach($mission_worker->sortByDesc('id')->take(3) as $mission)--}}
-{{--                                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">--}}
-{{--                                                        <div class="card">--}}
-{{--                                                            <div--}}
-{{--                                                                class="card-body task-card card-priority-{{ $mission->priority == 1? 'low' : ($mission->priority == 2? 'mid' : 'high') }} pb-0">--}}
-{{--                                                                <div class="progress">--}}
-{{--                                                                    @php--}}
-{{--                                                                        if (strtotime("now") > strtotime($mission->date_to))--}}
-{{--                                                                        {--}}
-{{--                                                                            $per = 100;--}}
-{{--                                                                        } else {--}}
-{{--                                                                            $per = (($mission->date_close ? strtotime($mission->date_close) : strtotime("now")) - strtotime($mission->created_at))/(strtotime($mission->date_to) - strtotime($mission->created_at)) * 100;--}}
-{{--                                                                        }--}}
-{{--                                                                    @endphp--}}
-{{--                                                                    <div--}}
-{{--                                                                        class="progress-bar {{ $per < 50? 'bg-success' : ($per < 75? 'bg-warning' : 'bg-danger') }}"--}}
-{{--                                                                        role="progressbar"--}}
-{{--                                                                        style="width: {{ $per }}%"--}}
-{{--                                                                        aria-valuemin="0"--}}
-{{--                                                                        aria-valuemax="100"></div>--}}
-{{--                                                                </div>--}}
-{{--                                                                <div class="row">--}}
-{{--                                                                    <div class="col-12">--}}
-{{--                                                                        <table class="table mb-0">--}}
-{{--                                                                            <thead>--}}
-{{--                                                                            <th>#</th>--}}
-{{--                                                                            <th>Источник</th>--}}
-{{--                                                                            <th>Тема</th>--}}
-{{--                                                                            </thead>--}}
-{{--                                                                            <tbody>--}}
-{{--                                                                            <tr>--}}
-{{--                                                                                <td width="15%"><a--}}
-{{--                                                                                        href="{{ route('mission.show', $mission->id) }}">#{{ $mission->id }}</a>--}}
-{{--                                                                                </td>--}}
-{{--                                                                                <td width="30%">{{ $from[$mission->from] }}</td>--}}
-{{--                                                                                <td>{{ $mission->subject->name }}</td>--}}
+                                                {{--                                                @foreach($mission_worker->sortByDesc('id')->take(3) as $mission)--}}
+                                                {{--                                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">--}}
+                                                {{--                                                        <div class="card">--}}
+                                                {{--                                                            <div--}}
+                                                {{--                                                                class="card-body task-card card-priority-{{ $mission->priority == 1? 'low' : ($mission->priority == 2? 'mid' : 'high') }} pb-0">--}}
+                                                {{--                                                                <div class="progress">--}}
+                                                {{--                                                                    @php--}}
+                                                {{--                                                                        if (strtotime("now") > strtotime($mission->date_to))--}}
+                                                {{--                                                                        {--}}
+                                                {{--                                                                            $per = 100;--}}
+                                                {{--                                                                        } else {--}}
+                                                {{--                                                                            $per = (($mission->date_close ? strtotime($mission->date_close) : strtotime("now")) - strtotime($mission->created_at))/(strtotime($mission->date_to) - strtotime($mission->created_at)) * 100;--}}
+                                                {{--                                                                        }--}}
+                                                {{--                                                                    @endphp--}}
+                                                {{--                                                                    <div--}}
+                                                {{--                                                                        class="progress-bar {{ $per < 50? 'bg-success' : ($per < 75? 'bg-warning' : 'bg-danger') }}"--}}
+                                                {{--                                                                        role="progressbar"--}}
+                                                {{--                                                                        style="width: {{ $per }}%"--}}
+                                                {{--                                                                        aria-valuemin="0"--}}
+                                                {{--                                                                        aria-valuemax="100"></div>--}}
+                                                {{--                                                                </div>--}}
+                                                {{--                                                                <div class="row">--}}
+                                                {{--                                                                    <div class="col-12">--}}
+                                                {{--                                                                        <table class="table mb-0">--}}
+                                                {{--                                                                            <thead>--}}
+                                                {{--                                                                            <th>#</th>--}}
+                                                {{--                                                                            <th>Источник</th>--}}
+                                                {{--                                                                            <th>Тема</th>--}}
+                                                {{--                                                                            </thead>--}}
+                                                {{--                                                                            <tbody>--}}
+                                                {{--                                                                            <tr>--}}
+                                                {{--                                                                                <td width="15%"><a--}}
+                                                {{--                                                                                        href="{{ route('mission.show', $mission->id) }}">#{{ $mission->id }}</a>--}}
+                                                {{--                                                                                </td>--}}
+                                                {{--                                                                                <td width="30%">{{ $from[$mission->from] }}</td>--}}
+                                                {{--                                                                                <td>{{ $mission->subject->name }}</td>--}}
 
-{{--                                                                            </tr>--}}
-{{--                                                                            </tbody>--}}
-{{--                                                                        </table>--}}
-{{--                                                                    </div>--}}
-{{--                                                                </div>--}}
-{{--                                                            </div>--}}
-{{--                                                            <div class="card-footer">--}}
-{{--                                                                <div class="row">--}}
-{{--                                                                    <div class="col-6"><span--}}
-{{--                                                                            class="badge badge-light">{{ $mission->owner->fio }}</span>--}}
-{{--                                                                    </div>--}}
-{{--                                                                    <div class="col-6">--}}
-{{--                                                                        <span--}}
-{{--                                                                            class="badge {{ $mission->status == 1? 'badge-info' : 'badge-warning' }} float-right font-weight-normal">{{ $mission->status == 1? 'В работе' : 'Ожидает решения' }}</span>--}}
-{{--                                                                    </div>--}}
-{{--                                                                </div>--}}
-{{--                                                            </div>--}}
-{{--                                                        </div>--}}
-{{--                                                    </div>--}}
-{{--                                                @endforeach--}}
+                                                {{--                                                                            </tr>--}}
+                                                {{--                                                                            </tbody>--}}
+                                                {{--                                                                        </table>--}}
+                                                {{--                                                                    </div>--}}
+                                                {{--                                                                </div>--}}
+                                                {{--                                                            </div>--}}
+                                                {{--                                                            <div class="card-footer">--}}
+                                                {{--                                                                <div class="row">--}}
+                                                {{--                                                                    <div class="col-6"><span--}}
+                                                {{--                                                                            class="badge badge-light">{{ $mission->owner->fio }}</span>--}}
+                                                {{--                                                                    </div>--}}
+                                                {{--                                                                    <div class="col-6">--}}
+                                                {{--                                                                        <span--}}
+                                                {{--                                                                            class="badge {{ $mission->status == 1? 'badge-info' : 'badge-warning' }} float-right font-weight-normal">{{ $mission->status == 1? 'В работе' : 'Ожидает решения' }}</span>--}}
+                                                {{--                                                                    </div>--}}
+                                                {{--                                                                </div>--}}
+                                                {{--                                                            </div>--}}
+                                                {{--                                                        </div>--}}
+                                                {{--                                                    </div>--}}
+                                                {{--                                                @endforeach--}}
                                             </div>
                                         </div>
                                         <div class="tab-pane fade" id="nav-help" role="tabpanel"
@@ -714,12 +735,13 @@
                                                                 <td class="align-middle">{{ $mission->worker->fio }}</td>
                                                                 <td class="align-middle">
                                                                     <span
-                                                                        class="badge {{ $mission->status == 1? 'badge-info' : 'badge-warning' }} float-right font-weight-normal">{{ $mission->status == 1? 'В работе' : 'Ожидает решения' }}</span>
+                                                                        class="badge {{ $mission->status == 1? 'badge-info' : 'badge-warning' }} font-weight-normal">{{ $mission->status == 1? 'В работе' : 'Ожидает решения' }}</span>
                                                                 </td>
                                                             </tr>
                                                             <tr>
                                                                 <td colspan="5">
-                                                                    <div class="progress mb-3" style="height: 3px !important;">
+                                                                    <div class="progress mb-3"
+                                                                         style="height: 3px !important;">
                                                                         @php
                                                                             if (strtotime("now") > strtotime($mission->date_to))
                                                                             {
@@ -741,63 +763,63 @@
                                                         </tbody>
                                                     </table>
                                                 </div>
-{{--                                                @foreach($user->mission_helper->where('status', '<>', 3)->sortByDesc('id')->take(3) as $mission)--}}
-{{--                                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">--}}
-{{--                                                        <div class="card">--}}
-{{--                                                            <div--}}
-{{--                                                                class="card-body task-card card-priority-{{ $mission->priority == 1? 'low' : ($mission->priority == 2? 'mid' : 'high') }} pb-0">--}}
-{{--                                                                <div class="progress">--}}
-{{--                                                                    @php--}}
-{{--                                                                        if (strtotime("now") > strtotime($mission->date_to))--}}
-{{--                                                                        {--}}
-{{--                                                                            $per = 100;--}}
-{{--                                                                        } else {--}}
-{{--                                                                            $per = (($mission->date_close ? strtotime($mission->date_close) : strtotime("now")) - strtotime($mission->created_at))/(strtotime($mission->date_to) - strtotime($mission->created_at)) * 100;--}}
-{{--                                                                        }--}}
-{{--                                                                    @endphp--}}
-{{--                                                                    <div--}}
-{{--                                                                        class="progress-bar {{ $per < 50? 'bg-success' : ($per < 75? 'bg-warning' : 'bg-danger') }}"--}}
-{{--                                                                        role="progressbar"--}}
-{{--                                                                        style="width: {{ $per }}%"--}}
-{{--                                                                        aria-valuemin="0"--}}
-{{--                                                                        aria-valuemax="100"></div>--}}
-{{--                                                                </div>--}}
-{{--                                                                <div class="row">--}}
-{{--                                                                    <div class="col-12">--}}
-{{--                                                                        <table class="table mb-0">--}}
-{{--                                                                            <thead>--}}
-{{--                                                                            <th>#</th>--}}
-{{--                                                                            <th>Источник</th>--}}
-{{--                                                                            <th>Тема</th>--}}
-{{--                                                                            </thead>--}}
-{{--                                                                            <tbody>--}}
-{{--                                                                            <tr>--}}
-{{--                                                                                <td width="15%"><a--}}
-{{--                                                                                        href="{{ route('mission.show', $mission->id) }}">#{{ $mission->id }}</a>--}}
-{{--                                                                                </td>--}}
-{{--                                                                                <td width="30%">{{ $from[$mission->from] }}</td>--}}
-{{--                                                                                <td>{{ $mission->subject->name }}</td>--}}
+                                                {{--                                                @foreach($user->mission_helper->where('status', '<>', 3)->sortByDesc('id')->take(3) as $mission)--}}
+                                                {{--                                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">--}}
+                                                {{--                                                        <div class="card">--}}
+                                                {{--                                                            <div--}}
+                                                {{--                                                                class="card-body task-card card-priority-{{ $mission->priority == 1? 'low' : ($mission->priority == 2? 'mid' : 'high') }} pb-0">--}}
+                                                {{--                                                                <div class="progress">--}}
+                                                {{--                                                                    @php--}}
+                                                {{--                                                                        if (strtotime("now") > strtotime($mission->date_to))--}}
+                                                {{--                                                                        {--}}
+                                                {{--                                                                            $per = 100;--}}
+                                                {{--                                                                        } else {--}}
+                                                {{--                                                                            $per = (($mission->date_close ? strtotime($mission->date_close) : strtotime("now")) - strtotime($mission->created_at))/(strtotime($mission->date_to) - strtotime($mission->created_at)) * 100;--}}
+                                                {{--                                                                        }--}}
+                                                {{--                                                                    @endphp--}}
+                                                {{--                                                                    <div--}}
+                                                {{--                                                                        class="progress-bar {{ $per < 50? 'bg-success' : ($per < 75? 'bg-warning' : 'bg-danger') }}"--}}
+                                                {{--                                                                        role="progressbar"--}}
+                                                {{--                                                                        style="width: {{ $per }}%"--}}
+                                                {{--                                                                        aria-valuemin="0"--}}
+                                                {{--                                                                        aria-valuemax="100"></div>--}}
+                                                {{--                                                                </div>--}}
+                                                {{--                                                                <div class="row">--}}
+                                                {{--                                                                    <div class="col-12">--}}
+                                                {{--                                                                        <table class="table mb-0">--}}
+                                                {{--                                                                            <thead>--}}
+                                                {{--                                                                            <th>#</th>--}}
+                                                {{--                                                                            <th>Источник</th>--}}
+                                                {{--                                                                            <th>Тема</th>--}}
+                                                {{--                                                                            </thead>--}}
+                                                {{--                                                                            <tbody>--}}
+                                                {{--                                                                            <tr>--}}
+                                                {{--                                                                                <td width="15%"><a--}}
+                                                {{--                                                                                        href="{{ route('mission.show', $mission->id) }}">#{{ $mission->id }}</a>--}}
+                                                {{--                                                                                </td>--}}
+                                                {{--                                                                                <td width="30%">{{ $from[$mission->from] }}</td>--}}
+                                                {{--                                                                                <td>{{ $mission->subject->name }}</td>--}}
 
-{{--                                                                            </tr>--}}
-{{--                                                                            </tbody>--}}
-{{--                                                                        </table>--}}
-{{--                                                                    </div>--}}
-{{--                                                                </div>--}}
-{{--                                                            </div>--}}
-{{--                                                            <div class="card-footer">--}}
-{{--                                                                <div class="row">--}}
-{{--                                                                    <div class="col-6"><span--}}
-{{--                                                                            class="badge badge-light">{{ $mission->worker->fio }}</span>--}}
-{{--                                                                    </div>--}}
-{{--                                                                    <div class="col-6">--}}
-{{--                                                                        <span--}}
-{{--                                                                            class="badge {{ $mission->status == 1? 'badge-info' : 'badge-warning' }} float-right font-weight-normal">{{ $mission->status == 1? 'В работе' : 'Ожидает решения' }}</span>--}}
-{{--                                                                    </div>--}}
-{{--                                                                </div>--}}
-{{--                                                            </div>--}}
-{{--                                                        </div>--}}
-{{--                                                    </div>--}}
-{{--                                                @endforeach--}}
+                                                {{--                                                                            </tr>--}}
+                                                {{--                                                                            </tbody>--}}
+                                                {{--                                                                        </table>--}}
+                                                {{--                                                                    </div>--}}
+                                                {{--                                                                </div>--}}
+                                                {{--                                                            </div>--}}
+                                                {{--                                                            <div class="card-footer">--}}
+                                                {{--                                                                <div class="row">--}}
+                                                {{--                                                                    <div class="col-6"><span--}}
+                                                {{--                                                                            class="badge badge-light">{{ $mission->worker->fio }}</span>--}}
+                                                {{--                                                                    </div>--}}
+                                                {{--                                                                    <div class="col-6">--}}
+                                                {{--                                                                        <span--}}
+                                                {{--                                                                            class="badge {{ $mission->status == 1? 'badge-info' : 'badge-warning' }} float-right font-weight-normal">{{ $mission->status == 1? 'В работе' : 'Ожидает решения' }}</span>--}}
+                                                {{--                                                                    </div>--}}
+                                                {{--                                                                </div>--}}
+                                                {{--                                                            </div>--}}
+                                                {{--                                                        </div>--}}
+                                                {{--                                                    </div>--}}
+                                                {{--                                                @endforeach--}}
                                             </div>
                                         </div>
                                     </div>
