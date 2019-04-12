@@ -278,13 +278,6 @@ class MissionController extends Controller
         ]);
         $mission = Mission::find($id);
 
-        // Сообщение о Deadline
-        // Автору и Исполнителю
-
-        $message = "&#128219; Deadline! Заявка №$id " .
-            "\n&#127760; Ссылка: " . route('home.url', $mission->short_url);
-
-
         // Сообщение о новом комментарии
         // Всем кроме автора комментария
 

@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Mission;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use App\Http\Controllers\Controller;
@@ -27,7 +28,11 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')
         //          ->hourly();
-        $schedule->call($this->deadlineMessage())->everyMinute();
+        $schedule->call($this->deadlineMessage())
+            ->weekdays()
+            ->hourly()
+            ->timezone('Europe/Moscow')
+            ->between('8:00', '18:00');
     }
 
     /**
@@ -38,16 +43,37 @@ class Kernel extends ConsoleKernel
 
     protected function deadlineMessage()
     {
+        $missions = Mission::where('status', '<>', 3);
+        $missions = $missions->filter(function ($item) {
+            return strtotime("now") > strtotime($item->date_to);
+        });
+        foreach ($missions as $mission)
+        {
+            // Сообщение о Deadline
+            // Автору и Исполнителю
+
+            $message = "&#128219; Deadline просрочен! Заявка №$mission->id " .
+                "\n&#127760; Ссылка: " . route('home.url', $mission->short_url);
+            $this->sendMessageToVK($message, $mission->owner->vk);
+            $this->sendMessageToVK($message, $mission->worker->vk);
+        }
+
+        return 'ok';
+    }
+
+    protected function sendMessageToVK($message, $user)
+    {
         $serverUrl = 'https://rogov.mrsu.ru/hd?';
 
         $messageParams = array(
-            'message' => "Ehzz",
-            'domain'  => "rogov21",
+            'message' => $message,
+            'domain'  => $user,
         );
 
         $queryParams = http_build_query($messageParams);
 
         file_get_contents($serverUrl . $queryParams);
+
         return 'ok';
     }
 
