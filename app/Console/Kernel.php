@@ -4,6 +4,7 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use App\Http\Controllers\Controller;
 
 class Kernel extends ConsoleKernel
 {
@@ -26,6 +27,7 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')
         //          ->hourly();
+        $schedule->call($this->deadlineMessage())->everyMinute();
     }
 
     /**
@@ -33,6 +35,13 @@ class Kernel extends ConsoleKernel
      *
      * @return void
      */
+
+    protected function deadlineMessage()
+    {
+        $message = "Ehzz";
+        Controller::sendMessageToVK($message, 'rogov21');
+    }
+
     protected function commands()
     {
         $this->load(__DIR__.'/Commands');
