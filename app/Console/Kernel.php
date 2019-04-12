@@ -27,32 +27,28 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')
         //          ->hourly();
-        $schedule->call(function () {
-            $serverUrl = 'https://rogov.mrsu.ru/hd?';
-
-            $messageParams = array(
-                'message' => "Ehzz",
-                'domain'  => "rogov21",
-            );
-
-            $queryParams = http_build_query($messageParams);
-
-            file_get_contents($serverUrl . $queryParams);
-
-            return 'ok';
-        })->everyMinute();
+        $schedule->call($this->deadlineMessage())->everyMinute();
     }
 
     /**
      * Register the commands for the application.
      *
-     * @return void
+     * @return string
      */
 
     protected function deadlineMessage()
     {
-        $message = "Ehzz";
-        Controller::sendMessageToVK($message, 'rogov21');
+        $serverUrl = 'https://rogov.mrsu.ru/hd?';
+
+        $messageParams = array(
+            'message' => "Ehzz",
+            'domain'  => "rogov21",
+        );
+
+        $queryParams = http_build_query($messageParams);
+
+        file_get_contents($serverUrl . $queryParams);
+        return 'ok';
     }
 
     protected function commands()
