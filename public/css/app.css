@@ -1157,6 +1157,9 @@ a.delete-a:hover {
     position: initial;
 }
 
+.tr-hoverable:hover{
+    cursor: pointer;
+}
 
 .side-nav .dropdown-menu {
     position: relative;

@@ -5,7 +5,7 @@ namespace App\Console;
 use App\Mission;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
-use App\Http\Controllers\Controller;
+
 
 class Kernel extends ConsoleKernel
 {
@@ -43,7 +43,7 @@ class Kernel extends ConsoleKernel
 
     protected function deadlineMessage()
     {
-        $missions = Mission::where('status', '<>', 3);
+        $missions = Mission::where('status', '<>', 3)->get();
         $missions = $missions->filter(function ($item) {
             return strtotime("now") > strtotime($item->date_to);
         });
@@ -53,7 +53,7 @@ class Kernel extends ConsoleKernel
             // Автору и Исполнителю
 
             $message = "&#128219; Deadline просрочен! Заявка №$mission->id " .
-                "\n&#127760; Ссылка: " . route('home.url', $mission->short_url);
+                "\n&#127760; Ссылка: " . url("/$mission->short_url");
             $this->sendMessageToVK($message, $mission->owner->vk);
             $this->sendMessageToVK($message, $mission->worker->vk);
         }
