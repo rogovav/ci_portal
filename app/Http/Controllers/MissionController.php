@@ -140,7 +140,6 @@ class MissionController extends Controller
             $message = "&#128101; Вы назначены помощником к заявке №$mission->id " .
                 "\n&#128100; Автор: " . Auth::user()->fio .
                 "\n&#128100; Исполнитель: " . $mission->worker->fio .
-                "\n&#128221; Описание: $request->info ".
                 "\n&#127760; Ссылка: " . route('home.url', $mission->short_url);
             $this->sendMessageToVK($message, $helper->vk);
         }
@@ -149,7 +148,6 @@ class MissionController extends Controller
             "\n&#128100; Автор: " . Auth::user()->fio .
             ($helpersFio? "\n&#128101; Помощники: $helpersFio" : "") .
             "\n&#128197; Deadline: " . date('Y-m-d H:i', strtotime($request->date_to)) .
-            "\n&#128221; Описание: $request->info " .
             "\n&#127760; Ссылка: " . route('home.url', $mission->short_url);
 
         $this->sendMessageToVK($message, $mission->worker->vk);
