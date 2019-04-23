@@ -30,9 +30,8 @@ class Kernel extends ConsoleKernel
         //          ->hourly();
         $schedule->call($this->deadlineMessage())
             ->weekdays()
-            ->hourly()
-            ->timezone('Europe/Moscow')
-            ->between('8:00', '18:00');
+            ->dailyAt('10:00')
+            ->timezone('Europe/Moscow');
     }
 
     /**
@@ -44,9 +43,12 @@ class Kernel extends ConsoleKernel
     protected function deadlineMessage()
     {
         $missions = Mission::where('status', '<>', 3)->get();
-        $missions = $missions->filter(function ($item) {
-            return strtotime("now") > strtotime($item->date_to);
-        });
+
+        if ($missions) {
+            $missions = $missions->filter(function ($item) {
+                return strtotime("now") > strtotime($item->date_to);
+            });
+        }
         foreach ($missions as $mission)
         {
             // Сообщение о Deadline

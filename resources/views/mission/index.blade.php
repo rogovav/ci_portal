@@ -217,7 +217,9 @@
                                 <tr data-link="{{ route('mission.show', $mission->id) }}"
                                     class="tr-hoverable card-priority-{{ $mission->priority == 1? 'low' : ($mission->priority == 2? 'mid' : 'high') }}">
                                     <td class="align-middle">
+
                                         <span>{{ $mission->id }}</span>
+
                                     </td>
                                     <td class="align-middle">{{ $from[$mission->from] }}</td>
                                     <td class="align-middle">{{$mission->subject->name}}</td>
