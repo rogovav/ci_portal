@@ -57,7 +57,8 @@
                         </div>
                         <div class="form-group">
                             <input type="text" value="1999-01-01"
-                                   onfocus="(this.type='date')" onblur="(this.type='text')" class="form-control hidden-print"
+                                   onfocus="(this.type='date')" onblur="(this.type='text')"
+                                   class="form-control hidden-print"
                                    name="birthday"
                                    placeholder="День рождения" required>
                         </div>
@@ -95,9 +96,11 @@
                     <div class="card-header ">
                         @if($user->super)
                             <span class="small d-block mb-2 font-weight-normal text-center col-12 admin-badge">Администратор</span>
+                        @else
+                            <span class="small d-block mb-2 font-weight-normal text-center col-12 admin-badge">Пользователь</span>
                         @endif
                         <h6 class="card-subtitle text-center">
-                            {{ $user->fio }}
+                            {{ preg_replace('/(\w+) (\w)\w+ (\w)\w+/iu', '$1 $2.$3.', $user->fio) }}
                         </h6>
                         <p class="text-center mb-0 small">({{ $user->position->name }})</p>
                         <div class="text-center">
@@ -105,14 +108,14 @@
                                 <span class="badge badge-danger font-weight-normal">Blocked</span>
                             @endif
                             {{--@if($user->super)--}}
-                                {{--<span class="badge badge-info font-weight-normal">Администратор</span>--}}
+                            {{--<span class="badge badge-info font-weight-normal">Администратор</span>--}}
                             {{--@endif--}}
                             @if($user->isOnline())
                                 <span
-                                    class="badge badge-success font-weight-normal">Online</span>
+                                        class="badge badge-success font-weight-normal">Online</span>
                             @else
                                 <span
-                                    class="badge font-weight-normal">Был в сети {{ date('d.m.y H:i' ,strtotime($user->last_activity)) }}</span>
+                                        class="badge font-weight-normal">Был в сети {{ date('d.m.y H:i' ,strtotime($user->last_activity)) }}</span>
                             @endif
                         </div>
                     </div>
@@ -126,11 +129,11 @@
                     <div class="card-footer">
                         <ul class="profile-card-user-social">
                             <li><span><a href="{{ route('user.show', $user->id) }}"><i
-                                            class="fas fa-user-circle fa-2x"></i></a></span></li>
+                                                class="fas fa-user-circle fa-2x"></i></a></span></li>
                             <li><span><a href="mailto:{{ $user->email }}"><i
-                                            class="far fa-envelope fa-2x"></i></a></span></li>
+                                                class="far fa-envelope fa-2x"></i></a></span></li>
                             <li><span><a href="tel:{{ $user->phone }}"><i
-                                            class="fas fa-phone fa-2x"></i></a></span>
+                                                class="fas fa-phone fa-2x"></i></a></span>
                             </li>
                         </ul>
                     </div>

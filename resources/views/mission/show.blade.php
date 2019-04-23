@@ -112,7 +112,8 @@
                                 <div class="card-header card-info-header d-flex justify-content-between">
                                     <span><b>Тема: </b>{{ $mission->subject->name }}</span>
                                     @if($mission->status != 3 && $mission->owner->id == Auth::id())
-                                        <span class="text-right" style="cursor: pointer" id="edit_description"
+                                        <span data-content="{{$mission->info}}" class="text-right"
+                                              style="cursor: pointer" id="edit_description"
                                               role="button">
                                         <b><i class="far fa-edit fa-2x"></i></b>
                                         </span>
@@ -129,7 +130,8 @@
                                 </div>
                                 <div class="card-body card-info ">
                                     @if($mission->status != 3 && $mission->owner->id == Auth::id())
-                                        <form action="{{ route('mission.update', $mission->id) }}" method="post" id="changeInfo">
+                                        <form action="{{ route('mission.update', $mission->id) }}" method="post"
+                                              id="changeInfo">
                                             {{ csrf_field() }}
                                             <textarea name="info" id="wiki_body" cols="30" rows="10"
                                                       class="form-control"></textarea>
@@ -386,10 +388,10 @@
                                                             <div class="text-center mt-2">
                                                                 @if($mission->worker->isOnline())
                                                                     <span
-                                                                            class="badge badge-success font-weight-normal">Online</span>
+                                                                        class="badge badge-success font-weight-normal">Online</span>
                                                                 @else
                                                                     <span
-                                                                            class="badge badge-secondary font-weight-normal">Offline</span>
+                                                                        class="badge badge-secondary font-weight-normal">Offline</span>
                                                                 @endif
                                                             </div>
                                                         </div>
@@ -420,10 +422,10 @@
                                                                     <div class="text-center mt-2">
                                                                         @if($helper->isOnline())
                                                                             <span
-                                                                                    class="badge badge-success font-weight-normal">Online</span>
+                                                                                class="badge badge-success font-weight-normal">Online</span>
                                                                         @else
                                                                             <span
-                                                                                    class="badge badge-secondary font-weight-normal">Offline</span>
+                                                                                class="badge badge-secondary font-weight-normal">Offline</span>
                                                                         @endif
                                                                     </div>
                                                                 </div>
@@ -458,13 +460,13 @@
                                                                 <a class="float-right mb-1"> {!! nl2br($comment->info) !!} </a>
                                                                 @foreach($comment->files as $file)
                                                                     <div
-                                                                            class="float-right col-12 mt-1 media-attachment-right-doc ma-right">
+                                                                        class="float-right col-12 mt-1 media-attachment-right-doc ma-right">
                                                                         <div
-                                                                                class="avatar bg-primary float-right col-2">
+                                                                            class="avatar bg-primary float-right col-2">
                                                                             <i class="material-icons">insert_drive_file</i>
                                                                         </div>
                                                                         <div
-                                                                                class=" media-body float-right col-10 pt-1 pr-2">
+                                                                            class=" media-body float-right col-10 pt-1 pr-2">
                                                                             <a href="{{ asset('storage/comments/' . $file->name) }}"
                                                                                data-filter-by="text"
                                                                                class="A-filter-by-text float-right text-right"
@@ -480,12 +482,12 @@
                                                             </div>
                                                             @foreach($comment->files as $file)
                                                                 <div
-                                                                        class="float-right col-12 mt-1 media-attachment-left-doc ma-right">
+                                                                    class="float-right col-12 mt-1 media-attachment-left-doc ma-right">
                                                                     <div class="avatar bg-primary float-left col-2">
                                                                         <i class="material-icons">insert_drive_file</i>
                                                                     </div>
                                                                     <div
-                                                                            class="media-body float-left col-10 pt-1 pr-2 ml-1">
+                                                                        class="media-body float-left col-10 pt-1 pr-2 ml-1">
                                                                         <a href="{{ asset('storage/comments/' . $file->name) }}"
                                                                            data-filter-by="text"
                                                                            class="A-filter-by-text"
@@ -498,7 +500,7 @@
                                                 </div>
                                             </div>
                                             <div
-                                                    class="w-100 card-footer mt-2">
+                                                class="w-100 card-footer mt-2">
                                                 <form class="m-0 p-0"
                                                       action="{{ route('mission.storeComment', $mission->id) }}"
                                                       method="POST" autocomplete="off"
@@ -518,16 +520,16 @@
                                                                         title="Отправить"
                                                                         style="padding-right: 16px;">
                                                                     <i
-                                                                            class="far fa-paper-plane"
-                                                                            aria-hidden="true"></i></button>
+                                                                        class="far fa-paper-plane"
+                                                                        aria-hidden="true"></i></button>
                                                                 <div class="custom-file float-right">
                                                                     <input type="file"
                                                                            class="custom-file-input d-none"
                                                                            id="customFile" name="commentFiles[]"
                                                                            multiple>
                                                                     <label
-                                                                            class="btn btn-outline-secondary rounded border"
-                                                                            for="customFile">
+                                                                        class="btn btn-outline-secondary rounded border"
+                                                                        for="customFile">
                                                                         <i class="fas fa-paperclip"></i>
                                                                         <span id="fileNumber"
                                                                               class="badge badge-light"></span>
@@ -577,12 +579,12 @@
     </script>
 
     <script
-            src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=ubhq9o4po4p1w2zdmnaepfxsb8h6f4e78gdvggrvli4ho8cs"></script>
+        src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=ubhq9o4po4p1w2zdmnaepfxsb8h6f4e78gdvggrvli4ho8cs"></script>
 
     <script>
         tinymce.init({
             selector: '#wiki_body',
-            plugins: "table, codesample, textcolor, image, media, formatpainter, emoticons"
+            plugins: "table, codesample, textcolor, image, media, emoticons"
         });
         $(document).ready(function () {
             $('.desc_save_no').hide();
@@ -608,7 +610,7 @@
             $('.desc_save_no').show();
             $('#mceu_12').show();
             $('#description').hide();
-            tinymce.activeEditor.setContent("{!! nl2br($mission->info) !!}")
+            tinymce.activeEditor.setContent($(this).data('content'))
         })
     </script>
 
