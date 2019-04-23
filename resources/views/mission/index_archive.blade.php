@@ -20,13 +20,13 @@
                                 <th>Тема</th>
                                 <th>Исполнитель</th>
                             </tr>
-                            <tr class="search-tr">
-                                <th>#</th>
-                                <th>Клиент</th>
-                                <th>Источник</th>
-                                <th>Тема</th>
-                                <th>Исполнитель</th>
-                            </tr>
+{{--                            <tr class="search-tr">--}}
+{{--                                <th>#</th>--}}
+{{--                                <th>Клиент</th>--}}
+{{--                                <th>Источник</th>--}}
+{{--                                <th>Тема</th>--}}
+{{--                                <th>Исполнитель</th>--}}
+{{--                            </tr>--}}
                             </thead>
                             <tbody>
                             @foreach($missions as $mission)

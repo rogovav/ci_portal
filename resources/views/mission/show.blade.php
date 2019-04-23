@@ -8,7 +8,7 @@
 @section('content')
     <div class="card">
         <div
-                class="card-header card-priority-{{ $mission->priority == 1? 'low' : ($mission->priority == 2? 'mid' : 'high') }}-header">
+            class="card-header card-priority-{{ $mission->priority == 1? 'low' : ($mission->priority == 2? 'mid' : 'high') }}-header">
             <div class="row align-items-center">
                 <div class="col-12 col-md-4 col-lg-2 col-xl-2 col-form-label">
                     <h6 class="mb-0">Заявка <b>#{{ $mission->id }}</b> ({{ $from[$mission->from] }})</h6>
@@ -17,11 +17,11 @@
                     <div class="row mb-1">
                         <div class="col-5 col-md-5 col-lg-4 col-xl-4 text-left">
                             <span
-                                    class="badge badge-info font-weight-normal">{{ $mission->created_at }}</span> {{-- Вт, 22-го янв., 13:22:44 --}}
+                                class="badge badge-info font-weight-normal">{{ $mission->created_at }}</span> {{-- Вт, 22-го янв., 13:22:44 --}}
                         </div>
                         <div class="col-2 col-md-2 col-lg-4 col-xl-4 text-center ">
                             <span class="badge badge-success font-weight-normal"><i
-                                        class="far fa-calendar{{ $per == 100? '-times' : ($mission->status == 1? Null : ($mission->status == 2? '-minus' : '-check')) }}"></i> {{ $status[$mission->status] }} </span>
+                                    class="far fa-calendar{{ $per == 100? '-times' : ($mission->status == 1? Null : ($mission->status == 2? '-minus' : '-check')) }}"></i> {{ $status[$mission->status] }} </span>
                         </div>
                         <div class="col-5 col-md-5 col-lg-4 col-xl-4 text-right ">
                             <span class="badge badge-info font-weight-normal">{{ $mission->date_to }}</span>
@@ -29,10 +29,10 @@
                     </div>
                     <div class="progress">
                         <div
-                                class="progress-bar progress-bar-striped progress-bar-animated {{ $per < 50? 'bg-success' : ($per < 75? 'bg-warning' : 'bg-danger') }}"
-                                role="progressbar"
-                                style="width: {{ $per }}%" aria-valuenow="10" aria-valuemin="0"
-                                aria-valuemax="100">
+                            class="progress-bar progress-bar-striped progress-bar-animated {{ $per < 50? 'bg-success' : ($per < 75? 'bg-warning' : 'bg-danger') }}"
+                            role="progressbar"
+                            style="width: {{ $per }}%" aria-valuenow="10" aria-valuemin="0"
+                            aria-valuemax="100">
                             {{--после 50%--}}
                         </div>
                     </div>
@@ -57,14 +57,14 @@
                         @break
                         @case(3)
                         <span
-                                class="badge badge-success float-right font-weight-normal">Выполнена {{ $mission->date_close }}</span>
+                            class="badge badge-success float-right font-weight-normal">Выполнена {{ $mission->date_close }}</span>
                         @break
                     @endswitch
                 </div>
             </div>
         </div>
         <div
-                class="card-body padding-0 card-priority-{{ $mission->priority == 1? 'low' : ($mission->priority == 2? 'mid' : 'high') }}">
+            class="card-body padding-0 card-priority-{{ $mission->priority == 1? 'low' : ($mission->priority == 2? 'mid' : 'high') }}">
             <div class="row">
                 <div class=" col-lg-12 col-xl-6">
                     <div class="card">
@@ -202,7 +202,7 @@
                                     <div class="col-3">
                                         <button id="rewrite_close" class="float-right close-button">
                                             <i
-                                                    class="material-icons">
+                                                class="material-icons">
                                                 clear
                                             </i>
                                         </button>
@@ -219,7 +219,7 @@
                                                 data-live-search="true">
                                             @foreach($users as $user)
                                                 <option
-                                                        {{ $user->id == $mission->worker->id ? 'selected' : Null }} value="{{ $user->id }}">{{ $user->fio }}</option>
+                                                    {{ $user->id == $mission->worker->id ? 'selected' : Null }} value="{{ $user->id }}">{{ $user->fio }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -254,7 +254,7 @@
                                     <div class="col-3">
                                         <button id="deadline_close" class="float-right close-button">
                                             <i
-                                                    class="material-icons">
+                                                class="material-icons">
                                                 clear
                                             </i>
                                         </button>
@@ -354,10 +354,10 @@
                                                             <div class="text-center mt-2">
                                                                 @if($mission->owner->isOnline())
                                                                     <span
-                                                                            class="badge badge-success font-weight-normal">Online</span>
+                                                                        class="badge badge-success font-weight-normal">Online</span>
                                                                 @else
                                                                     <span
-                                                                            class="badge badge-secondary font-weight-normal">Offline</span>
+                                                                        class="badge badge-secondary font-weight-normal">Offline</span>
                                                                 @endif
                                                             </div>
                                                         </div>
