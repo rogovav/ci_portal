@@ -153,29 +153,32 @@
                                 <div id="accordion2" class="col-12">
                                     <div class="row">
                                         @foreach($subjectTypes as $name => $subjects)
-                                            <div class="col-12">
-                                                <h5>{{ $name }}</h5>
-                                            </div>
-                                            <div class="col-12">
-                                                <table class="table text-left">
-                                                    <thead>
-                                                    <th width="90%">Название</th>
-                                                    <th width="10%"></th>
-                                                    </thead>
-                                                    <tbody>
-                                                    @foreach($subjects as $subject)
-                                                        <tr>
-                                                            <td>{{ $subject->name }}</td>
-                                                            <td>
-                                                                <button onclick="editTopic({{$subject}}); $('#subject_show_hide').show()"
+                                            @if ($name)
+                                                <div class="col-12">
+                                                    <h5>{{ $name }}</h5>
+                                                </div>
+                                                <div class="col-12">
+                                                    <table class="table text-left">
+                                                        <thead>
+                                                        <th width="90%">Название</th>
+                                                        <th width="10%"></th>
+                                                        </thead>
+                                                        <tbody>
+                                                        @foreach($subjects as $subject)
+                                                            <tr>
+                                                                <td>{{ $subject->name }}</td>
+                                                                <td>
+                                                                    <button
+                                                                        onclick="editTopic({{$subject}}); $('#subject_show_hide').show()"
                                                                         class="btn btn-dark">Изменить
-                                                                </button>
-                                                            </td>
-                                                        </tr>
-                                                    @endforeach
-                                                    </tbody>
-                                                </table>
-                                            </div>
+                                                                    </button>
+                                                                </td>
+                                                            </tr>
+                                                        @endforeach
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            @endif
                                         @endforeach
                                     </div>
                                 </div>
@@ -351,14 +354,15 @@
                                             </thead>
                                             <tbody>
                                             @foreach($positions as $position)
-                                            <tr>
-                                                <td>{{ $position->name }}</td>
-                                                <td>
-                                                    <button onclick="editPosition({{$position}});$('#position_show_hide').show()"
+                                                <tr>
+                                                    <td>{{ $position->name }}</td>
+                                                    <td>
+                                                        <button
+                                                            onclick="editPosition({{$position}});$('#position_show_hide').show()"
                                                             class="btn btn-dark">Изменить
-                                                    </button>
-                                                </td>
-                                            </tr>
+                                                        </button>
+                                                    </td>
+                                                </tr>
                                             @endforeach
                                             </tbody>
                                         </table>

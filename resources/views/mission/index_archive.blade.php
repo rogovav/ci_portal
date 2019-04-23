@@ -10,7 +10,8 @@
             <div class="card card-table-rendered padding-0">
                 <div class="row">
                     <div class="col-12">
-                        <table id="example" class="table table-striped table-bordered dt-responsive nowrap" width="100%">
+                        <table id="example" class="table table-bordered dt-responsive nowrap"
+                               width="100%">
                             <thead>
                             <tr>
                                 <th>#</th>
@@ -18,8 +19,6 @@
                                 <th>Источник</th>
                                 <th>Тема</th>
                                 <th>Исполнитель</th>
-                                <th>Помощники</th>
-                                <th>Адрес</th>
                             </tr>
                             <tr class="search-tr">
                                 <th>#</th>
@@ -27,29 +26,23 @@
                                 <th>Источник</th>
                                 <th>Тема</th>
                                 <th>Исполнитель</th>
-                                <th>Помощники</th>
-                                <th>Адрес</th>
                             </tr>
                             </thead>
                             <tbody>
-                                @foreach($missions as $mission)
-                                    <tr>
+                            @foreach($missions as $mission)
+                                <a href="#">
+                                    <tr data-link="{{ route('mission.show', $mission->id) }}"
+                                        class="tr-hoverable card-priority-{{ $mission->priority == 1? 'low' : ($mission->priority == 2? 'mid' : 'high') }}">
                                         <td>
-                                            <a href="{{ route('mission.show', $mission->id) }}">#{{ $mission->id }}</a>
+                                            <span>{{ $mission->id }}</span>
                                         </td>
                                         <td>{{@$mission->client->fio}}</td>
                                         <td>{{ $from[$mission->from] }}</td>
                                         <td>{{$mission->subject->name}}</td>
                                         <td>{{$mission->worker->fio}}</td>
-                                        <td>
-                                            @foreach($mission->helpers as $helper)
-                                                {{ $helper->fio . ' ' }}
-                                            @endforeach
-                                        </td>
-                                        <td>{{ @$mission->building->name }}{{ $mission->address? (', ' . $mission->address) : null }}
-                                            ({{ @$mission->building->address }})</td>
                                     </tr>
-                                @endforeach
+                                </a>
+                            @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -67,10 +60,16 @@
     <script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap4.min.js"></script>
     <script>
         $(document).ready(function () {
+
+            $('.tr-hoverable').click(function () {
+                window.location = $(this).data("link");
+            })
+
             $('#example').DataTable({
                 fixedHeader: true,
                 responsive: true,
                 order: [[0, 'desc']],
+                lengthMenu: [[25, 50, 100, -1], [25, 50, 100, "Все"]],
                 language: {
                     "processing": "Подождите...",
                     "search": "Поиск:",
