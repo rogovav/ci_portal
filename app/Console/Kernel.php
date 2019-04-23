@@ -5,7 +5,7 @@ namespace App\Console;
 use App\Mission;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
-use App\Http\Controllers\Controller;
+
 
 class Kernel extends ConsoleKernel
 {
@@ -43,6 +43,7 @@ class Kernel extends ConsoleKernel
     protected function deadlineMessage()
     {
         $missions = Mission::where('status', '<>', 3)->get();
+
         if ($missions) {
             $missions = $missions->filter(function ($item) {
                 return strtotime("now") > strtotime($item->date_to);

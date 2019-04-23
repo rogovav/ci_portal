@@ -105,30 +105,6 @@
                                                 <br>
                                                 <span id="user-vk" class="col-12">{{ $user->vk }}</span>
                                                 <br>
-                                                {{--                                                <table class="table">--}}
-                                                {{--                                                    <tbody>--}}
-                                                {{--                                                    --}}{{--                                                    <tr>--}}
-                                                {{--                                                    --}}{{--                                                        <td><b>День рождения:</b></td>--}}
-                                                {{--                                                    --}}{{--                                                        <td>{{ $user->birthday }}</td>--}}
-                                                {{--                                                    --}}{{--                                                    </tr>--}}
-                                                {{--                                                    <tr>--}}
-                                                {{--                                                        <td><b>Номер телефона</b></td>--}}
-                                                {{--                                                        <td><span id="user-phone">{{ $user->phone }}</span></td>--}}
-                                                {{--                                                    </tr>--}}
-                                                {{--                                                    <tr>--}}
-                                                {{--                                                        <td><b>Внутренний номер</b></td>--}}
-                                                {{--                                                        <td><span id="user-iphone">{{ $user->iphone }}</span></td>--}}
-                                                {{--                                                    </tr>--}}
-                                                {{--                                                    <tr>--}}
-                                                {{--                                                        <td><b>Почта</b></td>--}}
-                                                {{--                                                        <td><span id="user-email">{{ $user->email }}</span></td>--}}
-                                                {{--                                                    </tr>--}}
-                                                {{--                                                    <tr>--}}
-                                                {{--                                                        <td><b>Логин VK</b></td>--}}
-                                                {{--                                                        <td><span id="user-vk">{{ $user->vk }}</span></td>--}}
-                                                {{--                                                    </tr>--}}
-                                                {{--                                                    </tbody>--}}
-                                                {{--                                                </table>--}}
                                             </div>
                                             <div class="card-footer">
                                                 <span
@@ -503,9 +479,10 @@
                                                         <tbody>
                                                         @foreach($mission_owner->sortByDesc('id') as $mission)
 
-                                                            <tr class="card-priority-{{ $mission->priority == 1? 'low' : ($mission->priority == 2? 'mid' : 'high') }}">
-                                                                <td class="align-middle"><a
-                                                                        href="{{ route('mission.show', $mission->id) }}">#{{ $mission->id }}</a>
+                                                            <tr data-link="{{ route('mission.show', $mission->id) }}"
+                                                                class="tr-hoverable card-priority-{{ $mission->priority == 1? 'low' : ($mission->priority == 2? 'mid' : 'high') }}">
+                                                                <td class="align-middle">
+                                                                    <span>{{ $mission->id }}</span>
                                                                 </td>
                                                                 <td class="align-middle">{{ $from[$mission->from] }}</td>
                                                                 <td class="align-middle">{{ $mission->subject->name }}</td>
@@ -615,9 +592,10 @@
                                                         <tbody>
                                                         @foreach($mission_worker->sortByDesc('id') as $mission)
 
-                                                            <tr class="card-priority-{{ $mission->priority == 1? 'low' : ($mission->priority == 2? 'mid' : 'high') }}">
-                                                                <td class="align-middle"><a
-                                                                        href="{{ route('mission.show', $mission->id) }}">#{{ $mission->id }}</a>
+                                                            <tr data-link="{{ route('mission.show', $mission->id) }}"
+                                                                class="tr-hoverable card-priority-{{ $mission->priority == 1? 'low' : ($mission->priority == 2? 'mid' : 'high') }}">
+                                                                <td class="align-middle">
+                                                                    <span>{{ $mission->id }}</span>
                                                                 </td>
                                                                 <td class="align-middle">{{ $from[$mission->from] }}</td>
                                                                 <td class="align-middle">{{ $mission->subject->name }}</td>
@@ -726,9 +704,9 @@
                                                         <tbody>
                                                         @foreach($user->mission_helper->where('status', '<>', 3)->sortByDesc('id') as $mission)
 
-                                                            <tr class="card-priority-{{ $mission->priority == 1? 'low' : ($mission->priority == 2? 'mid' : 'high') }}">
-                                                                <td class="align-middle"><a
-                                                                        href="{{ route('mission.show', $mission->id) }}">#{{ $mission->id }}</a>
+                                                            <tr data-link="{{ route('mission.show', $mission->id) }}" class="tr-hoverable card-priority-{{ $mission->priority == 1? 'low' : ($mission->priority == 2? 'mid' : 'high') }}">
+                                                                <td class="align-middle">
+                                                                    <span>{{ $mission->id }}</span>
                                                                 </td>
                                                                 <td class="align-middle">{{ $from[$mission->from] }}</td>
                                                                 <td class="align-middle">{{ $mission->subject->name }}</td>
@@ -855,6 +833,9 @@
 
     <script>
         $(document).ready(function () {
+            $('.tr-hoverable').click(function () {
+                window.location = $(this).data("link");
+            })
             $('#card-user').hide()
             $('#pass_conf_btn').attr('disabled', true)
         })

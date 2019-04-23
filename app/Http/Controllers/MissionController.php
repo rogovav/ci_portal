@@ -215,6 +215,7 @@ class MissionController extends Controller
             $this->sendMessageToVK($message, $mission->worker->vk);
         }
 
+
         // изменениие рабочей группы
         if (isset($request->worker))
         {

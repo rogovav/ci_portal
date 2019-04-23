@@ -184,9 +184,10 @@
                                                         <tbody>
                                                         @foreach($mission_owner->sortByDesc('id') as $mission)
 
-                                                            <tr class="card-priority-{{ $mission->priority == 1? 'low' : ($mission->priority == 2? 'mid' : 'high') }}">
-                                                                <td class="align-middle"><a
-                                                                        href="{{ route('mission.show', $mission->id) }}">#{{ $mission->id }}</a>
+                                                            <tr data-link="{{ route('mission.show', $mission->id) }}"
+                                                                class="tr-hoverable card-priority-{{ $mission->priority == 1? 'low' : ($mission->priority == 2? 'mid' : 'high') }}">
+                                                                <td class="align-middle">
+                                                                    <span>{{ $mission->id }}</span>
                                                                 </td>
                                                                 <td class="align-middle">{{ $from[$mission->from] }}</td>
                                                                 <td class="align-middle">{{ $mission->subject->name }}</td>
@@ -295,9 +296,10 @@
                                                         <tbody>
                                                         @foreach($mission_worker->sortByDesc('id') as $mission)
 
-                                                            <tr class="card-priority-{{ $mission->priority == 1? 'low' : ($mission->priority == 2? 'mid' : 'high') }}">
-                                                                <td class="align-middle"><a
-                                                                        href="{{ route('mission.show', $mission->id) }}">#{{ $mission->id }}</a>
+                                                            <tr data-link="{{ route('mission.show', $mission->id) }}"
+                                                                class="tr-hoverable card-priority-{{ $mission->priority == 1? 'low' : ($mission->priority == 2? 'mid' : 'high') }}">
+                                                                <td class="align-middle">
+                                                                    <span>{{ $mission->id }}</span>
                                                                 </td>
                                                                 <td class="align-middle">{{ $from[$mission->from] }}</td>
                                                                 <td class="align-middle">{{ $mission->subject->name }}</td>
@@ -406,9 +408,10 @@
                                                         <tbody>
                                                         @foreach($user->mission_helper->where('status', '<>', 3)->sortByDesc('id') as $mission)
 
-                                                            <tr class="card-priority-{{ $mission->priority == 1? 'low' : ($mission->priority == 2? 'mid' : 'high') }}">
-                                                                <td class="align-middle"><a
-                                                                        href="{{ route('mission.show', $mission->id) }}">#{{ $mission->id }}</a>
+                                                            <tr data-link="{{ route('mission.show', $mission->id) }}"
+                                                                class="tr-hoverable card-priority-{{ $mission->priority == 1? 'low' : ($mission->priority == 2? 'mid' : 'high') }}">
+                                                                <td class="align-middle">
+                                                                    <span>{{ $mission->id }}</span>
                                                                 </td>
                                                                 <td class="align-middle">{{ $from[$mission->from] }}</td>
                                                                 <td class="align-middle">{{ $mission->subject->name }}</td>
@@ -556,4 +559,11 @@
 @endsection
 
 @section('js')
+    <script>
+        $(document).ready(function () {
+            $('.tr-hoverable').click(function () {
+                window.location = $(this).data("link");
+            })
+        })
+    </script>
 @endsection
