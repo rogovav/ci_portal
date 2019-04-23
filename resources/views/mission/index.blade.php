@@ -211,7 +211,7 @@
                             @foreach($missions as $mission)
                                 <tr class="card-priority-{{ $mission->priority == 1? 'low' : ($mission->priority == 2? 'mid' : 'high') }}">
                                     <td class="align-middle">
-                                        <a href="{{ route('mission.show', $mission->id) }}">#{{ $mission->id }}</a>
+                                        <a href="{{ route('mission.show', $mission->id) }}">{{ $mission->id }}</a>
                                     </td>
                                     <td class="align-middle">{{ $from[$mission->from] }}</td>
                                     <td class="align-middle">{{$mission->subject->name}}</td>

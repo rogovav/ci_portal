@@ -30,9 +30,8 @@ class Kernel extends ConsoleKernel
         //          ->hourly();
         $schedule->call($this->deadlineMessage())
             ->weekdays()
-            ->hourly()
-            ->timezone('Europe/Moscow')
-            ->between('8:00', '18:00');
+            ->dailyAt('10:00')
+            ->timezone('Europe/Moscow');
     }
 
     /**
@@ -43,17 +42,19 @@ class Kernel extends ConsoleKernel
 
     protected function deadlineMessage()
     {
-        $missions = Mission::where('status', '<>', 3);
-        $missions = $missions->filter(function ($item) {
-            return strtotime("now") > strtotime($item->date_to);
-        });
+        $missions = Mission::where('status', '<>', 3)->get();
+        if ($missions) {
+            $missions = $missions->filter(function ($item) {
+                return strtotime("now") > strtotime($item->date_to);
+            });
+        }
         foreach ($missions as $mission)
         {
             // Сообщение о Deadline
             // Автору и Исполнителю
 
             $message = "&#128219; Deadline просрочен! Заявка №$mission->id " .
-                "\n&#127760; Ссылка: " . route('home.url', $mission->short_url);
+                "\n&#127760; Ссылка: " . url("/$mission->short_url");
             $this->sendMessageToVK($message, $mission->owner->vk);
             $this->sendMessageToVK($message, $mission->worker->vk);
         }
