@@ -111,19 +111,32 @@
                             <div class="card">
                                 <div class="card-header card-info-header d-flex justify-content-between">
                                     <span><b>Тема: </b>{{ $mission->subject->name }}</span>
-                                    <span class="text-right" style="cursor: pointer" id="edit_description"
-                                          role="button">
+                                    @if($mission->status != 3 && $mission->owner->id == Auth::id())
+                                        <span data-content="{{$mission->info}}" class="text-right"
+                                              style="cursor: pointer" id="edit_description"
+                                              role="button">
                                         <b><i class="far fa-edit fa-2x"></i></b>
-                                    </span>
-                                    <span class="desc_save_no">
-                                        <b><i id="desc_save" class="far fa-check-square fa-2x mr-1"></i></b>
-                                           <span id="desc_no_save"><b><i style="cursor: pointer"
-                                                                         class="far fa-window-close fa-2x"></i></b></span>
-                                    </span>
+                                        </span>
+                                        <span class="desc_save_no">
+                                            <span id="desc_save">
+                                                <b><i style="cursor: pointer"
+                                                      class="far fa-check-square fa-2x mr-1"></i></b></span>
+
+                                            <span id="desc_no_save">
+                                                <b><i style="cursor: pointer"
+                                                      class="far fa-window-close fa-2x"></i></b></span>
+                                        </span>
+                                    @endif
                                 </div>
                                 <div class="card-body card-info ">
-                                    <textarea name="info" id="wiki_body" cols="30" rows="10"
-                                              class="form-control"></textarea>
+                                    @if($mission->status != 3 && $mission->owner->id == Auth::id())
+                                        <form action="{{ route('mission.update', $mission->id) }}" method="post"
+                                              id="changeInfo">
+                                            {{ csrf_field() }}
+                                            <textarea name="info" id="wiki_body" cols="30" rows="10"
+                                                      class="form-control"></textarea>
+                                        </form>
+                                    @endif
                                     <div id="description">
                                         {!! nl2br($mission->info) !!}
                                     </div>
@@ -571,7 +584,7 @@
     <script>
         tinymce.init({
             selector: '#wiki_body',
-            plugins: "table, codesample, textcolor, image, media, formatpainter, emoticons"
+            plugins: "table, codesample, textcolor, image, media, emoticons"
         });
         $(document).ready(function () {
             $('.desc_save_no').hide();
@@ -581,7 +594,6 @@
         });
 
         $('#desc_no_save').click(function () {
-            console.log('clicked')
             $('.desc_save_no').hide();
             $('#mceu_12').hide();
             $('#wiki_body').hide();
@@ -589,12 +601,16 @@
             $('#edit_description').show();
         });
 
+        $('#desc_save').click(function () {
+            $('#changeInfo').submit();
+        });
+
         $('#edit_description').click(function () {
             $(this).hide();
             $('.desc_save_no').show();
             $('#mceu_12').show();
             $('#description').hide();
-            tinymce.activeEditor.setContent("{!! nl2br($mission->info) !!}")
+            tinymce.activeEditor.setContent($(this).data('content'))
         })
     </script>
 
