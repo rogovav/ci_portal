@@ -216,6 +216,14 @@ class MissionController extends Controller
         }
 
 
+        // изменение описания заявки
+        if (isset($request->info))
+        {
+            $mission->info = $request->info;
+            $info = "Изменено описание заявки.";
+        }
+
+
         // изменениие рабочей группы
         if (isset($request->worker))
         {
