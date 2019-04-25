@@ -915,6 +915,7 @@
             $(this).replaceWith($input);
             $input.on("blur", switchToSpan);
             $input.select();
+            $input.mask("+7 (999) 999-99-99");
         };
         let switchToInputI = function () {
             let $input = $("<input>", {
