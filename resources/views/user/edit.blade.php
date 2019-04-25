@@ -901,7 +901,7 @@
     </script>
     <script src="{{ asset('js/jquery.maskedinput.js') }}"></script>
     <script>
-        $("#user-iphone").mask("+7 (999) 999-99-99");
+        $("input[type=tel]").mask("+7 (999) 999-99-99");
     </script>
     <script>
         let switchToInputP = function () {
