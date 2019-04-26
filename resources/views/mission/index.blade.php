@@ -343,7 +343,7 @@
         $(document).ready(function () {
             $('.tr-hoverable').mousedown(function (e) {
                 if (e.which === 2) {
-                    window.open($(this).data("link"),'_blank');
+                    window.open($(this).data("link"), '_blank');
                 } else if (e.which === 1) {
                     window.location = $(this).data("link");
                 }
