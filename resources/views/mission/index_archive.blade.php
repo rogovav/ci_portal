@@ -61,9 +61,13 @@
     <script>
         $(document).ready(function () {
 
-            $('.tr-hoverable').click(function () {
-                window.location = $(this).data("link");
-            })
+            $('.tr-hoverable').mousedown(function (e) {
+                if (e.which === 2) {
+                    window.open($(this).data("link"),'_blank');
+                } else if (e.which === 1) {
+                    window.location = $(this).data("link");
+                }
+            });
 
             $('#example').DataTable({
                 fixedHeader: true,
