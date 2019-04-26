@@ -28,7 +28,7 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')
         //          ->hourly();
-        $schedule->call($this->deadlineMessage())
+        $schedule->call(function (){$this->deadlineMessage();})
             ->timezone('Europe/Moscow')
             ->weekdays()
             ->at('10:00');
