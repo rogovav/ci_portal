@@ -341,8 +341,12 @@
     <script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap4.min.js"></script>
     <script>
         $(document).ready(function () {
+
             $('.tr-hoverable').click(function () {
-                window.location = $(this).data("link");
+
+                otherWinRef = window.open("", $(this).data("link"));
+                otherWinRef.blur();
+                otherWinRef.focus();
             })
 
             $('#example').DataTable({
