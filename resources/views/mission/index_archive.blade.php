@@ -36,7 +36,7 @@
                                         <td>
                                             <span>{{ $mission->id }}</span>
                                             <span
-                                                class="badge badge-danger">{{strtotime($mission->date_close) - strtotime($mission->date_to) ? 'Заявка просрочена' : ''}}</span>
+                                                class="badge badge-danger">{{strtotime($mission->date_close) - strtotime($mission->date_to) < 0 ? 'Заявка просрочена' : ''}}</span>
                                         </td>
                                         <td>{{@$mission->client->fio}}</td>
                                         <td>{{ $from[$mission->from] }}</td>
