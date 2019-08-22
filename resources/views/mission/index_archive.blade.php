@@ -14,6 +14,7 @@
                                width="100%">
                             <thead>
                             <tr>
+                                <th></th>
                                 <th>#</th>
                                 <th>Клиент</th>
                                 <th>Источник</th>
@@ -34,11 +35,16 @@
                                     <tr data-link="{{ route('mission.show', $mission->id) }}"
                                         class="tr-hoverable card-priority-{{ $mission->priority == 1? 'low' : ($mission->priority == 2? 'mid' : 'high') }}">
                                         <td>
-                                            <span>{{ $mission->id }}</span>
-                                            @if (strtotime($mission->date_close) - strtotime($mission->date_to) < 0)
+                                            @if (strtotime($mission->date_close) - strtotime($mission->date_to) > 0)
                                                 <span class="badge badge-danger"><i
                                                         class="fas fa-asterisk"></i></span>
+                                            @else
+                                                <span class="badge badge-success"><i
+                                                        class="fas fa-asterisk"></i></span>
                                             @endif
+                                        </td>
+                                        <td>
+                                            <span>{{ $mission->id }}</span>
                                         </td>
                                         <td>{{@$mission->client->fio}}</td>
                                         <td>{{ $from[$mission->from] }}</td>
@@ -76,7 +82,7 @@
             $('#example').DataTable({
                 fixedHeader: true,
                 responsive: true,
-                order: [[0, 'desc']],
+                order: [[1, 'desc']],
                 lengthMenu: [[25, 50, 100, -1], [25, 50, 100, "Все"]],
                 language: {
                     "processing": "Подождите...",
