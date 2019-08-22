@@ -90,7 +90,7 @@
     @endif
     <div class="row">
         @foreach($users as $user)
-            <div class="col-6 col-md-4 col-lg-3 col-xl-1">
+            <div class="col-6 col-md-4 col-lg-3 col-xl-2">
                 <div class="card">
                     {{--{{ $user->isOnline()? "avatar-index-border-online" : Null }} {{ $user->super? "avatar-index-border-admin" : Null}}--}}
                     <div class="card-header ">
@@ -112,10 +112,10 @@
                             {{--@endif--}}
                             @if($user->isOnline())
                                 <span
-                                    class="badge badge-success font-weight-normal">Online</span>
+                                        class="badge badge-success font-weight-normal">Online</span>
                             @else
                                 <span
-                                    class="badge font-weight-normal">Был в сети {{ date('d.m.y H:i' ,strtotime($user->last_activity)) }}</span>
+                                        class="badge font-weight-normal">Был в сети {{ date('d.m.y H:i' ,strtotime($user->last_activity)) }}</span>
                             @endif
                         </div>
                     </div>
@@ -129,11 +129,11 @@
                     <div class="card-footer">
                         <ul class="profile-card-user-social">
                             <li><span><a href="{{ route('user.show', $user->id) }}"><i
-                                            class="fas fa-user-circle fa-2x"></i></a></span></li>
+                                                class="fas fa-user-circle fa-2x"></i></a></span></li>
                             <li><span><a href="mailto:{{ $user->email }}"><i
-                                            class="far fa-envelope fa-2x"></i></a></span></li>
+                                                class="far fa-envelope fa-2x"></i></a></span></li>
                             <li><span><a href="tel:{{ $user->phone }}"><i
-                                            class="fas fa-phone fa-2x"></i></a></span>
+                                                class="fas fa-phone fa-2x"></i></a></span>
                             </li>
                         </ul>
                     </div>
