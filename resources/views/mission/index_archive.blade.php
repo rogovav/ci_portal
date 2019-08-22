@@ -36,7 +36,7 @@
                                         <td>
                                             <span>{{ $mission->id }}</span>
                                             <span class="badge badge-danger"><i
-                                                    class="fas {{strtotime($mission->date_close) - strtotime($mission->date_to) < 0 ? 'fa-asterisk' : ''}} "></i></span>
+                                                    class="{{strtotime($mission->date_close) - strtotime($mission->date_to) < 0 ? 'fas fa-asterisk' : ''}} "></i></span>
                                         </td>
                                         <td>{{@$mission->client->fio}}</td>
                                         <td>{{ $from[$mission->from] }}</td>
