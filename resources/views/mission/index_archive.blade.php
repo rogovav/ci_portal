@@ -35,8 +35,10 @@
                                         class="tr-hoverable card-priority-{{ $mission->priority == 1? 'low' : ($mission->priority == 2? 'mid' : 'high') }}">
                                         <td>
                                             <span>{{ $mission->id }}</span>
-                                            <span class="badge badge-danger"><i
-                                                    class="{{strtotime($mission->date_close) - strtotime($mission->date_to) < 0 ? 'fas fa-asterisk' : ''}} "></i></span>
+                                            @if (strtotime($mission->date_close) - strtotime($mission->date_to) < 0)
+                                                <span class="badge badge-danger"><i
+                                                        class="fas fa-asterisk"></i></span>
+                                            @endif
                                         </td>
                                         <td>{{@$mission->client->fio}}</td>
                                         <td>{{ $from[$mission->from] }}</td>
