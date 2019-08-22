@@ -39,7 +39,7 @@
     <div class="card">
         <div class="card-body padding-0">
             <div class="row">
-                <div class="col-md-12 col-lg-12 col-xl-4">
+                <div class="col-md-12 col-lg-12 col-xl-2">
                     <div class="row">
                         <div class="col-lg-6 col-xl-12">
                             <div class="card">
@@ -439,7 +439,7 @@
                     </div>
 
                 </div>
-                <div class=" col-lg-12 col-xl-8">
+                <div class=" col-lg-12 col-xl-10">
                     <div class="card">
                         <div class="card-body card-info padding-0">
                             <div class="card">

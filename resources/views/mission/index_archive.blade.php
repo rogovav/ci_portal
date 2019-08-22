@@ -20,13 +20,13 @@
                                 <th>Тема</th>
                                 <th>Исполнитель</th>
                             </tr>
-{{--                            <tr class="search-tr">--}}
-{{--                                <th>#</th>--}}
-{{--                                <th>Клиент</th>--}}
-{{--                                <th>Источник</th>--}}
-{{--                                <th>Тема</th>--}}
-{{--                                <th>Исполнитель</th>--}}
-{{--                            </tr>--}}
+                            {{--                            <tr class="search-tr">--}}
+                            {{--                                <th>#</th>--}}
+                            {{--                                <th>Клиент</th>--}}
+                            {{--                                <th>Источник</th>--}}
+                            {{--                                <th>Тема</th>--}}
+                            {{--                                <th>Исполнитель</th>--}}
+                            {{--                            </tr>--}}
                             </thead>
                             <tbody>
                             @foreach($missions as $mission)
@@ -35,6 +35,8 @@
                                         class="tr-hoverable card-priority-{{ $mission->priority == 1? 'low' : ($mission->priority == 2? 'mid' : 'high') }}">
                                         <td>
                                             <span>{{ $mission->id }}</span>
+                                            <span
+                                                class="badge badge-danger">{{strtotime($mission->date_close) - strtotime($mission->date_to) ? 'Заявка просрочена' : ''}}</span>
                                         </td>
                                         <td>{{@$mission->client->fio}}</td>
                                         <td>{{ $from[$mission->from] }}</td>
@@ -63,7 +65,7 @@
 
             $('.tr-hoverable').mousedown(function (e) {
                 if (e.which === 2) {
-                    window.open($(this).data("link"),'_blank');
+                    window.open($(this).data("link"), '_blank');
                 } else if (e.which === 1) {
                     window.location = $(this).data("link");
                 }
